@@ -1,0 +1,151 @@
+.reviewItemContainer {
+  width: 380px;
+  padding: 12px 10px 12px 0;
+
+  .reviewItem {
+    padding: 13px 11px;
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    height: fit-content;
+    .customerInfo {
+      display: flex;
+      justify-content: space-between;
+      .reviewLeft {
+        display: flex;
+        margin-bottom: 15px;
+        .image {
+          height: 53px;
+          width: 53px;
+          img {
+            border-radius: 5px;
+            height: 53px;
+            width: 53px;
+            object-fit: cover;
+          }
+        }
+        .infor {
+          padding-left: 20px;
+          .name {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 150%;
+            margin-bottom: 4px;
+            /* identical to box height, or 18px */
+            letter-spacing: 0.5px;
+            /* Neutral/Dark */
+            color: #223263;
+          }
+          .date {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 150%;
+            /* or 15px */
+            letter-spacing: 0.5px;
+            color: #9098b1;
+          }
+          .rating {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 150%;
+            /* identical to box height, or 15px */
+            /* Black blue */
+            color: #223263;
+            :global {
+              .ant-rate {
+                .ant-rate-star {
+                  font-size: 12px;
+                  margin-right: 1px;
+                  color: #ffc833;
+                }
+              }
+            }
+          }
+        }
+      }
+      .reviewRight {
+        .checkbox {
+          width: 64px;
+          height: 25px;
+          padding: 2px 4px;
+          background: #1890ff;
+          position: relative;
+          display: inline-block;
+          border-radius: 16px;
+
+          &::before {
+            content: " ";
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 50%;
+            transition: right 0.3s ease-in;
+          }
+          input {
+            height: 0;
+            width: 0;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            top: 0;
+            left: 0;
+          }
+          .checkboxText {
+            .checkboxOn {
+              position: absolute;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 20px;
+              color: #ffffff;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 6px;
+              opacity: 1;
+              visibility: visible;
+              transition: all 0.3s ease-in;
+            }
+            .checkboxOff {
+              opacity: 0;
+              visibility: hidden;
+              transition: all 0.3s ease-in;
+              position: absolute;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 20px;
+              color: #ffffff;
+              top: 50%;
+              transform: translateY(-50%);
+              right: 10px;
+            }
+          }
+        }
+        .checkbox.hide {
+          background: #bfbfbf;
+          &::before {
+            right: 41px;
+          }
+          .checkboxText {
+            .checkboxOn {
+              opacity: 0;
+              visibility: hidden;
+            }
+            .checkboxOff {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}

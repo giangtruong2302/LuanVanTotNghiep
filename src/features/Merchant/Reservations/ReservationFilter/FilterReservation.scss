@@ -1,0 +1,260 @@
+.reservationFilterContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+
+  .filterTitle {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    /* Linear */
+    background: linear-gradient(90deg, #fd409a -3.78%, #223263 79.03%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    width: 120px;
+    z-index: 99;
+  }
+
+  .filterDay {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+    margin-right: 30px;
+    padding: 8px 0px;
+    z-index: 99;
+    cursor: pointer;
+    &.activeDay {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      /* identical to box height, or 150% */
+      display: flex;
+      align-items: center;
+      /* Red */
+      color: #fb7181;
+      border-bottom: 2px solid #fb7181;
+    }
+  }
+
+  .filterSelect {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background: #ebf0ff;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-bottom: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &.active {
+      /* Black blue */
+      background: #223263;
+
+      .selectTitle {
+        color: #ffffff;
+      }
+      .services {
+        color: #fff;
+      }
+      :global {
+        .anticon.anticon-down {
+          color: #fff;
+        }
+      }
+    }
+    .selectTitle {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 22px;
+      /* identical to box height, or 183% */
+      /* Black blue */
+      color: #223263;
+      margin-right: 5px;
+    }
+    .services {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 22px;
+      /* identical to box height, or 183% */
+      text-align: right;
+      /* Black blue */
+      color: #223263;
+      margin-right: 5px;
+      span {
+        margin-left: 10px;
+        padding: 2px 5px;
+        /* light blue */
+        background: #ebf0ff;
+        border-radius: 27px;
+        color: #223263;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 16px;
+        /* identical to box height, or 160% */
+        /* Black blue */
+        color: #223263;
+      }
+    }
+    :global {
+      .anticon.anticon-down {
+        font-weight: 500;
+        font-size: 12px;
+        /* identical to box height, or 183% */
+        text-align: right;
+        /* Black blue */
+        color: #223263;
+      }
+    }
+
+    .option {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      z-index: -1;
+      top: 0px;
+      right: 0;
+      width: 257px;
+      height: 379px;
+      padding: 15px;
+      background: #ffffff;
+      box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+      .searchOption {
+        :global {
+          .ant-input {
+            border-right: none;
+            box-shadow: none;
+            outline: none;
+            padding: 8px 10px;
+          }
+          .ant-btn {
+            border-left: none;
+            height: 40px;
+            width: 40px;
+          }
+          .ant-input:hover,
+          .ant-input:focus {
+            border-color: #fb7181;
+            border-right: 1px solid #fb7181;
+          }
+          .ant-btn:hover,
+          .ant-btn:focus,
+          .ant-btn:active {
+            color: #9098b1;
+            border-color: #fb7181;
+            background: #fff;
+          }
+        }
+      }
+      .category {
+        width: 100%;
+        .main {
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 12px;
+          /* grey blue */
+          color: #9098b1;
+          margin-top: 15px;
+        }
+        .sub {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 10px;
+          margin-top: 12px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 15px;
+          /* identical to box height */
+          color: rgba(0, 0, 0, 0.65);
+          transition: background 0.3s ease;
+          :global {
+            .ant-checkbox-checked .ant-checkbox-inner {
+              background-color: #53d1b6;
+              border-color: #53d1b6;
+            }
+            .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+            .ant-checkbox:hover .ant-checkbox-inner,
+            .ant-checkbox-input:focus + .ant-checkbox-inner {
+              border-color: #53d1b6;
+            }
+          }
+          .display {
+            padding: 10px 20px 10px 10px;
+          }
+
+          &.active {
+            background: #ebf0ff;
+          }
+        }
+      }
+      .noData {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 20px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 29px;
+        background: linear-gradient(90deg, #fd409a -3.78%, #223263 79.03%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+      }
+      &.optionActive {
+        opacity: 1;
+        visibility: visible;
+        z-index: 999;
+        top: 42px;
+      }
+    }
+    .search {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      cursor: pointer;
+      top: 425px;
+      right: 150px;
+      width: 104px;
+      height: 30px;
+      padding: 10px;
+      background: var(--primary-pink);
+      color: #fff;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      /* identical to box height, or 157% */
+      text-align: center;
+      letter-spacing: 0.4px;
+      box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      display: flex;
+      border: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      &.btnActive {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}

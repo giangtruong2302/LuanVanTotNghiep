@@ -1,0 +1,43 @@
+.cardSummarize {
+    background-color: #fff;
+    text-align: left;
+    padding: 10px;
+    border: 0.5px solid #f0f0f0;
+    box-shadow: 3px 3px 20px rgba(214, 214, 214, 0.15);
+    border-radius: 8px;
+    .imagesSummarize {
+        margin-bottom: 10px;
+        width: 100%;
+        position: relative;
+        border-radius: 5px;
+        &:before {
+            content: "";
+            display: block;
+            padding-top: 40%;
+        }
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    }
+    .titleSummarize {
+        color: #223263;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .numberSummarize {
+        color: #223263;
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .descriptionSummarize {
+        color: #9098b1;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}

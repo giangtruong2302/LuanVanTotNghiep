@@ -1,0 +1,74 @@
+.dashboardBackground {
+  background-image: url("../../../assets/images/Background.png");
+  min-height: 100vh;
+  background-size: cover;
+  //background-image: linear-gradient(305.38deg, #c3c3c6 8.53%, #f4f1f4 94.82%);
+  .container {
+    max-width: 1054px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    .dashboard {
+      padding: 30px;
+      .rowDashboard {
+        display: flex;
+        margin: 0 -15px;
+        .title {
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 1.5;
+          text-align: left;
+          color: #223263;
+          margin-bottom: 16px;
+        }
+        .colLeft {
+          display: flex;
+          flex-direction: column;
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 66.6666%;
+          .leftItemSummarize {
+            margin-bottom: 30px;
+            .summarizeDashboard {
+              margin: 0 -10px;
+              display: flex;
+
+              .summarizeItem {
+                padding-left: 10px;
+                padding-right: 10px;
+                width: 33.33%;
+              }
+            }
+          }
+          .leftItemQuickAccess {
+            .quickAccessDashboard {
+              display: flex;
+              flex-wrap: wrap;
+              margin: 0 -5px;
+              .quickAccessItem {
+                width: 25%;
+                padding: 0 5px;
+                margin-bottom: 10px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+        .colRight {
+          display: flex;
+          flex-direction: column;
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 33.3334%;
+          .rightItemReservation {
+            margin-bottom: 10px;
+          }
+          .titleNotifications {
+            margin-bottom: 21px;
+          }
+        }
+      }
+    }
+  }
+}

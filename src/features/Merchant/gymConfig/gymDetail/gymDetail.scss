@@ -1,0 +1,152 @@
+.salonDetailContainer {
+  display: flex;
+  padding-left: 10px;
+  width: calc(100vw - 250px);
+  .salonDetailLeft {
+    background-image: url("../../../../assets/images/Background.png");
+
+    .salonDetailLeftContainer {
+      background: linear-gradient(195deg, #f1fbff 11.4%, #fff8fc85 26.64%);
+      backdrop-filter: blur(4px);
+      border-radius: 5px;
+      padding: 25px 10px;
+      width: 250px;
+      height: 100%;
+
+      .salonDetailInfo {
+        .detailTop {
+          .detailTopInfor {
+            display: flex;
+            align-items: center;
+            .detailTopInforLeft {
+              img {
+                width: 50px;
+                height: 50px;
+              }
+            }
+            .detailTopInforRight {
+              padding-left: 20px;
+
+              .detailTitle {
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 17px;
+                /* identical to box height */
+                /* Black blue */
+                color: #223263;
+              }
+              .ratingDetail {
+                display: flex;
+                align-items: flex-start;
+                padding-top: 5px;
+                img {
+                  width: 12px;
+                  height: 12px;
+                  color: #ffc833;
+                }
+                .ratingDetailInfo {
+                  font-weight: 400;
+                  font-size: 10px;
+                  line-height: 150%;
+                  padding-left: 5px;
+                  /* identical to box height, or 15px */
+                  color: #333333;
+                }
+              }
+            }
+          }
+          .detailBottomInfor {
+            margin-top: 20px;
+            .detailBottomItem {
+              margin-top: 20px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 15px;
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              span {
+                color: #223263;
+              }
+              div {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+      .salonDetailMap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .salonDetailScan {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .qrScanTitle {
+          padding-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  .salonDetailRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .detailRightContainer {
+      display: flex;
+      flex-direction: column;
+
+      .changeThumbnail {
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2.5rem 1rem;
+        background: #ffffff;
+        border: 0.5px solid #f0f0f0;
+        box-sizing: border-box;
+        box-shadow: 5px 5px 20px rgba(214, 214, 214, 0.15);
+        border-radius: 6px;
+        margin-bottom: 30px;
+        color: #000;
+
+        .changeThumbnailTitle {
+          padding-top: 10px;
+        }
+      }
+      .editSalonDetail {
+        cursor: pointer;
+
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2.5rem 1rem;
+        background: #ffffff;
+        border: 0.5px solid #f0f0f0;
+        box-sizing: border-box;
+        box-shadow: 5px 5px 20px rgba(214, 214, 214, 0.15);
+        border-radius: 6px;
+        color: #000;
+        .editSalonDetailTitle {
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+}

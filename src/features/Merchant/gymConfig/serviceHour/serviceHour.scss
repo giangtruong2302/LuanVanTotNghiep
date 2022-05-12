@@ -1,0 +1,28 @@
+.serviceHoursBackground {
+  display: flex;
+  .left {
+    // background: linear-gradient(
+    //   179.91deg,
+    //   #f1fbff 11.4%,
+    //   rgb(248 200 222 / 25%) 50.64%,
+    //   rgb(255 213 233 / 0%) 86.64%
+    // );
+    background-color: linear-gradient(195deg, #f1fbff 11.4%, #bab6b885 26.64%);
+    border-radius: 10px;
+    height: 75vh;
+    padding: 15px;
+  }
+  .right {
+    margin-left: 10px;
+    padding: 15px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .serviceHoursBackground {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+    padding-top: 50px;
+  }
+}

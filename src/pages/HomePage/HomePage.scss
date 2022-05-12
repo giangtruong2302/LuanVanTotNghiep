@@ -1,0 +1,195 @@
+// custom slick slider //
+.slick-prev {
+  // position: relative !important;
+  left: -20px !important;
+  z-index: 9999;
+  height: 48px !important;
+  width: 44px !important;
+
+  background: #fff !important;
+  border: 2px solid #d7d7d7 !important;
+
+  &:hover {
+    background-color: #d7d7d7 !important;
+  }
+}
+
+.slick-next {
+  // position: relative !important;
+  right: -10px !important;
+  z-index: 9999;
+  height: 48px !important;
+  width: 44px !important;
+
+  background: #fff !important;
+  border: 2px solid #d7d7d7 !important;
+
+  &:hover {
+    background-color: #d7d7d7 !important;
+  }
+}
+
+.slick-disabled {
+  display: none !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: FontAwesome !important;
+  color: red !important;
+}
+
+.section-share {
+  &.section-specialty {
+    background: #f5f5f5;
+  }
+
+  &.section-outstanding-doctor {
+    background: #f5f5f5;
+  }
+
+  &.section-about {
+    height: 500px !important;
+    border-top: 1px solid #efeef5;
+    border-bottom: 1px solid #efeef5;
+  }
+
+  .section-body {
+    //display: flex;
+    .section-customize {
+      &.handbook {
+        display: flex !important;
+        gap: 20px;
+      }
+      .bg-image {
+        background-position: center center;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        background-color: #eee;
+        width: 278px;
+        height: 150px;
+
+        &.section-specialty {
+          background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
+        }
+
+        &.section-medical-facility {
+          //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
+        }
+
+        &.section-outstanding-doctor {
+          //background-image: url('../../assets/outstandingDoctor/unknown.png');
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          margin: 0 auto;
+          margin-bottom: 20px;
+        }
+
+        &.section-handBook {
+          background-image: url("../../assets/images/gym-place/chiNhanh1.jpg");
+        }
+      }
+    }
+  }
+}
+
+.section-share {
+  height: 353px;
+
+  .section-container {
+    margin: 0 195px;
+    display: flex;
+    flex-direction: column;
+
+    .section-header {
+      height: 60px;
+      margin-bottom: 10px;
+      margin-top: 30px;
+
+      .title-section {
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .btn-section {
+        float: right;
+        padding: 10px 15px;
+        border: none;
+        display: block;
+        outline: none;
+        background: #ebebeb;
+        color: black;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #fff;
+          background: #f7d800;
+        }
+      }
+    }
+  }
+}
+
+.section-outstanding-doctor {
+  .section-customize {
+    padding: 5px;
+    cursor: pointer;
+
+    .customize-border {
+      border: 1px solid #9b9b9b;
+      padding: 20px;
+    }
+  }
+}
+
+.home-footer {
+  text-align: center;
+  padding-top: 8px;
+  min-height: 250px;
+  margin: 0 auto;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(240, 235, 235, 0.1));
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  .footerLeft {
+    border-right: 1px solid gray;
+    width: 30%;
+  }
+  .footerCenter {
+    width: 40%;
+  }
+  .footerRight {
+    border-left: 1px solid gray;
+    width: 30%;
+  }
+}
+
+.section-about {
+  padding: 0 153px;
+
+  .section-about-header {
+    padding: 20px 10px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .section-about-content {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+
+    .content-left {
+      width: 60%;
+    }
+
+    .content-right {
+      width: 40%;
+
+      p {
+        font-style: italic;
+      }
+    }
+  }
+}
