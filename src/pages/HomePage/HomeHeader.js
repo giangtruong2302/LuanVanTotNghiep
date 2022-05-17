@@ -38,7 +38,7 @@ const HomeHeader = (props) => {
         <div className="home-header-content">
           <div className="left-content">
             <i className="fas fa-bars"></i>
-            <img className="header-logo" src={LogoGHGym} onClick={() => {}} />
+            <img className="header-logo" src={LogoGHGym} onClick={() => { }} />
           </div>
           <div className="center-content">
             <div className="child-content">

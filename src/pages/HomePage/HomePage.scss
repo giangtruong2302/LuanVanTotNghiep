@@ -55,12 +55,14 @@
   }
 
   .section-body {
+
     //display: flex;
     .section-customize {
       &.handbook {
         display: flex !important;
         gap: 20px;
       }
+
       .bg-image {
         background-position: center center;
         background-repeat: no-repeat !important;
@@ -153,13 +155,16 @@
   display: flex;
   gap: 15px;
   width: 100%;
+
   .footerLeft {
     border-right: 1px solid gray;
     width: 30%;
   }
+
   .footerCenter {
     width: 40%;
   }
+
   .footerRight {
     border-left: 1px solid gray;
     width: 30%;
@@ -189,6 +194,152 @@
 
       p {
         font-style: italic;
+      }
+    }
+  }
+}
+
+// Responsive Moblie
+@media only screen and (max-width: 46.1875em) {
+  .slick-prev {
+    // position: relative !important;
+    left: -9px !important;
+    z-index: 9999;
+    height: 35px !important;
+    width: 40px !important;
+
+    background: #fff !important;
+    border: 2px solid #d7d7d7 !important;
+
+    &:hover {
+      background-color: #d7d7d7 !important;
+    }
+  }
+
+  .slick-next {
+    // position: relative !important;
+    right: -12px !important;
+    z-index: 9999;
+    height: 30px !important;
+    width: 38px !important;
+    background: #fff !important;
+    border: 2px solid #d7d7d7 !important;
+
+    &:hover {
+      background-color: #d7d7d7 !important;
+    }
+  }
+
+  .slick-disabled {
+    display: none !important;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-family: FontAwesome !important;
+    color: red !important;
+  }
+
+  .section-share {
+    &.section-specialty {
+      height: 220px;
+      background: #f5f5f5;
+    }
+
+    &.section-outstanding-doctor {
+      background: #f5f5f5;
+    }
+
+    &.section-about {
+      height: 500px !important;
+      border-top: 1px solid #efeef5;
+      border-bottom: 1px solid #efeef5;
+    }
+
+    .section-body {
+
+
+
+      .section-customize {
+        width: 50%;
+
+        &.handbook {
+          display: flex !important;
+          gap: 20px;
+        }
+
+        .bg-image {
+          background-position: center center;
+          background-repeat: no-repeat !important;
+          background-size: cover;
+          background-color: #eee;
+          width: 90px;
+          height: 90px;
+          gap: 10px;
+
+
+          &.section-specialty {
+            background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
+          }
+
+          &.section-medical-facility {
+            //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
+          }
+
+          &.section-outstanding-doctor {
+            //background-image: url('../../assets/outstandingDoctor/unknown.png');
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+          }
+
+          &.section-handBook {
+            background-image: url("../../assets/images/gym-place/chiNhanh1.jpg");
+          }
+        }
+      }
+    }
+  }
+
+  .section-share {
+    height: 353px;
+    // float: left;
+    padding: auto;
+
+    .section-container {
+      margin: 0 1mm;
+      display: flex;
+      flex-direction: column;
+
+      .section-header {
+        height: 60px;
+        margin-bottom: 1px;
+        margin-top: 30px;
+
+        .title-section {
+          font-size: 17px;
+          font-weight: 648;
+        }
+
+        .btn-section {
+          float: right;
+          padding: 4px 15px;
+          border: none;
+          display: block;
+          outline: none;
+          background: #ebebeb;
+          color: black;
+          cursor: pointer;
+          text-transform: uppercase;
+          font-size: 13px;
+
+          &:hover {
+            color: #fff;
+            background: #f7d800;
+          }
+        }
       }
     }
   }
