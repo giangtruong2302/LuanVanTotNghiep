@@ -37,77 +37,109 @@ const LoginPage = () => {
   const handleLogin = (values) => {
     console.log("check info ", values);
   };
-  const [active, setActive] = React.useState(false);
-
-  const handleClickSU = () => {
-    setActive(true);
-  };
-
-  const handleClickSI = () => {
-    setActive(false);
-  };
 
   return (
-    <div className={"backgroundContainer"}>
-      <div
-        className={`${"container"} ${
-          active === true ? "right_panel_active" : ""
-        }`}
-        id={"container"}
-      >
-        <div className={`${"form_container"} ${"sign_up_container"}`}>
-          <form id="formRegister" method="post" enctype="multipart/form-data">
-            <h1>Create Account</h1>
-            <div className={"social_container"}>
-              <a href="#" className={"social"}>
-                <box-icon type="logo" name="facebook"></box-icon>
-              </a>
-              <a href="#" className={"social"}>
-                <box-icon name="google" type="logo"></box-icon>
-              </a>
-            </div>
-            <span>or use your email for registration</span>
-            <input type="text" name="myName" placeholder="Name" />
-            <input type="email" name="myEmail" placeholder="Email" />
-            <input type="password" name="myPassword" placeholder="Password" />
-
-            <button type="submit">Sign Up</button>
-          </form>
+    <div className={"wrapper"}>
+      <div className={"loginPage"}>
+        <div className={"logoLogin"}>
+          {/* <img src={logo} alt="BIZBOOKLY" />
+           */}
+          GH GYM
         </div>
-        <div className={`${"form_container"} ${"sign_in_container"}`}>
-          <form id="formLogin" action="#">
-            <h1>Sign in</h1>
-            <div className={"social_container"}>
-              <a href="#" className={"social"}>
-                <box-icon type="logo" name="facebook"></box-icon>
-              </a>
-              <a href="#" className={"social"}>
-                <box-icon name="google" type="logo"></box-icon>
-              </a>
+        <div className={"titlePage"}>
+          <div className={"textLoginPage"}></div>
+          {isLogin.isAuthenticated ? (
+            ""
+          ) : (
+            <div className={"textRecovery"} style={{ color: "red" }}>
+              Invalid username or password
             </div>
-            <span>or use your account</span>
-            <input type="email" placeholder="Email" id="emailLogin" />
-            <input type="password" placeholder="Password" id="passwordLogin" />
-            <a href="#">Forgot your password?</a>
-            <button type="submit">Sign In</button>
-          </form>
-        </div>
-        <div className={"overlay_container"}>
-          <div className={"overlay"}>
-            <div className={`${"overlay_panel"} ${"overlay_left"}`}>
-              <h1>Welcome Back</h1>
-              <p>KIBI welcomes you back anytime, anywhere</p>
-              <button className={"ghost"} id="signIn" onClick={handleClickSI}>
-                Sign In
-              </button>
-            </div>
-            <div className={`${"overlay_panel"} ${"overlay_right"}`}>
-              <h1>Welcome to KIBI</h1>
-              <p>Let us revamp your beauty</p>
-              <button className={"ghost"} id="signUp" onClick={handleClickSU}>
-                Sign Up
-              </button>
-            </div>
+          )}
+          <Formik
+            validationSchema={loginSchema}
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            onSubmit={async (values) => {
+              handleLogin(values);
+            }}
+          >
+            {({ errors, touched }) => {
+              return (
+                <Form>
+                  <FormAnt.Item
+                    validateStatus={
+                      Boolean(touched?.email && errors?.email)
+                        ? "error"
+                        : "success"
+                    }
+                    help={
+                      Boolean(touched?.email && errors?.email) && errors?.email
+                    }
+                  >
+                    <Field name="email">
+                      {({ field }) => (
+                        <Input
+                          {...field}
+                          className={"inputLogin"}
+                          placeholder="Username"
+                        />
+                      )}
+                    </Field>
+                  </FormAnt.Item>
+                  <FormAnt.Item
+                    validateStatus={
+                      Boolean(touched?.password && errors?.password)
+                        ? "error"
+                        : "success"
+                    }
+                    help={
+                      Boolean(touched?.password && errors?.password) &&
+                      errors?.password
+                    }
+                  >
+                    <Field name="password">
+                      {({ field }) => (
+                        <Input.Password
+                          {...field}
+                          className={"inputLogin"}
+                          placeholder="Password"
+                        />
+                      )}
+                    </Field>
+                  </FormAnt.Item>
+                  <FormAnt.Item>
+                    <Field>
+                      {({ field }) => (
+                        <Checkbox className={"checkboxLogin"}>
+                          Remember me
+                        </Checkbox>
+                      )}
+                    </Field>
+                  </FormAnt.Item>
+                  <div className={"btnContainer"}>
+                    <button
+                      className={"btnLogin"}
+                      type="submit"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Login
+                    </button>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+          <div className={"loginForm"}>
+            <Link to={"/password-recovery"} className={"forgotPassword"}>
+              Forgot password
+            </Link>
+            <span> / </span>
+            <Link to={"/sign-up"} className={"forgotPassword"}>
+              Sign up
+            </Link>
+            <div className={"versionPage"}>v1.0.0</div>
           </div>
         </div>
       </div>

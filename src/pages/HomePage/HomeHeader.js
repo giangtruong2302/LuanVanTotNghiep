@@ -43,9 +43,11 @@ const HomeHeader = (props) => {
           <div className="center-content">
             <div className="child-content">
               <div>
-                <b>
-                  <FormattedMessage id="homeHeader.speciality" />
-                </b>
+                <NavLink to="/serviceOfGHGYM">
+                  <b>
+                    <FormattedMessage id="homeHeader.speciality" />
+                  </b>
+                </NavLink>
               </div>
               <div className="sub-title">
                 <FormattedMessage id="homeHeader.searchDocter" />
@@ -63,9 +65,11 @@ const HomeHeader = (props) => {
             </div>
             <div className="child-content">
               <div>
-                <b>
-                  <FormattedMessage id="homeHeader.doctor" />
-                </b>
+                <NavLink to="/Personal-Training">
+                  <b>
+                    <FormattedMessage id="homeHeader.doctor" />
+                  </b>
+                </NavLink>
               </div>
               <div className="sub-title">
                 <FormattedMessage id="homeHeader.select-doctor" />
@@ -87,7 +91,9 @@ const HomeHeader = (props) => {
                   <div className="logoLogin">
                     <SignIn size={24} color="#1a1a19" weight="fill" />
                   </div>
-                  <span className="textLogin">Đăng nhập</span>
+                  <span className="textLogin">
+                    <FormattedMessage id="homeHeader.login" />
+                  </span>
                 </div>
               </NavLink>
             </div>

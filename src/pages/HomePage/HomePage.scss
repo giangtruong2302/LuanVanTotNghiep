@@ -156,13 +156,46 @@
   .footerLeft {
     border-right: 1px solid gray;
     width: 30%;
+    text-align: left;
+    padding-left: 80px;
+    align-items: center;
+    margin: 0 auto;
+    .title-footer-GHGym {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
   }
   .footerCenter {
     width: 40%;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    gap: 15px;
+    .left-blog {
+      width: 50%;
+    }
+    .right-blog {
+      width: 50%;
+    }
   }
   .footerRight {
     border-left: 1px solid gray;
     width: 30%;
+    .textSocialMedia {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .social-media {
+      display: flex;
+      gap: 15px;
+      margin: 0 auto;
+      align-items: center;
+      width: 30%;
+    }
   }
 }
 

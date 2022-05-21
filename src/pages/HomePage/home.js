@@ -1,9 +1,8 @@
-import React, { useLocation } from "react-router-dom";
+import React, { useState, useLocation } from "react-router-dom";
 import "./HomePage.scss";
 import HomeHeader from "./HomeHeader";
 import HomeFooter from "./HomeFooter";
 import Specialty from "./Section/Specialty";
-import { useState } from "react";
 import GymCenter from "./Section/GymCenter";
 import OutStandingPT from "./Section/OutStandingPT";
 import HandBook from "./Section/HandBook";

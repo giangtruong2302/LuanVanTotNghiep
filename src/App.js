@@ -3,15 +3,18 @@ import "./App.css";
 import { Route, Switch, Router, Body, BrowserRouter } from "react-router-dom";
 import Home from "./pages/HomePage/home";
 import System from "./routes/System";
-
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import { Fragment } from "react";
 import { path } from "./utils/constant";
 // import Dashboard from "./containers/System/Admin/dashboard";
 import LoginPage from "./features/login";
+import SignUp from "./features/sign-up";
+import PersonalTraining from "./features/Customer/PT";
 // import GymConfig from "./features/Merchant/gymConfig";
 
 function App() {
+  // const Home = React.lazy(() => import("./pages/HomePage/home"));
   return (
     <Fragment>
       <div className="main-container">
@@ -25,7 +28,8 @@ function App() {
                         <Route path={path.HOMEPAGE} component={HomePage} /> */}
               <Route path={path.SYSTEM} component={System} />
               <Route path={path.LOGIN} component={LoginPage} />
-              {/* <Route path={path.GYM} component={GymConfig} /> */}
+              <Route path={path.SIGN_UP} component={SignUp} />
+              <Route path={path.PT} component={PersonalTraining} />
               {/* <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} /> */}
               {/* <Route path={'/doctor/'} component={Doctor} /> */}
               {/* <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />

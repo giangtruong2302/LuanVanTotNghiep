@@ -9,7 +9,8 @@
     "fee": "Examination package",
     "check-health": "General health check",
     "support": "Support",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "login": "Sign in"
   },
   "banner": {
     "title1": "MEDICAL PLATFORM",
