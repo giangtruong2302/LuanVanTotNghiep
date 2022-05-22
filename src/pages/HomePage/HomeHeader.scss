@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 100;
+  z-index: 99999;
 
 
   .home-header-content {
@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
+      cursor: pointer;
       .child-content {
         .login {
           display: flex;
@@ -193,8 +193,8 @@
         .icon-child {
           background: white;
           box-shadow: 0px 1px 2px #000;
-          width: 40px;
-          height: 40px;
+          width: 48px;
+          height: 48px;
           padding: 10px;
           border-radius: 50%;
           text-align: center;
