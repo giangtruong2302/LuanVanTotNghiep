@@ -88,6 +88,7 @@ const ListPT = () => {
   const [columnDefs] = useState([
     {
       field: "setting",
+      flex: 0,
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
     },
@@ -100,6 +101,7 @@ const ListPT = () => {
     },
     {
       field: "staff",
+      flex: 2,
       // width: 215,
       // headerName: "PT",
       // type: "rightAligned",

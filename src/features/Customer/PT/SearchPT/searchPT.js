@@ -28,10 +28,10 @@ const SearchPT = () => {
             bordered={false}
             // onChange={onChange}
           >
-            <Option>PT Name</Option>
-            <Option>Phone Number</Option>
-            <Option>Email</Option>
-            <Option>Address</Option>
+            <Option value="P.T Name">PT Name</Option>
+            <Option value="Phone Number">Phone Number</Option>
+            <Option value="Email">Email</Option>
+            <Option value="Address">Address</Option>
           </Select>
         </div>
         <div className="searchSection">

@@ -1,9 +1,6 @@
 .searchContainer {
   display: flex;
   align-items: center;
-  .searchSelected {
-    margin-right: 20px;
-  }
   .searchSection {
     margin-top: 28px;
     flex: 1;
@@ -32,12 +29,12 @@
         background: #fff;
       }
     }
-    .searchCustomer {
+    .searchService {
       border-radius: 10px;
     }
   }
 }
-.titlePTList {
+.titleService {
   letter-spacing: 0.4px;
   font-size: 18px;
   font-weight: 600;
@@ -48,9 +45,4 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
-}
-:global {
-  .ant-form-item {
-    margin-bottom: 0;
-  }
 }

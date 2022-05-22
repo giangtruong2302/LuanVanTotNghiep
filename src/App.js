@@ -11,6 +11,7 @@ import { path } from "./utils/constant";
 import LoginPage from "./features/login";
 import SignUp from "./features/sign-up";
 import PersonalTraining from "./features/Customer/PT";
+import ServiceGym from "./features/Customer/ServiceGym";
 // import GymConfig from "./features/Merchant/gymConfig";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path={path.LOGIN} component={LoginPage} />
               <Route path={path.SIGN_UP} component={SignUp} />
               <Route path={path.PT} component={PersonalTraining} />
+              <Route path={path.Service} component={ServiceGym} />
               {/* <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} /> */}
               {/* <Route path={'/doctor/'} component={Doctor} /> */}
               {/* <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />

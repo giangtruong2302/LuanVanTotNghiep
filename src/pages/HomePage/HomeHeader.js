@@ -43,7 +43,7 @@ const HomeHeader = (props) => {
           <div className="center-content">
             <div className="child-content">
               <div>
-                <NavLink to="/serviceOfGHGYM">
+                <NavLink to="/service-gym">
                   <b>
                     <FormattedMessage id="homeHeader.speciality" />
                   </b>
