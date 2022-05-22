@@ -7,6 +7,7 @@
   background-color: #fff;
   z-index: 100;
 
+
   .home-header-content {
     width: 100%;
     height: 100%;
@@ -55,6 +56,10 @@
           font-size: 12px;
         }
       }
+    }
+
+    .hamburger-menu {
+      display: none;
     }
 
     .right-content {
@@ -217,6 +222,7 @@
 
 //Moblie reponsive 
 @media only screen and (max-width: 46.1875em) {
+
   .home-header-container {
     height: 70px;
     width: 100%;
@@ -225,6 +231,9 @@
     top: 0;
     background-color: #fff;
     z-index: 100;
+
+
+
 
     .home-header-content {
       width: 100%;
@@ -237,13 +246,14 @@
         display: flex;
         align-items: center;
 
+
         .header-logo {
           background-size: 50%;
           height: 100%;
           min-width: 380%;
           cursor: pointer;
           transform: scale(0.6, 2);
-          margin-left: -170%;
+          margin-right: 180px;
         }
 
         i {
@@ -254,6 +264,7 @@
       }
 
       .center-content {
+        display: none;
         width: 85%;
         align-items: center;
         font-size: 13px;
@@ -285,15 +296,104 @@
         }
       }
 
+      .hamburger-menu {
+        display: flex;
+
+        #menu__toggle {
+          opacity: 0;
+        }
+
+        #menu__toggle:checked+.menu__btn>span {
+          transform: rotate(45deg);
+        }
+
+        #menu__toggle:checked+.menu__btn>span::before {
+          top: 0;
+          transform: rotate(0deg);
+        }
+
+        #menu__toggle:checked+.menu__btn>span::after {
+          top: 0;
+          transform: rotate(90deg);
+        }
+
+        #menu__toggle:checked~.menu__box {
+          left: 0 !important;
+        }
+
+        .menu__btn {
+          position: fixed;
+          top: 30px;
+          left: 20px;
+          width: 26px;
+          height: 26px;
+          cursor: pointer;
+          z-index: 1;
+        }
+
+        .menu__btn>span,
+        .menu__btn>span::before,
+        .menu__btn>span::after {
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          background-color: #616161;
+          transition-duration: .25s;
+        }
+
+        .menu__btn>span::before {
+          content: '';
+          top: -8px;
+        }
+
+        .menu__btn>span::after {
+          content: '';
+          top: 8px;
+        }
+
+        .menu__box {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 180px;
+          height: 65%;
+          margin: 0;
+          padding: 80px 0;
+          list-style: none;
+          background-color: white;
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+          transition-duration: .25s;
+        }
+
+        .menu__item {
+          display: block;
+          padding: 12px 24px;
+          color: #333;
+          font-family: 'Roboto', sans-serif;
+          font-size: 20px;
+          font-weight: 600;
+          text-decoration: none;
+          transition-duration: .25s;
+        }
+
+        .menu__item:hover {
+          background-color: #CFD8DC;
+        }
+      }
+
+
       .right-content {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
         width: 1.5mm;
+        margin-left: 200px;
 
         .support {
 
-          padding-left: 13px;
+          padding-left: -20px;
           padding-bottom: 20px;
           display: flex;
           flex-direction: row;
@@ -301,7 +401,7 @@
 
           i {
             font-size: 15px;
-            margin-right: -55px;
+            margin-right: -40px;
 
           }
         }
@@ -405,31 +505,42 @@
     }
 
     .content-down {
-      height: 35%;
+      height: 40%;
       padding-bottom: 10px;
       display: flex;
-      align-items: flex-end;
+      flex-direction: row;
+      align-items: flex-start;
       justify-content: center;
       background-image: linear-gradient(rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.9),
           rgba(255, 255, 255, 1));
 
       .options {
+        padding-left: 15px;
+        padding-top: 50px;
         text-align: center;
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         gap: 20px;
         width: 100%;
+        height: 100px;
 
         .option-child {
-          width: 250px;
-
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+          height: 50px;
+          justify-content: center;
 
 
           .icon-child {
+
             background: white;
             box-shadow: 0px 1px 2px #000;
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 45px;
             padding: 10px;
             border-radius: 50%;
             text-align: center;
@@ -442,7 +553,8 @@
           }
 
           .text-child {
-            font-size: 10px;
+
+            font-size: 12px;
             font-weight: 650;
 
           }
@@ -454,5 +566,6 @@
         }
       }
     }
+
   }
 }

@@ -5,7 +5,9 @@ import { LANGUAGES } from "../../utils/constant";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLanguageApp } from "../../store/actions";
 import LogoGHGym from "../../assets/images/logo/GHGYMLogo.png";
+import NavBar from "./NavBar";
 import { useHistory } from "react-router";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   BookmarksSimple,
   MagnifyingGlass,
@@ -81,6 +83,7 @@ const HomeHeader = (props) => {
                 <FormattedMessage id="homeHeader.check-health" />
               </div>
             </div>
+
             <div className="child-content">
               <NavLink to="/login">
                 <div className="login">
@@ -92,6 +95,22 @@ const HomeHeader = (props) => {
               </NavLink>
             </div>
           </div>
+          <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+
+            <ul class="menu__box">
+              <li><a class="menu__item" >Dịch vụ</a></li>
+              <li><a class="menu__item" >Cơ sở Gym</a></li>
+              <li><a class="menu__item" >Gói dịch vụ</a></li>
+              <li><a class="menu__item" >PT</a></li>
+              <li><a class="menu__item" >Đăng nhập</a></li>
+
+            </ul>
+          </div>
+
           <div className="right-content">
             <div className="support">
               <i className="fas fa-question-circle"></i>
@@ -200,4 +219,14 @@ const HomeHeader = (props) => {
     </>
   );
 };
+
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
 export default HomeHeader;

@@ -1,4 +1,6 @@
 // custom slick slider //
+
+
 .slick-prev {
   // position: relative !important;
   left: -20px !important;
@@ -68,7 +70,7 @@
         background-repeat: no-repeat !important;
         background-size: cover;
         background-color: #eee;
-        width: 278px;
+        width: 275px;
         height: 150px;
 
         &.section-specialty {
@@ -201,6 +203,8 @@
 
 // Responsive Moblie
 @media only screen and (max-width: 46.1875em) {
+
+
   .slick-prev {
     // position: relative !important;
     left: -9px !important;
@@ -218,10 +222,10 @@
 
   .slick-next {
     // position: relative !important;
-    right: -12px !important;
+    right: -2px !important;
     z-index: 9999;
-    height: 30px !important;
-    width: 38px !important;
+    height: 35px !important;
+    width: 40px !important;
     background: #fff !important;
     border: 2px solid #d7d7d7 !important;
 
@@ -261,25 +265,29 @@
 
 
       .section-customize {
-        width: 50%;
+
+        display: flex;
+
 
         &.handbook {
           display: flex !important;
-          gap: 20px;
         }
 
         .bg-image {
-          background-position: center center;
+          //background-position: center center;
           background-repeat: no-repeat !important;
           background-size: cover;
           background-color: #eee;
-          width: 90px;
-          height: 90px;
+          width: 175px;
+          height: 130px;
           gap: 10px;
+          margin: 0px 1px;
+
 
 
           &.section-specialty {
             background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
+
           }
 
           &.section-medical-facility {
@@ -312,20 +320,22 @@
       margin: 0 1mm;
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       .section-header {
-        height: 60px;
+        height: 40px;
         margin-bottom: 1px;
         margin-top: 30px;
 
         .title-section {
+          padding-right: 1px;
           font-size: 17px;
           font-weight: 648;
         }
 
         .btn-section {
           float: right;
-          padding: 4px 15px;
+          padding: 4px 22px;
           border: none;
           display: block;
           outline: none;
@@ -333,11 +343,12 @@
           color: black;
           cursor: pointer;
           text-transform: uppercase;
-          font-size: 13px;
+          font-size: 12px;
 
           &:hover {
             color: #fff;
             background: #f7d800;
+
           }
         }
       }
