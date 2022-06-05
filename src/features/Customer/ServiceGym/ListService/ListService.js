@@ -1,110 +1,285 @@
 import React, { useState } from "react";
 import "./ListService.scss";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-import { LicenseManager } from "ag-grid-enterprise";
-import { AgGridReact } from "ag-grid-react";
-LicenseManager.setLicenseKey(
-  "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
-);
+import { Empty } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
+import StaggerAnimation from "../../../../component/StaggerAnimation";
+import { Link } from "react-router-dom";
+import kickboxing from "../../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 
 const ListService = () => {
-  const [rowData] = useState([
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-    {
-      service: "Manicure",
-      workDuration: "1 Hrs 30 Mins",
-      price: "$40.00",
-    },
-  ]);
-  const [columnDefs] = useState([
-    {
-      field: "service",
-      // width: 550,
-      flex: 2,
-      headerName: "Service",
-      cellRenderer: "serviceRenderer",
-    },
-    {
-      field: "workDuration",
-      // width: 215,
-      headerName: "Work Duration",
-      type: "rightAligned",
-      cellRenderer: "workDurationRenderer",
-    },
-    {
-      field: "price",
-      // width: 215,
-      headerName: "Price (USA)",
-      type: "rightAligned",
-      cellRenderer: "priceRenderer",
-    },
-  ]);
-
-  const rowSelection = (item) => {
-    // return navigation("/dashboard");
-  };
-  const defaultColDef = {
-    resizable: true,
-    flex: 1,
-    minWidth: 100,
-  };
-  const gridOptions = {
-    rowSelection: "single",
-    // rowModelType: 'serverSide',
-    rowBuffer: 0,
-    cacheBlockSize: 10,
-    cacheOverflowSize: 1,
-    maxConcurrentDatasourceRequests: 1,
-    infiniteInitialRowCount: 10,
-    maxBlocksInCache: 1000,
-  };
-  const rowStyle = { background: "white" };
+  const [noService, setNoservice] = useState(false);
 
   return (
-    <div
-      className={"agThemeAlpineService container-fluid"}
-      style={{
-        height: 501,
-        width: "100%",
-        padding: "0 20px",
-      }}
-    >
-      <AgGridReact
-        defaultColDef={defaultColDef}
-        headerHeight={60}
-        rowData={rowData}
-        columnDefs={columnDefs}
-        gridOptions={gridOptions}
-        rowHeight={73}
-        rowStyle={rowStyle}
-        // frameworkComponents={frameworkComponents}
-      />
-    </div>
+    <>
+      {noService ? (
+        <div className="noData">
+          <Empty
+            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+            imageStyle={{
+              height: 60,
+            }}
+            description={"No Data"}
+          />
+        </div>
+      ) : (
+        <div className="listServiceContent container">
+          <InfiniteScroll
+            dataLength={8}
+            style={{ gap: "20px", display: "flex", flexDirection: "column" }}
+            loader={
+              <div className={"loading"}>
+                <StaggerAnimation />
+              </div>
+            }
+            hasMore={true}
+          >
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+            <Link to="/service-detail/:id" className="service">
+              <div className="breadcumService">
+                <div className="categoryService">Category</div>
+              </div>
+              <div className="lineService"></div>
+              <div className="serviceInfo">
+                <div className="info">
+                  <img
+                    src={kickboxing}
+                    style={{
+                      borderRadius: "100px",
+                      width: "30px",
+                      height: "30px",
+                      flex: "none",
+                      order: 0,
+                      flexGrow: 0,
+                    }}
+                  />
+                  <p className={"textNameService"}>Kick Boxing</p>
+                </div>
+                <div className="detailInfo">
+                  <p>môn võ tổng hợp-kick boxing</p>
+                  <span className="lineDetailInfo"></span>
+                  <p>6/month</p>
+                </div>
+              </div>
+            </Link>
+          </InfiniteScroll>
+        </div>
+      )}
+    </>
   );
 };
 export default ListService;

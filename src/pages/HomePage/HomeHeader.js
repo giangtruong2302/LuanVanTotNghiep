@@ -1,26 +1,22 @@
-import React, { useCallback, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import "./HomeHeader.scss";
-import { LANGUAGES } from "../../utils/constant";
-import { useSelector, useDispatch } from "react-redux";
-import { changeLanguageApp } from "../../store/actions";
-import LogoGHGym from "../../assets/images/logo/GHGYMLogo.png";
-import NavBar from "./NavBar";
-import { useHistory } from "react-router";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Input } from "antd";
 import {
-  BookmarksSimple,
-  MagnifyingGlass,
-  Buildings,
   AddressBook,
-  PhoneCall,
-  Person,
+  BookmarksSimple,
+  Buildings,
   DeviceMobile,
+  MagnifyingGlass,
+  Person,
+  PhoneCall,
   SignIn,
 } from "phosphor-react";
-import { Input } from "antd";
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import LoginPage from "../../features/login";
+import LogoGHGym from "../../assets/images/logo/GHGYMLogo.png";
+import { changeLanguageApp } from "../../store/actions";
+import { LANGUAGES } from "../../utils/constant";
+import "./HomeHeader.scss";
 
 const { Search } = Input;
 
@@ -40,7 +36,7 @@ const HomeHeader = (props) => {
         <div className="home-header-content">
           <div className="left-content">
             <i className="fas fa-bars"></i>
-            <img className="header-logo" src={LogoGHGym} onClick={() => { }} />
+            <img className="header-logo" src={LogoGHGym} onClick={() => {}} />
           </div>
           <div className="center-content">
             <div className="child-content">
@@ -57,9 +53,11 @@ const HomeHeader = (props) => {
             </div>
             <div className="child-content">
               <div>
-                <b>
-                  <FormattedMessage id="homeHeader.health-facility" />
-                </b>
+                <NavLink to="/gym-center">
+                  <b>
+                    <FormattedMessage id="homeHeader.health-facility" />
+                  </b>
+                </NavLink>
               </div>
               <div className="sub-title">
                 <FormattedMessage id="homeHeader.select-room" />
@@ -108,12 +106,21 @@ const HomeHeader = (props) => {
             </label>
 
             <ul class="menu__box">
-              <li><a class="menu__item" >Dịch vụ</a></li>
-              <li><a class="menu__item" >Cơ sở Gym</a></li>
-              <li><a class="menu__item" >Gói dịch vụ</a></li>
-              <li><a class="menu__item" >PT</a></li>
-              <li><a class="menu__item" >Đăng nhập</a></li>
-
+              <li>
+                <a class="menu__item">Dịch vụ</a>
+              </li>
+              <li>
+                <a class="menu__item">Cơ sở Gym</a>
+              </li>
+              <li>
+                <a class="menu__item">Gói dịch vụ</a>
+              </li>
+              <li>
+                <a class="menu__item">PT</a>
+              </li>
+              <li>
+                <a class="menu__item">Đăng nhập</a>
+              </li>
             </ul>
           </div>
 

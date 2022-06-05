@@ -99,20 +99,22 @@
     }
   },
   "admin": {
-    "manage-doctor": {
-      "title": "Create more information doctor",
-      "select-doctor": "Select doctor",
-      "intro": "Introduction",
-      "add": "Create infor",
-      "save": "Save infor",
-      "price": "Price",
-      "payment": "Payment",
-      "province": "Province",
-      "nameClinic": "Clinic's name",
-      "addressClinic": "Clinic's address",
-      "note": "Note",
-      "specialty": "Specialty",
-      "select-clinic": "Clinic"
+    "manage-gym": {
+      "manage-center": "Manage Center",
+      "manage-account": "Manage Account",
+      "setting": "Setting",
+      "languages": "Languages",
+      "staff": "Staff",
+      "customer": "Customer",
+      "revenue": "Revenue",
+      "list-of-staff": "List of Staff",
+      "create-staff": "Add staff to Branch Gym",
+      "update-staff": "Update info Staff",
+      "list-of-cus": "List of Customer",
+      "list-of-revenue": "List of Revenue",
+      "list-of-blog": "List of Blog",
+      "create-blog": "Create Blog",
+      "update-blog": "Update Blog"
     }
   }
 }

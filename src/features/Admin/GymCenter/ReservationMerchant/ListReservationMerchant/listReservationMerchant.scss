@@ -1,0 +1,8 @@
+.listItemReservation {
+  padding-top: 20px;
+  overflow-y: auto;
+  height: calc(100vh - 196px);
+  .loading {
+    margin-top: -20px;
+  }
+}

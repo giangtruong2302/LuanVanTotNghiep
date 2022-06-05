@@ -2,10 +2,9 @@ import React from "react";
 import { Form as FormAnt, Input, Select } from "antd";
 import "./SearchService.scss";
 import { Form, Formik } from "formik";
-
+const { Search } = Input;
+const { Option } = Select;
 const SearchService = () => {
-  const { Search } = Input;
-  const { Option } = Select;
   const onSearch = (value) => {
     console.log(value);
   };

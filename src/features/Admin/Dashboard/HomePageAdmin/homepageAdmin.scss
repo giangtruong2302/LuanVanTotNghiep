@@ -1,0 +1,121 @@
+.HomepageAdminBg {
+  height: 100%;
+  overflow: auto;
+  .titleHomeAdmin {
+    font-size: 24px;
+    font-weight: 700px;
+    color: #000;
+  }
+  .overviewCalc {
+    display: flex;
+    padding-left: 3px !important;
+    gap: 50px;
+    padding: 8px 0;
+    height: 100px;
+    // margin: 0 auto;
+    .gymCenterTotal {
+      height: 100%;
+      border-radius: 6px;
+      text-align: center;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+      &:hover {
+        box-shadow: 1px 1px 8px 1px #00bfff;
+        cursor: pointer;
+      }
+    }
+    .serviceOfGHGym {
+      height: 100%;
+      border-radius: 6px;
+      text-align: center;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+      &:hover {
+        box-shadow: 1px 1px 8px 1px #00bfff;
+        cursor: pointer;
+      }
+    }
+    .accountCusTotal {
+      height: 100%;
+      border-radius: 6px;
+      text-align: center;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+      &:hover {
+        box-shadow: 1px 1px 8px 1px #00bfff;
+        cursor: pointer;
+      }
+    }
+    .serviceHours {
+      height: 100%;
+      border-radius: 6px;
+      text-align: center;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+      &:hover {
+        box-shadow: 1px 1px 8px 1px #00bfff;
+        cursor: pointer;
+      }
+    }
+  }
+  .chartReservation {
+    padding-top: 25px;
+    .chartReservationContent {
+      display: flex;
+      gap: 10px;
+      .leftChart {
+      }
+      .rightChart {
+        height: 100%;
+        .rightChartContent {
+          // border-left: 1px solid #edf;
+          padding-left: 20px;
+          // box-shadow: 1px 1px 8px 1px #888;
+          padding-top: 20px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+  .unresolved {
+    padding-top: 50px;
+    padding-left: 3px;
+    padding-bottom: 50px;
+    display: flex;
+    gap: 50px;
+    height: 500px;
+    .unresolvedOnTop {
+      padding-left: 10px;
+      height: 100%;
+      border-radius: 6px;
+      text-align: start;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+      .unresolvedOnTopHeader {
+        display: flex;
+        gap: 70%;
+
+        .unresolvedOnTopTitle {
+          text-align: start;
+          justify-content: flex-start;
+        }
+        .viewDetailUnresolved {
+          text-align: start;
+          // float: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+    .ageCusPopular {
+      padding-left: 10px;
+      height: 100%;
+      border-radius: 6px;
+      text-align: start;
+      background-color: transparent;
+      box-shadow: 1px 1px 8px 1px #888;
+    }
+  }
+}

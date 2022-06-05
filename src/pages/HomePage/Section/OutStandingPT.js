@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
 import "./Specialty.scss";
 import img from "../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
+import { NavLink } from "react-router-dom";
 
 const OutStandingPT = (props) => {
   return (
@@ -18,7 +19,8 @@ const OutStandingPT = (props) => {
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
-            <div
+            <NavLink
+              to="/pt-detail/1"
               className="section-customize specialty-child"
               //key={index}
               //onClick={() => this.handleViewDetailSpecialty(item)}
@@ -28,7 +30,7 @@ const OutStandingPT = (props) => {
                 style={{ backgroundImage: `url(${img})` }}
               ></div>
               <div className="specialty-name">{"item.name"}</div>
-            </div>
+            </NavLink>
             <div
               className="section-customize specialty-child"
               //key={index}

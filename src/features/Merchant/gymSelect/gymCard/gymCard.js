@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const GymCard = () => {
   const handleAccess = () => {
     try {
-      <NavLink to="/system/dashboard" />;
+      <NavLink to="/merchant/dashboard" />;
     } catch (error) {}
   };
   return (
@@ -22,7 +22,7 @@ const GymCard = () => {
           {"180 Cao lỗ P5 Quận 8 Tp. Hồ Chí Minh"}
         </div>
         <div className="salonAccess" onClick={handleAccess}>
-          <NavLink to="/system/dashboard" className="textLinkAccess">
+          <NavLink to="/merchant/dashboard" className="textLinkAccess">
             {" "}
             Access
           </NavLink>

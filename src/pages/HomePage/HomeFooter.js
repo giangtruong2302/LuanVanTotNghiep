@@ -15,7 +15,7 @@ const HomeFooter = () => {
   return (
     <div className="home-footer container-fluid">
       <div className="footerLeft">
-        <p className="title-footer-GHGym">GH GYM</p>
+        <p className="title-footer-GHGym">Hệ thống GH GYM</p>
         <p>
           <Phone size={18} color="#1d1b1b" weight="fill" /> 0337657262
         </p>

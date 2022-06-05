@@ -71,7 +71,7 @@
   },
   "patient": {
     "detail-doctor": {
-      "schedule": "Lịch khám",
+      "schedule": "Lịch hướng dẫn",
       "no-schedule": "Bác sĩ không có lịch khám",
       "choose": "Chọn ",
       "Book-free": " và đặt (miễn phí)"
@@ -99,20 +99,22 @@
     }
   },
   "admin": {
-    "manage-doctor": {
-      "title": "Tạo thêm thông tin doctor",
-      "select-doctor": "Chọn bác sĩ",
-      "intro": "Thông tin giới thiệu",
-      "add": "Tạo thông tin",
-      "save": "Lưu thông tin",
-      "price": "Giá khám bệnh",
-      "payment": "Phương thức thanh toán",
-      "province": "Tỉnh thành",
-      "nameClinic": "Tên phòng khám",
-      "addressClinic": "Địa chỉ phòng phám",
-      "note": "Ghi chú",
-      "specialty": "Chọn chuyên khoa",
-      "select-clinic": "Chọn phòng khám"
+    "manage-gym": {
+      "manage-center": "Quản lý chi nhánh",
+      "manage-account": "Quản lý tài khoản",
+      "setting": "Cài đặt",
+      "languages": "Ngôn ngữ",
+      "staff": "Nhân viên",
+      "customer": "Khách hàng",
+      "revenue": "Doanh thu",
+      "list-of-staff": "Xem danh sách nhân viên",
+      "create-staff": "Thêm nhân viên",
+      "update-staff": "Cập nhật nhân viên",
+      "list-of-cus": "Xem danh sách khách hàng",
+      "list-of-revenue": "Xem doanh thu",
+      "list-of-blog": "Xem danh sách Blog",
+      "create-blog": "Tạo Blog",
+      "update-blog": "Cập nhật Blog"
     }
   }
 }

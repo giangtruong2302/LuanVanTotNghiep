@@ -55,7 +55,7 @@ const Dashboard = (props) => {
         ),
         title: "Reservation",
         description: "Management",
-        link: "/system/gym-reservation",
+        link: "/merchant/reservation",
       },
       {
         image: (
