@@ -1,0 +1,71 @@
+.ReservationDetailBg {
+  :global {
+    .ant-input-group .ant-input {
+      border-radius: 8px;
+    }
+  }
+  .ReservationDetailContainer {
+    height: auto;
+    display: flex;
+    gap: 10px;
+    padding: 20px 0px 0px 2px;
+    .leftContainer {
+      padding: 25px;
+      height: 300px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 1px #888;
+      display: flex;
+      justify-content: space-between;
+      .textContentReserLeft {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .textContentReserRight {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+    }
+    .rightContainer {
+      padding: 25px;
+      height: 300px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 1px #888;
+      display: flex;
+      justify-content: space-between;
+      .textContentReserLeft {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .textContentReserRight {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+    }
+  }
+  .btnControlService {
+    min-width: 100px;
+    max-width: auto;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 8px 1px #888;
+    text-align: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: rgb(8, 190, 246);
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
