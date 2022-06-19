@@ -50,22 +50,44 @@
       }
     }
   }
-  .btnControlService {
-    min-width: 100px;
-    max-width: auto;
-    height: 40px;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 8px 1px #888;
-    text-align: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    background-color: rgb(8, 190, 246);
-    padding-left: 10px;
-    padding-right: 10px;
+  .control {
+    display: flex;
+    gap: 10px;
+    .btnCancelService {
+      min-width: fit-content;
+      max-width: auto;
+      height: 40px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 1px #888;
+      text-align: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      background-color: rgb(233, 55, 67);
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .btnControlService {
+      min-width: fit-content;
+      max-width: auto;
+      height: 40px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 1px #888;
+      text-align: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      background-color: rgb(8, 190, 246);
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 }

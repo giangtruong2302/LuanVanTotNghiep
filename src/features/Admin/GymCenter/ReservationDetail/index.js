@@ -68,8 +68,9 @@ const ReservationDetail = () => {
         </Col>
       </Row>
       <Row>
-        <Col span={20}></Col>
-        <Col span={4}>
+        <Col span={19}></Col>
+        <Col span={5} className={classes.control}>
+          <button className={classes.btnCancelService}>Cancel</button>
           <button className={classes.btnControlService}>
             Start in Service
           </button>
