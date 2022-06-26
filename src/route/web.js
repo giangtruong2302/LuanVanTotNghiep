@@ -2,6 +2,12 @@ import express from "express";
 const multer = require("multer");
 import UserController from "../controllers/UserControler";
 import StaffController from "../controllers/StaffController";
+import CustomerController from "../controllers/CustomerController";
+import ServiceController from "../controllers/ServiceController";
+import CenterController from "../controllers/CenterController";
+import BookingController from "../controllers/BookingController";
+import SalaryController from "../controllers/SalaryController";
+import ManagerController from "../controllers/ManagerController";
 
 let router = express.Router();
 
@@ -20,6 +26,28 @@ let initWebRoutes = (app) => {
   );
   //staff
   router.get("/api/get-all-staff", StaffController.handleGetAllStaff);
+
+  //customer
+  router.get("/api/get-all-customer", CustomerController.handleGetAllCustomer);
+
+  //service
+  router.get("/api/get-all-service", ServiceController.handleGetAllService);
+
+  //center
+  router.get("/api/get-all-center", CenterController.handleGetAllCenter);
+
+  //booking
+  router.get("/api/get-all-booking", BookingController.handleGetAllBooking);
+
+  //salary
+  router.get("/api/get-all-salary", SalaryController.handleGetAllSalary);
+
+  //manager
+  router.get(
+    "/api/get-all-manager",
+    ManagerController.handleGetAllManageCenter
+  );
+
   // router.post('/api/user-login', UserController.handleLogin);
   // router.post('/api/user-login-social', UserController.handleLoginSocial);
 
