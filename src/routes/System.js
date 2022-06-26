@@ -4,6 +4,8 @@ import GymSelect from "../features/Merchant/gymSelect";
 import GymConfig from "../features/Merchant/gymConfig";
 import Reservation from "../features/Merchant/Reservations";
 import { Routes, Route } from "react-router-dom";
+import Staff from "../features/Staff/staff";
+
 
 const System = () => {
   return (
@@ -15,6 +17,7 @@ const System = () => {
             <Route path="/system/gym-select" component={GymSelect} />
             <Route path="/system/gym-config" component={GymConfig} />
             <Route path="/system/gym-reservation" component={Reservation} />
+            <Route path="/staff" component={Staff} />
             {/* <Route
                 path="/system/dashboard/gym-config"
                 component={GymConfig}

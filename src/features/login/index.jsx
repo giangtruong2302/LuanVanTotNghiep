@@ -1,10 +1,12 @@
 import { Checkbox, Form as FormAnt, Input } from "antd";
 import { Field, FieldProps, Form, Formik } from "formik";
 import "./Login.scss";
-
+import ReactDOM from 'react-dom';
+import Facebook from './loginFacebook/faceBook';
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "./validation";
+import Google from "./loginGoogle/loginGoogle";
 
 const { Password } = Input;
 const LoginPage = () => {
@@ -13,6 +15,7 @@ const LoginPage = () => {
   const handleLogin = (values) => {
     console.log("check info ", values);
   };
+
 
   return (
     <div className="wrapper">
@@ -87,7 +90,7 @@ const LoginPage = () => {
                   </FormAnt.Item>
                   <FormAnt.Item>
                     <Field>
-                      {({}) => (
+                      {({ }) => (
                         <Checkbox className={"checkboxLogin"}>
                           Remember me
                         </Checkbox>
@@ -103,7 +106,10 @@ const LoginPage = () => {
                       Login
                     </button>
                   </div>
+                  <Google />
+                  <Facebook />
                 </Form>
+
               );
             }}
           </Formik>

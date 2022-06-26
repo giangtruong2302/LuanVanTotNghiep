@@ -24,7 +24,16 @@ const PTDetail = React.lazy(() => import("../features/Customer/PTDetail"));
 const ServiceDetail = React.lazy(() =>
   import("../features/Customer/ServiceGymDetail")
 );
+const Staff = React.lazy(() => import("../features/Staff/staff"));
+const Booking = React.lazy(() => import("../features/Staff/Booking/booking"));
+const Review = React.lazy(() => import("../features/Customer/Review"));
+const PersonalInfomation = React.lazy(() => import("../features/Customer/PersonalInfomation"));
+const SendEmail = React.lazy(() => import("../features/sendEmail/index"));
 export {
+  SendEmail,
+  PersonalInfomation,
+  Review,
+  Staff,
   Home,
   LoginPage,
   GymCenter,
@@ -37,4 +46,5 @@ export {
   AdminPage,
   PTDetail,
   ServiceDetail,
+  Booking,
 };

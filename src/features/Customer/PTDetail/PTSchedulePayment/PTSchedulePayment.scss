@@ -1,4 +1,5 @@
 .doctor-extra-infor-container {
+
   padding-left: 15px;
 
   .content-up {
@@ -50,8 +51,7 @@
         }
       }
 
-      .note {
-      }
+      .note {}
     }
 
     .payment {
@@ -67,6 +67,24 @@
         cursor: pointer;
         color: rgb(38, 160, 231);
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .doctor-extra-infor-container {
+    width: 200%;
+
+    text-align: start;
+
+    .content-up {
+      margin-top: 50px;
+      min-height: 20px;
+    }
+
+    .content-down {
+      padding-bottom: 30px;
+      min-height: 20px;
     }
   }
 }

@@ -1,15 +1,21 @@
 .PTDetailBgContainer {
+
+
   .breadcumDetail {
     padding: 10px 20px 20px 25px;
   }
+
   .PTDetailContent {
     display: flex;
     gap: 15px;
     margin: 0 25px;
+
     .contentInfo {
       box-sizing: border-box;
+
       .avatarPTDetail {
         background: transparent;
+
         .imgPT {
           height: 230px;
           width: 190px;
@@ -18,24 +24,29 @@
           box-shadow: 1px 1px 8px 1px #888;
         }
       }
+
       .infoDetailPT {
         display: flex;
         gap: 5px;
         flex-direction: column;
+
         .namePTAndPosition {
           color: #000;
           font-weight: 600;
           font-size: 30px;
           font-family: "Courier New", Courier, monospace;
         }
+
         .descriptionPTDetail {
           font-style: italic;
           min-height: 130px;
           font-size: 12px;
         }
+
         .likeAndChat {
           display: flex;
           gap: 15px;
+
           .btnLike {
             padding: 5px 15px;
             background-color: #1bbada;
@@ -43,6 +54,7 @@
             border-radius: 6px;
             border: 1px solid #ffff;
           }
+
           .btnChat {
             padding: 5px 15px;
             background-color: #1bbada;
@@ -54,4 +66,92 @@
       }
     }
   }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .PTDetailBgContainer {
+    .breadcumDetail {
+      padding: 10px 20px 20px 25px;
+    }
+
+    .PTDetailContent {
+      display: flex;
+      gap: 15px;
+      margin: 0 25px;
+
+      .contentInfo {
+        box-sizing: border-box;
+
+        .avatarPTDetail {
+          background: transparent;
+
+          .imgPT {
+            height: 200px;
+            width: 150px;
+            border: 1px solid #f1f1f1;
+            border-radius: 50%;
+            box-shadow: 1px 1px 8px 1px #888;
+          }
+        }
+
+        .infoDetailPT {
+          display: flex;
+          gap: 5px;
+          flex-direction: column;
+
+          .namePTAndPosition {
+            padding-left: 110px;
+            padding-top: 40px;
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            font-family: "Courier New", Courier, monospace;
+          }
+
+          .descriptionPTDetail {
+            margin-left: -50px;
+            margin-top: 55px;
+            font-style: italic;
+            min-height: 130px;
+            font-size: 12px;
+            text-align: justify;
+          }
+
+          .likeAndChat {
+
+
+            gap: 15px;
+            justify-content: center;
+            padding-right: 80px;
+
+            .btnLike {
+              padding: 5px 15px;
+              background-color: #1bbada;
+              color: #fff;
+              border-radius: 6px;
+              border: 1px solid #ffff;
+            }
+
+            .btnChat {
+              padding: 5px 15px;
+              background-color: #1bbada;
+              color: #fff;
+              border-radius: 6px;
+              border: 1px solid #ffff;
+            }
+          }
+        }
+      }
+    }
+
+    .timeInfo {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+  }
+
+
+
+
+
 }

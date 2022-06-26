@@ -12,6 +12,7 @@ export const path = {
   SIGN_UP: "/sign-up",
   PT: "/Personal-Training",
   Service: "/service-gym",
+  Staff: "/staff",
 };
 
 export const LANGUAGES = {

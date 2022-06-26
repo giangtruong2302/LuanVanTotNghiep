@@ -86,11 +86,11 @@ const PTDetail = () => {
                 </div>
               </Col>
             </Row>
-            <Row>
+            <Row className="timeInfo" >
               <Col span={12}>
                 <PTShedule />
               </Col>
-              <Col span={12}>
+              <Col span={12} >
                 <PTSchedulePayment />
               </Col>
             </Row>

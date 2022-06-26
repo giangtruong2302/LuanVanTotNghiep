@@ -56,6 +56,7 @@
   }
 
   .section-body {
+
     //display: flex;
     .section-customize {
       &.handbook {
@@ -75,9 +76,9 @@
           background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
         }
 
-        &.section-medical-facility {
-          //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
-        }
+        // &.section-medical-facility {
+        //   //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
+        // }
 
         &.section-outstanding-doctor {
           //background-image: url('../../assets/outstandingDoctor/unknown.png');
@@ -163,6 +164,7 @@
     padding-left: 80px;
     align-items: center;
     margin: 0 auto;
+
     .title-footer-GHGym {
       font-size: 24px;
       font-weight: 700;
@@ -178,9 +180,11 @@
     text-align: center;
     flex-direction: row;
     gap: 15px;
+
     .left-blog {
       width: 50%;
     }
+
     .right-blog {
       width: 50%;
     }
@@ -189,11 +193,13 @@
   .footerRight {
     border-left: 1px solid gray;
     width: 30%;
+
     .textSocialMedia {
       color: #000;
       font-size: 20px;
       font-weight: 700;
     }
+
     .social-media {
       display: flex;
       gap: 15px;
@@ -311,9 +317,9 @@
             background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
           }
 
-          &.section-medical-facility {
-            //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
-          }
+          // &.section-medical-facility {
+          //   //background-image: url('../../assets/medical-facility/benh-vien-cho-ray-h1.jpg');
+          // }
 
           &.section-outstanding-doctor {
             //background-image: url('../../assets/outstandingDoctor/unknown.png');
@@ -349,7 +355,7 @@
         margin-top: 30px;
 
         .title-section {
-          padding-right: 1px;
+          padding-right: 1.5px;
           font-size: 17px;
           font-weight: 648;
         }
@@ -371,6 +377,79 @@
             background: #f7d800;
           }
         }
+      }
+    }
+  }
+
+  .home-footer {
+
+    padding-top: 8px;
+    width: 100%;
+    height: 460px;
+    margin: 0 auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(240, 235, 250, 0.1));
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+
+    .footerLeft {
+      text-align: left;
+      border-right: none;
+
+      padding-left: 5px;
+      width: 70%;
+      margin-left: 10px;
+      flex-direction: column;
+
+
+      .title-footer-GHGym {
+        font-size: 24px;
+        font-weight: 700;
+        color: black;
+
+
+      }
+    }
+
+    .footerCenter {
+
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      width: 100%;
+      text-align: left;
+      padding-left: 15px;
+
+
+      .left-blog {
+        width: 50%;
+      }
+
+      .right-blog {
+        width: 50%;
+        margin-top: -10px;
+      }
+    }
+
+    .footerRight {
+      border-left: none;
+      width: auto;
+
+
+      .textSocialMedia {
+        color: black;
+        font-size: 20px;
+        font-weight: 700;
+        padding-left: 13px;
+      }
+
+      .social-media {
+        display: flex;
+        gap: 15px;
+        margin-left: 15px;
+        align-items: center;
+        width: 300%;
       }
     }
   }
