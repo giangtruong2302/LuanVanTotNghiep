@@ -1,0 +1,155 @@
+:global {
+  .ag-react-container {
+    height: 100%;
+    width: 100%;
+  }
+  .ant-menu-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .ant-menu-title-content {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      /* identical to box height, or 157% */
+
+      text-align: center;
+      letter-spacing: 0.4px;
+
+      /* Neutral/1 */
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+  .ant-menu-inline,
+  .ant-menu-vertical,
+  .ant-menu-vertical-left {
+    border-right: none;
+  }
+}
+
+.settingContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  height: 100%;
+  width: 100%;
+  svg {
+    font-size: 22px;
+  }
+}
+.statusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  svg {
+    font-size: 13px;
+    margin-left: 5px;
+  }
+  .statusText {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 22px;
+    overflow: hidden;
+    // color: #53d1b6;
+    // color: #FD409A;
+  }
+}
+.seviceNameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  .avatar {
+    // width: 100%;
+    height: 100%;
+    margin-right: 15px;
+    img {
+      height: 30px;
+      width: 30px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  .staffText {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    /* #000000 */
+    color: rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+  }
+}
+
+.estimateTimeOfService {
+  display: flex;
+  align-items: center;
+  padding-top: 23px;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  svg {
+    font-size: 13px;
+    margin-left: 5px;
+  }
+  .serviceTimeText {
+    width: 300px;
+    text-align: end;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 22px;
+    /* identical to box height, or 183% */
+    /* #000000 */
+    color: rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+  }
+}
+
+.priceOfService {
+  display: flex;
+  padding-top: 23px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  svg {
+    font-size: 13px;
+    margin-left: 5px;
+  }
+  .servicePriceText {
+    width: 300px;
+    text-align: end;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 22px;
+    /* identical to box height, or 183% */
+    /* #000000 */
+    color: rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+  }
+}
+:global {
+  .ant-dropdown-menu {
+    top: 15px;
+    left: -15px;
+  }
+}

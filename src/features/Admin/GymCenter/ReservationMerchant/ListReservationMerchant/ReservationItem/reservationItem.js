@@ -52,7 +52,10 @@ const ReservationItemMerchant = () => {
     }
   };
   return (
-    <NavLink to={`/reservation/detail`} className="itemContainer">
+    <NavLink
+      to={`/admin/merchant/${1}/reservation-detail/${1}`}
+      className="itemContainer"
+    >
       <div className="confirmation">
         <div className={`${"status"} ${statusCondition()}`}>
           <div className={`${statusCondition()}`}> </div>

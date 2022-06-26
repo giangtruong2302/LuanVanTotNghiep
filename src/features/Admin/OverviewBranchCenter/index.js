@@ -65,7 +65,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Customer",
         description: "Swap",
-        link: `/customers/`,
+        link: `/admin/merchant/${1}/customers`,
       },
       {
         image: (
@@ -85,7 +85,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Staff",
         description: "Swap",
-        link: "/customers",
+        link: "/admin/merchant/:branchId/staffs",
       },
       {
         image: (
@@ -115,7 +115,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Service",
         description: "Swap",
-        link: `/salon-config/details`,
+        link: `/admin/merchant/:branchId/services`,
       },
       {
         image: (

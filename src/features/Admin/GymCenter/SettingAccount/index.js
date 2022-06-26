@@ -12,11 +12,21 @@ import {
   UserCircle,
 } from "phosphor-react";
 import ChangeAvatar from "./Modal/modalUpdateAvatar";
+import ChangeDetail from "./Modal/modalUpdateDetail";
+import ChangePassword from "./Modal/modalChangePassword";
 
 const SettingAccount = () => {
   const [showModal, setShowModal] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
+  };
+  const [showModalDetail, setShowModalDetail] = useState(false);
+  const handleModalDetail = (isVisible) => {
+    setShowModalDetail(isVisible);
+  };
+  const [showModalPassword, setShowModalPassword] = useState(false);
+  const handleModalPassword = (isVisible) => {
+    setShowModalPassword(isVisible);
   };
   return (
     <>
@@ -52,7 +62,7 @@ const SettingAccount = () => {
                 </div>
                 <div
                   className={"topUpdatedItem"}
-                  // onClick={() => setShowModalInfo(true)}
+                  onClick={() => setShowModalDetail(true)}
                 >
                   <DotsThreeCircleVertical
                     size={14}
@@ -66,7 +76,7 @@ const SettingAccount = () => {
                 </div>
                 <div
                   className={"topUpdatedItem"}
-                  // onClick={() => setShowModalPassword(true)}
+                  onClick={() => setShowModalPassword(true)}
                 >
                   <DotsThreeCircleVertical
                     size={14}
@@ -123,6 +133,18 @@ const SettingAccount = () => {
           handleModal={handleModal}
           showModal={showModal}
           avatar={ava}
+        />
+      )}
+      {showModalDetail && (
+        <ChangeDetail
+          handleModal={handleModalDetail}
+          showModal={showModalDetail}
+        />
+      )}
+      {showModalPassword && (
+        <ChangePassword
+          handleModal={handleModalPassword}
+          showModal={showModalPassword}
         />
       )}
     </>
