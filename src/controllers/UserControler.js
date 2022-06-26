@@ -3,6 +3,8 @@ import db from "../models/index";
 import UserService from "../Services/UserService";
 
 let handleLogin = async (req, res) => {
+  console.log("check data from: ", req.body);
+
   let email = req.body.email;
   let password = req.body.password;
 
@@ -12,7 +14,7 @@ let handleLogin = async (req, res) => {
       message: "Missing inputs parameter!",
     });
   }
-
+  console.log("check data from: ", req.body);
   let userData = await UserService.handleUserLogin(email, password);
 
   return res.status(200).json({

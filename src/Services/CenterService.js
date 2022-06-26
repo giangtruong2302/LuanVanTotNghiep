@@ -31,7 +31,26 @@ const getAllCenter = async (payloadReq) => {
     }
   });
 };
+const getDetailCenter = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let center = await db.GymCenter.findOne({
+        where: { CenterId: id },
+        // include: [
+        //     { model: db.Artists, as: 'SongOfArtists' },
+        //     { model: db.Genres, as: 'GenresSong', attributes: ['id', 'genresName'] },
+        // ],
+        raw: false,
+        nest: true,
+      });
 
+      resolve(center);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getAllCenter,
+  getDetailCenter,
 };

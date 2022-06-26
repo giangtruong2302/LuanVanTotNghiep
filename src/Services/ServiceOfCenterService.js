@@ -31,7 +31,26 @@ const getAllService = async (payloadReq) => {
     }
   });
 };
+const getDetailService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let service = await db.Services.findOne({
+        where: { ServiceId: id },
+        // include: [
+        //     { model: db.Artists, as: 'SongOfArtists' },
+        //     { model: db.Genres, as: 'GenresSong', attributes: ['id', 'genresName'] },
+        // ],
+        raw: false,
+        nest: true,
+      });
 
+      resolve(service);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getAllService,
+  getDetailService,
 };

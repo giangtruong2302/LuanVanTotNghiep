@@ -31,7 +31,26 @@ const getAllBooking = async (payloadReq) => {
     }
   });
 };
+const getDetailBookingOfPT = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let bookingOfPT = await db.Booking.findOne({
+        where: { PTId: id },
+        // include: [
+        //     { model: db.Artists, as: 'SongOfArtists' },
+        //     { model: db.Genres, as: 'GenresSong', attributes: ['id', 'genresName'] },
+        // ],
+        raw: false,
+        nest: true,
+      });
 
+      resolve(bookingOfPT);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getAllBooking,
+  getDetailBookingOfPT,
 };

@@ -26,19 +26,29 @@ let initWebRoutes = (app) => {
   );
   //staff
   router.get("/api/get-all-staff", StaffController.handleGetAllStaff);
+  router.get("/api/get-detail-pt", StaffController.handleGetPTDetail);
 
   //customer
   router.get("/api/get-all-customer", CustomerController.handleGetAllCustomer);
 
   //service
   router.get("/api/get-all-service", ServiceController.handleGetAllService);
+  router.get(
+    "/api/get-detail-service",
+    ServiceController.handleGetServiceDetail
+  );
 
   //center
   router.get("/api/get-all-center", CenterController.handleGetAllCenter);
+  router.get("/api/get-detail-center", CenterController.handleGetDetailCenter);
 
   //booking
   router.get("/api/get-all-booking", BookingController.handleGetAllBooking);
-
+  //get booking follow pi id
+  router.get(
+    "/api/get-booking-detail",
+    BookingController.handleGetDetailBookingOfPT
+  );
   //salary
   router.get("/api/get-all-salary", SalaryController.handleGetAllSalary);
 

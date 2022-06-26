@@ -31,7 +31,26 @@ const getAllStaff = async (payloadReq) => {
     }
   });
 };
+const getDetailPT = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let staff = await db.Staffs.findOne({
+        where: { StaffId: id },
+        // include: [
+        //     { model: db.Artists, as: 'SongOfArtists' },
+        //     { model: db.Genres, as: 'GenresSong', attributes: ['id', 'genresName'] },
+        // ],
+        raw: false,
+        nest: true,
+      });
 
+      resolve(staff);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getAllStaff,
+  getDetailPT,
 };
