@@ -1,0 +1,134 @@
+.ServiceGymDetailBg {
+  .ServiceDetailContent {
+    display: flex;
+    gap: 15px;
+    margin: 0 25px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    .bgServiceDetailContent {
+      background: url("../../../assets/images/banner/bgDetail1.jpg");
+      // opacity: 0.8;
+      background-size: cover;
+    }
+
+    .breadcumDetail {
+      padding: 10px 20px 20px 0px;
+    }
+
+    .serviceDetailAbout {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      border-bottom: 1px solid rgb(222, 217, 217);
+
+      .serviceDetailTitle {
+        color: #000;
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .serviceDetailDefine {
+        color: #000;
+        font-size: 14px;
+        font-style: italic;
+      }
+
+      .serviceDetailDefineSeemore {
+        color: rgb(95, 95, 95);
+        font-size: 14px;
+        font-style: italic;
+      }
+
+      .linkCollapse {
+        font-style: italic;
+        font-weight: 500;
+        color: rgb(48, 15, 215);
+        cursor: pointer;
+      }
+
+      .linkSeemore {
+        font-weight: 500;
+        font-style: italic;
+        color: rgb(48, 15, 215);
+        cursor: pointer;
+      }
+    }
+
+    .listPTService {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .ServiceGymDetailBg {
+    .ServiceDetailContent {
+      display: flex;
+      gap: 15px;
+      margin: 0 -35px;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 1));
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
+      .bgServiceDetailContent {
+        background-image: none;
+        background-size: cover;
+      }
+
+      .breadcumDetail {
+        padding: 10px 20px 20px 0px;
+      }
+
+      .serviceDetailAbout {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        border-bottom: 1px solid rgb(222, 217, 217);
+
+        .serviceDetailTitle {
+          color: #000;
+          font-size: 22px;
+          font-weight: 600;
+        }
+
+        .serviceDetailDefine {
+          color: #000;
+          font-size: 14px;
+          font-style: italic;
+        }
+
+        .serviceDetailDefineSeemore {
+          color: rgb(95, 95, 95);
+          font-size: 14px;
+          font-style: italic;
+        }
+
+        .linkCollapse {
+          font-style: italic;
+          font-weight: 500;
+          color: rgb(48, 15, 215);
+          cursor: pointer;
+        }
+
+        .linkSeemore {
+          font-weight: 500;
+          font-style: italic;
+          color: rgb(48, 15, 215);
+          cursor: pointer;
+        }
+      }
+
+      .listPTService {
+        margin-top: 20px;
+      }
+    }
+  }
+}

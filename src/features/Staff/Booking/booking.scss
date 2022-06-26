@@ -1,0 +1,257 @@
+.PTProfileBg {
+    background-color: #fff;
+    max-height: 100vh;
+    max-width: 100vw;
+
+    // overflow: auto;
+    .containerListPT {
+        max-width: 100vw;
+        // margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        font-family: "roboto";
+        font-weight: bold;
+        font-size: 50px;
+
+        .backToHome {
+            width: 100%;
+            background: linear-gradient(305.38deg, #949292 -50.47%, #f2edf0 94.82%);
+            height: 60px;
+            padding-left: 20px;
+
+            .backtoHome {
+                padding-top: 15px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                // width: fit-content;
+                .textBackToHome {
+                    font-family: "roboto";
+                    font-size: 14px;
+                    font-weight: 400;
+                    margin-left: 10px;
+                    color: #223263;
+                }
+            }
+        }
+
+        .titlePage {
+
+
+            .PTinfo {
+                display: flex;
+                flex-direction: row;
+                margin-left: 200px;
+
+                .listCenterContent {
+                    overflow: auto;
+                    max-height: auto;
+                    display: flex;
+                    margin: 0 10px;
+                    flex-direction: column;
+                    // align-items: flex-start;
+                    //padding: 0 20px;
+
+                    padding-right: 250px;
+                    gap: 15px;
+                    position: relative;
+                    width: 100vw;
+                    // height: calc(100% - 20px);
+
+                    border-radius: 5px;
+
+                    :global {
+                        .infinite-scroll-component__outerdiv {
+                            width: 100%;
+                        }
+                    }
+
+                    .Center {
+                        box-sizing: border-box;
+                        margin: 0 auto;
+                        width: 100%;
+                        height: 119px;
+                        background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
+                        /* light blue */
+                        border: 1px solid transparent;
+                        box-sizing: border-box;
+                        box-shadow: 1px 1px 8px 1px grey;
+
+                        border-radius: 10px;
+
+                        /* Inside auto layout */
+                        flex: none;
+                        order: 0;
+                        flex-grow: 0;
+                        display: flex;
+
+                        flex-direction: column;
+                        padding: 42px;
+                        margin-top: 20px;
+
+                        .centerInfo {
+                            display: flex;
+                            align-items: center;
+                            padding: 0px;
+                            gap: 10px;
+                            justify-content: space-between;
+                            width: 100%;
+                            height: 10px;
+                            padding-top: 20px;
+                            text-align: start;
+
+                            .info {
+                                display: flex;
+
+                                flex-direction: column;
+                                gap: 3px;
+
+                                column-gap: 150px;
+                                width: 1200px;
+
+
+                                .infoCus {
+                                    min-width: 97px;
+                                    max-width: auto;
+                                    height: 17px;
+                                    margin-left: 20px;
+                                    font-family: "Inter";
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 18px;
+                                    line-height: 17px;
+                                    margin-top: 2px;
+
+
+                                    /* identical to box height */
+
+                                    /* Black blue */
+
+                                    color: #223263;
+
+                                    /* Inside auto layout */
+
+                                    display: flex;
+                                    flex-direction: row;
+
+                                }
+
+
+
+                            }
+
+                            .infoService {
+                                display: flex;
+
+                                flex-direction: column;
+                                gap: 3px;
+                                margin-left: 40px;
+                                column-gap: 150px;
+                                width: 900px;
+
+                                .textNameCenter {
+
+                                    min-width: 97px;
+                                    max-width: auto;
+                                    height: 17px;
+                                    margin-left: 20px;
+                                    font-family: "Inter";
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 18px;
+                                    line-height: 17px;
+                                    margin-top: 2px;
+                                    color: #223263;
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                            }
+
+                            .detailInfo {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: flex-start;
+                                margin-bottom: 20px;
+                                gap: 9px;
+                                justify-content: flex-end;
+                                width: 100%;
+                                height: 17px;
+
+                                font-family: "Inter";
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 17px;
+                                /* identical to box height */
+
+                                /* #000000 */
+
+                                color: black;
+
+                                .buttonAccept {
+                                    background-color: rgb(43, 247, 43);
+                                    border-radius: 9px;
+                                    width: 100px;
+                                    height: 35px;
+                                    font-weight: bold;
+                                    font-size: 18px;
+                                    box-sizing: border-box;
+                                    box-shadow: 1px 1px 8px 1px grey;
+                                }
+
+                                .buttonAccept:hover {
+                                    background-color: rgb(26, 210, 26);
+                                    color: white;
+                                }
+
+                                .buttonDeniend {
+                                    background-color: rgb(255, 25, 40);
+                                    border-radius: 9px;
+                                    width: 100px;
+                                    height: 35px;
+                                    font-weight: bold;
+                                    font-size: 18px;
+                                    box-sizing: border-box;
+                                    box-shadow: 1px 1px 8px 1px grey;
+                                }
+
+                                .buttonDeniend:hover {
+                                    background-color: rgb(155, 11, 16);
+                                    color: white;
+                                }
+
+                                .lineDetailInfo {
+                                    width: 1px;
+                                    height: 17px;
+                                    font-family: "Inter";
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    line-height: 17px;
+                                    /* identical to box height */
+
+                                    /* light blue */
+
+                                    color: #ebf0ff;
+
+                                    /* Inside auto layout */
+
+                                    flex: none;
+                                    // order: 1;
+                                    flex-grow: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+
+}

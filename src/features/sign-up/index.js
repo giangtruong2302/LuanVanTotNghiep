@@ -74,7 +74,7 @@ const SignUp = () => {
                   >
                     <Field name="lastName">
                       {({ field }) => (
-                        <Input.Password
+                        <Input
                           {...field}
                           className={"inputLogin"}
                           placeholder="Last Name"
@@ -157,7 +157,7 @@ const SignUp = () => {
                   >
                     <Field name="address">
                       {({ field }) => (
-                        <Input.Password
+                        <Input
                           {...field}
                           className={"inputLogin"}
                           placeholder="Address"

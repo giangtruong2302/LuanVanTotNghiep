@@ -1,0 +1,23 @@
+.cardQuickAccess {
+    background-color: #fff;
+    padding: 10px;
+    border: 0.5px solid #f0f0f0;
+    box-shadow: 3px 3px 20px rgba(214, 214, 214, 0.15);
+    border-radius: 8px;
+    text-align: center;
+    .imagesQuickAccess {
+        font-size: 32px;
+    }
+    .titleQuickAccess {
+        color: #223263;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .descriptionQuickAccess {
+        color: #9098b1;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 1.8;
+        padding-bottom: 17px;
+    }
+}

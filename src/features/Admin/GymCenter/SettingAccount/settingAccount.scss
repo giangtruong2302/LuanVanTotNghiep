@@ -1,0 +1,131 @@
+.settingAccountBg {
+  // background-image: url("../../assets/images/Background.png");
+  height: calc(100vh - 150px);
+  // background-size: cover;
+  background-color: #fff;
+  .settingAccountContainer {
+    max-width: 1054px;
+    margin: 0 auto;
+    padding: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .detailContainer {
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .detailTop {
+        padding: 6px 16px;
+        background: linear-gradient(0deg, #f1fbff, #f1fbff);
+        margin-bottom: 20px;
+        /* Note: backdrop-filter has minimal browser support */
+        border-radius: 5px;
+        width: 415px;
+        height: fit-content;
+        .topInfo {
+          display: flex;
+          position: relative;
+          .topInfoImg {
+            width: 90px;
+            height: 90px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(-35%);
+            border: 4px solid #ffffff;
+            border-radius: 5px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 5px;
+            }
+          }
+          .topInfoContent {
+            display: block;
+            text-align: justify;
+            padding-left: 110px;
+            padding-top: 8px;
+            width: 100%;
+            .topInforName {
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 17px;
+            }
+            .topInforEmail {
+              margin-top: 5px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 15px;
+            }
+          }
+        }
+        .topUpdate {
+          display: flex;
+          margin-top: 30px;
+          justify-content: center;
+          align-items: center;
+          .topUpdatedItem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            cursor: pointer;
+            img {
+              height: 12px;
+              width: 12px;
+              margin-right: 3px;
+            }
+
+            .updatedName {
+              margin-left: 5px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 15px;
+              color: #000000;
+            }
+          }
+        }
+      }
+      .detailBottomContainer {
+        background: #fff;
+        .detailBottom {
+          padding: 6px 16px;
+          backdrop-filter: blur(4px);
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          /* Note: backdrop-filter has minimal browser support */
+          border-radius: 5px;
+          width: 415px;
+          height: 350px;
+
+          .bottomItem {
+            display: flex;
+            margin-top: 20px;
+            img {
+              margin-right: 10px;
+            }
+
+            .bottomItemName {
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 15px;
+              margin-left: 12px;
+            }
+          }
+          .bottomItem.bottomMain .bottomItemName {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+          }
+        }
+      }
+    }
+  }
+}

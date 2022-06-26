@@ -1,0 +1,38 @@
+.ServiceProfileBg {
+  background-color: #fff;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  .containerServiceList {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: fit-content;
+    margin: 0 auto;
+    .backToHome {
+      width: 100%;
+      background: linear-gradient(305.38deg, #949292 -50.47%, #f2edf0 94.82%);
+      padding: 20px 18px;
+      height: 155px;
+      .backToHomeLink {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        width: fit-content;
+        .textBackToHome {
+          font-family: "roboto";
+          font-size: 14px;
+          font-weight: 400;
+          margin-left: 10px;
+          color: #223263;
+        }
+      }
+    }
+    .listItem {
+      margin-top: 15px;
+      overflow: auto;
+      // background-color: #fff;
+      // min-height: 400px;
+      max-height: calc(100vh - 160px);
+    }
+  }
+}

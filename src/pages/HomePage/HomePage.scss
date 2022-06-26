@@ -1,6 +1,5 @@
 // custom slick slider //
 
-
 .slick-prev {
   // position: relative !important;
   left: -20px !important;
@@ -169,7 +168,7 @@
     .title-footer-GHGym {
       font-size: 24px;
       font-weight: 700;
-      color: #fff;
+      color: #000;
     }
   }
 
@@ -196,7 +195,7 @@
     width: 30%;
 
     .textSocialMedia {
-      color: #fff;
+      color: #000;
       font-size: 20px;
       font-weight: 700;
     }
@@ -241,8 +240,6 @@
 
 // Responsive Moblie
 @media only screen and (max-width: 46.1875em) {
-
-
   .slick-prev {
     // position: relative !important;
     left: -9px !important;
@@ -299,13 +296,8 @@
     }
 
     .section-body {
-
-
-
       .section-customize {
-
         display: flex;
-
 
         &.handbook {
           display: flex !important;
@@ -321,11 +313,8 @@
           gap: 10px;
           margin: 0px 1px;
 
-
-
           &.section-specialty {
             background-image: url("../../assets/images/gym-place/chiNhanh2.jpg");
-
           }
 
           // &.section-medical-facility {
@@ -386,7 +375,6 @@
           &:hover {
             color: #fff;
             background: #f7d800;
-
           }
         }
       }

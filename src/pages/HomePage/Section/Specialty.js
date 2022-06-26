@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "./Specialty.scss";
 import { FormattedMessage } from "react-intl";
 import img from "../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
+import { NavLink } from "react-router-dom";
 
 const Specialty = (props) => {
   console.log("object", props.settings);
@@ -20,7 +21,8 @@ const Specialty = (props) => {
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
-            <div
+            <NavLink
+              to="/service-detail/1"
               className="section-customize specialty-child"
               //key={index}
               //onClick={() => this.handleViewDetailSpecialty(item)}
@@ -30,7 +32,7 @@ const Specialty = (props) => {
                 style={{ backgroundImage: `url(${img})` }}
               ></div>
               <div className="specialty-name">{"item.name"}</div>
-            </div>
+            </NavLink>
             <div
               className="section-customize specialty-child"
               //key={index}

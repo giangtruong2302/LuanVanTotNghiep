@@ -11,6 +11,8 @@ export const path = {
   DETAIL_CLINIC: "/detail-clinic/:id",
   SIGN_UP: "/sign-up",
   PT: "/Personal-Training",
+  Service: "/service-gym",
+  Staff: "/staff",
 };
 
 export const LANGUAGES = {

@@ -1,0 +1,30 @@
+.container {
+    padding-top: 5px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%);
+
+
+    .profile {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        border-radius: 20px;
+        margin: 30px;
+        border: solid black;
+
+
+        .imgPT {
+            margin-left: 20px;
+            margin-top: 20px;
+            height: 230px;
+            width: 190px;
+            border: 1px solid #f1f1f1;
+            border-radius: 50%;
+            box-shadow: 1px 1px 8px 1px #888;
+        }
+    }
+}
