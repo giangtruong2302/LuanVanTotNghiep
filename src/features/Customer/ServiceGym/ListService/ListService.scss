@@ -1,12 +1,12 @@
 .listServiceContent {
   overflow: auto;
-  max-height: auto;
+  min-height: 1450px;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   align-items: flex-start;
   //padding: 10px;
-  padding-top: 550px;
+  padding-top: 10px;
   gap: 25px;
   position: relative;
   width: 100vw;
@@ -39,6 +39,7 @@
 
     flex-direction: column;
     padding: 42px;
+
 
     .breadcumService {
       display: flex;

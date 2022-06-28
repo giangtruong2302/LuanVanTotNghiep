@@ -24,6 +24,7 @@ import {
   ServiceDetail,
   AdminLoginPage,
 } from "../routes/user";
+import GymDetailPage from "../features/Customer/GymCenterDetail";
 
 const AppLayout = () => {
   return (
@@ -45,6 +46,7 @@ const AppLayout = () => {
         <Route path="/customer-infomation" element={<PersonalInformation />} />
         <Route path="/send-email" element={<SendEmail />} />
         <Route path="/bmi" element={<BMI />} />
+        <Route path="/center-detail" element={<GymDetailPage />} />
 
         {/* merchant */}
         <Route path="/merchant/gym-select" element={<GymSelect />} />
