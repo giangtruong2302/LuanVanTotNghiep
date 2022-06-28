@@ -8,7 +8,6 @@ import { SendEmail } from "../features/sendEmail";
 import Booking from "../features/Staff/Booking/booking";
 import Staff from "../features/Staff/staff";
 import {
-
   Home,
   LoginPage,
   GymCenter,
@@ -21,6 +20,7 @@ import {
   AdminPage,
   PTDetail,
   ServiceDetail,
+  AdminLoginPage,
 } from "../routes/user";
 
 const AppLayout = () => {
@@ -29,6 +29,7 @@ const AppLayout = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin-login" element={<AdminLoginPage />} />
         <Route path="/Personal-Training" element={<PT />} />
         <Route path="/service-gym" element={<Service />} />
         <Route path="/sign-up" element={<SignUp />} />
