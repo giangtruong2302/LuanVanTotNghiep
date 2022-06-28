@@ -13,12 +13,20 @@ import {
   ReservationDetail,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
+import RequireAuth from "./RequiredAuth";
 
 const AppLayoutAdmin = () => {
   return (
     <AppSuspense>
       <Routes>
-        <Route path="/admin" element={<AdminPage />}>
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth>
+              <AdminPage />
+            </RequireAuth>
+          }
+        >
           <Route index element={<HomePageAdmin />} />
           <Route path="/admin/customer-total" element={<CustomerTotal />} />
           <Route path="/admin/merchant/reservation" element={<Reservation />} />

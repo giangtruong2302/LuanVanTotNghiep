@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import "./admin.scss";
 import { useNavigate } from "react-router-dom";
+import * as actions from "../../store/actions";
 import avatar from "../../assets/images/logo/logoGHGym.png";
 import {
   MenuFoldOutlined,
@@ -40,6 +41,7 @@ import { LANGUAGES } from "../../utils/constant";
 import { FormattedMessage } from "react-intl";
 import flagVie from "../../assets/images/region/vietnam.png";
 import flagEng from "../../assets/images/region/united-states.png";
+import { getAllCenter } from "./AdminAPI";
 
 const { Header, Sider, Content } = Layout;
 function getItem(label, key, icon, children, type) {
@@ -51,211 +53,317 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
-const menu = (
-  <Menu
-    items={[
-      {
-        key: "1",
-        icon: <User size={20} color="#171717" weight="fill" />,
-        label: <NavLink to="/admin/reservation">Profile</NavLink>,
-      },
-      {
-        key: "2",
-        icon: <Repeat size={20} color="#171717" weight="fill" />,
-        label: (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.aliyun.com"
-          >
-            Reset Password
-          </a>
-        ),
-      },
-      {
-        key: "3",
-        icon: <SignOut size={20} color="#1d1b1b" weight="fill" />,
-        label: (
-          <NavLink
-            // target="_blank"
 
-            to="/admin/customer-total"
-          >
-            Logout
-          </NavLink>
-        ),
-      },
-    ]}
-  />
-);
 const AdminPage = () => {
   const navigate = useNavigate();
+  const roleId = useSelector((state) => state.user.userInfo.roleId);
+  console.log("check role: ", roleId);
   const [collapsed, setCollapsed] = useState(false);
+  const [center, setCenter] = useState([]);
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
   const handleChangeListStaffs = () => {
     navigate("/admin/manage-staffs");
   };
-  const handleChangeCenter = () => {
+  const handleChangeCenter = (CenterId, CenterName) => {
     navigate("/admin/manage-center");
+    localStorage.setItem("centerId", CenterId);
+    console.log("check center id after change: ", CenterId);
   };
+  const handleLogout = () => {
+    dispatch(dispatch(actions.processLogout()));
+    navigate("/admin-login");
+  };
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: "1",
+          icon: <User size={20} color="#171717" weight="fill" />,
+          label: <NavLink to="/admin/reservation">Profile</NavLink>,
+        },
+        {
+          key: "2",
+          icon: <Repeat size={20} color="#171717" weight="fill" />,
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              Reset Password
+            </a>
+          ),
+        },
+        {
+          key: "3",
+          icon: <SignOut size={20} color="#1d1b1b" weight="fill" />,
+          label: "Logout",
+          onClick: handleLogout,
+        },
+      ]}
+    />
+  );
+  useEffect(() => {
+    try {
+      getAllCenter(1).then((res) => {
+        console.log("check res: ", res.centers);
+        if (res && res.centers.rows.length > 0) {
+          setCenter(res.centers.rows);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  console.log("check center: ", center);
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <NavLink to="" exact={true}>
           <div className="logo" />
         </NavLink>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          itemIcon={<RightCircleOutlined />}
-          items={[
-            getItem(
-              <FormattedMessage id="admin.manage-gym.manage-center" />,
-              "sub1",
-              <Buildings size={20} color="#f4f1f1" weight="fill" />,
-              [
-                {
-                  label: "Centers",
-                  key: "sub21",
-                  icon: <Buildings size={20} color="#f4f1f1" weight="fill" />,
-                  children: [
-                    {
-                      label: "Quận 8",
-                      key: "21",
-                      icon: (
-                        <MapPinLine size={20} color="#eeeee7" weight="fill" />
-                      ),
-                      onClick: handleChangeCenter,
+        {roleId && roleId === 1 && (
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            itemIcon={<RightCircleOutlined />}
+            // items={[
+            //   getItem(
+            //     <FormattedMessage id="admin.manage-gym.manage-center" />,
+            //     "sub1",
+            //     <Buildings size={20} color="#f4f1f1" weight="fill" />,
+            //     [
+            //       {
+            //         label: "Centers",
+            //         key: "sub21",
+            //         icon: <Buildings size={20} color="#f4f1f1" weight="fill" />,
+            //         children: [
+            //           center && center.length > 0
+            //             ? center.map((item, index) => {
+            //                 return {
+            //                   label: "item.CenterName,",
+            //                   key: "index",
+            //                   icon: (
+            //                     <MapPinLine
+            //                       size={20}
+            //                       color="#eeeee7"
+            //                       weight="fill"
+            //                     />
+            //                   ),
+            //                   onClick: handleChangeCenter,
+            //                 };
+            //               })
+            //             : "",
+            //         ],
+            //       },
+            //       // getItem(
+            //       //   <FormattedMessage id="admin.manage-gym.staff" />,
+            //       //   "sub2",
+            //       //   <UsersThree size={20} color="#f4f1f1" weight="fill" />,
+            //       //   [
+            //       //     {
+            //       //       label: (
+            //       //         <FormattedMessage id="admin.manage-gym.list-of-staff" />
+            //       //       ),
+            //       //       key: "1",
+            //       //       onClick: handleChangeListStaffs,
+            //       //     },
+            //       //     getItem(
+            //       //       <FormattedMessage id="admin.manage-gym.create-staff" />,
+            //       //       "2"
+            //       //     ),
+            //       //     getItem(
+            //       //       <FormattedMessage id="admin.manage-gym.update-staff" />,
+            //       //       "3"
+            //       //     ),
+            //       //   ]
+            //       // ),
+            //       // getItem(
+            //       //   <FormattedMessage id="admin.manage-gym.customer" />,
+            //       //   "sub3",
+            //       //   <UsersFour size={20} color="#f4f1f1" weight="fill" />,
+            //       //   [
+            //       //     getItem(
+            //       //       <FormattedMessage id="admin.manage-gym.list-of-cus" />,
+            //       //       "4"
+            //       //     ),
+            //       //   ]
+            //       // ),
+            //       // getItem(
+            //       //   <FormattedMessage id="admin.manage-gym.revenue" />,
+            //       //   "sub4",
+            //       //   <Coins size={20} color="#f4f1f1" weight="fill" />,
+            //       //   [
+            //       //     getItem(
+            //       //       <FormattedMessage id="admin.manage-gym.list-of-revenue" />,
+            //       //       "5"
+            //       //     ),
+            //       //   ]
+            //       // ),
+            //       getItem(
+            //         "Blog",
+            //         "sub5",
+            //         <Books size={20} color="#f4f1f1" weight="fill" />,
+            //         [
+            //           getItem(
+            //             <FormattedMessage id="admin.manage-gym.list-of-blog" />,
+            //             "6"
+            //           ),
+            //           getItem(
+            //             <FormattedMessage id="admin.manage-gym.create-blog" />,
+            //             "7"
+            //           ),
+            //           getItem(
+            //             <FormattedMessage id="admin.manage-gym.update-blog" />,
+            //             "8"
+            //           ),
+            //         ]
+            //       ),
+            //     ]
+            //   ),
+            //   getItem(
+            //     <FormattedMessage id="admin.manage-gym.manage-account" />,
+            //     "sub6",
+            //     <UserCircle size={20} color="#f4f1f1" weight="fill" />,
+            //     [
+            //       getItem("Xem danh sách tài khoản", "8"),
+            //       getItem("Tạo tài khoản", "10"),
+            //       getItem("Cập nhật tài khoản", "11"),
+            //     ]
+            //   ),
+
+            //   {
+            //     key: "12",
+            //     // icon: <BellRinging size={20} color="#f4f1f1" weight="fill" />,
+            //     icon: <GearSix size={20} color="#f5f5f5" weight="fill" />,
+            //     label: <FormattedMessage id="admin.manage-gym.setting" />,
+            //   },
+            //   getItem(
+            //     <FormattedMessage id="admin.manage-gym.languages" />,
+            //     "sub7",
+            //     <Translate size={20} color="#f4f1f1" weight="fill" />,
+            //     [
+            //       {
+            //         label: "Tiếng Việt",
+            //         key: "13",
+            //         onClick: () => {
+            //           dispatch(changeLanguageApp(LANGUAGES.VI));
+            //         },
+            //       },
+            //       {
+            //         label: "English",
+            //         key: "14",
+            //         onClick: () => {
+            //           dispatch(changeLanguageApp(LANGUAGES.EN));
+            //         },
+            //       },
+            //     ]
+            //   ),
+            // ]}
+          >
+            <Menu.SubMenu
+              title={<FormattedMessage id="admin.manage-gym.manage-center" />}
+            >
+              <Menu.SubMenu title="Center">
+                {center &&
+                  center.length > 0 &&
+                  center.map((item, index) => {
+                    return (
+                      <Menu.Item
+                        key={index}
+                        onClick={() =>
+                          handleChangeCenter(item.CenterId, item.CenterName)
+                        }
+                      >
+                        {item.CenterName}
+                      </Menu.Item>
+                    );
+                  })}
+              </Menu.SubMenu>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item>Xem danh sách tài khoản</Menu.Item>
+            </Menu.SubMenu>
+            <Menu.Item>Cài đặt tài khoản</Menu.Item>
+            <Menu.SubMenu
+              title={<FormattedMessage id="admin.manage-gym.languages" />}
+            >
+              <Menu.Item
+                onClick={() => {
+                  dispatch(changeLanguageApp(LANGUAGES.VI));
+                }}
+              >
+                Tiếng việt
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  dispatch(changeLanguageApp(LANGUAGES.EN));
+                }}
+              >
+                English
+              </Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
+        )}
+        {roleId && roleId === 2 && (
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            itemIcon={<RightCircleOutlined />}
+            items={[
+              {
+                label: "Quận 8",
+                key: "21",
+                icon: <MapPinLine size={20} color="#eeeee7" weight="fill" />,
+                onClick: handleChangeCenter,
+              },
+              getItem(
+                <FormattedMessage id="admin.manage-gym.manage-account" />,
+                "sub6",
+                <UserCircle size={20} color="#f4f1f1" weight="fill" />,
+                [
+                  getItem("Xem danh sách tài khoản", "8"),
+                  getItem("Tạo tài khoản", "10"),
+                  getItem("Cập nhật tài khoản", "11"),
+                ]
+              ),
+
+              {
+                key: "12",
+                // icon: <BellRinging size={20} color="#f4f1f1" weight="fill" />,
+                icon: <GearSix size={20} color="#f5f5f5" weight="fill" />,
+                label: <FormattedMessage id="admin.manage-gym.setting" />,
+              },
+              getItem(
+                <FormattedMessage id="admin.manage-gym.languages" />,
+                "sub7",
+                <Translate size={20} color="#f4f1f1" weight="fill" />,
+                [
+                  {
+                    label: "Tiếng Việt",
+                    key: "13",
+                    onClick: () => {
+                      dispatch(changeLanguageApp(LANGUAGES.VI));
                     },
-                    {
-                      label: "Quận 1",
-                      key: "22",
-                      icon: (
-                        <MapPinLine size={20} color="#eeeee7" weight="fill" />
-                      ),
-                    },
-                    {
-                      label: "Quận Bình Tân",
-                      key: "23",
-                      icon: (
-                        <MapPinLine size={20} color="#eeeee7" weight="fill" />
-                      ),
-                    },
-                    {
-                      label: "Quận 10",
-                      key: "24",
-                      icon: (
-                        <MapPinLine size={20} color="#eeeee7" weight="fill" />
-                      ),
-                    },
-                  ],
-                },
-                // getItem(
-                //   <FormattedMessage id="admin.manage-gym.staff" />,
-                //   "sub2",
-                //   <UsersThree size={20} color="#f4f1f1" weight="fill" />,
-                //   [
-                //     {
-                //       label: (
-                //         <FormattedMessage id="admin.manage-gym.list-of-staff" />
-                //       ),
-                //       key: "1",
-                //       onClick: handleChangeListStaffs,
-                //     },
-                //     getItem(
-                //       <FormattedMessage id="admin.manage-gym.create-staff" />,
-                //       "2"
-                //     ),
-                //     getItem(
-                //       <FormattedMessage id="admin.manage-gym.update-staff" />,
-                //       "3"
-                //     ),
-                //   ]
-                // ),
-                // getItem(
-                //   <FormattedMessage id="admin.manage-gym.customer" />,
-                //   "sub3",
-                //   <UsersFour size={20} color="#f4f1f1" weight="fill" />,
-                //   [
-                //     getItem(
-                //       <FormattedMessage id="admin.manage-gym.list-of-cus" />,
-                //       "4"
-                //     ),
-                //   ]
-                // ),
-                // getItem(
-                //   <FormattedMessage id="admin.manage-gym.revenue" />,
-                //   "sub4",
-                //   <Coins size={20} color="#f4f1f1" weight="fill" />,
-                //   [
-                //     getItem(
-                //       <FormattedMessage id="admin.manage-gym.list-of-revenue" />,
-                //       "5"
-                //     ),
-                //   ]
-                // ),
-                getItem(
-                  "Blog",
-                  "sub5",
-                  <Books size={20} color="#f4f1f1" weight="fill" />,
-                  [
-                    getItem(
-                      <FormattedMessage id="admin.manage-gym.list-of-blog" />,
-                      "6"
-                    ),
-                    getItem(
-                      <FormattedMessage id="admin.manage-gym.create-blog" />,
-                      "7"
-                    ),
-                    getItem(
-                      <FormattedMessage id="admin.manage-gym.update-blog" />,
-                      "8"
-                    ),
-                  ]
-                ),
-              ]
-            ),
-            getItem(
-              <FormattedMessage id="admin.manage-gym.manage-account" />,
-              "sub6",
-              <UserCircle size={20} color="#f4f1f1" weight="fill" />,
-              [
-                getItem("Xem danh sách tài khoản", "8"),
-                getItem("Tạo tài khoản", "10"),
-                getItem("Cập nhật tài khoản", "11"),
-              ]
-            ),
-            {
-              key: "12",
-              // icon: <BellRinging size={20} color="#f4f1f1" weight="fill" />,
-              icon: <GearSix size={20} color="#f5f5f5" weight="fill" />,
-              label: <FormattedMessage id="admin.manage-gym.setting" />,
-            },
-            getItem(
-              <FormattedMessage id="admin.manage-gym.languages" />,
-              "sub7",
-              <Translate size={20} color="#f4f1f1" weight="fill" />,
-              [
-                {
-                  label: "Tiếng Việt",
-                  key: "13",
-                  onClick: () => {
-                    dispatch(changeLanguageApp(LANGUAGES.VI));
                   },
-                },
-                {
-                  label: "English",
-                  key: "14",
-                  onClick: () => {
-                    dispatch(changeLanguageApp(LANGUAGES.EN));
+                  {
+                    label: "English",
+                    key: "14",
+                    onClick: () => {
+                      dispatch(changeLanguageApp(LANGUAGES.EN));
+                    },
                   },
-                },
-              ]
-            ),
-          ]}
-        />
+                ]
+              ),
+            ]}
+          />
+        )}
       </Sider>
       <Layout className="sitelayout">
         <Header
