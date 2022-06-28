@@ -2,14 +2,14 @@ import { Checkbox, Form as FormAnt, Input } from "antd";
 import { Field, FieldProps, Form, Formik } from "formik";
 import "./Login.scss";
 import ReactDOM from 'react-dom';
-
+import Facebook from './loginFacebook/faceBook';
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "./validation";
-
+import Google from "./loginGoogle/loginGoogle";
 
 const { Password } = Input;
-const LoginPage = () => {
+const CustomerLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const handleLogin = (values) => {
@@ -106,7 +106,8 @@ const LoginPage = () => {
                       Login
                     </button>
                   </div>
-
+                  <Google />
+                  <Facebook />
                 </Form>
 
               );
@@ -128,4 +129,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default CustomerLoginPage;

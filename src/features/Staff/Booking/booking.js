@@ -9,16 +9,16 @@ const Booking = () => {
 
     return (
 
-        <div className="PTProfileBg">
+        <div className="BookingProfileBg">
 
             <div className="containerListPT">
                 Lịch Booking
-                <div className="titlePage">
+                <div className="titlePageBooking">
                     <div className="PTinfo">
                         <div className="listCenterContent container">
                             <InfiniteScroll
                                 dataLength={8}
-                                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                                style={{ display: "flex", flexDirection: "column", gap: "10px" }}
                                 loader={
                                     <div className={"loading"}>
                                         <StaggerAnimation />

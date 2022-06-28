@@ -8,6 +8,7 @@
     //padding: 0 20px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 30px;
     gap: 15px;
     position: relative;
     width: 100vw;
@@ -24,7 +25,7 @@
     .Center {
         box-sizing: border-box;
         margin: 0 auto;
-        width: 100%;
+        width: 44%;
         height: 119px;
         background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
         /* light blue */
@@ -42,7 +43,7 @@
 
         flex-direction: column;
         padding: 42px;
-        margin-top: 20px;
+        margin: auto;
 
         .centerInfo {
             display: flex;
