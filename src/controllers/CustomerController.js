@@ -11,7 +11,16 @@ const handleGetAllCustomer = async (req, res) => {
     totalPage: Math.ceil(customers.count / 10),
   });
 };
-
+const handleGetAllCustomerOfCenter = async (req, res) => {
+  let customerOfCenter = await CustomerService.getAllCustomerOfCenter(req);
+  return res.status(200).json({
+    errCode: 0,
+    errMessage: "get all customer of center is success",
+    customerOfCenter,
+    totalPage: Math.ceil(customerOfCenter.count / 10),
+  });
+};
 module.exports = {
   handleGetAllCustomer,
+  handleGetAllCustomerOfCenter,
 };

@@ -2,7 +2,7 @@ import Account from "../models/Account";
 import db from "../models/index";
 import UserService from "../Services/UserService";
 
-let handleLogin = async (req, res) => {
+const handleLogin = async (req, res) => {
   console.log("check data from: ", req.body);
 
   let email = req.body.email;

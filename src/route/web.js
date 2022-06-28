@@ -27,10 +27,17 @@ let initWebRoutes = (app) => {
   //staff
   router.get("/api/get-all-staff", StaffController.handleGetAllStaff);
   router.get("/api/get-detail-pt", StaffController.handleGetPTDetail);
-
+  router.get(
+    "/api/merchant/:CenterId/staff-center",
+    StaffController.handleGetAllStaffOfCenter
+  );
+  router.get("/api/get-all-pt", StaffController.handleGetAllPT);
   //customer
   router.get("/api/get-all-customer", CustomerController.handleGetAllCustomer);
-
+  router.get(
+    "/api/merchant/:CenterId/customer-center",
+    CustomerController.handleGetAllCustomerOfCenter
+  );
   //service
   router.get("/api/get-all-service", ServiceController.handleGetAllService);
   router.get(

@@ -31,6 +31,30 @@ const getAllStaff = async (payloadReq) => {
     }
   });
 };
+const getAllPT = async (payloadReq) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const skip = (payloadReq.page - 1) * 10;
+      let pts = await db.Staffs.findAndCountAll({
+        where: {
+          RoleId: 3,
+        },
+        // attributes: {
+        //   exclude: ["password"],
+        // },
+        limit: 10,
+        offset: skip,
+        // include: [{ model: db.Roles, as: "UserRoles" }],
+        raw: true,
+        nest: true,
+      });
+
+      resolve(pts);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 const getDetailPT = (id) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -50,7 +74,33 @@ const getDetailPT = (id) => {
     }
   });
 };
+const getAllStaffOfCenter = async (req) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const skip = (req.query.page - 1) * 10;
+      let staffs = await db.Staffs.findAndCountAll({
+        where: {
+          CenterId: req.params.CenterId,
+        },
+        // attributes: {
+        //   exclude: ["password"],
+        // },
+        limit: 10,
+        offset: skip,
+        // include: [{ model: db.Roles, as: "UserRoles" }],
+        raw: true,
+        nest: true,
+      });
+
+      resolve(staffs);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getAllStaff,
   getDetailPT,
+  getAllStaffOfCenter,
+  getAllPT,
 };

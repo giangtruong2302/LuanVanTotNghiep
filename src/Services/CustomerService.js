@@ -14,7 +14,31 @@ const getAllCustomer = async (payloadReq) => {
   return new Promise(async (resolve, reject) => {
     try {
       const skip = (payloadReq.page - 1) * 10;
-      let customers = await db.Staffs.findAndCountAll({
+      let customers = await db.Customer.findAndCountAll({
+        // attributes: {
+        //   exclude: ["password"],
+        // },
+        limit: 10,
+        offset: skip,
+        // include: [{ model: db.Roles, as: "UserRoles" }],
+        raw: true,
+        nest: true,
+      });
+
+      resolve(customers);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+const getAllCustomerOfCenter = async (req) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const skip = (req.query.page - 1) * 10;
+      let customers = await db.Customer.findAndCountAll({
+        where: {
+          CenterId: req.params.CenterId,
+        },
         // attributes: {
         //   exclude: ["password"],
         // },
@@ -34,4 +58,5 @@ const getAllCustomer = async (payloadReq) => {
 
 module.exports = {
   getAllCustomer,
+  getAllCustomerOfCenter,
 };
