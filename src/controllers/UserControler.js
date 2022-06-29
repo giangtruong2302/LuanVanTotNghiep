@@ -23,6 +23,27 @@ const handleLogin = async (req, res) => {
     data: userData.user ? userData.user : {},
   });
 };
+const handleLoginForStaff = async (req, res) => {
+  console.log("check data from: ", req.body);
+
+  let email = req.body.email;
+  let password = req.body.password;
+
+  if (!email || !password) {
+    return res.status(500).json({
+      errorCode: 1,
+      message: "Missing inputs parameter!",
+    });
+  }
+  console.log("check data from: ", req.body);
+  let userData = await UserService.handleUserLoginForStaff(email, password);
+
+  return res.status(200).json({
+    errorCode: userData.errorCode,
+    message: userData.errMessage,
+    data: userData.user ? userData.user : {},
+  });
+};
 const handleGetAllAccountForAdmin = async (req, res) => {
   let accounts = await UserService.getAllAccount(req.query);
   return res.status(200).json({
@@ -129,7 +150,7 @@ module.exports = {
   handleLogin,
   handleGetAllAccountForAdmin,
   handleCreateNewUser,
-
+  handleLoginForStaff,
   //   getAllRoles,
 
   //   handleGetAllUser,

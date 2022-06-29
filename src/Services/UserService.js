@@ -106,6 +106,54 @@ let handleUserLogin = async (email, password) => {
     }
   });
 };
+let handleUserLoginForStaff = async (email, password) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let userData = {};
+      let isExist = await checkUserEmail(email);
+      if (isExist) {
+        let user = await db.Accounts.findOne({
+          where: {
+            email: email,
+            // , roleId: [1]
+          },
+          attributes: [
+            "id",
+            "email",
+            "roleId",
+            "password",
+            "fullName",
+            "avatar",
+          ],
+          raw: true,
+        });
+        if (user) {
+          // compare pass //
+          let check = bcrypt.compareSync(password, user.password);
+          if (check) {
+            userData.errorCode = 0;
+            userData.errMessage = `Ok`;
+
+            delete user.password; // ko lay password cua user //
+            userData.user = user;
+          } else {
+            userData.errorCode = 3;
+            userData.errMessage = `Wrong pass`;
+          }
+        } else {
+          userData.errorCode = 2;
+          userData.errMessage = `User isn't exist`;
+        }
+      } else {
+        userData.errorCode = 1;
+        userData.errMessage = `Your's email isn't exist in our system`;
+      }
+      resolve(userData);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 const getAllAccount = async (payloadReq) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -413,6 +461,7 @@ let deleteUser = (id) => {
 
 module.exports = {
   getAllRoles,
+  handleUserLoginForStaff,
   createNewUser,
   getAllAccount,
   getAllUser,
