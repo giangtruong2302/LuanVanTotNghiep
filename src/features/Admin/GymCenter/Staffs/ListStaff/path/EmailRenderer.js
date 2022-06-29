@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./customizeListPT.scss";
 
-const EmailRenderer = () => {
+const EmailRenderer = (props) => {
   return (
     <>
       <div className="phoneContainer">
-        <div className="phoneText">giangtruong2302@gmail.com</div>
+        <div className="phoneText">{props.data.StaffEmail}</div>
         <EnvelopeSimple color="#0a0700" weight="light" />
       </div>
     </>

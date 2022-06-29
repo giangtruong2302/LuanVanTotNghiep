@@ -4,14 +4,16 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
-import { Gear } from "phosphor-react";
+import { Gear, Plus, SquaresFour } from "phosphor-react";
+import { Action, Fab } from "react-tiny-fab";
 import frameworkcomponents from "./path";
-import { getAllStaffOfCenter } from "../StaffAPI";
+// import { getAllCustomerOfCenter } from "../CusAPI";
+import { getAllAccount } from "../accountAPI";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListStaff = () => {
+const ListAccount = () => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -94,7 +96,13 @@ const ListStaff = () => {
       cellRenderer: "settingRenderer",
     },
     {
-      field: "staff",
+      field: "status",
+      flex: 0,
+      // headerName: "Setting",
+      cellRenderer: "statusRenderer",
+    },
+    {
+      field: "UserName",
       flex: 2,
       // width: 215,
       // headerName: "PT",
@@ -123,12 +131,6 @@ const ListStaff = () => {
       cellRenderer: "addressRenderer",
     },
   ]);
-
-  const defaultColDef = {
-    resizable: true,
-    flex: 1,
-    minWidth: 100,
-  };
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("centerId");
   const serverSideDatasource = useCallback(() => {
@@ -139,10 +141,10 @@ const ListStaff = () => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllStaffOfCenter(parseInt(CenterId), page)
+          getAllAccount(page)
             .then((res) => {
               // console.log(res.data.data);
-              const data = res.staffOfCenter;
+              const data = res.accounts;
               if (data && data.rows.length > 0) {
                 const lastRow = () => {
                   if (parseInt(data.totalPage) <= 1) return data.count;
@@ -165,6 +167,16 @@ const ListStaff = () => {
       },
     };
   }, [CenterId]);
+  const gridOptions = {
+    rowSelection: "single",
+    rowModelType: "serverSide",
+    rowBuffer: 0,
+    cacheBlockSize: 10,
+    cacheOverflowSize: 1,
+    maxConcurrentDatasourceRequests: 1,
+    infiniteInitialRowCount: 10,
+    maxBlocksInCache: 1000,
+  };
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
@@ -180,15 +192,10 @@ const ListStaff = () => {
     const dataSourceAll = serverSideDatasource();
     params.api.setServerSideDatasource(dataSourceAll);
   };
-  const gridOptions = {
-    // rowSelection: "single",
-    rowModelType: "serverSide",
-    rowBuffer: 0,
-    cacheBlockSize: 10,
-    cacheOverflowSize: 1,
-    maxConcurrentDatasourceRequests: 1,
-    infiniteInitialRowCount: 10,
-    maxBlocksInCache: 1000,
+  const defaultColDef = {
+    resizable: true,
+    flex: 1,
+    minWidth: 100,
   };
 
   return (
@@ -211,7 +218,19 @@ const ListStaff = () => {
         onGridReady={onGridReady}
         // suppressContextMenu={true}
       />
+      <Fab
+        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
+        icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
+        alwaysShowTitle={true}
+      >
+        <Action
+          style={{ backgroundColor: "#A9A9A9" }}
+          // onClick={handleAddStaff}
+        >
+          <Plus size={20} color="#Ffff" weight="fill" />
+        </Action>
+      </Fab>
     </div>
   );
 };
-export default ListStaff;
+export default ListAccount;

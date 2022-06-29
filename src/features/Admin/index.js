@@ -117,7 +117,9 @@ const AdminPage = () => {
     }
   }, []);
   console.log("check center: ", center);
-
+  const handleViewListAccount = () => {
+    navigate("/admin/view-list-account");
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -287,7 +289,9 @@ const AdminPage = () => {
             <Menu.SubMenu
               title={<FormattedMessage id="admin.manage-gym.manage-account" />}
             >
-              <Menu.Item>Xem danh sách tài khoản</Menu.Item>
+              <Menu.Item onClick={handleViewListAccount}>
+                Xem danh sách tài khoản
+              </Menu.Item>
             </Menu.SubMenu>
             <Menu.Item>Cài đặt tài khoản</Menu.Item>
             <Menu.SubMenu

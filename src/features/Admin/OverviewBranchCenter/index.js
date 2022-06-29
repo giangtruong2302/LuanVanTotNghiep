@@ -18,6 +18,9 @@ import {
   Infinity,
 } from "phosphor-react";
 import { useSelector } from "react-redux";
+import { getAllCustomerOfCenter } from "../GymCenter/Customers/CusAPI";
+import { message } from "antd";
+import { getAllStaffOfCenter } from "../GymCenter/Staffs/StaffAPI";
 
 const DashboardBranchCenter = (props) => {
   //const salonId = useAppSelector(state => state.currentSalon);
@@ -45,6 +48,9 @@ const DashboardBranchCenter = (props) => {
   // }, [salonId]);
   const testLanguage = useSelector((state) => state.app.language);
   console.log("check la in dashboard: ", testLanguage);
+  const [customerTotal, setCustomerTotal] = useState();
+  const [staffTotal, setStaffTotal] = useState();
+
   let arr = useMemo(
     () => [
       {
@@ -151,7 +157,47 @@ const DashboardBranchCenter = (props) => {
     ],
     []
   );
-
+  const CenterId = localStorage.getItem("centerId");
+  useEffect(() => {
+    try {
+      getAllStaffOfCenter(parseInt(CenterId), 1)
+        .then((res) => {
+          console.log("check res staff: ", res.staffOfCenter);
+          if (res.staffOfCenter) {
+            setSummary({
+              staff: res.staffOfCenter.count ? res.staffOfCenter.count : 0,
+            });
+            setStaffTotal(res.staffOfCenter.count);
+          }
+        })
+        .catch(() => {
+          message.error("get staff fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [CenterId]);
+  useEffect(() => {
+    try {
+      getAllCustomerOfCenter(parseInt(CenterId), 1)
+        .then((res) => {
+          console.log("check res: ", res);
+          if (res.customerOfCenter) {
+            setSummary({
+              customer: res.customerOfCenter.count
+                ? res.customerOfCenter.count
+                : 0,
+            });
+            setCustomerTotal(res.customerOfCenter.count);
+          }
+        })
+        .catch(() => {
+          message.error("get customer fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [CenterId]);
   // const handleLogout = () => {
   //     dispatch(loginActions.doLogout());
   // };
@@ -178,15 +224,11 @@ const DashboardBranchCenter = (props) => {
                     <Summarize
                       image={logo}
                       title="Customer"
-                      total={summary?.customer}
+                      total={customerTotal}
                     />
                   </div>
                   <div className={classes.summarizeItem}>
-                    <Summarize
-                      image={logo}
-                      title="Staff"
-                      total={summary?.staff}
-                    />
+                    <Summarize image={logo} title="Staff" total={staffTotal} />
                   </div>
                   <div className={classes.summarizeItem}>
                     <Summarize image={logo} title="Something" total={1.2022} />
