@@ -32,13 +32,13 @@ const getAllBooking = async (payloadReq) => {
   });
 };
 
-const getAllBookingOfPT = async (req) => {
+const getAllScheduleWorkOfPT = async (req) => {
   return new Promise(async (resolve, reject) => {
     try {
       const skip = (req.query.page - 1) * 10;
-      let staffs = await db.Booking.findAndCountAll({
+      let scheduleWork = await db.ScheduleWorking.findAndCountAll({
         where: {
-          PTId: req.params.PTId,
+          StaffId: req.params.StaffId,
         },
         // attributes: {
         //   exclude: ["password"],
@@ -50,33 +50,13 @@ const getAllBookingOfPT = async (req) => {
         nest: true,
       });
 
-      resolve(staffs);
+      resolve(scheduleWork);
     } catch (e) {
       reject(e);
     }
   });
 };
-const getDetailBookingOfPT = (id) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let bookingOfPT = await db.Booking.findOne({
-        where: { PTId: id },
-        // include: [
-        //     { model: db.Artists, as: 'SongOfArtists' },
-        //     { model: db.Genres, as: 'GenresSong', attributes: ['id', 'genresName'] },
-        // ],
-        raw: false,
-        nest: true,
-      });
 
-      resolve(bookingOfPT);
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
 module.exports = {
-  getAllBooking,
-  getDetailBookingOfPT,
-  getAllBookingOfPT,
+  getAllScheduleWorkOfPT,
 };

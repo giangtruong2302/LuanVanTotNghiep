@@ -21,7 +21,17 @@ const handleGetDetailBookingOfPT = async (req, res) => {
     bookingDetail,
   });
 };
+const handleGetBookingOfPT = async (req, res) => {
+  const bookingOfPT = await BookingService.getAllBookingOfPT(req);
+  return res.status(200).json({
+    errCode: 0,
+    errMessage: "get all booking of pt is success",
+    bookingOfPT,
+    totalPage: Math.ceil(bookingOfPT.count / 10),
+  });
+};
 module.exports = {
   handleGetAllBooking,
   handleGetDetailBookingOfPT,
+  handleGetBookingOfPT,
 };

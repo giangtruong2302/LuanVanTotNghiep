@@ -8,6 +8,7 @@ import CenterController from "../controllers/CenterController";
 import BookingController from "../controllers/BookingController";
 import SalaryController from "../controllers/SalaryController";
 import ManagerController from "../controllers/ManagerController";
+import ScheduleWorkingController from "../controllers/ScheduleWorkingController";
 
 let router = express.Router();
 
@@ -56,6 +57,10 @@ let initWebRoutes = (app) => {
     "/api/get-booking-detail",
     BookingController.handleGetDetailBookingOfPT
   );
+  router.get(
+    "/api/:PTId/get-booking-of-pt",
+    BookingController.handleGetBookingOfPT
+  );
   //salary
   router.get("/api/get-all-salary", SalaryController.handleGetAllSalary);
 
@@ -63,6 +68,12 @@ let initWebRoutes = (app) => {
   router.get(
     "/api/get-all-manager",
     ManagerController.handleGetAllManageCenter
+  );
+
+  //schedule working
+  router.get(
+    "/api/:StaffId/get-schedule-working",
+    ScheduleWorkingController.handleGetScheduleWorkingOfPT
   );
 
   // router.post('/api/user-login', UserController.handleLogin);

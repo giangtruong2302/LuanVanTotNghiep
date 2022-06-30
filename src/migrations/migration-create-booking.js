@@ -8,12 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ReservationId: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
       CustomerId: {
         allowNull: false,
         autoIncrement: true,
@@ -32,7 +26,11 @@ module.exports = {
       PTName: {
         type: Sequelize.STRING,
       },
+
       CenterId: {
+        type: Sequelize.INTEGER,
+      },
+      ServiceId: {
         type: Sequelize.INTEGER,
       },
       StartTime: {
