@@ -56,6 +56,31 @@ const getAllBookingOfPT = async (req) => {
     }
   });
 };
+
+const getAllBookingOfCenter = async (req) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const skip = (req.query.page - 1) * 10;
+      let bookings = await db.Booking.findAndCountAll({
+        where: {
+          CenterId: req.params.CenterId,
+        },
+        // attributes: {
+        //   exclude: ["password"],
+        // },
+        limit: 10,
+        offset: skip,
+        // include: [{ model: db.Roles, as: "UserRoles" }],
+        raw: true,
+        nest: true,
+      });
+
+      resolve(bookings);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 const getDetailBookingOfPT = (id) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -79,4 +104,5 @@ module.exports = {
   getAllBooking,
   getDetailBookingOfPT,
   getAllBookingOfPT,
+  getAllBookingOfCenter,
 };

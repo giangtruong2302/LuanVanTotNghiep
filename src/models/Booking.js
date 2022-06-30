@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       ServiceId: DataTypes.INTEGER,
       StartTime: DataTypes.STRING,
       EndTime: DataTypes.STRING,
+      Status: DataTypes.STRING,
     },
     {
       sequelize,

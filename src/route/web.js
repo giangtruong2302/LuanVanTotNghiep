@@ -61,6 +61,10 @@ let initWebRoutes = (app) => {
     "/api/:PTId/get-booking-of-pt",
     BookingController.handleGetBookingOfPT
   );
+  router.get(
+    "/api/:CenterId/get-all-booking-of-center",
+    BookingController.handleGetBookingOfCenter
+  );
   //salary
   router.get("/api/get-all-salary", SalaryController.handleGetAllSalary);
 

@@ -30,8 +30,18 @@ const handleGetBookingOfPT = async (req, res) => {
     totalPage: Math.ceil(bookingOfPT.count / 10),
   });
 };
+const handleGetBookingOfCenter = async (req, res) => {
+  const bookingOfCenter = await BookingService.getAllBookingOfCenter(req);
+  return res.status(200).json({
+    errCode: 0,
+    errMessage: "get all booking of center is success",
+    bookingOfCenter,
+    totalPage: Math.ceil(bookingOfCenter.count / 10),
+  });
+};
 module.exports = {
   handleGetAllBooking,
   handleGetDetailBookingOfPT,
   handleGetBookingOfPT,
+  handleGetBookingOfCenter,
 };

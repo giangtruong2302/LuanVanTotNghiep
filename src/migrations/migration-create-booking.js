@@ -39,6 +39,9 @@ module.exports = {
       EndTime: {
         type: Sequelize.STRING,
       },
+      Status: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,
