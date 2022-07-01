@@ -62,7 +62,7 @@ let initWebRoutes = (app) => {
     BookingController.handleGetBookingOfPT
   );
   router.get(
-    "/api/:CenterId/get-all-booking-of-center",
+    "/api/merchant/:CenterId/get-all-booking-of-center",
     BookingController.handleGetBookingOfCenter
   );
   //salary
