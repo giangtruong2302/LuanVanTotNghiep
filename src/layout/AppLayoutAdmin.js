@@ -12,6 +12,7 @@ import {
   Services,
   ReservationDetail,
   Account,
+  SettingAccountAdmin,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -47,6 +48,10 @@ const AppLayoutAdmin = () => {
             element={<ReservationDetail />}
           />
           <Route path="/admin/view-list-account" element={<Account />} />
+          <Route
+            path="/admin/setting-account"
+            element={<SettingAccountAdmin />}
+          />
         </Route>
 
         {/* <Route path="/reservation" element={<Reservation />} /> */}

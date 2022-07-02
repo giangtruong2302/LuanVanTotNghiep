@@ -11,7 +11,7 @@ LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListStaff = () => {
+const ListStaff = (props) => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -139,7 +139,11 @@ const ListStaff = () => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllStaffOfCenter(parseInt(CenterId), page)
+          getAllStaffOfCenter(
+            parseInt(CenterId),
+            props.searchValue,
+            parseInt(page)
+          )
             .then((res) => {
               // console.log(res.data.data);
               const data = res.staffOfCenter;
@@ -164,7 +168,7 @@ const ListStaff = () => {
         } catch (error) {}
       },
     };
-  }, [CenterId]);
+  }, [CenterId, props.searchValue]);
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
@@ -172,7 +176,7 @@ const ListStaff = () => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource]);
+  }, [serverSideDatasource, props.searchValue]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

@@ -9,11 +9,13 @@ import { Action, Fab } from "react-tiny-fab";
 import frameworkcomponents from "./path";
 // import { getAllCustomerOfCenter } from "../CusAPI";
 import { getAllAccount } from "../accountAPI";
+import { isVisible } from "@testing-library/user-event/dist/utils";
+import CreateAccount from "../ModalAccount/modalAddAccount";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListAccount = () => {
+const ListAccount = (props) => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -109,13 +111,7 @@ const ListAccount = () => {
       // type: "rightAligned",
       cellRenderer: "staffRenderer",
     },
-    {
-      field: "phone",
-      // width: 215,
-      // headerName: "Phone",
-      // type: "rightAligned",
-      cellRenderer: "phoneRenderer",
-    },
+
     {
       field: "email",
       // width: 215,
@@ -124,7 +120,7 @@ const ListAccount = () => {
       cellRenderer: "emailRenderer",
     },
     {
-      field: "address",
+      field: "Role",
       // width: 215,
       // headerName: "Address",
       // type: "rightAligned",
@@ -135,13 +131,14 @@ const ListAccount = () => {
   const CenterId = localStorage.getItem("centerId");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
+
     return {
       getRows: function (params) {
         // loading?.classList.remove("hidden");
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllAccount(page)
+          getAllAccount(props.searchValue, page)
             .then((res) => {
               // console.log(res.data.data);
               const data = res.accounts;
@@ -166,7 +163,7 @@ const ListAccount = () => {
         } catch (error) {}
       },
     };
-  }, [CenterId]);
+  }, [CenterId, props.status, props.searchValue]);
   const gridOptions = {
     rowSelection: "single",
     rowModelType: "serverSide",
@@ -177,14 +174,19 @@ const ListAccount = () => {
     infiniteInitialRowCount: 10,
     maxBlocksInCache: 1000,
   };
+  const [searchValue, setSearchValue] = useState("");
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
+    console.log("check search value list :", props.searchValue);
+    if (props.searchValue !== "") {
+      setSearchValue(props.searchValue);
+    }
     if (gridApiCustomer) {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource]);
+  }, [serverSideDatasource, props.status, props.searchValue]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();
@@ -218,18 +220,6 @@ const ListAccount = () => {
         onGridReady={onGridReady}
         // suppressContextMenu={true}
       />
-      <Fab
-        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
-        icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
-        alwaysShowTitle={true}
-      >
-        <Action
-          style={{ backgroundColor: "#A9A9A9" }}
-          // onClick={handleAddStaff}
-        >
-          <Plus size={20} color="#Ffff" weight="fill" />
-        </Action>
-      </Fab>
     </div>
   );
 };

@@ -160,7 +160,7 @@ const DashboardBranchCenter = (props) => {
   const CenterId = localStorage.getItem("centerId");
   useEffect(() => {
     try {
-      getAllStaffOfCenter(parseInt(CenterId), 1)
+      getAllStaffOfCenter(parseInt(CenterId), "", 1)
         .then((res) => {
           console.log("check res staff: ", res.staffOfCenter);
           if (res.staffOfCenter) {
@@ -179,7 +179,7 @@ const DashboardBranchCenter = (props) => {
   }, [CenterId]);
   useEffect(() => {
     try {
-      getAllCustomerOfCenter(parseInt(CenterId), 1)
+      getAllCustomerOfCenter(parseInt(CenterId), "", 1)
         .then((res) => {
           console.log("check res: ", res);
           if (res.customerOfCenter) {

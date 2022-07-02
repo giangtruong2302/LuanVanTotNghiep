@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 import staff from "../../../../../../assets/images/imgStaff/staff.png";
 import "./reservationItem.scss";
 
-const ReservationItemMerchant = () => {
+const ReservationItemMerchant = (props) => {
   const statusCondition = () => {
     switch ("pending") {
       case "PENDING":
@@ -51,6 +51,7 @@ const ReservationItemMerchant = () => {
         return "color1";
     }
   };
+  console.log("check props: ", props);
   return (
     <NavLink
       to={`/admin/merchant/${1}/reservation-detail/${1}`}
@@ -59,20 +60,20 @@ const ReservationItemMerchant = () => {
       <div className="confirmation">
         <div className={`${"status"} ${statusCondition()}`}>
           <div className={`${statusCondition()}`}> </div>
-          NEW
+          {props.data.Status ? props.data.Status : "N/A"}
         </div>
         <div className="date">
           {moment(new Date(`23 0002 12:12 A}`))
             .format("dddd, DD MMMM, HH:mm A")
             .toUpperCase()}
         </div>
-        <div className="id">{"props.booking.code"}</div>
+        <div className="id"> {props.data.id ? props.data.id : "N/A"}</div>
       </div>
       <div className="information">
         <div className="cusDetail">
           <img src={staff} alt="" />
           <div className="cusName">
-            {"props.customer.firstName"} {"props.customer.lastName"}
+            {props.data.CustomerName ? props.data.CustomerName : "N/A"}
           </div>
         </div>
 
@@ -93,11 +94,11 @@ const ReservationItemMerchant = () => {
       </div>
       <div className="serviceDetail">
         <div className={`${"serviceItem"} ${handleColor(1)}`}>
-          <div className="serviceName">{"item.service"}</div>
+          <div className="serviceName">{props.data.ServiceId}</div>
           <div className="staffDetail">
             Staff :
             <img src={staff} alt="" style={{ height: "35px", width: "35px" }} />
-            {" Anyone"}
+            {props.data.PTName ? props.data.PTName : "N/A"}
           </div>
         </div>
       </div>

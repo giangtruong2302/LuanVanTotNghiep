@@ -11,7 +11,7 @@ LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListCustomer = () => {
+const ListCustomer = (props) => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -86,6 +86,7 @@ const ListCustomer = () => {
       address: "tp hcm",
     },
   ]);
+  console.log("check search value: ", props.searchValue);
   const [columnDefs] = useState([
     {
       field: "setting",
@@ -131,12 +132,17 @@ const ListCustomer = () => {
     return {
       getRows: function (params) {
         // loading?.classList.remove("hidden");
-        const page = params.request.endRow / 10;
+        let page = 1;
+        page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllCustomerOfCenter(parseInt(CenterId), page)
+          getAllCustomerOfCenter(
+            parseInt(CenterId),
+            props.searchValue,
+            parseInt(page)
+          )
             .then((res) => {
-              // console.log(res.data.data);
+              // console.log("check res cus of center: ", res);
               const data = res.customerOfCenter;
               if (data && data.rows.length > 0) {
                 const lastRow = () => {
@@ -159,7 +165,7 @@ const ListCustomer = () => {
         } catch (error) {}
       },
     };
-  }, [CenterId]);
+  }, [CenterId, props.searchValue]);
   const gridOptions = {
     rowSelection: "single",
     rowModelType: "serverSide",
@@ -177,7 +183,7 @@ const ListCustomer = () => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource]);
+  }, [serverSideDatasource, props.searchValue]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

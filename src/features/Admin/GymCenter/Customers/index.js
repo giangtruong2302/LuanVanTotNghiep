@@ -7,9 +7,14 @@ import { ArrowLeft } from "phosphor-react";
 import { PageHeader, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import ListCustomer from "./ListCustomer/listCustomer";
+import { useState } from "react";
 const { Search } = Input;
 const Customers = () => {
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const onSearchValue = (value) => {
+    setSearchValue(value);
+  };
   return (
     <div className="PTProfileBg">
       <PageHeader
@@ -29,13 +34,14 @@ const Customers = () => {
           <Search
             style={{ borderRadius: "8px !important" }}
             placeholder="search reservation of center"
-            loading
+            // loading
             enterButton
+            onSearch={onSearchValue}
           />
         }
       />
       <div className={classes.listItem}>
-        <ListCustomer />
+        <ListCustomer searchValue={searchValue} />
       </div>
     </div>
   );

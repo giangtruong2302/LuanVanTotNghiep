@@ -10,7 +10,7 @@ LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListService = () => {
+const ListService = (props) => {
   const [rowData] = useState([
     {
       service: "Manicure",
@@ -96,7 +96,7 @@ const ListService = () => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllService(page)
+          getAllService(props.searchValue, parseInt(page))
             .then((res) => {
               // console.log(res.data.data);
               const data = res.services;
@@ -121,7 +121,7 @@ const ListService = () => {
         } catch (error) {}
       },
     };
-  }, [CenterId]);
+  }, [CenterId, props.searchValue]);
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
@@ -129,7 +129,7 @@ const ListService = () => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource]);
+  }, [serverSideDatasource, props.searchValue]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

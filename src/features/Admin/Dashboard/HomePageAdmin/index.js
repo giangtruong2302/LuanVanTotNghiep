@@ -1,23 +1,55 @@
 import { Col, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import ChartReservation from "../Chart/chartReservation";
 import "./homepageAdmin.scss";
 import { NavLink } from "react-router-dom";
+import {
+  getAllCustomerOfCenter,
+  getAllCustomerOfSystem,
+} from "../../GymCenter/Customers/CusAPI";
+import { useState } from "react";
+import { getAllCenter } from "../../AdminAPI";
 
 const HomePageAdmin = () => {
+  const CenterId = localStorage.getItem("centerId");
+  const [totalCustomer, setTotalCustomer] = useState(0);
+  const [totalCenter, setTotalCenter] = useState(0);
+  useEffect(() => {
+    try {
+      getAllCustomerOfSystem(1)
+        .then((res) => {
+          console.log(res.customers.count);
+          setTotalCustomer(res.customers.count);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+      getAllCenter(1)
+        .then((res) => {
+          setTotalCenter(res.centers.count);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <div className="HomepageAdminBg">
         <div className="titleHomeAdmin">Overview</div>
         <Row className="overviewCalc">
           <Col span={5} className="gymCenterTotal">
-            Gym center Total
+            <p>Gym center Total</p>
+            <p>{totalCenter}</p>
           </Col>
           <Col span={5} className="serviceOfGHGym">
             Servive
           </Col>
           <Col span={5} className="accountCusTotal">
-            Account customer total
+            <p>Account customer total</p>
+            <p>{totalCustomer}</p>
           </Col>
           <Col span={5} className="serviceHours">
             Service Hours
