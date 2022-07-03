@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./customizeListPT.scss";
 
-const AddressRenderer = () => {
+const AddressRenderer = (props) => {
   return (
     <>
       <div className="phoneContainer">
-        <div className="phoneText">TP HCM</div>
+        <div className="phoneText">{props.data.Address}</div>
         <MapPinLine color="#0a0700" weight="light" />
       </div>
     </>

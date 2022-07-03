@@ -6,9 +6,14 @@ import { ArrowLeft } from "phosphor-react";
 import ListStaff from "./ListStaff/listStaff";
 import { PageHeader, Input } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const { Search } = Input;
 const Staffs = () => {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
+  const onSearchValue = (value) => {
+    setSearchValue(value);
+  };
   return (
     <div className="PTProfileBg">
       <PageHeader
@@ -28,13 +33,14 @@ const Staffs = () => {
           <Search
             style={{ borderRadius: "8px !important" }}
             placeholder="search reservation of center"
-            loading
+            // loading
+            onSearch={onSearchValue}
             enterButton
           />
         }
       />
       <div className={classes.listItem}>
-        <ListStaff />
+        <ListStaff searchValue={searchValue} />
       </div>
     </div>
   );

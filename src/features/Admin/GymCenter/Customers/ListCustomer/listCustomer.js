@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "./styles.module.scss";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -6,11 +6,12 @@ import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { Gear } from "phosphor-react";
 import frameworkcomponents from "./path";
+import { getAllCustomerOfCenter } from "../CusAPI";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListCustomer = () => {
+const ListCustomer = (props) => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -85,6 +86,7 @@ const ListCustomer = () => {
       address: "tp hcm",
     },
   ]);
+  console.log("check search value: ", props.searchValue);
   const [columnDefs] = useState([
     {
       field: "setting",
@@ -92,13 +94,7 @@ const ListCustomer = () => {
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
     },
-    {
-      field: "status",
-      // width: 550,
-      // flex: 2,
-      // headerName: "Status",
-      cellRenderer: "statusRenderer",
-    },
+
     {
       field: "Customer",
       flex: 2,
@@ -129,21 +125,76 @@ const ListCustomer = () => {
       cellRenderer: "addressRenderer",
     },
   ]);
-
-  const defaultColDef = {
-    resizable: true,
-    flex: 1,
-    minWidth: 100,
-  };
+  const [gridApiCustomer, setGridApiCustomer] = useState();
+  const CenterId = localStorage.getItem("centerId");
+  const serverSideDatasource = useCallback(() => {
+    console.log("check cuurent salon:", CenterId);
+    return {
+      getRows: function (params) {
+        // loading?.classList.remove("hidden");
+        let page = 1;
+        page = params.request.endRow / 10;
+        try {
+          //FOR FILTER PURPOSE
+          getAllCustomerOfCenter(
+            parseInt(CenterId),
+            props.searchValue,
+            parseInt(page)
+          )
+            .then((res) => {
+              // console.log("check res cus of center: ", res);
+              const data = res.customerOfCenter;
+              if (data && data.rows.length > 0) {
+                const lastRow = () => {
+                  if (parseInt(data.totalPage) <= 1) return data.count;
+                  else if (page <= parseInt(data.totalPages) - 2) return -1;
+                  else return data.count;
+                };
+                // call the success callback
+                setTimeout(() => {
+                  params.successCallback(data.rows, lastRow());
+                }, 500);
+                // loading?.classList.add("hidden");
+              } else {
+                params.api.showNoRowsOverlay();
+              }
+            })
+            .catch(() => {
+              params.api.showLoadingOverlay();
+            });
+        } catch (error) {}
+      },
+    };
+  }, [CenterId, props.searchValue]);
   const gridOptions = {
     rowSelection: "single",
-    // rowModelType: 'serverSide',
+    rowModelType: "serverSide",
     rowBuffer: 0,
     cacheBlockSize: 10,
     cacheOverflowSize: 1,
     maxConcurrentDatasourceRequests: 1,
     infiniteInitialRowCount: 10,
     maxBlocksInCache: 1000,
+  };
+  const agOverLaytheme =
+    '<span class="ag-overlay-loading-center">No rows to show</span>';
+  useEffect(() => {
+    if (gridApiCustomer) {
+      const newDataSource = serverSideDatasource();
+      gridApiCustomer.setServerSideDatasource(newDataSource);
+    }
+  }, [serverSideDatasource, props.searchValue]);
+
+  const onGridReady = (params) => {
+    params.api.showLoadingOverlay();
+    setGridApiCustomer(params.api);
+    const dataSourceAll = serverSideDatasource();
+    params.api.setServerSideDatasource(dataSourceAll);
+  };
+  const defaultColDef = {
+    resizable: true,
+    flex: 1,
+    minWidth: 100,
   };
 
   return (
@@ -158,11 +209,13 @@ const ListCustomer = () => {
       <AgGridReact
         defaultColDef={defaultColDef}
         headerHeight={80}
-        rowData={rowData}
         columnDefs={columnDefs}
         gridOptions={gridOptions}
         rowHeight={73}
+        overlayLoadingTemplate={agOverLaytheme}
         frameworkComponents={frameworkcomponents}
+        onGridReady={onGridReady}
+        // suppressContextMenu={true}
       />
     </div>
   );

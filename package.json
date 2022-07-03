@@ -50,6 +50,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.0",
     "react-slick": "^0.28.1",
+    "react-tiny-fab": "^4.0.4",
     "react-toastify": "^5.5.0",
     "reactjs-popup": "^2.0.5",
     "redux-logger": "^3.0.6",

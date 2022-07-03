@@ -1,12 +1,15 @@
 import { PageHeader } from "antd";
 import { Input } from "antd";
 import React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ListReservationMerchant from "./ListReservationMerchant/listReservationMerchant";
-import "./reservationMerchant.scss";
+import { getAllReservationOfCenter } from "./ReservationAPI";
+import classes from "./styles.module.scss";
 const { Search } = Input;
 const ReservationMerchant = () => {
   const navigate = useNavigate();
+
   return (
     <>
       <div className="reservationCenterBg">
@@ -32,7 +35,8 @@ const ReservationMerchant = () => {
             />
           }
         />
-        <div className="listReservationMerchant">
+        <div className={classes.filterBooking}></div>
+        <div className={classes.listReservationMerchant}>
           <ListReservationMerchant />
         </div>
       </div>

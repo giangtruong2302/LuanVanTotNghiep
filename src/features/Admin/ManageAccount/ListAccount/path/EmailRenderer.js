@@ -7,7 +7,7 @@ const EmailRenderer = (props) => {
   return (
     <>
       <div className="phoneContainer">
-        <div className="phoneText">{props.data.CustomerEmail}</div>
+        <div className="phoneText">{props.data.email}</div>
         <EnvelopeSimple color="#0a0700" weight="light" />
       </div>
     </>

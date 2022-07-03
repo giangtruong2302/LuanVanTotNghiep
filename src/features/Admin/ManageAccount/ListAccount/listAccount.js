@@ -4,14 +4,18 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
-import { Gear } from "phosphor-react";
+import { Gear, Plus, SquaresFour } from "phosphor-react";
+import { Action, Fab } from "react-tiny-fab";
 import frameworkcomponents from "./path";
-import { getAllStaffOfCenter } from "../StaffAPI";
+// import { getAllCustomerOfCenter } from "../CusAPI";
+import { getAllAccount } from "../accountAPI";
+import { isVisible } from "@testing-library/user-event/dist/utils";
+import CreateAccount from "../ModalAccount/modalAddAccount";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListStaff = (props) => {
+const ListAccount = (props) => {
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -94,20 +98,20 @@ const ListStaff = (props) => {
       cellRenderer: "settingRenderer",
     },
     {
-      field: "staff",
+      field: "status",
+      flex: 0,
+      // headerName: "Setting",
+      cellRenderer: "statusRenderer",
+    },
+    {
+      field: "UserName",
       flex: 2,
       // width: 215,
       // headerName: "PT",
       // type: "rightAligned",
       cellRenderer: "staffRenderer",
     },
-    {
-      field: "phone",
-      // width: 215,
-      // headerName: "Phone",
-      // type: "rightAligned",
-      cellRenderer: "phoneRenderer",
-    },
+
     {
       field: "email",
       // width: 215,
@@ -116,37 +120,28 @@ const ListStaff = (props) => {
       cellRenderer: "emailRenderer",
     },
     {
-      field: "address",
+      field: "Role",
       // width: 215,
       // headerName: "Address",
       // type: "rightAligned",
       cellRenderer: "addressRenderer",
     },
   ]);
-
-  const defaultColDef = {
-    resizable: true,
-    flex: 1,
-    minWidth: 100,
-  };
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("centerId");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
+
     return {
       getRows: function (params) {
         // loading?.classList.remove("hidden");
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllStaffOfCenter(
-            parseInt(CenterId),
-            props.searchValue,
-            parseInt(page)
-          )
+          getAllAccount(props.searchValue, page)
             .then((res) => {
               // console.log(res.data.data);
-              const data = res.staffOfCenter;
+              const data = res.accounts;
               if (data && data.rows.length > 0) {
                 const lastRow = () => {
                   if (parseInt(data.totalPage) <= 1) return data.count;
@@ -168,24 +163,9 @@ const ListStaff = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.searchValue]);
-  const agOverLaytheme =
-    '<span class="ag-overlay-loading-center">No rows to show</span>';
-  useEffect(() => {
-    if (gridApiCustomer) {
-      const newDataSource = serverSideDatasource();
-      gridApiCustomer.setServerSideDatasource(newDataSource);
-    }
-  }, [serverSideDatasource, props.searchValue]);
-
-  const onGridReady = (params) => {
-    params.api.showLoadingOverlay();
-    setGridApiCustomer(params.api);
-    const dataSourceAll = serverSideDatasource();
-    params.api.setServerSideDatasource(dataSourceAll);
-  };
+  }, [CenterId, props.status, props.searchValue]);
   const gridOptions = {
-    // rowSelection: "single",
+    rowSelection: "single",
     rowModelType: "serverSide",
     rowBuffer: 0,
     cacheBlockSize: 10,
@@ -193,6 +173,31 @@ const ListStaff = (props) => {
     maxConcurrentDatasourceRequests: 1,
     infiniteInitialRowCount: 10,
     maxBlocksInCache: 1000,
+  };
+  const [searchValue, setSearchValue] = useState("");
+  const agOverLaytheme =
+    '<span class="ag-overlay-loading-center">No rows to show</span>';
+  useEffect(() => {
+    console.log("check search value list :", props.searchValue);
+    if (props.searchValue !== "") {
+      setSearchValue(props.searchValue);
+    }
+    if (gridApiCustomer) {
+      const newDataSource = serverSideDatasource();
+      gridApiCustomer.setServerSideDatasource(newDataSource);
+    }
+  }, [serverSideDatasource, props.status, props.searchValue]);
+
+  const onGridReady = (params) => {
+    params.api.showLoadingOverlay();
+    setGridApiCustomer(params.api);
+    const dataSourceAll = serverSideDatasource();
+    params.api.setServerSideDatasource(dataSourceAll);
+  };
+  const defaultColDef = {
+    resizable: true,
+    flex: 1,
+    minWidth: 100,
   };
 
   return (
@@ -218,4 +223,4 @@ const ListStaff = (props) => {
     </div>
   );
 };
-export default ListStaff;
+export default ListAccount;

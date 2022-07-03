@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./listReservationMerchant.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../../component/StaggerAnimation";
 import ReservationItemMerchant from "./ReservationItem/reservationItem";
+import { getAllReservationOfCenter } from "../ReservationAPI";
+import { message } from "antd";
+import { useState } from "react";
 
 const ListReservationMerchant = () => {
+  const [dataRes, setDataRes] = useState();
+  const CenterId = localStorage.getItem("centerId");
+  useEffect(() => {
+    try {
+      getAllReservationOfCenter(CenterId, 1)
+        .then((res) => {
+          console.log("check res reservation: ", res);
+          if (
+            res &&
+            res.bookingOfCenter &&
+            res.bookingOfCenter.rows.length > 0
+          ) {
+            setDataRes(res.bookingOfCenter.rows);
+          }
+        })
+        .catch((error) => message.error(error.response.message));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [CenterId]);
   return (
     <div className="listItemReservation">
       <InfiniteScroll
@@ -17,18 +40,11 @@ const ListReservationMerchant = () => {
         }
         scrollableTarget="scrollableDiv"
       >
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
-        <ReservationItemMerchant />
+        {dataRes && dataRes.length > 0
+          ? dataRes.map((item, index) => {
+              return <ReservationItemMerchant data={item} index={index} />;
+            })
+          : "no data to show"}
       </InfiniteScroll>
     </div>
   );

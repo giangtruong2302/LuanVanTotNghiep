@@ -26,6 +26,10 @@ const Customers = React.lazy(() =>
 const ReservationDetail = React.lazy(() =>
   import("../features/Admin/GymCenter/ReservationDetail")
 );
+const Account = React.lazy(() => import("../features/Admin/ManageAccount"));
+const SettingAccountAdmin = React.lazy(() =>
+  import("../features/Admin/SettingAccountForAdmin")
+);
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
   Reservation,
@@ -37,4 +41,6 @@ export {
   Staffs,
   GymCenterAdmin,
   SettingAccount,
+  Account,
+  SettingAccountAdmin,
 };

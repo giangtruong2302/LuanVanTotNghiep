@@ -20,6 +20,7 @@ import {
   BellRinging,
   Books,
   Buildings,
+  ClockClockwise,
   Coins,
   Gear,
   GearSix,
@@ -104,6 +105,9 @@ const AdminPage = () => {
       ]}
     />
   );
+  const handleSettingAccount = () => {
+    navigate("/admin/setting-account");
+  };
   useEffect(() => {
     try {
       getAllCenter(1).then((res) => {
@@ -117,7 +121,9 @@ const AdminPage = () => {
     }
   }, []);
   console.log("check center: ", center);
-
+  const handleViewListAccount = () => {
+    navigate("/admin/view-list-account");
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -265,6 +271,7 @@ const AdminPage = () => {
             // ]}
           >
             <Menu.SubMenu
+              icon={<Buildings size={20} weight="bold" color="#fff" />}
               title={<FormattedMessage id="admin.manage-gym.manage-center" />}
             >
               <Menu.SubMenu title="Center">
@@ -285,12 +292,21 @@ const AdminPage = () => {
               </Menu.SubMenu>
             </Menu.SubMenu>
             <Menu.SubMenu
+              icon={<UserCircle size={20} weight="bold" color="#fff" />}
               title={<FormattedMessage id="admin.manage-gym.manage-account" />}
             >
-              <Menu.Item>Xem danh sách tài khoản</Menu.Item>
+              <Menu.Item onClick={handleViewListAccount}>
+                Xem danh sách tài khoản
+              </Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item>Cài đặt tài khoản</Menu.Item>
+            <Menu.Item
+              icon={<ClockClockwise size={20} weight="bold" color="#fff" />}
+              onClick={handleSettingAccount}
+            >
+              Cài đặt tài khoản
+            </Menu.Item>
             <Menu.SubMenu
+              icon={<Translate size={20} weight="bold" color="#fff" />}
               title={<FormattedMessage id="admin.manage-gym.languages" />}
             >
               <Menu.Item

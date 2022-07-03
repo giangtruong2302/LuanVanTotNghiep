@@ -1,6 +1,7 @@
 .agThemeAlpineStaffs {
   width: 100%;
   :global {
+    margin-top: 10px;
     .ag-header {
       border: 1px solid transparent;
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -32,7 +33,13 @@
     }
     .ag-cell {
       border: 1px solid transparent;
-      line-height: min(var(--ag-theme-row-height, 60px), 60px);
+      // line-height: min(
+      //   $numbers: (
+      //     var(--ag-theme-row-height, 60),
+      //     60,
+      //   )
+      // );
+      line-height: 6em;
     }
     .ag-loading {
       padding-left: 30px;
