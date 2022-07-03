@@ -40,6 +40,7 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
+
       .child-content {
         .login {
           display: flex;
@@ -187,8 +188,10 @@
       display: flex;
       gap: 50px;
 
+
       .option-child {
         width: 100px;
+        color: black !important;
 
         .icon-child {
           background: white;
@@ -533,6 +536,7 @@
           flex-wrap: wrap;
           height: 50px;
           justify-content: center;
+          color: black !important;
 
 
           .icon-child {

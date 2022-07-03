@@ -1,5 +1,5 @@
 import { Breadcrumb, Col, PageHeader, Row } from "antd";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./PTDetail.scss";
 import { useNavigate } from "react-router-dom";
 import { Question, List, ThumbsUp, Chats } from "phosphor-react";
@@ -8,9 +8,36 @@ import ava from "../../../assets/images/imgStaff/staff.png";
 import PTShedule from "./PTShedule/PTShedule";
 import PTSchedulePayment from "./PTSchedulePayment";
 import OverviewDetail from "./OverviewPTInfo/overviewDetailInfo";
+import { getPtDetail } from "./PtDetailAPI";
+import { useParams } from "react-router-dom";
+
+
+
 
 const PTDetail = () => {
   const navigate = useNavigate();
+  const [ptDetail, setptDetail] = useState();
+  const [noptDetail, setNoptDetail] = useState(false);
+  const [, setptDetailLoading] = useState(true);
+  const id = useParams();
+
+  useEffect(() => {
+    getPtDetail(id.id).then((response) => {
+      if (response.staffDetail) {
+        setptDetail(response.staffDetail);
+        setNoptDetail(false);
+      } else {
+        setNoptDetail(true);
+      }
+    })
+      .catch(() => {
+        setNoptDetail(true);
+      })
+      .finally(() => {
+        setptDetailLoading(false);
+      });
+  }, []);
+
   return (
     <div className="PTDetailBgContainer">
       <PageHeader
@@ -31,15 +58,16 @@ const PTDetail = () => {
           <List size={20} color="#eeeee7" weight="fill" />,
         ]}
       />
-      <div className="breadcumDetail">
+
+      <div className="breadcumDetail" >
         <Breadcrumb>
           <Breadcrumb.Item href="">
             <HomeOutlined />
           </Breadcrumb.Item>
           <Breadcrumb.Item href="">
-            <span>Danh sach Huan luyen vien ca nhan</span>
+            <span>Danh sách huấn luyện viên cá nhân</span>
           </Breadcrumb.Item>
-          <Breadcrumb.Item>Huan luyen vien Duong Truong Giang</Breadcrumb.Item>
+          <Breadcrumb.Item>Huấn luyện viên {ptDetail?.StaffName} </Breadcrumb.Item>
         </Breadcrumb>
       </div>
 
@@ -54,27 +82,20 @@ const PTDetail = () => {
               flexDirection: "column",
             }}
           >
+
             <Row>
               <Col className="avatarPTDetail" span={4}>
                 <img src={ava} className="imgPT" />
               </Col>
               <Col span={20} className="infoDetailPT">
                 <div className="namePTAndPosition">
-                  Body building professor Duong Truong Giang
+                  Body building professor {ptDetail?.StaffName}
                 </div>
                 <div className="descriptionPTDetail">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Officia, recusandae sequi, deserunt nobis mollitia veniam
-                  eligendi labore nesciunt, non autem eos dolore delectus
-                  inventore vel voluptate nam at? Ratione, qui? Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Officia,
-                  recusandae sequi, deserunt nobis mollitia veniam eligendi
-                  labore nesciunt, non autem eos dolore delectus inventore vel
-                  voluptate nam at? Ratione, qui? Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Officia, recusandae sequi,
-                  deserunt nobis mollitia veniam eligendi labore nesciunt, non
-                  autem eos dolore delectus inventore vel voluptate nam at?
-                  Ratione, qui?
+                  <div>Email :  {ptDetail?.StaffEmail}</div>
+                  <div>Phone Number :  {ptDetail?.StaffPhoneNumber}</div>
+
+
                 </div>
                 <div className="likeAndChat">
                   <span className="btnLike">

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./staff.scss";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "phosphor-react";
+
 import ListBooking from "./ListBooking/listBooking";
 import ava from "../../assets/images/imgStaff/staff.png";
 import Modal from 'react-modal';
+import { getPtDetail } from "../Customer/PTDetail/PtDetailAPI";
+
 
 const customStyles = {
     content: {
@@ -19,6 +22,10 @@ const customStyles = {
 };
 const Staff = () => {
     let subtitle;
+    const [ptDetail, setptDetail] = useState();
+    const [noptDetail, setNoptDetail] = useState(false);
+    const [, setptDetailLoading] = useState(true);
+    const id = useParams();
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     function openModal() {
@@ -33,6 +40,24 @@ const Staff = () => {
     function closeModal() {
         setIsOpen(false);
     }
+
+
+    useEffect(() => {
+        getPtDetail(id.id).then((response) => {
+            if (response.staffDetail) {
+                setptDetail(response.staffDetail);
+                setNoptDetail(false);
+            } else {
+                setNoptDetail(true);
+            }
+        })
+            .catch(() => {
+                setNoptDetail(true);
+            })
+            .finally(() => {
+                setptDetailLoading(false);
+            });
+    }, []);
     return (
 
         <div className="PTProfileBg">
@@ -43,12 +68,12 @@ const Staff = () => {
                     <div className="PTinfo">
                         <img src={ava} className="imgPT" />
                         <div className="PtName">
-                            Welcome, Nguyễn Nhật Huy !
+                            Welcome, {ptDetail?.StaffName} !
                             <div className="btnPT">
-                                <button className="btnScan">Scan</button>
 
 
-                                <Link to={{ pathname: '/pt-booking' }}> <button className="btnBook">Lịch booking</button></Link>
+
+                                <Link to={`/pt-booking/${ptDetail?.id}`}> <button className="btnBook">Lịch booking</button></Link>
 
 
 
@@ -60,7 +85,7 @@ const Staff = () => {
                                     style={customStyles}
                                     contentLabel="Example Modal"
                                 ><div>Your Salary is :</div>
-                                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}>5.000.000 VND </h2>
+                                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{(ptDetail?.SalaryId === 1) ? "5.000.000VNĐ" : "4.000.000VNĐ"} </h2>
 
 
 

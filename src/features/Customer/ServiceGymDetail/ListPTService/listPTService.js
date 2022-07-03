@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import "antd/dist/antd.css";
 import "./listPTService.scss";
 import { List, Avatar, Space, Select } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import PTShedule from "../../PTDetail/PTShedule/PTShedule";
+import PTShedule from "../../GymCenterDetail/PtSchedule/PtSchedule";
+import { getPtOfService } from "./listPTServiceAPI";
 
 const { Option } = Select;
 const ListPTService = () => {
@@ -32,6 +33,30 @@ const ListPTService = () => {
   const onSearch = (value) => {
     console.log("search:", value);
   };
+  const [PtOfCenter, setPtOfCenter] = useState();
+  const [noPtOfCenter, setNoPtOfCenter] = useState(false);
+  const [, setPtOfCenterLoading] = useState(true);
+  const [center, SetCenter] = useState();
+  const [totalPage, setTotalPage] = useState(0);
+
+  useEffect(() => {
+    getPtOfService(1, 1).then((response) => {
+      if (response.ptOfCenter.rows) {
+        console.log(response.ptOfCenter)
+        setTotalPage(response.totalPage)
+        setPtOfCenter(response.ptOfCenter.rows);
+        setNoPtOfCenter(false);
+      } else {
+        setNoPtOfCenter(true);
+      }
+    })
+      .catch(() => {
+        setNoPtOfCenter(true);
+      })
+      .finally(() => {
+        setPtOfCenterLoading(false);
+      });
+  }, []);
   return (
     <div className="listPTServiceContainer">
       <div className="filterCenter">
@@ -46,15 +71,13 @@ const ListPTService = () => {
           }
         >
           <Option value="allCenter">Tất cả cơ sở</Option>
-          <Option value="distrist8">Cơ sở quận 8</Option>
-          <Option value="distrist1">Cơ sở quận 1</Option>
-          <Option value="distristBT">Cơ sở Bình Tân</Option>
-          <Option value="distrist10">Cơ sở quận 10</Option>
+          <Option value="1">Cơ sở quận 1</Option>
+          <Option value="2">Cơ sở quận 10</Option>
         </Select>
       </div>
       <List
         // style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-        // className="listPTServiceItems"
+        // className="listPTCenterItems"
         itemLayout="vertical"
         size="large"
         pagination={{
@@ -63,7 +86,7 @@ const ListPTService = () => {
           },
           pageSize: 5,
         }}
-        dataSource={data}
+        dataSource={PtOfCenter}
         footer={
           <div>
             <b>GH Gym</b> Danh sách PT
@@ -71,7 +94,7 @@ const ListPTService = () => {
         }
         renderItem={(item) => (
           <List.Item
-            className="itemPTService"
+            className="itemPTCenter"
             key={item.title}
             actions={[
               <IconText
@@ -92,17 +115,21 @@ const ListPTService = () => {
             ]}
             extra={
               <div className="ptSchedule">
-                <PTShedule />
+                <PTShedule ptId={item.StaffId} />
               </div>
             }
           >
-            <NavLink to="/pt-detail/1">
+
+            <NavLink to={`/pt-detail/${item.StaffId}`}>
+
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
+                title={<a href={item.href}>{item.StaffName}</a>}
+                description={item.StaffEmail + " SĐT: " + item.StaffPhoneNumber}
+
               />
             </NavLink>
+
             {item.content}
           </List.Item>
         )}

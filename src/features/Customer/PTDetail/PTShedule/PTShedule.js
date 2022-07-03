@@ -5,6 +5,8 @@ import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
 import { Select } from "antd";
+import { getTimeWorking } from "./PTSheduleAPI";
+import { useParams } from "react-router-dom";
 
 const PTShedule = () => {
   const language = useSelector((state) => state.app.language);
@@ -53,6 +55,27 @@ const PTShedule = () => {
     const arrDay = getArrDays(language);
     setAllDays(arrDay);
   }, []);
+  const [timeDetail, setTimeDetail] = useState();
+  const [noTimeDetail, setNoTimeDetail] = useState(false);
+  const [, setTimeDetailLoading] = useState(true);
+  const id = useParams();
+
+  useEffect(() => {
+    getTimeWorking(id.id, 1).then((response) => {
+      if (response.ScheduleWorking.rows) {
+        setTimeDetail(response.ScheduleWorking.rows);
+        setNoTimeDetail(false);
+      } else {
+        setNoTimeDetail(true);
+      }
+    })
+      .catch(() => {
+        setTimeDetail(true);
+      })
+      .finally(() => {
+        setTimeDetailLoading(false);
+      });
+  }, []);
   return (
     <>
       <div className="doctor-schedule-container">
@@ -60,12 +83,12 @@ const PTShedule = () => {
           <select>
             {allDays && allDays.length > 0
               ? allDays.map((item, index) => {
-                  return (
-                    <option key={index} value={item.value}>
-                      {item.label}
-                    </option>
-                  );
-                })
+                return (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })
               : ""}
           </select>
         </div>
@@ -80,14 +103,17 @@ const PTShedule = () => {
           </div>
           <div className="time-content">
             <>
+
+
+
               <div className="time-content-btns">
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
-                <button className={"btn-vie"}>{"timeDisplay"}</button>
+                {timeDetail?.map((item, index) => {
+                  return (
+                    <button className={"btn-vie"}>{item.TimeWork}</button>
+                  )
+                })}
               </div>
+
 
               <div className="book-free">
                 <span>

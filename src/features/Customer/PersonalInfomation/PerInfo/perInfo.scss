@@ -1,11 +1,12 @@
 .container {
     padding-top: 5px;
     width: 100%;
-    height: 100vh;
+    min-height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%);
+    margin-top: 20px;
 
 
     .profile {
@@ -15,16 +16,55 @@
         border-radius: 20px;
         margin: 30px;
         border: solid black;
+        padding-bottom: 30px;
 
-
-        .imgPT {
-            margin-left: 20px;
-            margin-top: 20px;
+        .imgCus {
+            margin-left: 50px;
+            margin-top: 10px;
             height: 230px;
             width: 190px;
             border: 1px solid #f1f1f1;
             border-radius: 50%;
             box-shadow: 1px 1px 8px 1px #888;
+
+        }
+
+        .infoDetailCus {
+            .nameCusAndPosition {
+                font-size: 30px;
+            }
+
+            .descriptionCusDetail {
+                display: flex;
+                flex-direction: row;
+                font-size: 25px;
+                width: 100%;
+                padding-top: 10px;
+
+                .address {
+                    width: 50%;
+                }
+
+                .phonenumber {
+                    width: 50%;
+                }
+            }
+
+            .cusDetail {
+                display: flex;
+                flex-direction: row;
+                font-size: 25px;
+                width: 100%;
+                padding-top: 10px;
+
+                .gender {
+                    width: 50%;
+                }
+
+                .birth {
+                    width: 50%;
+                }
+            }
         }
     }
 }

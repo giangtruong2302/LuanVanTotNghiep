@@ -8,6 +8,7 @@
     //padding: 0 20px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 30px;
     gap: 15px;
     position: relative;
     width: 100vw;
@@ -24,7 +25,7 @@
     .Center {
         box-sizing: border-box;
         margin: 0 auto;
-        width: 100%;
+        width: 44%;
         height: 119px;
         background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
         /* light blue */
@@ -42,7 +43,7 @@
 
         flex-direction: column;
         padding: 42px;
-        margin-top: 20px;
+        margin: auto;
 
         .centerInfo {
             display: flex;
@@ -251,7 +252,7 @@
                 padding: 0px;
                 gap: 10px;
                 justify-content: space-between;
-                width: 100%;
+                width: 260px;
                 height: 30px;
                 padding-top: 20px;
 
@@ -261,17 +262,42 @@
                     margin-left: -30px;
                     margin-bottom: 10px;
 
+                    .infoCus {
+                        min-width: 97px;
+                        max-width: auto;
+                        height: 17px;
+                        margin-left: 1px;
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 10px;
+                        line-height: 17px;
+                        margin-top: 1px;
+                        flex: none;
+                        order: 1;
+                        flex-grow: 0;
+                        color: #223263;
+                    }
+
+                }
+
+                .infoService {
+                    display: flex;
+                    align-items: center;
+                    margin-left: -1px;
+                    margin-bottom: 10px;
+
                     .textNameCenter {
                         min-width: 97px;
                         max-width: auto;
                         height: 17px;
-                        margin-left: 20px;
+                        margin-left: 1px;
                         font-family: "Inter";
                         font-style: normal;
                         font-weight: 600;
-                        font-size: 14px;
+                        font-size: 10px;
                         line-height: 17px;
-                        margin-top: 20px;
+                        margin-top: 1px;
                         /* identical to box height */
 
                         /* Black blue */
@@ -291,7 +317,7 @@
                     flex-direction: column;
                     align-items: flex-start;
                     gap: 1px;
-                    margin-left: -30px;
+                    margin-left: 7px;
                     justify-content: flex-end;
                     width: 100%;
                     height: 100px;
