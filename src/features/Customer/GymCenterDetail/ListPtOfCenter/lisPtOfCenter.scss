@@ -1,0 +1,83 @@
+.listPTCenterContainer {
+    margin-left: 350px;
+
+    :global {
+        .ant-list-items {
+            gap: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .filterCenter {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        max-width: fit-content;
+        min-width: 115px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+    }
+
+    .itemPTCenter {
+        align-items: center;
+        box-sizing: border-box;
+        box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+        max-width: 1000px;
+
+        .ptSchedule {
+            width: 400px;
+        }
+    }
+
+    .listPTCenterItems {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding: 0px;
+        list-style: none;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 46.1875em) {
+    .listPTCenterContainer {
+        :global {
+            .ant-list-items {
+                gap: 15px;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .filterCenter {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            max-width: fit-content;
+            min-width: 115px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+        }
+
+        .itemPTCenter {
+            align-items: initial;
+            box-sizing: border-box;
+            box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+            max-width: 320px;
+
+            .ptSchedule {
+                width: 400px;
+            }
+        }
+
+        .listPTCenterItems {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 15px !important;
+            padding: 0px;
+            list-style: none;
+            margin: 0;
+        }
+    }
+}

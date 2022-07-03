@@ -1,15 +1,40 @@
 import { Breadcrumb, Col, PageHeader, Row } from "antd";
 import { Question, List } from "phosphor-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./serviceGymDetail.scss";
 import { useNavigate } from "react-router-dom";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import ListPTService from "./ListPTService/listPTService";
+import { useParams } from "react-router-dom";
+import { getServiceGymDetail } from "./serviceGymDetailAPI";
 
 const ServiceGymDetail = () => {
   const navigate = useNavigate();
   const [isSeeMoreServiceDetail, setIsSeeMoreServiceDetail] = useState(false);
+  const [servicesDetail, setServiceDetail] = useState();
+  const [noserviceDetail, setNoServiceDetail] = useState(false);
+  const [, setServiceDetailLoading] = useState(true);
+  const id = useParams();
+
+  useEffect(() => {
+    getServiceGymDetail(id.id).then((response) => {
+      if (response.serviceDetail) {
+        setServiceDetail(response.serviceDetail);
+        setNoServiceDetail(false);
+      } else {
+        setNoServiceDetail(true);
+      }
+    })
+      .catch(() => {
+        setNoServiceDetail(true);
+      })
+      .finally(() => {
+        setServiceDetailLoading(false);
+      });
+  }, []);
+
   return (
+
     <div className="ServiceGymDetailBg">
       <PageHeader
         className="site-page-header"
@@ -50,19 +75,16 @@ const ServiceGymDetail = () => {
                       <HomeOutlined />
                     </Breadcrumb.Item>
                     <Breadcrumb.Item href="">
-                      <span>Danh sach Huan luyen vien ca nhan</span>
+                      <span>Danh sách các dịch vụ</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Dich vu Body Building</Breadcrumb.Item>
+                    <Breadcrumb.Item>Dich vu {servicesDetail?.ServiceName} </Breadcrumb.Item>
                   </Breadcrumb>
                 </div>
                 <div className="serviceDetailAbout">
-                  <div className="serviceDetailTitle">Body building</div>
+                  <div className="serviceDetailTitle">{servicesDetail?.ServiceName}</div>
                   <div className="serviceDetailDefine">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Dolorem voluptatum hic id sint voluptatibus sapiente
-                    similique dolore veritatis perspiciatis tempora magni,
-                    dignissimos impedit error beatae veniam quaerat fuga minima
-                    quam.
+                    <p>WorkDuration : {servicesDetail?.WorkDuration}</p>
+                    <p>Price : {servicesDetail?.Price}</p>
                   </div>
                   {!isSeeMoreServiceDetail && (
                     <span

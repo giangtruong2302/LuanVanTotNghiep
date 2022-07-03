@@ -1,4 +1,6 @@
 .listPTServiceContainer {
+
+
   :global {
     .ant-list-items {
       gap: 15px;
@@ -21,10 +23,10 @@
     align-items: initial;
     box-sizing: border-box;
     box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
-    max-width: 1200px;
+    max-width: 1000px;
 
     .ptSchedule {
-      width: 400px;
+      max-width: 400px;
     }
   }
 

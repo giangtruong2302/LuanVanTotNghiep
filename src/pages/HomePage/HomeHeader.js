@@ -17,7 +17,7 @@ import LogoGHGym from "../../assets/images/logo/GHGYMLogo.png";
 import { changeLanguageApp } from "../../store/actions";
 import { LANGUAGES } from "../../utils/constant";
 import "./HomeHeader.scss";
-
+import { Link } from "react-router-dom";
 const { Search } = Input;
 
 const HomeHeader = (props) => {
@@ -218,14 +218,14 @@ const HomeHeader = (props) => {
                   <FormattedMessage id="banner.child5" />
                 </div>
               </div>
-              <div className="option-child">
+              <Link to="/bmi" className="option-child" >
                 <div className="icon-child">
                   <Person size={24} color="#393937" weight="light" />
                 </div>
                 <div className="text-child">
                   <FormattedMessage id="banner.child6" />
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

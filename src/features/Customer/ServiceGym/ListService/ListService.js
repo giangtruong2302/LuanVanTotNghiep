@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ListService.scss";
+import classes from "./styles.module.scss";
 import { Empty } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
@@ -9,8 +9,9 @@ import { getAllService } from "../ServiceAPI";
 
 const ListService = () => {
 
+
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [allService, setAllService] = useState();
   const [noService, setNoService] = useState(false);
   const [, setServiceLoading] = useState(true);
@@ -33,18 +34,20 @@ const ListService = () => {
         setServiceLoading(false);
       });
   }, []);
-  console.log("data check", allService?.length)
   const fetchNextPageService = async () => {
     getAllService(page)
       .then((response) => {
-        if (response.services.rows && response.services.rows.length > 0) {
+        const data = response.services.rows;
+        if (data && data.length > 0) {
+          console.log(response)
           setAllService((prev) => {
-            if (prev !== undefined) return [...prev, ...response.services.rows];
+            if (prev !== undefined) return [...prev, ...data];
           });
-          if (response.services.rows.length === 0 || response.services.rows.length < 10) {
+          if (data.length === 0 || data.length < 10) {
             setHasMore(false);
           }
           setPage(page + 1);
+
         }
       })
       .catch(() => {
@@ -71,51 +74,48 @@ const ListService = () => {
           />
         </div>
       ) : (
-        <div className="listServiceContent container">
+        <div className={classes.listServiceContent}>
           <InfiniteScroll
-            dataLength={getAllService?.length ? getAllService.length : 0}
-            style={{ gap: "20px", display: "flex", flexDirection: "column" }}
+            dataLength={allService?.length ? allService.length : 0}
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             loader={
               <div className={"loading"}>
                 <StaggerAnimation />
               </div>
             }
-            hasMore={true}
+            hasMore={hasMore}
             next={fetchNextPageService}
           >
             {allService?.map((item, index) => {
+
               return (
-                <div>
-
-                  <Link to={`/service-detail/${item.ServiceId}`} className="service">
-                    <div className="breadcumService">
-                      <div className="categoryService">Category</div>
+                <Link to={`/service-detail/${item.id}`} className={classes.service}>
+                  <div className={classes.breadcumService}>
+                    <div className={classes.categoryService}>{item.id}</div>
+                  </div>
+                  <div className={classes.lineService}></div>
+                  <div className={classes.serviceInfo}>
+                    <div className={classes.info}>
+                      <img
+                        src={kickboxing}
+                        style={{
+                          borderRadius: "100px",
+                          width: "30px",
+                          height: "30px",
+                          flex: "none",
+                          order: 0,
+                          flexGrow: 0,
+                        }}
+                      />
+                      <p className={classes.textNameService}>{item.ServiceName}</p>
                     </div>
-                    <div className="lineService"></div>
-                    <div className="serviceInfo">
-                      <div className="info">
-                        <img
-                          src={kickboxing}
-                          style={{
-                            borderRadius: "100px",
-                            width: "30px",
-                            height: "30px",
-                            flex: "none",
-                            order: 0,
-                            flexGrow: 0,
-                          }}
-                        />
-                        <p className={"textNameService"}>{item.ServiceName}</p>
-                      </div>
-                      <div className="detailInfo">
-                        <p>{item.Price}</p>
-                        <span className="lineDetailInfo"></span>
-                        <p>{item.WorkDuration}</p>
-                      </div>
+                    <div className={classes.detailInfo}>
+                      <p>{item.Price}</p>
+                      <span className={classes.lineDetailInfo}></span>
+                      <p>{item.WorkDuration}</p>
                     </div>
-                  </Link>
-
-                </div>
+                  </div>
+                </Link>
               )
             })}
           </InfiniteScroll>

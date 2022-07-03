@@ -1,6 +1,7 @@
 .listServiceContent {
   overflow: auto;
-  min-height: 1450px;
+  max-height: auto;
+  height: calc(100% - 450px);
   display: flex;
   margin: 0 auto;
   flex-direction: column;
@@ -10,8 +11,8 @@
   gap: 25px;
   position: relative;
   width: 100vw;
-  //padding: 0 20px;
-  // height: calc(100% - 20px);
+  padding: 0 20px;
+  height: calc(100% - 20px);
 
   border-radius: 5px;
 

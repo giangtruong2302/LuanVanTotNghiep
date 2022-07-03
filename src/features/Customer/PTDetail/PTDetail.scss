@@ -9,6 +9,7 @@
     display: flex;
     gap: 15px;
     margin: 0 25px;
+    padding-left: 30px;
 
     .contentInfo {
       box-sizing: border-box;
@@ -29,6 +30,7 @@
         display: flex;
         gap: 5px;
         flex-direction: column;
+        padding-left: 30px;
 
         .namePTAndPosition {
           color: #000;
@@ -40,7 +42,9 @@
         .descriptionPTDetail {
           font-style: italic;
           min-height: 130px;
-          font-size: 12px;
+          font-size: 22px;
+
+
         }
 
         .likeAndChat {

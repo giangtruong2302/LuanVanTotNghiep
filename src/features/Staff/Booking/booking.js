@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./booking.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../component/StaggerAnimation";
-
-
+import { getBookingDetail } from "./bookingAPI";
+import { useParams } from "react-router-dom";
+import { Empty } from "antd";
 
 const Booking = () => {
+    const [bookDetail, setBookDetail] = useState();
+    const [noBookDetail, setNoBookDetail] = useState(false);
+    const [, setBookDetailLoading] = useState(true);
+    const id = useParams();
 
+    useEffect(() => {
+        getBookingDetail(id.id, 1).then((response) => {
+            if (response.bookingOfPT.rows) {
+                setBookDetail(response.bookingOfPT.rows);
+                setNoBookDetail(false);
+            } else {
+                setNoBookDetail(true);
+            }
+        })
+            .catch(() => {
+                setNoBookDetail(true);
+            })
+            .finally(() => {
+                setBookDetailLoading(false);
+            });
+    }, []);
     return (
 
         <div className="BookingProfileBg">
@@ -15,104 +36,55 @@ const Booking = () => {
                 Lịch Booking
                 <div className="titlePageBooking">
                     <div className="PTinfo">
-                        <div className="listCenterContent container">
-                            <InfiniteScroll
-                                dataLength={8}
-                                style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-                                loader={
-                                    <div className={"loading"}>
-                                        <StaggerAnimation />
-                                    </div>
-                                }
-                                hasMore={true}
-                            >
-                                <div className="Center">
-                                    <div className="centerInfo">
-                                        <div className="info">
-
-                                            <p className={"infoCus"}>Khách hàng : Dương Trường Giang</p>
-                                            <p className={"infoCus"}>Ngày bắt đầu : 15-02-2022</p>
-                                            <p className={"infoCus"}>Ngày kết thúc : 15-05-2022</p>
-
+                        {noBookDetail ? (
+                            <div className="noData">
+                                <Empty
+                                    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                                    imageStyle={{
+                                        height: 60,
+                                    }}
+                                    description={"No Data"}
+                                />
+                            </div>
+                        ) : (
+                            <div className="listBookingContent container">
+                                <InfiniteScroll
+                                    dataLength={8}
+                                    style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                                    loader={
+                                        <div className={"loading"}>
+                                            <StaggerAnimation />
                                         </div>
-                                        <div className="infoService">
-                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : KichBoxing</p>
-                                            <p className={"textNameCenter"}>Gói dịch vụ : 3 tháng</p>
-                                            <p className={"textNameCenter"}>Thời gian : 15h30 - 17h30</p>
-                                        </div>
+                                    }
+                                    hasMore={true}
+                                >
+                                    {bookDetail?.map((item, index) => {
 
-                                    </div>
-                                </div>
-                                <div className="Center">
-                                    <div className="centerInfo">
-                                        <div className="info">
+                                        return (
+                                            <div className="Center">
+                                                <div className="centerInfo">
+                                                    <div className="info">
 
-                                            <p className={"infoCus"}>Khách hàng : Dương Trường Giang</p>
-                                            <p className={"infoCus"}>Ngày bắt đầu : 15-02-2022</p>
-                                            <p className={"infoCus"}>Ngày kết thúc : 15-05-2022</p>
+                                                        <p className={"infoCus"}>Khách hàng : {item.CustomerName}</p>
+                                                        <p className={"infoCus"}>Ngày bắt đầu : {item.StartTime}</p>
+                                                        <p className={"infoCus"}>Ngày kết thúc : {item.EndTime}</p>
 
-                                        </div>
-                                        <div className="infoService">
-                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : KichBoxing</p>
-                                            <p className={"textNameCenter"}>Gói dịch vụ : 3 tháng</p>
-                                            <p className={"textNameCenter"}>Thời gian : 15h30 - 17h30</p>
-                                        </div>
+                                                    </div>
+                                                    <div className="infoService">
+                                                        <p className={"textNameCenter"}>Dịch vụ đăng ký : {item.ServiceId}</p>
+                                                        <p className={"textNameCenter"}>Huấn luyện viên : {item.PTName}</p>
 
-                                    </div>
-                                </div>
-                                <div className="Center">
-                                    <div className="centerInfo">
-                                        <div className="info">
+                                                    </div>
 
-                                            <p className={"infoCus"}>Khách hàng : Dương Trường Giang</p>
-                                            <p className={"infoCus"}>Ngày bắt đầu : 15-02-2022</p>
-                                            <p className={"infoCus"}>Ngày kết thúc : 15-05-2022</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
 
-                                        </div>
-                                        <div className="infoService">
-                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : KichBoxing</p>
-                                            <p className={"textNameCenter"}>Gói dịch vụ : 3 tháng</p>
-                                            <p className={"textNameCenter"}>Thời gian : 15h30 - 17h30</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div className="Center">
-                                    <div className="centerInfo">
-                                        <div className="info">
-
-                                            <p className={"infoCus"}>Khách hàng : Dương Trường Giang</p>
-                                            <p className={"infoCus"}>Ngày bắt đầu : 15-02-2022</p>
-                                            <p className={"infoCus"}>Ngày kết thúc : 15-05-2022</p>
-
-                                        </div>
-                                        <div className="infoService">
-                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : KichBoxing</p>
-                                            <p className={"textNameCenter"}>Gói dịch vụ : 3 tháng</p>
-                                            <p className={"textNameCenter"}>Thời gian : 15h30 - 17h30</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div className="Center">
-                                    <div className="centerInfo">
-                                        <div className="info">
-
-                                            <p className={"infoCus"}>Khách hàng : Dương Trường Giang</p>
-                                            <p className={"infoCus"}>Ngày bắt đầu : 15-02-2022</p>
-                                            <p className={"infoCus"}>Ngày kết thúc : 15-05-2022</p>
-
-                                        </div>
-                                        <div className="infoService">
-                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : KichBoxing</p>
-                                            <p className={"textNameCenter"}>Gói dịch vụ : 3 tháng</p>
-                                            <p className={"textNameCenter"}>Thời gian : 15h30 - 17h30</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </InfiniteScroll>
-                        </div>
+                                </InfiniteScroll>
+                            </div>
+                        )
+                        }
                     </div>
 
                 </div>

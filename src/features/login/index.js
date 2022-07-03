@@ -1,36 +1,50 @@
-import { Checkbox, Form as FormAnt, Input } from "antd";
+import { Checkbox, Form as FormAnt, Input, message } from "antd";
 import { Field, FieldProps, Form, Formik } from "formik";
 import "./Login.scss";
 import ReactDOM from 'react-dom';
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "./validation";
-
+import { handleLoginStaffAPI } from "./loginStaffAPI";
+import * as actions from "../../store/actions";
 
 const { Password } = Input;
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-
-  const handleLogin = (values) => {
+  const dispatch = useDispatch();
+  const handleLogin = async (values) => {
     console.log("check info ", values);
+    const email = values ? values.email : "";
+    const password = values ? values.password : "";
+    try {
+      await handleLoginStaffAPI(email, password)
+        .then((res) => {
+          const data = res.data;
+          dispatch(dispatch(actions.userLoginSuccess(data)));
+          navigate(`/staff-personal-page/${res.data.id}`);
+        })
+        .catch(() => {
+          message.error("login fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 
   return (
     <div className="wrapper">
       <div className="loginPage">
-        <div className="logoLogin">
-          {/* <img src={logo} alt="BIZBOOKLY" />
-           */}
-          GH GYM
-        </div>
+        <div className="logoLogin">GH GYM</div>
         <div className="titlePage">
           <div className="textLoginPage"></div>
           {isLogin.isAuthenticated ? (
             ""
           ) : (
-            <div className={"textRecovery"} style={{ color: "red" }}>
+            <div className="textRecovery" style={{ color: "red" }}>
               Invalid username or password
             </div>
           )}
@@ -42,6 +56,7 @@ const LoginPage = () => {
             }}
             onSubmit={async (values) => {
               handleLogin(values);
+              // console.log(values);
             }}
           >
             {({ errors, touched }) => {
@@ -91,24 +106,22 @@ const LoginPage = () => {
                   <FormAnt.Item>
                     <Field>
                       {({ }) => (
-                        <Checkbox className={"checkboxLogin"}>
+                        <Checkbox className="checkboxLogin">
                           Remember me
                         </Checkbox>
                       )}
                     </Field>
                   </FormAnt.Item>
-                  <div className={"btnContainer"}>
+                  <div className="classes.btnContainer">
                     <button
-                      className={"btnLogin"}
+                      className="btnLogin"
                       type="submit"
                       style={{ cursor: "pointer" }}
                     >
                       Login
                     </button>
                   </div>
-
                 </Form>
-
               );
             }}
           </Formik>

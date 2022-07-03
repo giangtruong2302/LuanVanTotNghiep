@@ -35,8 +35,8 @@ const ListCenter = () => {
   console.log("data check", allGymCenter?.length)
   const fetchNextPageCenter = async () => {
     getAllGymCenter(page)
-      .then((res) => {
-        const { data } = res;
+      .then((response) => {
+        const { data } = response.centers.rows;
         if (data && data.length > 0) {
           setAllGymCenter((prev) => {
             if (prev !== undefined) return [...prev, ...data];
@@ -70,7 +70,7 @@ const ListCenter = () => {
           />
         </div>
       ) : (
-        <div className="listCenterContent container">
+        <div className="listCenterContent">
           <InfiniteScroll
             dataLength={getAllGymCenter?.length ? getAllGymCenter.length : 0}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
@@ -87,7 +87,7 @@ const ListCenter = () => {
                 <div>
                   <Link to={`/center-detail/${item.id}`} className="Center">
                     <div className="centerInfo">
-                      <div className="info">
+                      <div className="infoCen">
                         <img
                           src={chinhanh}
                           style={{
@@ -101,9 +101,9 @@ const ListCenter = () => {
                         />
                         <p className={"textNameCenter"}>{item.CenterName}</p>
                       </div>
-                      <div className="detailInfo">
-                        <p>{item.CenterAddress}</p>
-                        <span className="lineDetailInfo"></span>
+                      <div className="detailInfoCenter">
+                        <div className="addressCenter">{item.CenterAddress}</div>
+                        <span className="lineDetailInfoCenter"></span>
                         <p>6/month</p>
                       </div>
                     </div>
