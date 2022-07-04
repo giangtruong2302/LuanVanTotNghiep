@@ -8,8 +8,6 @@ import kickboxing from "../../../../assets/images/service/phong-tap-mma-gym-tphc
 import { getAllService } from "../ServiceAPI";
 
 const ListService = () => {
-
-
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
   const [allService, setAllService] = useState();
@@ -17,16 +15,15 @@ const ListService = () => {
   const [, setServiceLoading] = useState(true);
 
   useEffect(() => {
-
-    getAllService("1").then((response) => {
-
-      if (response.services.rows.length > 0) {
-        setAllService(response.services.rows);
-        setNoService(false);
-      } else {
-        setNoService(true);
-      }
-    })
+    getAllService("1")
+      .then((response) => {
+        if (response.services.rows.length > 0) {
+          setAllService(response.services.rows);
+          setNoService(false);
+        } else {
+          setNoService(true);
+        }
+      })
       .catch(() => {
         setNoService(true);
       })
@@ -39,7 +36,7 @@ const ListService = () => {
       .then((response) => {
         const data = response.services.rows;
         if (data && data.length > 0) {
-          console.log(response)
+          console.log(response);
           setAllService((prev) => {
             if (prev !== undefined) return [...prev, ...data];
           });
@@ -47,7 +44,6 @@ const ListService = () => {
             setHasMore(false);
           }
           setPage(page + 1);
-
         }
       })
       .catch(() => {
@@ -87,9 +83,11 @@ const ListService = () => {
             next={fetchNextPageService}
           >
             {allService?.map((item, index) => {
-
               return (
-                <Link to={`/service-detail/${item.id}`} className={classes.service}>
+                <Link
+                  to={`/service-detail/${item.id}`}
+                  className={classes.service}
+                >
                   <div className={classes.breadcumService}>
                     <div className={classes.categoryService}>{item.id}</div>
                   </div>
@@ -107,7 +105,9 @@ const ListService = () => {
                           flexGrow: 0,
                         }}
                       />
-                      <p className={classes.textNameService}>{item.ServiceName}</p>
+                      <p className={classes.textNameService}>
+                        {item.ServiceName}
+                      </p>
                     </div>
                     <div className={classes.detailInfo}>
                       <p>{item.Price}</p>
@@ -116,7 +116,7 @@ const ListService = () => {
                     </div>
                   </div>
                 </Link>
-              )
+              );
             })}
           </InfiniteScroll>
         </div>

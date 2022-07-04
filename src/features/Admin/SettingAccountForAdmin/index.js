@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 
 const SettingAccountForAdmin = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log("check user info: ", userInfo);
+  console.log("check user info: ", userInfo["AccountManager.ManagerName"]);
   const [showModal, setShowModal] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
@@ -31,6 +31,7 @@ const SettingAccountForAdmin = () => {
   const handleModalPassword = (isVisible) => {
     setShowModalPassword(isVisible);
   };
+  // console.log("check user info: ", userInfo.AccountManager.ManagerName);
   return (
     <>
       <div className="settingAccountBg">
@@ -42,8 +43,16 @@ const SettingAccountForAdmin = () => {
                   <img src={ava} alt="" />
                 </div>
                 <div className="topInfoContent">
-                  <div className={"topInforName"}>{userInfo.fullName}</div>
-                  <div className={"topInforEmail"}>{userInfo.email}</div>
+                  <div className={"topInforName"}>
+                    {userInfo && userInfo["AccountManager.ManagerName"]
+                      ? userInfo["AccountManager.ManagerName"]
+                      : "N/A"}
+                  </div>
+                  <div className={"topInforEmail"}>
+                    {userInfo["AccountManager.ManagerEmail"]
+                      ? userInfo["AccountManager.ManagerEmail"]
+                      : "N/A"}
+                  </div>
                 </div>
               </div>
               <div className="topUpdate">
@@ -97,31 +106,52 @@ const SettingAccountForAdmin = () => {
                 <div className={"bottomItem"}>
                   <Gift size={15} color="#121212" weight="bold" />
                   <div className={"bottomItemName"}>
-                    Date of birth: {"dataAcc.dob"}
+                    Date of birth:{" "}
+                    {userInfo["AccountManager.DayOfBirth"]
+                      ? userInfo["AccountManager.DayOfBirth"]
+                      : "N/A"}
                   </div>
                 </div>
                 <div className={"bottomItem"}>
                   <Smiley size={15} color="#121212" weight="bold" />
                   <div className={"bottomItemName"}>
-                    Gender: {"dataAcc.gender"}
+                    Gender:{" "}
+                    {userInfo["AccountManager.Gender"] === true
+                      ? "Male"
+                      : "Female"}
                   </div>
                 </div>
                 <div className={"bottomItem"}>
                   <UserCircle size={15} color="#121212" weight="bold" />
                   <div className={"bottomItemName"}>
-                    Account Type: Salon holder
+                    Account Type:{" "}
+                    {userInfo["AccountManager.RoleId"] === 1 && "Admin"}{" "}
+                    {userInfo["AccountManager.RoleId"] === 2 && "Manager"}{" "}
+                    {userInfo["AccountManager.RoleId"] === 3 &&
+                      "Personal Trainer"}{" "}
+                    {userInfo["AccountManager.RoleId"] === 4 && "Lễ tân"}{" "}
+                    {userInfo["AccountManager.RoleId"] === 5 && "Customer"}
                   </div>
                 </div>
                 <div className={"bottomItem"}>
                   <Briefcase size={15} color="#121212" weight="bold" />
                   <div className={"bottomItemName"}>
-                    Working Salon: Awesome Salon
+                    Working Salon:{" "}
+                    {userInfo["AccountManager.CenterId"] === 0 &&
+                      "Quản lý hệ thống "}{" "}
+                    {userInfo["AccountManager.CenterId"] === 1 &&
+                      "Quản lý hệ thống Phạm Ngũ Lão "}{" "}
+                    {userInfo["AccountManager.CenterId"] === 2 &&
+                      "Quản lý hệ thống Lý Thường Kiệt "}
                   </div>
                 </div>
                 <div className={"bottomItem"}>
                   <MapPin size={15} color="#121212" weight="bold" />
                   <div className={"bottomItemName"}>
-                    Address: {"dataAcc.address"}
+                    Address:{" "}
+                    {userInfo["AccountManager.ManagerAddress"]
+                      ? userInfo["AccountManager.ManagerAddress"]
+                      : "N/A"}
                   </div>
                 </div>
               </div>
@@ -129,6 +159,7 @@ const SettingAccountForAdmin = () => {
           </div>
         </div>
       </div>
+
       {showModal && (
         <ChangeAvatar
           handleModal={handleModal}

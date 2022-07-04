@@ -124,6 +124,12 @@ const AdminPage = () => {
   const handleViewListAccount = () => {
     navigate("/admin/view-list-account");
   };
+  const handleViewListService = () => {
+    navigate("/admin/view-list-service");
+  };
+  const handleViewListManager = () => {
+    navigate("/admin/view-list-manager");
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -282,7 +288,7 @@ const AdminPage = () => {
                       <Menu.Item
                         key={index}
                         onClick={() =>
-                          handleChangeCenter(item.CenterId, item.CenterName)
+                          handleChangeCenter(item.id, item.CenterName)
                         }
                       >
                         {item.CenterName}
@@ -297,6 +303,24 @@ const AdminPage = () => {
             >
               <Menu.Item onClick={handleViewListAccount}>
                 Xem danh sách tài khoản
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<UserCircle size={20} weight="bold" color="#fff" />}
+              title="Quản lý Manager of Center"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListManager}>
+                Xem danh sách Manager
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<UserCircle size={20} weight="bold" color="#fff" />}
+              title="Quản lý Dịch vụ"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListService}>
+                Xem danh sách dịch vụ
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.Item

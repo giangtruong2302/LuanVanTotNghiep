@@ -27,8 +27,15 @@ const ReservationDetail = React.lazy(() =>
   import("../features/Admin/GymCenter/ReservationDetail")
 );
 const Account = React.lazy(() => import("../features/Admin/ManageAccount"));
+const ServiceAllSystem = React.lazy(() =>
+  import("../features/Admin/ManageService")
+);
+const Manager = React.lazy(() => import("../features/Admin/ManageManager"));
 const SettingAccountAdmin = React.lazy(() =>
   import("../features/Admin/SettingAccountForAdmin")
+);
+const DashboardBranchCenter = React.lazy(() =>
+  import("../features/Admin/OverviewBranchCenter")
 );
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
@@ -43,4 +50,7 @@ export {
   SettingAccount,
   Account,
   SettingAccountAdmin,
+  ServiceAllSystem,
+  Manager,
+  DashboardBranchCenter,
 };
