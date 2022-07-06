@@ -38,12 +38,15 @@ const ListPTService = () => {
   const [, setPtOfCenterLoading] = useState(true);
   const [center, SetCenter] = useState();
   const [totalPage, setTotalPage] = useState(0);
+  const [selectCenterId, setSelectSenterId] = useState(1);
 
-  useEffect(() => {
-    getPtOfService(1, 1).then((response) => {
+
+  const onChangeCenter = (value) => {
+    getPtOfService(value, 1).then((response) => {
+
       if (response.ptOfCenter.rows) {
         console.log(response.ptOfCenter)
-        setTotalPage(response.totalPage)
+
         setPtOfCenter(response.ptOfCenter.rows);
         setNoPtOfCenter(false);
       } else {
@@ -56,21 +59,18 @@ const ListPTService = () => {
       .finally(() => {
         setPtOfCenterLoading(false);
       });
-  }, []);
+  };
+
   return (
     <div className="listPTServiceContainer">
       <div className="filterCenter">
         <Select
-          showSearch
-          placeholder="Tất cả cơ sở"
+
           optionFilterProp="children"
-          onSearch={onSearch}
-          onChange={onChange}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().includes(input.toLowerCase())
-          }
+          placeholder="Hãy chọn cơ sở"
+          onChange={onChangeCenter}
         >
-          <Option value="allCenter">Tất cả cơ sở</Option>
+
           <Option value="1">Cơ sở quận 1</Option>
           <Option value="2">Cơ sở quận 10</Option>
         </Select>
@@ -115,17 +115,17 @@ const ListPTService = () => {
             ]}
             extra={
               <div className="ptSchedule">
-                <PTShedule ptId={item.StaffId} />
+                <PTShedule ptId={item.id} />
               </div>
             }
           >
 
-            <NavLink to={`/pt-detail/${item.StaffId}`}>
+            <NavLink to={`/pt-detail/${item.id}`}>
 
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar} />}
                 title={<a href={item.href}>{item.StaffName}</a>}
-                description={item.StaffEmail + " SĐT: " + item.StaffPhoneNumber}
+                description={item.StaffEmail + "Số điện thoại PT:" + item.StaffPhoneNumber}
 
               />
             </NavLink>

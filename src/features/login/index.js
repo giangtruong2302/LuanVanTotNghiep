@@ -22,8 +22,8 @@ const LoginPage = () => {
     try {
       await handleLoginStaffAPI(email, password)
         .then((res) => {
-          const data = res.data;
-          dispatch(dispatch(actions.userLoginSuccess(data)));
+          const dataStaff = res.data;
+          dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
           navigate(`/staff-personal-page/${res.data.id}`);
         })
         .catch(() => {

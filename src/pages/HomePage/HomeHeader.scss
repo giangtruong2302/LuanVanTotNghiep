@@ -8,6 +8,8 @@
   z-index: 99999;
 
 
+
+
   .home-header-content {
     width: 100%;
     height: 100%;
@@ -35,13 +37,68 @@
     }
 
     .center-content {
-      width: 75%;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
 
       .child-content {
+        margin-right: 5px;
+
+        .cusArea {
+          display: flex;
+          flex-direction: row;
+
+          margin-right: 50px;
+
+          .CusName {
+
+
+            .helloCus {
+              font-weight: bold;
+              font-size: 17px;
+
+
+            }
+
+            .dropdownCus {
+              padding-right: 20px;
+
+            }
+          }
+
+
+          .cart {
+
+            padding-left: 10px;
+
+            .toggle {
+              padding-left: 10px;
+              width: 49%;
+
+              margin-top: 20px;
+              margin-right: 80px;
+
+
+
+            }
+
+            .MenuCart {
+
+
+              .item {
+                border: solid black 0.1px;
+                width: auto;
+                height: auto;
+                font-weight: bold;
+                font-size: 14px;
+              }
+            }
+
+          }
+        }
+
         .login {
           display: flex;
 
@@ -50,6 +107,8 @@
           .textLogin {
             font-size: 14px;
           }
+
+
         }
 
         .sub-title {
@@ -64,13 +123,13 @@
     }
 
     .right-content {
-      width: 25%;
+      width: 12%;
       display: flex;
       justify-content: flex-end;
       align-items: center;
 
       .support {
-        padding-right: 50px;
+        padding-right: 20px;
         display: flex;
         align-items: center;
         cursor: pointer;
