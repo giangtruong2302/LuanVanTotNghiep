@@ -10,21 +10,20 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
-import StaggerAnimation from "../../../../component/StaggerAnimation";
+import unknow from "../../../../../assets/images/imgStaff/dyno.jpg";
+import StaggerAnimation from "../../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
 import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateServiceSchema } from "./validation";
-import { handleCreateNewService, handleUpdateService } from "./ModalServiceAPI";
+import { handleCreateNewService } from "./ModalServiceAPI";
 const { Option } = Select;
-const UpdateService = (props) => {
-  console.log("check props update: ", props);
+const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
@@ -62,28 +61,28 @@ const UpdateService = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitUpdateStaff = useCallback(
+  const handleSubmitCreateStaff = useCallback(
     (values) => {
       console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleUpdateService(
-          props.data.id,
+        handleCreateNewService(
           values.ServiceName ? values.ServiceName : "",
           values.WorkDuration ? values.WorkDuration : "",
           values.Price ? values.Price : "",
           ""
         )
           .then((res) => {
-            props.takeStatus("complete" + Date.now());
-            props.handleModal(false);
             if (res.data.success === true) {
-              message.success("create new staff account is success !");
+              props.handleModal(false);
             } else {
               message.error(res.data.data.email[0]);
             }
+            props.takeStatus("complete" + Date.now());
+
+            toast.success("create new staff account is success !");
           })
           .catch((res) => {
             setSaving(false);
@@ -137,34 +136,30 @@ const UpdateService = (props) => {
       <Modal
         centered
         visible={isModalVisible}
-        width="477px"
+        width="500px"
         onCancel={handleCancel}
         closable={true}
         closeIcon={<XCircle size={32} color="#fff" weight="fill" />}
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Update Account</span>
-          {differentPass ? (
+          <span className={classes.nameCreate}>Create New Service</span>
+          {/* {differentPass ? (
             <p style={{ color: "#ff0000" }}>
               password is different current password
             </p>
           ) : (
             ""
-          )}
+          )} */}
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
             <Formik
               validationSchema={CreateServiceSchema}
               initialValues={{
-                ServiceName: props.data?.ServiceName
-                  ? props.data.ServiceName
-                  : "N/A",
-                WorkDuration: props.data?.WorkDuration
-                  ? props.data.WorkDuration
-                  : "N/A",
-                Price: props.data?.Price ? props.data.Price : "N/A",
+                ServiceName: "",
+                WorkDuration: "",
+                Price: "",
                 // // avatar: "",
                 // isActive: true,
                 // userName: "",
@@ -176,7 +171,7 @@ const UpdateService = (props) => {
               onSubmit={async (values) => {
                 console.log("check values:", values);
                 setSaving(true);
-                handleSubmitUpdateStaff(values);
+                handleSubmitCreateStaff(values);
                 // let newValues: CreateStaffAccountType = values
                 // if (imageUrl && croppedAreaPixels) {
                 //   const croppedImage = await getCroppedImg(
@@ -338,7 +333,7 @@ const UpdateService = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item> */}
-                    <span className={classes.titleRight}>Avatar</span>
+                    <span className={classes.titleRight}>Service Image</span>
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>
                         <Cropper
@@ -374,7 +369,7 @@ const UpdateService = (props) => {
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        "Update"
+                        "Create"
                       )}
                     </button>
                   </Form>
@@ -387,4 +382,4 @@ const UpdateService = (props) => {
     </>
   );
 };
-export default UpdateService;
+export default CreateService;

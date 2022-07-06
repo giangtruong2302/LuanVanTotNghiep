@@ -6,7 +6,7 @@ import { ArrowLeft } from "phosphor-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
 import { isVisible } from "@testing-library/user-event/dist/utils";
-import CreateAccount from "./ModalManager/modalAddAccount";
+import CreateAccount from "./ModalManager/modalAddManager";
 // import ListStaff from "./ListStaff/listStaff";
 import { PageHeader, Input } from "antd";
 import { useNavigate } from "react-router-dom";

@@ -21,7 +21,7 @@ import Cropper from "react-easy-crop";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateManagerSchema } from "./validation";
-import { handleCreateNewAcount } from "./ModalAccountAPI";
+import { handleCreateNewManager } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateAccount = (props) => {
   console.log("check props update: ", props);
@@ -69,7 +69,7 @@ const UpdateAccount = (props) => {
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewAcount(
+        handleCreateNewManager(
           values.email,
           values.password,
           values.fullName,

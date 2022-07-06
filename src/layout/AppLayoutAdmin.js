@@ -15,7 +15,10 @@ import {
   SettingAccountAdmin,
   ServiceAllSystem,
   Manager,
+  GymDetail,
   DashboardBranchCenter,
+  GymConfig,
+  RatingAndReview,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -52,6 +55,18 @@ const AppLayoutAdmin = () => {
           />
           <Route path="/admin/customer-total" element={<CustomerTotal />} />
           <Route path="/admin/merchant/reservation" element={<Reservation />} />
+          <Route path="/admin/merchant/gym-config" element={<GymConfig />}>
+            <Route index element={<GymDetail />} />
+            <Route
+              path="/admin/merchant/gym-config/details"
+              element={<GymDetail />}
+            />
+            <Route
+              path="/admin/merchant/gym-config/rating-and-review"
+              element={<RatingAndReview />}
+            />
+          </Route>
+
           <Route path="/admin/merchant/:branchId/staffs" element={<Staffs />} />
           <Route path="/admin/manage-center" element={<GymCenterAdmin />} />
           <Route path="/admin/merchant/settings" element={<SettingAccount />} />
@@ -78,8 +93,6 @@ const AppLayoutAdmin = () => {
           />
           <Route path="/admin/view-list-manager" element={<Manager />} />
         </Route>
-
-        {/* <Route path="/reservation" element={<Reservation />} /> */}
       </Routes>
     </AppSuspense>
   );

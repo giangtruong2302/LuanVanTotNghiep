@@ -2,11 +2,11 @@ import React from "react";
 import service from "../../../../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 import "./serviceRender.scss";
 
-const EstimateTime = () => {
+const EstimateTime = (props) => {
   return (
     <>
       <div className="estimateTimeOfService">
-        <div className="serviceTimeText">6 month</div>
+        <div className="serviceTimeText">{props.data.WorkDuration}</div>
       </div>
     </>
   );

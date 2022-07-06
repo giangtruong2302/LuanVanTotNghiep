@@ -37,8 +37,18 @@ const SettingAccountAdmin = React.lazy(() =>
 const DashboardBranchCenter = React.lazy(() =>
   import("../features/Admin/OverviewBranchCenter")
 );
+const GymConfig = React.lazy(() =>
+  import("../features/Admin/GymCenter/GymConfig")
+);
+const GymDetail = React.lazy(() =>
+  import("../features/Admin/GymCenter/GymConfig/GymDetail/gymDetail")
+);
+const RatingAndReview = React.lazy(() =>
+  import("../features/Admin/GymCenter/GymConfig/ratingReview")
+);
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
+  GymConfig,
   Reservation,
   ReservationDetail,
   Services,
@@ -53,4 +63,6 @@ export {
   ServiceAllSystem,
   Manager,
   DashboardBranchCenter,
+  GymDetail,
+  RatingAndReview,
 };

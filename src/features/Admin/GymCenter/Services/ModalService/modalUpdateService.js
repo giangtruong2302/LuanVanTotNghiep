@@ -10,8 +10,8 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
-import StaggerAnimation from "../../../../component/StaggerAnimation";
+import unknow from "../../../../../assets/images/imgStaff/dyno.jpg";
+import StaggerAnimation from "../../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
 import { XCircle } from "phosphor-react";

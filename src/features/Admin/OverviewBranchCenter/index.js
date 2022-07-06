@@ -93,7 +93,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Gym",
         description: "Swap",
-        link: "/system/gym-config",
+        link: "/admin/merchant/gym-config",
       },
       {
         image: (

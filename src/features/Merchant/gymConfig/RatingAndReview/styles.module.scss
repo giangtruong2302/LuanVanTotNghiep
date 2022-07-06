@@ -1,0 +1,57 @@
+.ratingAndReviewContainer {
+  max-height: 100%;
+  .title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    text-transform: capitalize;
+    /* Linear */
+    background: linear-gradient(90deg, #fd409a -3.78%, #223263 9.03%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .ratingContainer {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+    color: #53d1b6;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 5px;
+      font-size: 20px;
+      padding-bottom: 2px;
+    }
+  }
+  .container {
+    height: calc(100vh - 155px);
+    overflow-y: auto;
+
+    .reviewContainer {
+      inset: 0;
+    }
+  }
+
+  .loadingContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    // margin-top: -25px;
+    padding-bottom: 5px;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .ratingAndReviewContainer {
+    .container {
+      height: 666px;
+    }
+  }
+}

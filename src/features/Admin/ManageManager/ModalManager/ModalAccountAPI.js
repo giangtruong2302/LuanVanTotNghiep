@@ -1,25 +1,29 @@
 import axios from "../../../../axios";
 // import axios from 'axios'
 
-const handleCreateNewAcount = (
-  email,
-  password,
+const handleCreateNewManager = (
   fullName,
-
-  isActive,
-  userName,
-  roleId
+  password,
+  email,
+  phoneNumber,
+  gender,
+  address,
+  roleId,
+  centerId,
+  salaryId
 ) => {
   // console.log("first", userEmail, userPassword);
-  return axios.post(`/api/create-new-user`, {
-    email,
-    password,
+  return axios.post(`/api/create-new-manager`, {
     fullName,
-
-    isActive,
-    userName,
+    password,
+    email,
+    phoneNumber,
+    gender,
+    address,
     roleId,
+    centerId,
+    salaryId,
   }); // req.body.email, req.body.password //
 };
 
-export { handleCreateNewAcount };
+export { handleCreateNewManager };
