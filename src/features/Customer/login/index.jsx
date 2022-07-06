@@ -1,4 +1,4 @@
-import { Checkbox, Form as FormAnt, Input } from "antd";
+import { Checkbox, Form as FormAnt, Input, message } from "antd";
 import { Field, FieldProps, Form, Formik } from "formik";
 import "./Login.scss";
 import ReactDOM from 'react-dom';
@@ -7,13 +7,34 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loginSchema } from "./validation";
 import Google from "./loginGoogle/loginGoogle";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { handleLoginUserAPI } from "./loginUserAPI";
+import * as actions from "../../../store/actions";
 const { Password } = Input;
 const CustomerLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
-  const handleLogin = (values) => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogin = async (values) => {
     console.log("check info ", values);
+    const email = values ? values.email : "";
+    const password = values ? values.password : "";
+    try {
+      await handleLoginUserAPI(email, password)
+        .then((res) => {
+          const dataCus = res.data;
+          dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
+          navigate(`/`);
+        })
+        .catch(() => {
+          message.error("login fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 

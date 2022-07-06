@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Question, List, ThumbsUp, Chats } from "phosphor-react";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import ava from "../../../assets/images/imgStaff/staff.png";
-import PTShedule from "./PTShedule/PTShedule";
+import PTShedule from "../GymCenterDetail/PtSchedule/PtSchedule";
 import PTSchedulePayment from "./PTSchedulePayment";
 import OverviewDetail from "./OverviewPTInfo/overviewDetailInfo";
 import { getPtDetail } from "./PtDetailAPI";
@@ -109,7 +109,7 @@ const PTDetail = () => {
             </Row>
             <Row className="timeInfo" >
               <Col span={12}>
-                <PTShedule />
+                <PTShedule ptId={id.id} />
               </Col>
               <Col span={12} >
                 <PTSchedulePayment />

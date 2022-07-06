@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AppSuspense from "../component/AppSuspense";
 import CustomerLoginPage from "../features/Customer/login";
-import PersonalInformation from "../features/Customer/PersonalInfomation";
 import Review from "../features/Customer/Review";
 
 import { SendEmail } from "../features/sendEmail";
@@ -25,8 +24,13 @@ import {
   AdminLoginPage,
 } from "../routes/user";
 import GymDetailPage from "../features/Customer/GymCenterDetail";
-import LeTan from "../features/LeTan/LeTan";
-import ScanQR from "../features/LeTan/Scan/ScanQR";
+
+
+import PersonalInfoStaff from "../features/Staff/PersonalInfo/PersonalInfo";
+import PerInfo from "../features/Customer/PersonalInfomation/perInfo";
+import BookingOfCus from "../features/Customer/PersonalInfomation/BookingOfCus/cusBooking";
+import ScanQR from "../features/Staff/Scan/ScanQR";
+import Page404 from "../features/Page404/Page404";
 
 const AppLayout = () => {
   return (
@@ -42,16 +46,18 @@ const AppLayout = () => {
         <Route path="/pt-detail/:id" element={<PTDetail />} />
         <Route path="/service-detail/:id" element={<ServiceDetail />} />
         <Route path="/staff-personal-page/:id" element={<Staff />} />
-        <Route path="/pt-booking/:id" element={<Booking />} />
+        <Route path="/pt-booking" element={<Booking />} />
         <Route path="/login" element={<CustomerLoginPage />} />
         <Route path="/customer-review" element={<Review />} />
-        <Route path="/customer-infomation" element={<PersonalInformation />} />
+        <Route path="/customer-infomation" element={<PerInfo />} />
         <Route path="/send-email" element={<SendEmail />} />
         <Route path="/bmi" element={<BMI />} />
         <Route path="/center-detail/:id" element={<GymDetailPage />} />
-        <Route path="/le-tan-page" element={<LeTan />} />
-        <Route path="/scanqr" element={<ScanQR />} />
 
+        <Route path="/scanqr" element={<ScanQR />} />
+        <Route path="/staff-info/:id" element={<PersonalInfoStaff />} />
+        <Route path="/booking-of-cus" element={<BookingOfCus />} />
+        <Route path="/404-error-notfound" element={<Page404 />} />
         {/* merchant */}
         <Route path="/merchant/gym-select" element={<GymSelect />} />
         <Route path="/merchant/dashboard" element={<Dashboard />} />

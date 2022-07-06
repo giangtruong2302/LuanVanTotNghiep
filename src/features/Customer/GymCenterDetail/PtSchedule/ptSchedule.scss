@@ -77,6 +77,19 @@
             }
         }
     }
+
+    .inputLogin {
+        background: #fcf7fe;
+        border-radius: 10px;
+        width: 315px;
+        height: 44px;
+        border: 0px solid #ffffff;
+
+        // margin: 20px 0px;
+        input {
+            background: #fcf7fe;
+        }
+    }
 }
 
 @media only screen and (max-width: 46.1875em) {

@@ -97,12 +97,12 @@ const ListPTCenter = () => {
                         ]}
                         extra={
                             <div className="ptSchedule">
-                                <PTShedule ptId={item.StaffId} />
+                                <PTShedule ptId={item.id} />
                             </div>
                         }
                     >
 
-                        <NavLink to={`/pt-detail/${item.StaffId}`}>
+                        <NavLink to={`/pt-detail/${item.id}`}>
 
                             <List.Item.Meta
                                 avatar={<Avatar src={item.avatar} />}
