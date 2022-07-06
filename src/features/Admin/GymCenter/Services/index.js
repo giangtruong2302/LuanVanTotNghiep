@@ -5,14 +5,25 @@ import { ArrowLeft } from "phosphor-react";
 // import SearchService from "./SearchService/SearchService";
 import ListService from "./ListService";
 import { Input, PageHeader } from "antd";
+import { Gear, Plus, SquaresFour } from "phosphor-react";
+import { Action, Fab } from "react-tiny-fab";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CreateService from "./ModalService/modalAddService";
 const { Search } = Input;
 const Services = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [status, setStatus] = useState("");
+  const handleShowModalAdd = (isVisible) => {
+    setShowModalAdd(isVisible);
+  };
   const onSearchValue = (value) => {
     setSearchValue(value);
+  };
+  const takeStatus = (value) => {
+    setStatus(value);
   };
   return (
     <div className="ServiceProfileBg">
@@ -40,8 +51,27 @@ const Services = () => {
         }
       />
       <div className={classes.listItem}>
-        <ListService searchValue={searchValue} />
+        <ListService searchValue={searchValue} status={status} />
       </div>
+      <Fab
+        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
+        icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
+        alwaysShowTitle={true}
+      >
+        <Action
+          style={{ backgroundColor: "#A9A9A9" }}
+          onClick={() => setShowModalAdd(true)}
+        >
+          <Plus size={20} color="#Ffff" weight="fill" />
+        </Action>
+      </Fab>
+      {showModalAdd && (
+        <CreateService
+          showModal={showModalAdd}
+          handleModal={handleShowModalAdd}
+          takeStatus={takeStatus}
+        />
+      )}
     </div>
   );
 };

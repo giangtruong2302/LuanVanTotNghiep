@@ -50,6 +50,7 @@ const DashboardBranchCenter = (props) => {
   console.log("check la in dashboard: ", testLanguage);
   const [customerTotal, setCustomerTotal] = useState();
   const [staffTotal, setStaffTotal] = useState();
+  const roleId = useSelector((state) => state.user.userInfo.roleId);
 
   let arr = useMemo(
     () => [
@@ -73,16 +74,73 @@ const DashboardBranchCenter = (props) => {
         description: "Swap",
         link: `/admin/merchant/${1}/customers`,
       },
+
       {
         image: (
-          <span className="icon-QuickAcces_3">
-            <Package size={24} color="#1db1e2" weight="fill" />
+          <span className="icon-QuickAcces_4">
+            <Users size={24} color="#76e21d" weight="light" />
           </span>
         ),
-        title: "Product",
+        title: "Staff",
+        description: "Swap",
+        link: "/admin/merchant/:branchId/staffs",
+      },
+      {
+        image: (
+          <span className="icon-QuickAcces_5">
+            <Gear size={24} color="#828580" weight="fill" />
+          </span>
+        ),
+        title: "Gym",
+        description: "Swap",
+        link: "/admin/merchant/gym-config",
+      },
+      {
+        image: (
+          <span className="icon-QuickAcces_6">
+            <Sword size={24} color="#f2f4f1" weight="fill" />
+          </span>
+        ),
+        title: "Work shiff",
         description: "Swap",
         link: "/customers",
       },
+      {
+        image: (
+          <span className="icon-QuickAcces_7">
+            <Infinity size={24} color="#242423" weight="fill" />
+          </span>
+        ),
+        title: "Service",
+        description: "Swap",
+        link: `/admin/merchant/:branchId/services`,
+      },
+    ],
+    []
+  );
+  let arrForManager = useMemo(
+    () => [
+      {
+        image: (
+          <span className="icon-QuickAcces_1">
+            <Calendar size={24} color="#1fa836" weight="fill" />
+          </span>
+        ),
+        title: "Reservation",
+        description: "Management",
+        link: "/admin/merchant/reservation",
+      },
+      {
+        image: (
+          <span className="icon-QuickAcces_2">
+            <Smiley size={24} color="#e9b807" weight="fill" />
+          </span>
+        ),
+        title: "Customer",
+        description: "Swap",
+        link: `/admin/merchant/${1}/customers`,
+      },
+
       {
         image: (
           <span className="icon-QuickAcces_4">
@@ -241,21 +299,39 @@ const DashboardBranchCenter = (props) => {
                 <div className={`${classes.title} ${classes.titleQuickAccess}`}>
                   Quick Access
                 </div>
-                <div className={classes.quickAccessDashboard}>
-                  {arr.map(function (item, idx) {
-                    return (
-                      <div key={idx} className={classes.quickAccessItem}>
-                        <Link to={item.link}>
-                          <QuickAccess
-                            image={item.image}
-                            title={item.title}
-                            description={item.description}
-                          />
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
+                {roleId && roleId === 1 ? (
+                  <div className={classes.quickAccessDashboard}>
+                    {arr.map(function (item, idx) {
+                      return (
+                        <div key={idx} className={classes.quickAccessItem}>
+                          <Link to={item.link}>
+                            <QuickAccess
+                              image={item.image}
+                              title={item.title}
+                              description={item.description}
+                            />
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className={classes.quickAccessDashboard}>
+                    {arrForManager.map(function (item, idx) {
+                      return (
+                        <div key={idx} className={classes.quickAccessItem}>
+                          <Link to={item.link}>
+                            <QuickAccess
+                              image={item.image}
+                              title={item.title}
+                              description={item.description}
+                            />
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
             <div className={classes.colRight}>

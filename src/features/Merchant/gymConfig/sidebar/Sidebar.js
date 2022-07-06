@@ -25,7 +25,7 @@ const navItem = [
   {
     display: "Rating & Reviews",
     icon: Star,
-    link: "/system/gym-config/rating-review",
+    link: "/admin/merchant/gym-config/rating-and-review",
   },
   {
     display: "FAQ",

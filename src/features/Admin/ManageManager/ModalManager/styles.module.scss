@@ -1,0 +1,250 @@
+.createStaff {
+  margin-top: 20px;
+
+  :global {
+    .ant-form-item-control-input-content {
+      input {
+        &::placeholder {
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 24px;
+          /* identical to box height, or 171% */
+          letter-spacing: 0.4px;
+          color: rgba(58, 39, 82, 0.68);
+          padding-left: 14px;
+        }
+      }
+    }
+    .ant-select-status-error.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
+      .ant-select-selector {
+      background-color: transparent;
+      border-color: #ff4d4f !important;
+    }
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      background-color: transparent;
+      border: none;
+    }
+    .ant-select-single .ant-select-selector {
+      display: block;
+    }
+    .ant-modal-footer {
+      display: none !important;
+    }
+    .ant-modal-content {
+      border-radius: 20px !important;
+    }
+    .ant-modal-close {
+      top: -25px !important;
+      right: -25px !important;
+      .ant-modal-close-x {
+        height: auto;
+        width: auto;
+      }
+    }
+    .reactEasyCrop_Container {
+      position: relative;
+      width: 309px !important;
+      height: 309px !important;
+      top: 40%;
+      left: 50%;
+      transform: translate(-49%, 2%);
+    }
+    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+      padding: 0;
+      span {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+        /* identical to box height, or 171% */
+        letter-spacing: 0.4px;
+        color: #000;
+      }
+    }
+
+    .ant-select-selection-placeholder {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      /* identical to box height, or 171% */
+      letter-spacing: 0.4px;
+      color: rgba(58, 39, 82, 0.68) !important;
+      padding-left: 10px !important;
+    }
+  }
+  .titleCreateStaff {
+    // text-align: center;
+    margin-left: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+    .nameCreate {
+      text-align: center;
+      justify-content: center;
+      padding-top: 10px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      font-size: 24px;
+      background: linear-gradient(90deg, #fd409a -3.78%, #223263 79.03%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .createStaffContainer {
+    display: flex;
+    gap: 6px;
+    min-height: 790px;
+    max-height: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    .containerLeft {
+      width: 50%;
+      height: 200px;
+      // border-right: 1px solid #ebf0ff;
+      .titleLeft {
+        //margin: 10px;
+        font-size: 14px;
+      }
+      .formInfo {
+        .inputRecovery {
+          background: #fcf7fe;
+          border-radius: 10px;
+          width: 315px;
+          height: 44px;
+          padding: 10px;
+          border: 0px solid #ffffff;
+          display: flex;
+          align-items: center;
+
+          &:focus {
+            border-color: #40a9ff;
+            box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+            outline: 0;
+          }
+          &:focus-visible {
+            border-color: #40a9ff;
+          }
+          input {
+            background: #fcf7fe;
+          }
+        }
+        .inputError {
+          border-color: #ff7875;
+          box-shadow: 0 0 0 2px rgb(255 77 79 / 20%);
+          outline: 0;
+        }
+        .btnRecovery {
+          margin-top: 35px !important;
+          margin-bottom: 20px !important;
+          box-shadow: 0px 10px 40px rgba(58, 41, 106, 0.1);
+          background: #ffffff;
+          border: 0px solid #ffffff;
+          border-radius: 10px;
+          color: #fd409a;
+          font-size: 18px;
+          font-weight: 700;
+          width: 80%;
+          padding: 10px;
+          z-index: 99;
+          cursor: pointer;
+          // margin-top: 10px;
+          margin-left: 235px !important;
+        }
+      }
+    }
+    .lineMiddle {
+      height: 200px;
+      width: 1px;
+      /* light blue */
+      background-color: #ebf0ff;
+    }
+    .containerRight {
+      width: 50%;
+      height: auto;
+      // border: 1px solid #fff;
+      border-radius: 6px;
+      .titleRight {
+        margin-left: 46px;
+        font-size: 14px;
+      }
+      .changeThumbnailContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .image {
+          min-height: 309px;
+          min-width: 309px;
+          overflow: hidden;
+          img {
+            width: 309px;
+            border-radius: 6px;
+          }
+        }
+        .changeImage {
+          :global {
+            .ant-upload.ant-upload-select.ant-upload-select-picture-card {
+              height: 48px;
+              width: 140px;
+              background-color: #fff;
+              border: none !important;
+            }
+          }
+          .btnUpload {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            box-shadow: 0px 4px 40px rgba(58, 41, 106, 0.1);
+            border-radius: 5px;
+            height: 48px;
+            width: 140px;
+            margin-top: 30px;
+            .text {
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 22px;
+              /* identical to box height, or 183% */
+              text-align: center;
+              letter-spacing: 0.4px;
+              /* Gray 2 */
+              color: #4f4f4f;
+              margin-left: 10px;
+            }
+          }
+          .image {
+            width: 309px;
+            height: 309px;
+            overflow: hidden;
+            img {
+              border-radius: 5px;
+              width: 309px;
+              height: 309px;
+              object-fit: cover;
+            }
+          }
+          .btn {
+            background: #ffffff;
+            box-shadow: 0px 10px 40px rgba(58, 41, 106, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            /* identical to box height, or 122% */
+            text-align: center;
+            letter-spacing: 0.4px;
+            color: var(--primary-pink);
+            padding: 13px 130px;
+            border: none;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ LicenseManager.setLicenseKey(
 );
 
 const ListService = (props) => {
+  const [status, setStatus] = useState("");
   const [rowData] = useState([
     {
       service: "Manicure",
@@ -44,6 +45,18 @@ const ListService = (props) => {
     },
   ]);
   const [columnDefs] = useState([
+    {
+      ield: "setting",
+      flex: 0,
+      // headerName: "Setting",
+      cellRenderer: "settingServiceRenderer",
+      action: {
+        action1: (value) => {
+          // console.log("check value update:", value);
+          setStatus(value);
+        },
+      },
+    },
     {
       field: "service",
       // width: 550,
@@ -121,7 +134,7 @@ const ListService = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.searchValue]);
+  }, [CenterId, props.searchValue, props.status, status]);
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
@@ -129,7 +142,7 @@ const ListService = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.searchValue]);
+  }, [serverSideDatasource, props.searchValue, props.status, status]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();
