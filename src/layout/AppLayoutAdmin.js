@@ -79,7 +79,7 @@ const AppLayoutAdmin = () => {
             element={<Customers />}
           />
           <Route
-            path="/admin/merchant/:branchId/reservation-detail/:id"
+            path="/admin/merchant/reservation-detail/:id"
             element={<ReservationDetail />}
           />
           <Route path="/admin/view-list-account" element={<Account />} />

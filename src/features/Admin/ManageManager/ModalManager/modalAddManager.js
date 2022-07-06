@@ -116,9 +116,11 @@ const CreateManager = (props) => {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
         setLoading(false);
+        console.log("check file name: ", info.file);
       });
     }
   };
+  console.log("check base64: ", imageUrl);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}

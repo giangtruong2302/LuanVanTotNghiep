@@ -7,25 +7,25 @@ import moment from "moment";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import staff from "../../../../../../assets/images/imgStaff/staff.png";
-import "./reservationItem.scss";
+import classes from "./styles.module.scss";
 
 const ReservationItemMerchant = (props) => {
   const statusCondition = () => {
-    switch ("pending") {
+    switch (props.data.Status) {
       case "PENDING":
-        return "pending";
+        return classes.pending;
       case "SCHEDULED":
-        return "schedule";
+        return classes.schedule;
       case "STARTING":
-        return "starting";
+        return classes.starting;
       case "CANCELLED":
-        return "cancel";
+        return classes.cancel;
       case "REJECTED":
-        return "cancel";
+        return classes.cancel;
       case "COMPLETED":
-        return "complete";
+        return classes.complete;
       default:
-        return "pending";
+        return classes.pending;
     }
   };
 
@@ -54,48 +54,59 @@ const ReservationItemMerchant = (props) => {
   console.log("check props: ", props);
   return (
     <NavLink
-      to={`/admin/merchant/${1}/reservation-detail/${1}`}
-      className="itemContainer"
+      to={`/admin/merchant/reservation-detail/${props.data.id}`}
+      className={classes.itemContainer}
     >
-      <div className="confirmation">
-        <div className={`${"status"} ${statusCondition()}`}>
+      <div className={classes.confirmation}>
+        <div className={`${classes.status} ${statusCondition()}`}>
           <div className={`${statusCondition()}`}> </div>
           {props.data.Status ? props.data.Status : "N/A"}
         </div>
-        <div className="date">
-          {moment(new Date(`23 0002 12:12 A}`))
+        <div className={classes.date}>
+          {moment(new Date(props.data.StartTime), "DD-MM-YYYY")
             .format("dddd, DD MMMM, HH:mm A")
             .toUpperCase()}
         </div>
-        <div className="id"> {props.data.id ? props.data.id : "N/A"}</div>
+        <div className={classes.id}>
+          {"# "}
+          {props.data.id ? props.data.id : "N/A"}
+        </div>
       </div>
-      <div className="information">
-        <div className="cusDetail">
+      <div className={classes.information}>
+        <div className={classes.cusDetail}>
           <img src={staff} alt="" />
-          <div className="cusName">
+          <div className={classes.cusName}>
             {props.data.CustomerName ? props.data.CustomerName : "N/A"}
           </div>
         </div>
 
-        <div className="infoDetail">
-          <div className={"infoDetailItem"}>
+        <div className={classes.infoDetail}>
+          <div className={classes.infoDetailItem}>
             <PhoneOutlined />
-            <span className={"text"}>{"props.customer.phoneNumber"}</span>
+            <span className={"text"}>
+              {props.data?.CustomerBooking["PhoneNumber"]}
+            </span>
           </div>
-          <div className="infoDetailItem">
+          <div className={classes.infoDetailItem}>
             <MailOutlined />
-            <span className="text">{"props.customer.email"}</span>
+            <span className={classes.text}>
+              {" "}
+              {props.data?.CustomerBooking["CustomerEmail"]}
+            </span>
           </div>
-          <div className="infoDetailItem">
+          <div className={classes.infoDetailItem}>
             <EnvironmentOutlined />
-            <span className="text">{"props.customer.address"}</span>
+            <span className={classes.text}>
+              {" "}
+              {props.data.CustomerBooking["Address"]}
+            </span>
           </div>
         </div>
       </div>
-      <div className="serviceDetail">
-        <div className={`${"serviceItem"} ${handleColor(1)}`}>
-          <div className="serviceName">{props.data.ServiceId}</div>
-          <div className="staffDetail">
+      <div className={classes.serviceDetail}>
+        <div className={`${classes.serviceItem} ${handleColor(1)}`}>
+          <div className={classes.serviceName}>{props.data.ServiceId}</div>
+          <div className={classes.staffDetail}>
             Staff :
             <img src={staff} alt="" style={{ height: "35px", width: "35px" }} />
             {props.data.PTName ? props.data.PTName : "N/A"}
