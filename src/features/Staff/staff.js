@@ -7,6 +7,8 @@ import ListBooking from "./ListBooking/listBooking";
 import ava from "../../assets/images/imgStaff/staff.png";
 import Modal from 'react-modal';
 import { getPtDetail } from "../Customer/PTDetail/PtDetailAPI";
+import { useSelector } from "react-redux";
+import { message } from "antd";
 
 
 const customStyles = {
@@ -27,7 +29,8 @@ const Staff = () => {
     const [, setptDetailLoading] = useState(true);
     const id = useParams();
     const [modalIsOpen, setIsOpen] = React.useState(false);
-
+    const staffInfo = useSelector((state) => state.staff.staffInfo);
+    console.log("check staff info: ", staffInfo["AccountStaff.id"]);
     function openModal() {
         setIsOpen(true);
     }
@@ -43,7 +46,7 @@ const Staff = () => {
 
 
     useEffect(() => {
-        getPtDetail(id.id).then((response) => {
+        getPtDetail(staffInfo["AccountStaff.id"]).then((response) => {
             if (response.staffDetail) {
                 setptDetail(response.staffDetail);
                 setNoptDetail(false);
@@ -72,9 +75,12 @@ const Staff = () => {
                             <div className="btnPT">
 
 
-
-                                <Link to={`/pt-booking/${ptDetail?.id}`}> <button className="btnBook">Lịch booking</button></Link>
-
+                                {(staffInfo["oleId"] === 4 ?
+                                    <Link to={`/scanqr`}> <button className="btnBook">Scan QR</button></Link>
+                                    :
+                                    <Link to={`/pt-booking/`}> <button className="btnBook">Lịch booking</button></Link>
+                                )}
+                                <Link to={`/staff-info/${ptDetail?.id}`}> <button className="btnInfo">Thông tin cá nhân</button></Link>
 
 
                                 <button className="btnSalary" onClick={openModal}>Salary</button>

@@ -1,0 +1,40 @@
+.screen {
+    position: absolute;
+
+    .imgBg {
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        position: absolute;
+    }
+
+    .button1 {
+        margin-top: 550px;
+        margin-left: 550px;
+        position: absolute;
+        z-index: 2;
+        width: 170px;
+        height: 60px;
+        border-radius: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        border: none;
+        background-color: rgb(247, 92, 58);
+    }
+
+    .button2 {
+        color: white;
+        border: none;
+        background-color: rgb(247, 92, 58);
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 550px;
+        margin-left: 820px;
+        position: absolute;
+        z-index: 3;
+        width: 170px;
+        height: 60px;
+        border-radius: 30px;
+    }
+}

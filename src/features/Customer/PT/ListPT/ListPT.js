@@ -63,7 +63,7 @@ const ListPT = () => {
             {allStaff?.map((item, index) => {
 
               return (
-                <Link to={`/pt-detail/${item.StaffId}`} className="PT">
+                <Link to={`/pt-detail/${item.id}`} className="PT">
                   <div className="ptInfo">
                     <div className="infoPt">
                       <img

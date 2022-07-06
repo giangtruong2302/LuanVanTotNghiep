@@ -1,0 +1,180 @@
+.CusDetailBgContainer {
+
+
+    .breadcumDetail {
+        padding: 10px 20px 20px 25px;
+    }
+
+    .CusDetailContent {
+        display: flex;
+        gap: 15px;
+        margin: 0 25px;
+        padding-left: 30px;
+
+        .contentInfo {
+            box-sizing: border-box;
+
+
+            .avatarCusDetail {
+
+                background: transparent;
+
+
+                .imgCus {
+                    margin-left: 50px;
+                    margin-top: 50px;
+                    height: 230px;
+                    width: 190px;
+                    border: 1px solid #f1f1f1;
+                    border-radius: 50%;
+                    box-shadow: 1px 1px 8px 1px #888;
+
+                }
+            }
+
+            .infoDetailCus {
+                display: flex;
+                gap: 5px;
+                flex-direction: column;
+                padding-left: 200px;
+                margin-top: 50px;
+
+
+
+                .nameCusAndPosition {
+                    color: #000;
+                    font-weight: 600;
+                    font-size: 30px;
+                    font-family: "Courier New", Courier, monospace;
+                }
+
+                .descriptionCusDetail {
+
+                    min-height: 130px;
+                    font-size: 25px;
+                    font-family: 'Times New Roman', Times, serif
+                }
+
+                .likeAndChat {
+                    display: flex;
+                    gap: 15px;
+
+                    .btn-sua {
+                        padding: 15px 15px;
+                        background-color: #1bbada;
+                        color: #fff;
+                        border-radius: 6px;
+                        border: 1px solid #ffff;
+                        font-weight: bold;
+                        font-size: 20px;
+                        border-radius: 30px;
+                    }
+
+                    .btn-check-book {
+
+
+                        padding-bottom: 33px;
+                        padding-left: 23px;
+                        padding-right: 23px;
+
+                        background-color: #1bbada;
+                        color: #fff !important;
+                        border-radius: 6px;
+                        border: 1px solid #ffff;
+                        font-weight: bold;
+                        font-size: 20px;
+                        border-radius: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 46.1875em) {
+    .CusDetailBgContainer {
+        .breadcumDetail {
+            padding: 10px 20px 20px 25px;
+        }
+
+        .CusDetailContent {
+            display: flex;
+            gap: 15px;
+            margin: 0 25px;
+
+            .contentInfo {
+                box-sizing: border-box;
+
+                .avatarCusDetail {
+                    background: transparent;
+
+                    .imgCus {
+                        height: 200px;
+                        width: 150px;
+                        border: 1px solid #f1f1f1;
+                        border-radius: 50%;
+                        box-shadow: 1px 1px 8px 1px #888;
+                    }
+                }
+
+                .infoDetailCus {
+                    display: flex;
+                    gap: 5px;
+                    flex-direction: column;
+
+                    .nameCusAndPosition {
+                        padding-left: 110px;
+                        padding-top: 40px;
+                        color: #000;
+                        font-weight: bold;
+                        font-size: 18px;
+                        font-family: "Courier New", Courier, monospace;
+                    }
+
+                    .descriCusionCusDetail {
+                        margin-left: -50px;
+                        margin-top: 55px;
+                        font-style: italic;
+                        min-height: 130px;
+                        font-size: 12px;
+                        text-align: justify;
+                    }
+
+                    .likeAndChat {
+
+
+                        gap: 15px;
+                        justify-content: center;
+                        padding-right: 80px;
+
+                        .btnLike {
+                            padding: 5px 15px;
+                            background-color: #1bbada;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                        }
+
+                        .btnChat {
+                            padding: 5px 15px;
+                            background-color: #1bbada;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                        }
+                    }
+                }
+            }
+        }
+
+        .timeInfo {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+    }
+
+
+
+
+
+}

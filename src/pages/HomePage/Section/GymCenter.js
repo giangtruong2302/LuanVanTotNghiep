@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "./Specialty.scss";
 import { FormattedMessage } from "react-intl";
 import img from "../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
+import { getAllGymCenter } from "./SectionAPI";
 const GymCenter = (props) => {
+  const [allGymCenter, setAllGymCenter] = useState();
+  const [noGymCenter, setNoGymCenter] = useState(false);
+  const [, setGymCenterLoading] = useState(true);
+  useEffect(() => {
+
+    getAllGymCenter("1").then((response) => {
+
+      if (response.centers.rows.length > 0) {
+        setAllGymCenter(response.centers.rows);
+        setNoGymCenter(false);
+      } else {
+        setNoGymCenter(true);
+      }
+    })
+      .catch(() => {
+        setNoGymCenter(true);
+      })
+      .finally(() => {
+        setGymCenterLoading(false);
+      });
+  }, []);
+
   return (
     <div className="section-share section-specialty">
       <div className="section-container">
@@ -17,138 +40,22 @@ const GymCenter = (props) => {
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
-            <div
-              className="section-customize specialty-child"
-              //key={index}
-              //onClick={() => this.handleViewDetailSpecialty(item)}
-            >
-              <div
-                className="bg-image section-specialty"
-                style={{ backgroundImage: `url(${img})` }}
-              ></div>
-              <div className="specialty-name">{"item.name"}</div>
-            </div>
+            {allGymCenter?.map((item, index) => {
+              return (
+                <div
+                  className="section-customize specialty-child"
+                //key={index}
+                //onClick={() => this.handleViewDetailSpecialty(item)}
+                >
+                  <div
+                    className="bg-image section-specialty"
+                    style={{ backgroundImage: `url(${img})` }}
+                  ></div>
+                  <div className="specialty-name">{item.CenterName}</div>
+                </div>
+              )
+            })}
+
           </Slider>
         </div>
       </div>
