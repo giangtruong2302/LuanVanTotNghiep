@@ -1,177 +1,155 @@
-.PTProfileBg {
-    background: linear-gradient(180deg, #ffffff 60.28%, #717c7c 100%);
+.PTProfileBg1 {
+  background: linear-gradient(180deg, #ffffff 60.28%, #717c7c 100%);
+  max-height: 100vh;
+  max-width: 100vw;
+
+  // overflow: auto;
+  .containerListPT {
+    max-width: 100vw;
+    // margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: "roboto";
+    font-weight: bold;
+    font-size: 50px;
+    background: #7a8484;
+
+    .backToHome {
+      width: 100%;
+      background: linear-gradient(305.38deg, #949292 -35.47%, #f2edf0 94.82%);
+      height: 60px;
+      padding-left: 20px;
+
+      .backtoHome {
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        // width: fit-content;
+        .textBackToHome {
+          font-family: "roboto";
+          font-size: 14px;
+          font-weight: 400;
+          margin-left: 10px;
+          color: #223263;
+        }
+      }
+    }
+
+    .titlePage {
+      .PTinfo {
+        display: flex;
+        flex-direction: row;
+        //margin-left: 200px;
+        padding-bottom: 30px;
+        background: linear-gradient(360deg, #ffffff 80.28%, #717c7c 100%);
+        justify-content: center;
+
+        .PtName {
+          font-size: 25px;
+          margin-left: 20px;
+          margin-top: 50px;
+
+          .btnPT {
+            display: flex;
+            gap: 20px;
+            padding-left: 30px;
+            padding-top: 30px;
+
+            .btnBook {
+              background-color: yellow;
+              border-radius: 20px;
+              width: 160px;
+              font-weight: bold;
+              box-sizing: border-box;
+              box-shadow: 1px 1px 8px 1px grey;
+              color: black !important;
+              height: 80px;
+            }
+
+            .btnInfo {
+              background-color: yellow;
+              border-radius: 20px;
+              width: 160px;
+              font-weight: bold;
+              box-sizing: border-box;
+              box-shadow: 1px 1px 8px 1px grey;
+              color: black !important;
+              height: 80px;
+            }
+
+            .btnSalary {
+              background-color: yellow;
+              border-radius: 20px;
+              width: 160px;
+              font-weight: bold;
+              box-sizing: border-box;
+              box-shadow: 1px 1px 8px 1px grey;
+              height: 80px;
+            }
+          }
+        }
+
+        .imgPT {
+          gap: 20px;
+          height: 230px;
+          width: 190px;
+          border: 1px solid #f1f1f1;
+          border-radius: 50%;
+          box-shadow: 1px 1px 8px 1px #888;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .PTProfileBg {
+    background-color: #fff;
     max-height: 100vh;
     max-width: 100vw;
 
     // overflow: auto;
     .containerListPT {
-        max-width: 100vw;
-        // margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        font-family: "roboto";
-        font-weight: bold;
-        font-size: 50px;
-        background: #7a8484;
+      max-width: 100vw;
+      // margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      font-family: "roboto";
+      font-weight: bold;
+      font-size: 50px;
 
-        .backToHome {
-            width: 100%;
-            background: linear-gradient(305.38deg, #949292 -35.47%, #f2edf0 94.82%);
-            height: 60px;
-            padding-left: 20px;
+      .titlePage {
+        .PTinfo {
+          display: flex;
+          flex-direction: column;
+          margin-right: 250px;
+          padding-bottom: 30px;
 
-            .backtoHome {
-                padding-top: 15px;
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
+          .PtName {
+            font-size: 20px;
+            margin-left: 25px;
+            margin-top: 50px;
+          }
 
-                // width: fit-content;
-                .textBackToHome {
-                    font-family: "roboto";
-                    font-size: 14px;
-                    font-weight: 400;
-                    margin-left: 10px;
-                    color: #223263;
-                }
-            }
+          .imgPT {
+            gap: 20px;
+            height: 230px;
+            width: 190px;
+            border: 1px solid #f1f1f1;
+            border-radius: 50%;
+            box-shadow: 1px 1px 8px 1px #888;
+            margin-left: 120px;
+          }
         }
-
-        .titlePage {
-
-
-            .PTinfo {
-                display: flex;
-                flex-direction: row;
-                //margin-left: 200px;
-                padding-bottom: 30px;
-                background: linear-gradient(360deg, #ffffff 80.28%, #717c7c 100%);
-                justify-content: center;
-
-
-                .PtName {
-                    font-size: 25px;
-                    margin-left: 20px;
-                    margin-top: 50px;
-
-                    .btnPT {
-                        display: flex;
-                        gap: 20px;
-                        padding-left: 30px;
-                        padding-top: 30px;
-
-
-                        .btnBook {
-                            background-color: yellow;
-                            border-radius: 20px;
-                            width: 160px;
-                            font-weight: bold;
-                            box-sizing: border-box;
-                            box-shadow: 1px 1px 8px 1px grey;
-                            color: black !important;
-                            height: 80px;
-                        }
-
-                        .btnInfo {
-                            background-color: yellow;
-                            border-radius: 20px;
-                            width: 160px;
-                            font-weight: bold;
-                            box-sizing: border-box;
-                            box-shadow: 1px 1px 8px 1px grey;
-                            color: black !important;
-                            height: 80px;
-                        }
-
-                        .btnSalary {
-                            background-color: yellow;
-                            border-radius: 20px;
-                            width: 160px;
-                            font-weight: bold;
-                            box-sizing: border-box;
-                            box-shadow: 1px 1px 8px 1px grey;
-                            height: 80px;
-                        }
-
-                    }
-                }
-
-                .imgPT {
-
-                    gap: 20px;
-                    height: 230px;
-                    width: 190px;
-                    border: 1px solid #f1f1f1;
-                    border-radius: 50%;
-                    box-shadow: 1px 1px 8px 1px #888;
-                }
-            }
-
-        }
+      }
     }
-
-
-}
-
-@media only screen and (max-width: 46.1875em) {
-    .PTProfileBg {
-        background-color: #fff;
-        max-height: 100vh;
-        max-width: 100vw;
-
-        // overflow: auto;
-        .containerListPT {
-            max-width: 100vw;
-            // margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            font-family: "roboto";
-            font-weight: bold;
-            font-size: 50px;
-
-
-            .titlePage {
-
-
-                .PTinfo {
-                    display: flex;
-                    flex-direction: column;
-                    margin-right: 250px;
-                    padding-bottom: 30px;
-
-
-
-                    .PtName {
-                        font-size: 20px;
-                        margin-left: 25px;
-                        margin-top: 50px;
-
-
-
-
-                    }
-
-                    .imgPT {
-
-                        gap: 20px;
-                        height: 230px;
-                        width: 190px;
-                        border: 1px solid #f1f1f1;
-                        border-radius: 50%;
-                        box-shadow: 1px 1px 8px 1px #888;
-                        margin-left: 120px;
-                    }
-                }
-
-            }
-        }
-
-
-    }
+  }
 }

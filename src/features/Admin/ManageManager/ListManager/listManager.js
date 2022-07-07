@@ -16,6 +16,7 @@ LicenseManager.setLicenseKey(
 );
 
 const ListManager = (props) => {
+  const [status, setStatus] = useState("");
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -96,6 +97,12 @@ const ListManager = (props) => {
       flex: 0,
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
+      action: {
+        action1: (value) => {
+          // console.log("check value update:", value);
+          setStatus(value);
+        },
+      },
     },
 
     {
@@ -172,7 +179,7 @@ const ListManager = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.status, props.searchValue]);
+  }, [CenterId, props.status, props.searchValue, status]);
   const gridOptions = {
     rowSelection: "single",
     rowModelType: "serverSide",
@@ -195,7 +202,7 @@ const ListManager = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.status, props.searchValue]);
+  }, [serverSideDatasource, props.status, props.searchValue, status]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

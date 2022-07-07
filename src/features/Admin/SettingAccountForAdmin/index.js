@@ -32,6 +32,10 @@ const SettingAccountForAdmin = () => {
     setShowModalPassword(isVisible);
   };
   // console.log("check user info: ", userInfo.AccountManager.ManagerName);
+  // const image = userInfo["AccountManager.Imange"]
+  //   ? userInfo["AccountManager.ManagerName"]
+  //   : "";
+  // console.log("check image: ", image);
   return (
     <>
       <div className="settingAccountBg">
@@ -40,7 +44,14 @@ const SettingAccountForAdmin = () => {
             <div className="detailTop">
               <div className="topInfo">
                 <div className="topInfoImg">
-                  <img src={ava} alt="" />
+                  <img
+                    src={
+                      userInfo["AccountManager.ManagerImage"]
+                        ? userInfo["AccountManager.ManagerImage"]
+                        : ava
+                    }
+                    alt=""
+                  />
                 </div>
                 <div className="topInfoContent">
                   <div className={"topInforName"}>

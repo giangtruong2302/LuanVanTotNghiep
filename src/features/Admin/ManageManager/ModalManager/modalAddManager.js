@@ -28,7 +28,8 @@ const CreateManager = (props) => {
   const [allCenter, setAllCenter] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -72,14 +73,18 @@ const CreateManager = (props) => {
         setSaving(true);
         handleCreateNewManager(
           values.name,
-          values.password.toString(),
+          values.password,
           values.email,
-          values.phoneNumber.toString(),
-          values.gender.toString(),
-          values.address.toString,
-          values.roleId.toString(),
-          values.centerId.toString(),
-          values.salaryId.toString()
+          values.phoneNumber,
+          values.gender,
+          values.address,
+          values.roleId,
+          imageUrl,
+          fileName,
+          values.centerId,
+          values.salaryId,
+          Math.floor(Math.random() * 1001),
+          Math.floor(Math.random() * 2001)
         )
           .then((res) => {
             props.takeStatus("complete" + Date.now());
@@ -92,7 +97,7 @@ const CreateManager = (props) => {
           .catch((res) => {
             setSaving(false);
             console.log("check res data email: ", res);
-            message.error(res.data.data.email);
+            message.error(res.data?.data.email);
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -102,7 +107,7 @@ const CreateManager = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -110,13 +115,14 @@ const CreateManager = (props) => {
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
-  const handleChangeImage = async (info) => {
+  const handleChangeImage = (info) => {
     setLoading(true);
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
-        console.log("check file name: ", info.file);
+        console.log("check file name: ", info.file.name);
       });
     }
   };

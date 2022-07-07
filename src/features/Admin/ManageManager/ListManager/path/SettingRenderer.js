@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import "./customizeListPT.scss";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import UpdateAccount from "../../ModalManager/modalUpdateAccount";
+import { handleDeleteManager } from "../../ModalManager/ModalAccountAPI";
 const { confirm } = Modal;
 
 const SettingRenderer = (props) => {
@@ -13,6 +14,12 @@ const SettingRenderer = (props) => {
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
   };
+  const [status, setStatus] = useState("");
+  const takeStatus = (value) => {
+    setStatus(value);
+    props.colDef.action.action1("update" + Date.now());
+  };
+
   function confirmDelete() {
     confirm({
       title: `Do you want to delete ${
@@ -23,15 +30,15 @@ const SettingRenderer = (props) => {
       centered: true,
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
-        console.log("first");
-        // return doDeleteStaff(currentSalon.salonId, props.data.id)
-        //   .then(() => {
-        //     props.colDef.action.action1("delete" + props.data.id);
-        //     message.success("Success");
-        //   })
-        //   .catch(() => {
-        //     message.error("Failure");
-        //   });
+        // return console.log("role id: ", props);
+        return handleDeleteManager(props.data.ExternalId, props.data.RoleId)
+          .then(() => {
+            message.success("delete success");
+            props.colDef.action.action1("delete" + Date.now());
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       },
       onCancel() {
         ("");
@@ -49,7 +56,7 @@ const SettingRenderer = (props) => {
         style={{ color: "#53d1b6" }}
       >
         <CheckSquareOffset size={18} color="#53d1b6" weight="fill" />
-        UPDATE STAFF
+        UPDATE MANAGER
       </Menu.Item>
       {/* <Menu.Item
         key="3"
@@ -61,7 +68,7 @@ const SettingRenderer = (props) => {
       </Menu.Item> */}
       <Menu.Item key="4" onClick={confirmDelete} style={{ color: "#FD409A" }}>
         <XCircle size={18} color="#FD409A" weight="fill" />
-        DELETE STAFF
+        DELETE MANAGER
       </Menu.Item>
     </Menu>
   );
@@ -87,6 +94,7 @@ const SettingRenderer = (props) => {
           handleModal={handleModal}
           showModal={showModal}
           data={props.data}
+          takeStatus={takeStatus}
         />
       )}
     </>

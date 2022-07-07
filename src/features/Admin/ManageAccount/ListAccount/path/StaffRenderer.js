@@ -10,7 +10,7 @@ const StaffRenderer = (props) => {
     <>
       <Link to={`/pt-detail/${idPT}`} className="staffContainer">
         <div className="avatar">
-          <img src={avaPT} />
+          <img src={props.data.avatar ? props.data.avatar : avaPT} />
         </div>
         <div className="staffText">{props.data.fullName}</div>
       </Link>
