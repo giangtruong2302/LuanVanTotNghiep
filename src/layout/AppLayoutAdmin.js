@@ -21,6 +21,7 @@ import {
   RatingAndReview,
   CustomerProfile,
   StaffProfile,
+  ScheduleWorking,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -97,6 +98,10 @@ const AppLayoutAdmin = () => {
           <Route
             path="/admin/view-list-service"
             element={<ServiceAllSystem />}
+          />
+          <Route
+            path="/admin/view-list-schedule-working"
+            element={<ScheduleWorking />}
           />
           <Route path="/admin/view-list-manager" element={<Manager />} />
         </Route>

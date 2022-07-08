@@ -29,6 +29,7 @@ import {
   handleGetDetailStaff,
 } from "./StaffDetailAPI";
 import UpcomingBooking from "./booking/UpcomingBooking";
+import ListScheduleOfPT from "./ListSchedule/listSchedule";
 
 const StaffProfile = () => {
   const [customerProfile, setCutomerProfile] = useState();
@@ -172,11 +173,11 @@ const StaffProfile = () => {
               )}
             </div>
             <div className={classes.bookingHistory}>
-              <div className={classes.titleBooking}>Booking History</div>
-              {/* <BookingHistory
-                userId={customerId}
-                salonId={currentSalon.toString()}
-              /> */}
+              <div className={classes.titleBooking}>Schedule Working</div>
+              <ListScheduleOfPT
+                userId={staffId}
+                // salonId={currentSalon.toString()}
+              />
             </div>
           </div>
         </div>

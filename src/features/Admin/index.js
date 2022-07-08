@@ -34,6 +34,8 @@ import {
   UsersThree,
   UserSwitch,
   Planet,
+  CalendarCheck,
+  Book,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -132,6 +134,12 @@ const AdminPage = () => {
   };
   const handleViewListManager = () => {
     navigate("/admin/view-list-manager");
+  };
+  const handleViewListSchedule = () => {
+    navigate("/admin/view-list-schedule-working");
+  };
+  const handleViewListBlog = () => {
+    navigate("/admin/view-list-blog");
   };
   return (
     <Layout style={{ height: "100vh" }} className="bgAdmin">
@@ -326,6 +334,24 @@ const AdminPage = () => {
                 Xem danh sách dịch vụ
               </Menu.Item>
             </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<CalendarCheck size={20} weight="bold" color="#fff" />}
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title="Quản lý Lịch làm việc"
+            >
+              <Menu.Item onClick={handleViewListSchedule}>
+                Xem danh sách khung giờ làm việc
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<Book size={20} weight="bold" color="#fff" />}
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title="Quản lý Blog"
+            >
+              <Menu.Item onClick={handleViewListBlog}>
+                Xem danh sách Blog
+              </Menu.Item>
+            </Menu.SubMenu>
             <Menu.Item
               icon={<ClockClockwise size={20} weight="bold" color="#fff" />}
               onClick={handleSettingAccount}
@@ -361,21 +387,11 @@ const AdminPage = () => {
             itemIcon={<RightCircleOutlined />}
             items={[
               {
-                label: "Quận 8",
+                label: "Center",
                 key: "21",
                 icon: <MapPinLine size={20} color="#eeeee7" weight="fill" />,
                 // onClick: handleChangeCenter,
               },
-              getItem(
-                <FormattedMessage id="admin.manage-gym.manage-account" />,
-                "sub6",
-                <UserCircle size={20} color="#f4f1f1" weight="fill" />,
-                [
-                  getItem("Xem danh sách tài khoản", "8"),
-                  getItem("Tạo tài khoản", "10"),
-                  getItem("Cập nhật tài khoản", "11"),
-                ]
-              ),
 
               {
                 key: "12",

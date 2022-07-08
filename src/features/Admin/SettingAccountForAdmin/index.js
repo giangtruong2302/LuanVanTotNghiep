@@ -20,7 +20,7 @@ import { handleGetInfoManager } from "./SettingAccountAPI";
 const SettingAccountForAdmin = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const [infoDetail, setInfoDetail] = useState();
-  // console.log("check user info: ", userInfo["AccountManager.ManagerName"]);
+  console.log("check user info: ", userInfo);
   const [showModal, setShowModal] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
@@ -39,7 +39,7 @@ const SettingAccountForAdmin = () => {
   //   : "";
   // console.log("check image: ", image);
   useEffect(() => {
-    handleGetInfoManager(userInfo.id ? userInfo.id : -1)
+    handleGetInfoManager(userInfo.ExternalId ? userInfo.ExternalId : -1)
       .then((res) => {
         if (res) {
           console.log("check res info: ", res.managerDetail);

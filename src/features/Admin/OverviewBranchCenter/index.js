@@ -189,7 +189,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Account",
         description: "Swap",
-        link: "/admin/merchant/settings",
+        link: "/admin/setting-account",
       },
     ],
     []
