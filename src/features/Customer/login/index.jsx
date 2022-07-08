@@ -27,6 +27,7 @@ const CustomerLoginPage = () => {
       await handleLoginUserAPI(email, password)
         .then((res) => {
           const dataCus = res.data;
+          console.log('datacus', dataCus)
           dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
           navigate(`/`);
         })

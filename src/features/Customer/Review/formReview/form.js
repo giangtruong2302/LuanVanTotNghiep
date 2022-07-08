@@ -1,21 +1,49 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field } from "formik";
-
-import { Form, Input, Rate } from "antd";
+import { getAllGymCenter } from "./formAPI";
+import { Form, Input, Rate, Select } from "antd";
+import { createReview } from "./formAPI";
 import './form.scss'
+import { useSelector } from "react-redux";
+import { Content } from "antd/lib/layout/layout";
 
 
-const onFinish = (values) => {
-
-    console.log('check', values)
-
-};
 const handleRate = (valueRate) => {
-    console.log('rate', valueRate)
+
 }
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 const FormReview = () => {
+    const onFinish = (values) => {
+
+        console.log('check', values)
+        createReview(valueRate, values.ReviewContent, cusInfo["AccountCustomer.id"], values.center)
+
+    };
+    const cusInfo = useSelector((state) => state.cus.cusInfo);
+    const { Option } = Select;
+    const [allGymCenter, setAllGymCenter] = useState();
+    const [noGymCenter, setNoGymCenter] = useState(false);
+    const [, setGymCenterLoading] = useState(true);
+
+    useEffect(() => {
+
+        getAllGymCenter("1").then((response) => {
+
+            if (response.centers.rows.length > 0) {
+                setAllGymCenter(response.centers.rows);
+                setNoGymCenter(false);
+            } else {
+                setNoGymCenter(true);
+            }
+        })
+            .catch(() => {
+                setNoGymCenter(true);
+            })
+            .finally(() => {
+                setGymCenterLoading(false);
+            });
+    }, []);
     const [valueRate, setValueRate] = useState(3);
     const [form] = Form.useForm();
     return (
@@ -46,7 +74,7 @@ const FormReview = () => {
                         </Form.Item>
                         <div className="titleInput">Phone number :</div>
                         <Form.Item
-                            name="Phone Number"
+                            name="PhoneNumber"
                             rules={[
                                 {
                                     required: true,
@@ -55,9 +83,35 @@ const FormReview = () => {
                         >
                             <Input />
                         </Form.Item>
+                        <div className="titleInput">Gym Center :</div>
+
+                        <Form.Item
+                            name="center"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+
+
+                        >
+                            <Select
+                                placeholder="Select a center"
+
+                            >
+                                {allGymCenter?.map((item, index) => {
+                                    return (
+                                        <>
+                                            <Option value={item.id} >{item.CenterName}</Option>
+
+                                        </>
+                                    )
+                                })}
+                            </Select>
+                        </Form.Item>
                         <div className="titleInput">Review :</div>
                         <Form.Item
-                            name="Review Content"
+                            name="ReviewContent"
                             rules={[
                                 {
                                     required: true,

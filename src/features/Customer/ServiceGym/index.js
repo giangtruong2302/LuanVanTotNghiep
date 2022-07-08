@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./styles.module.scss";
+import "./Service.scss"
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import SearchService from "./SearchService/SearchService";
@@ -9,18 +9,17 @@ import "../../../pages/HomePage/HomePage.scss"
 
 const ServiceGym = () => {
   return (
-    <div className={classes.ServiceProfileBg}>
-      <div className={classes.containerServiceList}>
-        <div className={classes.backToHome}>
-          <NavLink to="/" className={classes.backToHomeLink}>
-            <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
-            <div className={classes.textBackToHome}>Back to home</div>
+    <div className="ServiceProfileBg">
+      <div className="containerServiceList">
+        <div className="backToHome">
+          <NavLink to="/" className="backToHomeLink">
+            <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+            <div className="textBackToHome">Back to home</div>
           </NavLink>
-          <div>
-            <SearchService />
-          </div>
+
         </div>
-        <div className={classes.listItem}>
+
+        <div className="listItem">
           <ListService />
 
         </div>

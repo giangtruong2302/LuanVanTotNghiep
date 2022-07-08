@@ -3,13 +3,16 @@ import { LANGUAGES } from "../../../utils/constant";
 import moment from "moment";
 import { Select, Button } from 'antd';
 import "./createTimeWorking.scss"
-const { Option } = Select;
+import { getAllTimeWorking } from "./createTimeWorkingAPI"
+import { createSchedule } from "./createTimeWorkingAPI"
+
+import { useSelector } from "react-redux";
 const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
+const { Option } = Select;
+
+
 
 const getArrDays = () => {
     let allDays = [];
@@ -37,11 +40,46 @@ const getArrDays = () => {
     return allDays;
 };
 
-const handleDay = (e) => {
-    console.log(e.target.value)
-}
+
+
 
 const CreateTime = () => {
+
+    const staffInfo = useSelector((state) => state.staff.staffInfo);
+    const handleDay = (e) => {
+        console.log(e.target.value)
+        setTimeStamp(e.target.value)
+    }
+    const handleChange = (value) => {
+        console.log(value);
+        setTimeId(value)
+    };
+    const handleCreateTimeWork = () => {
+        createSchedule(timeStamp, staffInfo["AccountStaff.id"], timeId)
+    }
+    const [timeId, setTimeId] = useState();
+    const [timeStamp, setTimeStamp] = useState();
+    const [allTime, setAllTime] = useState();
+    const [noAllTime, setNoAllTime] = useState(false);
+    const [, setAllTimeLoading] = useState(true);
+    useEffect(() => {
+
+        getAllTimeWorking("1").then((response) => {
+
+            if (response.time.rows.length > 0) {
+                setAllTime(response.time.rows);
+                setNoAllTime(false);
+            } else {
+                setNoAllTime(true);
+            }
+        })
+            .catch(() => {
+                setNoAllTime(true);
+            })
+            .finally(() => {
+                setAllTimeLoading(false);
+            });
+    }, []);
     useEffect(() => {
         const arrDay = getArrDays();
         setAllDays(arrDay);
@@ -70,17 +108,16 @@ const CreateTime = () => {
                     }}
                     onChange={handleChange}
                 >
-                    <Option value="T1">8h-9h30</Option>
-                    <Option value="T2">9h30-11h</Option>
-                    <Option value="T3">1h30-3h</Option>
-                    <Option value="T4">3h30-5h</Option>
-                    <Option value="T5">6h-7h30</Option>
-                    <Option value="T6">7h30-9h</Option>
+                    {allTime?.map((item, index) => {
+                        return (
+                            <Option value={item.id} >{item.TimeWork}</Option>
 
 
+                        )
+                    })}
 
                 </Select>
-                <Button> Tạo lịch</Button>
+                <Button onClick={handleCreateTimeWork}> Tạo lịch</Button>
             </div>
         </div>
     )
