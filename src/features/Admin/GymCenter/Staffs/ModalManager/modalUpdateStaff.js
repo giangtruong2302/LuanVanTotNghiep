@@ -38,7 +38,7 @@ const UpdateStaff = (props) => {
   const [crop, setCrop] = useState({ x: 50, y: 50 });
   const [croppedAreaPixels, setCroppedAreaPixels] = useState();
   const [detailCenter, setDetailCenter] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
 
   const [zoom, setZoom] = useState(1);
   const beforeUpload = (file) => {

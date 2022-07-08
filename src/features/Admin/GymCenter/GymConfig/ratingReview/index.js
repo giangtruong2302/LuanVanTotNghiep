@@ -17,7 +17,7 @@ const RatingReview = () => {
   //   }
   // };
   const [dataReview, setDataReview] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
 
   useEffect(() => {
     try {

@@ -9,9 +9,11 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import UpdateStaff from "../../ModalManager/modalUpdateStaff";
 import { handleDeleteStaff } from "../../ModalManager/ModalAccountAPI";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const { confirm } = Modal;
 
 const SettingRenderer = (props) => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showPopOver, setShowPopOver] = useState(false);
   const handleModal = (isVisible) => {
@@ -22,7 +24,9 @@ const SettingRenderer = (props) => {
     setStatus(value);
     props.colDef.action.action1("update" + Date.now());
   };
-
+  const handleViewStaffProfile = () => {
+    navigate(`/admin/view-staff-info/${props.data.id}`);
+  };
   function confirmDelete() {
     confirm({
       title: `Do you want to delete ${
@@ -63,6 +67,14 @@ const SettingRenderer = (props) => {
       >
         <CheckSquareOffset size={18} color="#53d1b6" weight="fill" />
         UPDATE STAFF
+      </Menu.Item>
+      <Menu.Item
+        key="3"
+        onClick={handleViewStaffProfile}
+        style={{ color: "#53d1b6" }}
+      >
+        <CheckSquareOffset size={18} color="#53d1b6" weight="fill" />
+        VIEW STAFF DETAIL
       </Menu.Item>
       {/* <Menu.Item
         key="3"

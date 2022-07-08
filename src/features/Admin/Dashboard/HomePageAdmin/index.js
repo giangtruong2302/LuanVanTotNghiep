@@ -11,7 +11,7 @@ import { useState } from "react";
 import { getAllCenter } from "../../AdminAPI";
 
 const HomePageAdmin = () => {
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   const [totalCustomer, setTotalCustomer] = useState(0);
   const [totalCenter, setTotalCenter] = useState(0);
   useEffect(() => {

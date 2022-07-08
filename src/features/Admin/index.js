@@ -33,6 +33,7 @@ import {
   UsersFour,
   UsersThree,
   UserSwitch,
+  Planet,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -69,8 +70,8 @@ const AdminPage = () => {
     navigate("/admin/manage-staffs");
   };
   const handleChangeCenter = (CenterId, CenterName) => {
-    navigate("/admin/manage-center");
-    localStorage.setItem("centerId", CenterId);
+    navigate(`/admin/manage-center`);
+    localStorage.setItem("CenterId", CenterId.toString());
     console.log("check center id after change: ", CenterId);
   };
   const handleLogout = () => {
@@ -133,7 +134,7 @@ const AdminPage = () => {
     navigate("/admin/view-list-manager");
   };
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100vh" }} className="bgAdmin">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <NavLink to="" exact={true}>
           <div className="logo" />
@@ -317,7 +318,7 @@ const AdminPage = () => {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
-              icon={<UserCircle size={20} weight="bold" color="#fff" />}
+              icon={<Planet size={20} weight="bold" color="#fff" />}
               title="Quản lý Dịch vụ"
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
             >
@@ -363,7 +364,7 @@ const AdminPage = () => {
                 label: "Quận 8",
                 key: "21",
                 icon: <MapPinLine size={20} color="#eeeee7" weight="fill" />,
-                onClick: handleChangeCenter,
+                // onClick: handleChangeCenter,
               },
               getItem(
                 <FormattedMessage id="admin.manage-gym.manage-account" />,

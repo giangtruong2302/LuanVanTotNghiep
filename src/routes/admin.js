@@ -49,6 +49,9 @@ const RatingAndReview = React.lazy(() =>
 const CustomerProfile = React.lazy(() =>
   import("../features/Admin/GymCenter/Customers/CustomerDetail")
 );
+const StaffProfile = React.lazy(() =>
+  import("../features/Admin/GymCenter/Staffs/StaffDetail")
+);
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
   GymConfig,
@@ -69,4 +72,5 @@ export {
   GymDetail,
   RatingAndReview,
   CustomerProfile,
+  StaffProfile,
 };

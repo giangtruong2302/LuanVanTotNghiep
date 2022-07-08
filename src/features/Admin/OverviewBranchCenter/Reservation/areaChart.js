@@ -14,7 +14,7 @@ const countCreatedAtElInArr = (arr = [], el1) => {
   return count;
 };
 const AreaChart = () => {
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   const [allDataChart, setDataChart] = useState([]);
   useEffect(() => {
     handleGetChartBooking(CenterId ? CenterId : -1, 1).then((res) => {
@@ -57,7 +57,7 @@ const AreaChart = () => {
       // setDataChart(moment(newArr.createdAt).format("dddd"));
       setDataChart(newArr);
     });
-  }, []);
+  }, [CenterId]);
   console.log("check all data: ", allDataChart);
   const { InteractionAction, registerInteraction, registerAction } = G2;
   const [data, setData] = useState([

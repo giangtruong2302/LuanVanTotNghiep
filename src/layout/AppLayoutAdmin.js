@@ -20,6 +20,7 @@ import {
   GymConfig,
   RatingAndReview,
   CustomerProfile,
+  StaffProfile,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -83,6 +84,7 @@ const AppLayoutAdmin = () => {
             path="/admin/view-customer-info/:id"
             element={<CustomerProfile />}
           />
+          <Route path="/admin/view-staff-info/:id" element={<StaffProfile />} />
           <Route
             path="/admin/merchant/reservation-detail/:id"
             element={<ReservationDetail />}

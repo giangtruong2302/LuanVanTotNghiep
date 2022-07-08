@@ -72,7 +72,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Customer",
         description: "Swap",
-        link: `/admin/merchant/${1}/customers`,
+        link: `/admin/merchant/:branchId/customers`,
       },
 
       {
@@ -138,7 +138,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Customer",
         description: "Swap",
-        link: `/admin/merchant/${1}/customers`,
+        link: `/admin/merchant/:branchId/customers`,
       },
 
       {
@@ -159,7 +159,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Gym",
         description: "Swap",
-        link: "/system/gym-config",
+        link: "/admin/merchant/gym-config",
       },
       {
         image: (
@@ -215,7 +215,7 @@ const DashboardBranchCenter = (props) => {
     ],
     []
   );
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   useEffect(() => {
     try {
       getAllStaffOfCenter(parseInt(CenterId), "", 1)
