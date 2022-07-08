@@ -114,7 +114,7 @@ const CustomerProfile = () => {
                     </div>
                     <div className={classes.nameInfo}>
                       {customerProfile
-                        ? customerProfile.CustomerName
+                        ? customerProfile?.CustomerName
                         : "Loading"}
                     </div>
                   </Col>
@@ -128,7 +128,7 @@ const CustomerProfile = () => {
           <div className={classes.bottomProfile}>
             <div className={classes.upcomingBooking}>
               <div className={classes.titleBooking}>Upcoming Booking</div>
-              {upcommingBooking.length === 0 ? (
+              {upcommingBooking && upcommingBooking.length === 0 ? (
                 <Empty
                   image={empty}
                   imageStyle={{
@@ -136,7 +136,7 @@ const CustomerProfile = () => {
                   }}
                   description={"No Upcoming Booking"}
                 />
-              ) : upcommingBooking.length > 0 ? (
+              ) : upcommingBooking && upcommingBooking.length > 0 ? (
                 <div
                   id="scrollableDiv"
                   style={{
@@ -145,7 +145,7 @@ const CustomerProfile = () => {
                   }}
                 >
                   <InfiniteScroll
-                    dataLength={upcommingBooking.length}
+                    dataLength={upcommingBooking ? upcommingBooking.length : 0}
                     next={fetchNextUpBooking}
                     hasMore={hasMore}
                     loader={
