@@ -5,7 +5,8 @@ const handleCreateNewService = (
   ServiceName,
   WorkDuration,
   Price,
-  ServiceImage
+  ServiceImage,
+  fileName
 ) => {
   // console.log("first", userEmail, userPassword);
   return axios.post(`/api/create-new-service`, {
@@ -13,6 +14,7 @@ const handleCreateNewService = (
     WorkDuration,
     Price,
     ServiceImage,
+    fileName,
   });
 };
 const handleUpdateService = (
@@ -20,7 +22,8 @@ const handleUpdateService = (
   ServiceName,
   WorkDuration,
   Price,
-  ServiceImage
+  ServiceImage,
+  fileName
 ) => {
   return axios.put(`/api/update-service`, {
     id: id,
@@ -28,6 +31,7 @@ const handleUpdateService = (
     WorkDuration: WorkDuration,
     Price: Price,
     ServiceImage: ServiceImage,
+    fileName,
   });
 };
 const handleDeleteService = (id) => {

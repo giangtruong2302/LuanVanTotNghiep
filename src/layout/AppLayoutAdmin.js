@@ -19,6 +19,7 @@ import {
   DashboardBranchCenter,
   GymConfig,
   RatingAndReview,
+  CustomerProfile,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -77,6 +78,10 @@ const AppLayoutAdmin = () => {
           <Route
             path="/admin/merchant/:branchId/customers"
             element={<Customers />}
+          />
+          <Route
+            path="/admin/view-customer-info/:id"
+            element={<CustomerProfile />}
           />
           <Route
             path="/admin/merchant/reservation-detail/:id"

@@ -56,6 +56,8 @@ function getItem(label, key, icon, children, type) {
 }
 
 const AdminPage = () => {
+  const userInfo = useSelector((state) => state.user.userInfo);
+
   const navigate = useNavigate();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
   console.log("check role: ", roleId);
@@ -439,10 +441,15 @@ const AdminPage = () => {
           </span>
           <span className="infoUser">
             <img
-              src={avatar}
-              style={{ width: "80px", height: "80px", borderRadius: "100px" }}
+              src={userInfo && userInfo.avatar}
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "100px",
+                paddingRight: "3px",
+              }}
             />
-            <span>Duong Truong Giang</span> &nbsp;
+            <span>{userInfo && userInfo.fullName}</span> &nbsp;
             <Dropdown overlay={menu} placement={"bottomLeft"} arrow>
               <Button
                 style={{ outline: "none", border: "none" }}

@@ -87,11 +87,12 @@ const CreateManager = (props) => {
           Math.floor(Math.random() * 2001)
         )
           .then((res) => {
-            props.takeStatus("complete" + Date.now());
-            if (res.data.success === true) {
-              message.success("create new manager is success !");
+            if (res.errCode === 0) {
+              toast.success("create new manager is success !");
+              props.takeStatus("complete" + Date.now());
+              props.handleModal(false);
             } else {
-              message.error(res.data.data.email[0]);
+              toast.error(res.message);
             }
           })
           .catch((res) => {
@@ -322,7 +323,7 @@ const CreateManager = (props) => {
                             setFieldValue("gender", value);
                           }}
                         >
-                          <Option value="true">Name</Option>
+                          <Option value="true">Nam</Option>
                           <Option value="false">Nữ</Option>
                         </Select>
                       </FormAnt.Item>
