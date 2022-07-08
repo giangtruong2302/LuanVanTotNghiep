@@ -11,7 +11,9 @@ import OverviewDetail from "./OverviewPTInfo/overviewDetailInfo";
 import { getPtDetail } from "./PtDetailAPI";
 import { useParams } from "react-router-dom";
 
-
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
+import HomeFooter from "../../../pages/HomePage/HomeFooter";
 
 
 const PTDetail = () => {
@@ -40,24 +42,13 @@ const PTDetail = () => {
 
   return (
     <div className="PTDetailBgContainer">
-      <PageHeader
-        className="site-page-header"
-        onBack={() => navigate("/")}
-        subTitle="Back to home"
-        style={{
-          top: 0,
-          position: "sticky",
-          zIndex: "9",
-          background:
-            "linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%)",
-          color: "#fff",
-          fontWeight: "600",
-        }}
-        extra={[
-          <Question size={20} color="#eeeee7" weight="fill" />,
-          <List size={20} color="#eeeee7" weight="fill" />,
-        ]}
-      />
+      <div className="backToHome">
+        <NavLink to="/" className="backtoHome">
+          <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+          <div className="textBackToHome">Back to home</div>
+        </NavLink>
+
+      </div>
 
       <div className="breadcumDetail" >
         <Breadcrumb>
@@ -123,6 +114,7 @@ const PTDetail = () => {
           </Col>
         </Row>
       </div>
+      <HomeFooter />
     </div>
   );
 };

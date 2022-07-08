@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import SearchPT from "./SearchPT/searchPT";
 import ListPT from "./ListPT/ListPT";
+import HomeFooter from "../../../pages/HomePage/HomeFooter";
+import "../../../pages/HomePage/HomePage.scss"
 
 const PersonalTraining = () => {
   return (
@@ -11,7 +13,7 @@ const PersonalTraining = () => {
       <div className="containerListPT">
         <div className="backToHome">
           <NavLink to="/" className="backtoHome">
-            <ArrowLeft size={24} color="#292829" weight="duotone" />
+            <ArrowLeft size={24} color="#ffffff" weight="duotone" />
             <div className="textBackToHome">Back to home</div>
           </NavLink>
           <div>
@@ -19,8 +21,9 @@ const PersonalTraining = () => {
           </div>
         </div>
         <div className="listItem">
-          <ListPT />
+          <ListPT /><HomeFooter />
         </div>
+
       </div>
     </div>
   );

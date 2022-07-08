@@ -21,6 +21,7 @@ export default function Home() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+
     // className: "slide",
     responsive: [
       {
@@ -42,11 +43,18 @@ export default function Home() {
       },
     ],
   };
+  var settingCenter = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+  }
   return (
     <>
       <HomeHeader isShowBanner={true} />
       <Specialty settings={settings} />
-      <GymCenter settings={settings} />
+      <GymCenter settings={settingCenter} />
       <OutStandingPT settings={settings} />
       <HandBook settings={settings} />
       {/*

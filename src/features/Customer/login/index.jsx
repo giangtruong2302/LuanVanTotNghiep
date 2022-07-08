@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleLoginUserAPI } from "./loginUserAPI";
 import * as actions from "../../../store/actions";
+import bgLogin from "../../../assets/images/banner/bgLogin.jpg"
 const { Password } = Input;
 const CustomerLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -39,7 +40,8 @@ const CustomerLoginPage = () => {
 
 
   return (
-    <div className="wrapper">
+    <div className="wrapperBg">
+      <img className="bgLogin" src={bgLogin}></img>
       <div className="loginPage">
         <div className="logoLogin">
           {/* <img src={logo} alt="BIZBOOKLY" />
@@ -138,7 +140,7 @@ const CustomerLoginPage = () => {
             <Link to={"/password-recovery"} className={"forgotPassword"}>
               Forgot password
             </Link>
-            <span> / </span>
+            <span className="centerForgotPass"> / </span>
             <Link to={"/sign-up"} className={"forgotPassword"}>
               Sign up
             </Link>

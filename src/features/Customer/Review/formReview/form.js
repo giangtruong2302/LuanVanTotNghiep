@@ -1,10 +1,23 @@
 
-import React from "react";
-import { Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { Field } from "formik";
 
-import { Form as FormAnt, Input } from "antd";
+import { Form, Input, Rate } from "antd";
 import './form.scss'
+
+
+const onFinish = (values) => {
+
+    console.log('check', values)
+
+};
+const handleRate = (valueRate) => {
+    console.log('rate', valueRate)
+}
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 const FormReview = () => {
+    const [valueRate, setValueRate] = useState(3);
+    const [form] = Form.useForm();
     return (
         <div className="wrapper">
             <div className="loginPage">
@@ -16,77 +29,67 @@ const FormReview = () => {
                 <div className="titlePage">
                     <div className="textLoginPage"></div>
 
-                    <Formik>
-
-
-                        <Form>
-                            <div className="titleInput">Customer name :</div>
-                            <FormAnt.Item>
-                                <Field name="nameUser">
-                                    {({ field }) => (
-                                        <Input
-
-                                            className="inputLogin"
-                                            placeholder=""
-                                        />
-                                    )}
-                                </Field>
-                            </FormAnt.Item>
-                            <div className="titleInput">Email</div>
-                            <FormAnt.Item>
-                                <Field name="email">
-                                    {({ field }) => (
-                                        <Input
-
-                                            className="inputLogin"
-                                            placeholder=""
-                                        />
-                                    )}
-                                </Field>
-                            </FormAnt.Item>
-                            <div className="titleInput">Phone number</div>
-                            <FormAnt.Item>
-                                <Field name="email">
-                                    {({ field }) => (
-                                        <Input
-
-                                            className="inputLogin"
-                                            placeholder=""
-                                        />
-                                    )}
-                                </Field>
-                            </FormAnt.Item>
-                            <div className="titleInput">Message</div>
-                            <FormAnt.Item>
-                                <Field name="message">
-                                    {({ field }) => (
-
-                                        < Input.TextArea
-
-                                            className="inputLogin"
-                                            placeholder=""
-                                        />
-                                    )}
-                                </Field>
-                            </FormAnt.Item>
-
-                            <div className={"btnContainer"}>
-                                <button
-                                    className={"btnLogin"}
-                                    type="submit"
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    Submit
-                                </button>
-                            </div>
-
-                        </Form>
 
 
 
-                    </Formik>
+                    <Form form={form} name="control-hooks" onFinish={onFinish}>
+                        <div className="titleInput">Email :</div>
+                        <Form.Item
+                            name="Email"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <div className="titleInput">Phone number :</div>
+                        <Form.Item
+                            name="Phone Number"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <div className="titleInput">Review :</div>
+                        <Form.Item
+                            name="Review Content"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input className="inputReview" />
+                        </Form.Item>
+                        <div className="titleInput">Rating :</div>
+                        <span>
+                            <Rate tooltips={desc} onChange={setValueRate} value={valueRate} />
+                            {valueRate ? <span className="ant-rate-text">{desc[valueRate - 1]}</span> : ''}
+                        </span>
 
-                    <div className={"versionPage"}>v1.0.0</div>
+                        <div className={"btnContainer"}>
+                            <button
+                                className={"btnLogin"}
+                                type="submit"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleRate(valueRate)}
+                            >
+                                Submit
+                            </button>
+                        </div>
+
+                    </Form>
+
+
+
+
+
+
 
                 </div>
             </div>

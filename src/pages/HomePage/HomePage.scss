@@ -22,6 +22,7 @@
   height: 48px !important;
   width: 44px !important;
 
+
   background: #fff !important;
   border: 2px solid #d7d7d7 !important;
 
@@ -62,6 +63,19 @@
       &.handbook {
         display: flex !important;
         gap: 20px;
+      }
+
+      .bgCenter {
+        background-position: center center;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        background-color: #eee;
+        width: 550px;
+        height: 230px;
+
+
+
+
       }
 
       .bg-image {
@@ -152,27 +166,30 @@
   padding-top: 8px;
   min-height: 250px;
   margin: 0 auto;
-  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(240, 235, 235, 0.1));
+  background: #a50000;
   display: flex;
   gap: 15px;
   width: 100%;
 
   .footerLeft {
-    border-right: 1px solid gray;
+    border-right: 1px solid white;
     width: 30%;
     text-align: left;
     padding-left: 80px;
     align-items: center;
     margin: 0 auto;
+    color: white;
+    font-size: 18px;
 
     .title-footer-GHGym {
       font-size: 24px;
       font-weight: 700;
-      color: #000;
+      color: white;
     }
   }
 
   .footerCenter {
+    color: white;
     width: 40%;
     align-items: center;
     margin: 0 auto;
@@ -183,19 +200,22 @@
 
     .left-blog {
       width: 50%;
+      font-size: 18px;
     }
 
     .right-blog {
       width: 50%;
+      font-size: 18px;
     }
   }
 
   .footerRight {
-    border-left: 1px solid gray;
+    padding-top: 50px;
+    border-left: 1px solid white;
     width: 30%;
 
     .textSocialMedia {
-      color: #000;
+      color: white;
       font-size: 20px;
       font-weight: 700;
     }

@@ -10,13 +10,23 @@
     background: #fcf7fe;
   }
 }
-.wrapper {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%);
+
+.wrapperBg {
+  height: 1000px;
+  overflow: hidden;
+
+
+
+
+
+  .bgLogin {
+
+    width: 100vw;
+    min-height: 100%;
+    background-repeat: no-repeat;
+
+  }
+
 
   .loginPage {
     width: 343px;
@@ -49,15 +59,19 @@
     }
 
     .titlePage {
+
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 15px;
       text-align: center;
-      background-color: #fff;
+
       border-radius: 20px;
-      margin-top: 2rem;
+      margin-bottom: 1450px;
+      z-index: 10;
+      opacity: 0.9;
+      background-color: rgb(66, 61, 61);
 
       .textLoginPage {
         margin-top: 10px;
@@ -72,26 +86,29 @@
       }
 
       .inputLogin {
-        background: #fcf7fe;
+
+        background-color: transparent;
         border-radius: 10px;
         width: 315px;
         height: 44px;
-        border: 0px solid #ffffff;
+        border: 1px solid #ffffff;
+        color: white;
 
         // margin: 20px 0px;
         input {
-          background: #fcf7fe;
+          background: transparent;
         }
       }
 
       .checkboxLogin {
-        background: #ffffff;
+
+        color: #ffffff;
         width: 75%;
         font-weight: 300;
         font-size: 14px;
         line-height: 17px;
-        color: rgba(58, 39, 82, 0.7);
-        padding-left: 10px;
+
+        padding-left: 60px;
       }
 
       .btnContainer {
@@ -126,10 +143,14 @@
         }
       }
 
+      .centerForgotPass {
+        color: white;
+      }
+
       .forgotPassword {
         font-size: 14px;
         font-weight: 300;
-        color: #4285f4;
+        color: white;
         padding-bottom: 20px;
         cursor: pointer;
       }
@@ -176,12 +197,12 @@
   .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover {
     /* background: #fff; */
     border-color: #ff4d4f;
-    background: #fcf7fe;
+    background-color: transparent;
   }
 
   .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
   .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-    background: #fcf7fe;
+    background-color: transparent;
     border-color: #ff4d4f;
   }
 }

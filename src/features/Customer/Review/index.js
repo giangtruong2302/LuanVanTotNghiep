@@ -6,7 +6,7 @@ import { ArrowLeft } from "phosphor-react";
 
 const Review = () => {
     return (
-        <div className="PTProfileBg">
+        <div className="PTProfileBg1">
             <div className="containerListPT">
                 <div className="backToHome">
                     <NavLink to="/" className="backtoHome">

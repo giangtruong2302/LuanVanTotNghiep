@@ -3,9 +3,24 @@
 
   .specialty-name {
     padding: 10px 0;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
 
     &:hover {
       color: #45c3d2;
+    }
+  }
+}
+
+.section-body-center {
+  width: 100%;
+
+  .section-customize {
+
+    .bgCenter {
+      width: 300%;
     }
   }
 }

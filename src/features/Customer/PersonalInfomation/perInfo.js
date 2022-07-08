@@ -9,21 +9,25 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateCusDetail } from "./perInfoAPI";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Question, List, ThumbsUp, Chats } from "phosphor-react";
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
 import { ToastContainer, toast } from 'react-toastify';
 import Modal from 'react-modal';
+import BgProfile from "../../../assets/images/banner/bgCus.jpg"
 const customStyles = {
     content: {
+        position: 'absolute',
         top: '50%',
         left: '50%',
         right: '74%',
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-
     },
 };
+
 const PerInfo = () => {
+
     const navigate = useNavigate();
     const { Option } = Select;
     const cusInfo = useSelector((state) => state.cus.cusInfo);
@@ -90,177 +94,179 @@ const PerInfo = () => {
     }, []);
     return (
         <div className="CusDetailBgContainer">
-            <PageHeader
-                className="site-page-header"
-                onBack={() => navigate("/")}
-                subTitle="Back to home"
-                style={{
-                    top: 0,
-                    position: "sticky",
-                    zIndex: "9",
-                    background:
-                        "linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%)",
-                    color: "#fff",
-                    fontWeight: "600",
-                }}
-                extra={[
-                    <Question size={20} color="#eeeee7" weight="fill" />,
-                    <List size={20} color="#eeeee7" weight="fill" />,
-                ]}
-            />
+            <div className="backToHome">
+                <NavLink to="/" className="backtoHome">
+                    <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
+                    <div className="textBackToHome">Back to home</div>
+                </NavLink>
 
-            <div className="breadcumDetail" >
-                <Breadcrumb>
-                    <Breadcrumb.Item href="">
-                        <HomeOutlined />
-                    </Breadcrumb.Item>
-
-                    <Breadcrumb.Item>Khách hàng {cusDetail?.CustomerName}  </Breadcrumb.Item>
-                </Breadcrumb>
             </div>
 
-            <div className="CusDetailContent">
-                <Row className="contentInfo">
-                    <Col
-                        span={24}
-                        offset={0}
-                        style={{
-                            display: "flex",
-                            gap: "15px",
-                            flexDirection: "column",
-                        }}
-                    >
 
-                        <Row>
-                            <Col className="avatarCusDetail" span={4}>
-                                <img src={ava} className="imgCus" />
-                            </Col>
-                            <Col span={20} className="infoDetailCus">
-                                <div className="nameCusAndPosition">
-                                    Hello, {cusDetail?.CustomerName} !
-                                </div>
-                                <div className="descriptionCusDetail">
-                                    <div>Email : {cusDetail?.CustomerEmail}  </div>
-                                    <div>Số điện thoại : {cusDetail?.PhoneNumber} </div>
-                                    <div>Ngày sinh : {cusDetail?.DayOfBirth} </div>
-                                    <div>Giới tính : {(cusDetail?.Gender === true ? "Nam" : "Nữ")} </div>
-                                    <div>Địa chỉ : {cusDetail?.Address} </div>
+            <div className="screenProfile">
+                <div className="modalForm">
+                    <Modal
+
+                        isOpen={modalIsOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                    ><h1>Form sửa thông tin</h1>
+                        <div ref={(_subtitle) => (subtitle = _subtitle)}>
+                            <Form form={form} name="control-hooks" className="formCus" onFinish={onFinish}>
+                                Full Name :
+                                <Form.Item
+                                    name="fullName"
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                Email :
+                                <Form.Item
+                                    name="email"
+
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                Gender :
+                                <Form.Item
+                                    name="Gender"
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Select
+                                        placeholder="Select your gender"
+                                    >
+                                        <Option value={true}>Nam</Option>
+                                        <Option value={false}>Nữ</Option>
+                                    </Select>
+                                </Form.Item>
+                                SĐT
+                                <Form.Item
+                                    name="phoneNumber"
+
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                Address
+                                <Form.Item
+                                    name="address"
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                Day of Birth :
+                                <Form.Item
+                                    name="DayOfBirth"
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+
+                                <ToastContainer />
+
+                                <Button type="primary" htmlType="submit" >
+                                    Submit
+                                </Button>
+                                <Button htmlType="button" onClick={onReset}>
+                                    Reset
+                                </Button>
+                            </Form>
+                        </div>
 
 
 
-                                </div>
-                                <div className="likeAndChat">
-                                    <span >
-                                        <button className={"btn-sua"} onClick={openModal}>Sửa thông tin</button>
+                    </Modal>
+                </div>
+                <img className="imgBg" src={BgProfile}></img>
+                <div className="CusDetailContent">
 
-                                    </span>
-                                    <span >
-                                        <Link to={"/booking-of-cus"} className={"btn-check-book"}>Xem booking</Link>
-                                    </span>
-                                </div>
-                                <Modal
-                                    isOpen={modalIsOpen}
-                                    onAfterOpen={afterOpenModal}
-                                    onRequestClose={closeModal}
-                                    style={customStyles}
-                                    contentLabel="Example Modal"
-                                ><h1>Form sửa thông tin</h1>
-                                    <div ref={(_subtitle) => (subtitle = _subtitle)}>
-                                        <Form form={form} name="control-hooks" onFinish={onFinish}>
-                                            Full Name :
-                                            <Form.Item
-                                                name="fullName"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            Email :
-                                            <Form.Item
-                                                name="email"
+                    <Row className="contentInfo">
+                        <Col
+                            span={24}
+                            offset={0}
+                            style={{
+                                display: "flex",
+                                gap: "15px",
+                                flexDirection: "column",
+                            }}
+                        >
 
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            Gender :
-                                            <Form.Item
-                                                name="Gender"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Select
-                                                    placeholder="Select your gender"
-                                                >
-                                                    <Option value={true}>Nam</Option>
-                                                    <Option value={false}>Nữ</Option>
-                                                </Select>
-                                            </Form.Item>
-                                            SĐT
-                                            <Form.Item
-                                                name="phoneNumber"
+                            <Row>
+                                <Col className="avatarCusDetail" span={4}>
+                                    <img src={ava} className="imgCus" />
+                                </Col>
+                                <Col span={20} className="infoDetailCus">
+                                    <div className="nameCusAndPosition">
+                                        Hello, {cusDetail?.CustomerName} !
+                                    </div>
+                                    <div className="descriptionCusDetail">
+                                        <div className="detailCus">
+                                            <div className="titleInfo" >Email : </div><div className="infoCus"> {cusDetail?.CustomerEmail}  </div>
+                                        </div>
+                                        <div className="detailCus">
+                                            <div className="titleInfo" >Số điện thoại : </div><div className="infoCus"> {cusDetail?.PhoneNumber} </div>
+                                        </div>
+                                        <div className="detailCus">
+                                            <div className="titleInfo" >Ngày sinh : </div><div className="infoCus"> {cusDetail?.DayOfBirth} </div>
+                                        </div>
+                                        <div className="detailCus">
+                                            <div className="titleInfo" >Giới tính : </div><div className="infoCus"> {(cusDetail?.Gender === true ? "Nam" : "Nữ")} </div>
+                                        </div>
+                                        <div className="detailCus">
+                                            <div className="titleInfo" >Địa chỉ : </div><div className="infoCus"> {cusDetail?.Address} </div>
+                                        </div>
 
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            Address
-                                            <Form.Item
-                                                name="address"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            Day of Birth :
-                                            <Form.Item
-                                                name="DayOfBirth"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
 
-                                            <ToastContainer />
+                                    </div>
+                                    <div className="likeAndChat">
+                                        <span >
+                                            <button className={"btn-sua"} onClick={openModal}>Sửa thông tin</button>
 
-                                            <Button type="primary" htmlType="submit" >
-                                                Submit
-                                            </Button>
-                                            <Button htmlType="button" onClick={onReset}>
-                                                Reset
-                                            </Button>
-                                        </Form>
+                                        </span>
+                                        <span >
+                                            <Link to={"/booking-of-cus"} className={"btn-check-book"}>Xem booking</Link>
+                                        </span>
+                                        <span >
+                                            <Link to={"/customer-review"} className={"btn-check-book"}>Đánh giá</Link>
+                                        </span>
                                     </div>
 
 
 
-                                </Modal>
+                                </Col>
+                            </Row>
 
-                            </Col>
-                        </Row>
+                        </Col>
+                    </Row>
 
-                    </Col>
-                </Row>
+                </div>
             </div>
         </div>
     );

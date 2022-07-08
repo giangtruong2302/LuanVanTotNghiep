@@ -31,6 +31,8 @@ import PerInfo from "../features/Customer/PersonalInfomation/perInfo";
 import BookingOfCus from "../features/Customer/PersonalInfomation/BookingOfCus/cusBooking";
 import ScanQR from "../features/Staff/Scan/ScanQR";
 import Page404 from "../features/Page404/Page404";
+import PayPage from "../features/Customer/PayPage";
+import CreateTime from "../features/Staff/createTimeWork/createTimeWorking";
 
 const AppLayout = () => {
   return (
@@ -53,11 +55,12 @@ const AppLayout = () => {
         <Route path="/send-email" element={<SendEmail />} />
         <Route path="/bmi" element={<BMI />} />
         <Route path="/center-detail/:id" element={<GymDetailPage />} />
-
+        <Route path="/payment-page" element={<PayPage />} />
         <Route path="/scanqr" element={<ScanQR />} />
         <Route path="/staff-info/:id" element={<PersonalInfoStaff />} />
         <Route path="/booking-of-cus" element={<BookingOfCus />} />
         <Route path="/404-error-notfound" element={<Page404 />} />
+        <Route path="/create-timeworking" element={<CreateTime />} />
         {/* merchant */}
         <Route path="/merchant/gym-select" element={<GymSelect />} />
         <Route path="/merchant/dashboard" element={<Dashboard />} />

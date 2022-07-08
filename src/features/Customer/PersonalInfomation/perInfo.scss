@@ -1,89 +1,181 @@
 .CusDetailBgContainer {
 
 
+    .backToHome {
+        width: 100%;
+        background: #a50000;
+
+        height: 60px;
+
+        .backtoHome {
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            // width: fit-content;
+            .textBackToHome {
+                font-family: "roboto";
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+                color: white;
+            }
+        }
+    }
+
     .breadcumDetail {
         padding: 10px 20px 20px 25px;
     }
 
-    .CusDetailContent {
-        display: flex;
-        gap: 15px;
-        margin: 0 25px;
-        padding-left: 30px;
-
-        .contentInfo {
-            box-sizing: border-box;
+    .screenProfile {
+        position: absolute;
 
 
-            .avatarCusDetail {
 
-                background: transparent;
+        .modalForm {
+            z-index: 100;
+            position: absolute;
 
-
-                .imgCus {
-                    margin-left: 50px;
-                    margin-top: 50px;
-                    height: 230px;
-                    width: 190px;
-                    border: 1px solid #f1f1f1;
-                    border-radius: 50%;
-                    box-shadow: 1px 1px 8px 1px #888;
-
-                }
+            .formCus {
+                z-index: 10;
+                position: absolute;
             }
+        }
 
-            .infoDetailCus {
-                display: flex;
-                gap: 5px;
-                flex-direction: column;
-                padding-left: 200px;
-                margin-top: 50px;
+        .imgBg {
+            width: 100vw;
+            z-index: -1;
+            height: 685px;
+            position: absolute;
+
+        }
+
+        .CusDetailContent {
+            position: absolute;
+            gap: 15px;
+            margin-top: 100px;
+            padding-left: 30px;
+            // box-shadow: 3px 3px 3px 7px #cdcccc;
+            width: 800px;
+            margin-left: 360px;
+            background-color: white;
+            border-radius: 30px;
+            height: 450px;
+            z-index: -0;
 
 
+            .contentInfo {
+                box-sizing: border-box;
 
-                .nameCusAndPosition {
-                    color: #000;
-                    font-weight: 600;
-                    font-size: 30px;
-                    font-family: "Courier New", Courier, monospace;
+
+                .avatarCusDetail {
+
+                    background: transparent;
+
+
+                    .imgCus {
+                        margin-left: 40px;
+                        margin-top: 80px;
+                        height: 230px;
+                        width: 190px;
+                        border: 1px solid #f1f1f1;
+                        border-radius: 50%;
+                        box-shadow: 1px 1px 8px 1px #888;
+
+                    }
                 }
 
-                .descriptionCusDetail {
-
-                    min-height: 130px;
-                    font-size: 25px;
-                    font-family: 'Times New Roman', Times, serif
-                }
-
-                .likeAndChat {
+                .infoDetailCus {
                     display: flex;
-                    gap: 15px;
+                    gap: 5px;
+                    flex-direction: column;
+                    padding-left: 50px;
+                    margin-top: 50px;
+                    padding-left: 150px;
+                    position: absolute;
 
-                    .btn-sua {
-                        padding: 15px 15px;
-                        background-color: #1bbada;
-                        color: #fff;
-                        border-radius: 6px;
-                        border: 1px solid #ffff;
-                        font-weight: bold;
-                        font-size: 20px;
-                        border-radius: 30px;
+
+
+
+
+                    .nameCusAndPosition {
+                        border-bottom: solid rgb(170, 168, 168) 1px;
+                        margin-left: 150px;
+
+                        color: #000;
+                        font-weight: 600;
+                        font-size: 30px;
+                        font-family: 'Times New Roman', Times, serif;
                     }
 
-                    .btn-check-book {
+                    .descriptionCusDetail {
+                        margin-top: 60px;
+                        margin-left: 150px;
+                        position: absolute;
+                        display: flex;
+                        flex-direction: column;
+                        min-height: 130px;
+                        font-size: 25px;
+                        font-family: 'Times New Roman', Times, serif
+                    }
+
+                    .detailCus {
+                        display: flex;
+                        flex-direction: row;
+
+                        .titleInfo {
+                            font-weight: bold;
+                        }
+                    }
 
 
-                        padding-bottom: 33px;
-                        padding-left: 23px;
-                        padding-right: 23px;
+                    .likeAndChat {
 
-                        background-color: #1bbada;
-                        color: #fff !important;
-                        border-radius: 6px;
-                        border: 1px solid #ffff;
-                        font-weight: bold;
-                        font-size: 20px;
-                        border-radius: 30px;
+
+                        gap: 15px;
+                        border-top: solid rgb(170, 168, 168) 1px;
+                        margin-top: 230px;
+                        width: 530px;
+                        margin-left: 80px;
+                        padding-top: 30px;
+
+
+
+
+                        .btn-sua {
+                            padding-bottom: 15px;
+                            padding-left: 23px;
+                            padding-right: 23px;
+                            padding-top: 15px;
+                            margin-right: 10px;
+
+                            background: #a50000;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                            font-weight: bold;
+                            font-size: 20px;
+                            border-radius: 30px;
+                        }
+
+                        .btn-check-book {
+
+                            margin-right: 10px;
+                            padding-bottom: 15px;
+                            padding-left: 23px;
+                            padding-right: 23px;
+                            padding-top: 15px;
+                            margin-top: 50px !important;
+
+                            background: #a50000;
+                            color: #fff !important;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                            font-weight: bold;
+                            font-size: 20px;
+                            border-radius: 30px;
+                        }
                     }
                 }
             }

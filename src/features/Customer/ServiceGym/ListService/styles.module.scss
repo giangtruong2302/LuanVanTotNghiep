@@ -1,17 +1,18 @@
 .listServiceContent {
   overflow: auto;
+
   max-height: auto;
   height: calc(100% - 450px);
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   align-items: flex-start;
-  //padding: 10px;
-  padding-top: 10px;
+  padding-top: 120px;
+
   gap: 25px;
   position: relative;
   width: 100vw;
-  padding: 0 20px;
+  //padding: 0 20px;
   height: calc(100% - 20px);
 
   border-radius: 5px;
@@ -19,6 +20,7 @@
   :global {
     .infinite-scroll-component__outerdiv {
       width: 100%;
+      padding-bottom: 40px;
     }
   }
 
@@ -28,6 +30,7 @@
     margin: 0 auto;
     max-width: 100%;
     height: 119px;
+
     background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
     /* light blue */
     border: 1px solid #131314;
@@ -49,7 +52,8 @@
       padding: 0px;
       justify-content: space-between;
       width: 100%;
-      height: 20px;
+      height: 10px;
+
       padding-bottom: 20px;
 
       .categoryService {
@@ -64,6 +68,7 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 17px;
+
         /* identical to box height */
 
         /* Black blue */
@@ -96,7 +101,7 @@
       height: 0px;
       /* light blue */
 
-      border: 1px solid #ebf0ff;
+
     }
 
     .serviceInfo {
@@ -112,6 +117,7 @@
       .info {
         display: flex;
         align-items: center;
+        margin-bottom: 15px;
 
         .textNameService {
           min-width: 97px;
@@ -121,7 +127,7 @@
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
-          font-size: 14px;
+          font-size: 18px;
           line-height: 17px;
           margin-top: 20px;
           /* identical to box height */
@@ -151,13 +157,13 @@
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 18px;
         line-height: 17px;
         /* identical to box height */
 
         /* #000000 */
 
-        color: rgba(0, 0, 0, 0.65);
+        color: black;
 
         .lineDetailInfo {
           width: 1px;

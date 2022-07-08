@@ -63,7 +63,7 @@ const Staff = () => {
     }, []);
     return (
 
-        <div className="PTProfileBg">
+        <div className="PTProfileBg1">
 
             <div className="containerListPT">
                 Page Staff Booking
@@ -75,7 +75,7 @@ const Staff = () => {
                             <div className="btnPT">
 
 
-                                {(staffInfo["oleId"] === 4 ?
+                                {(staffInfo["roleId"] === 4 ?
                                     <Link to={`/scanqr`}> <button className="btnBook">Scan QR</button></Link>
                                     :
                                     <Link to={`/pt-booking/`}> <button className="btnBook">Lịch booking</button></Link>
@@ -84,6 +84,7 @@ const Staff = () => {
 
 
                                 <button className="btnSalary" onClick={openModal}>Salary</button>
+                                <Link to={`/create-timeworking`}> <button className="btnInfo">Đăng ký lịch làm</button></Link>
                                 <Modal
                                     isOpen={modalIsOpen}
                                     onAfterOpen={afterOpenModal}

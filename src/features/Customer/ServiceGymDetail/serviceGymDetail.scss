@@ -1,4 +1,27 @@
 .ServiceGymDetailBg {
+  .backToHome {
+    width: 100%;
+    background: #a50000;
+
+    height: 60px;
+
+    .backtoHome {
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      // width: fit-content;
+      .textBackToHome {
+        font-family: "roboto";
+        font-size: 18px;
+        font-weight: 400;
+        margin-left: 10px;
+        color: white;
+      }
+    }
+  }
+
   .ServiceDetailContent {
     display: flex;
     gap: 15px;

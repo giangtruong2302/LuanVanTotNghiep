@@ -5,7 +5,6 @@ import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
 import { getTimeWorking } from "./PtScheduleAPI";
-import { useParams } from "react-router-dom";
 import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -240,11 +239,13 @@ const PTShedule = (props) => {
     };
     const onChangeStartTime = (date, dateString) => {
 
-        setStartTime(dateString)
+        setStartTime(date._d)
+
     };
+
     const onChangeEndTime = (date, dateString) => {
 
-        setEndTime(dateString)
+        setEndTime(date)
     };
     const options = {
 
@@ -257,8 +258,25 @@ const PTShedule = (props) => {
         progress: undefined,
     };
     const [messRes, setMessRes] = useState("");
+    //dateToTimeStamp
+    // var myDate = "7-7-2022";
+    // const date = new Date(myDate);
+    // const timestampSeconds = Math.floor(date.getTime() / 1000);
+    //TimeStampToString
+    // let timestamp = 1657126800000
+
+    // var date = new Date(timestamp);
+    const handleDate = (e) => {
+        // console.log(timestampSeconds);
+
+        // console.log(date.getDate() +
+        //     "/" + (date.getMonth() + 1) +
+        //     "/" + date.getFullYear());
+
+        console.log(e.target.value)
 
 
+    }
 
     const onFinish = (values) => {
         createBooking(cusInfo["AccountCustomer.id"], parseInt(values.pt), cusInfo["fullName"], "", values.center, values.service, startTime, endTime, status).then((response) => {
@@ -273,6 +291,11 @@ const PTShedule = (props) => {
         })
 
 
+
+        startTime.setMonth(startTime.getMonth() - 3);
+        console.log('time', moment(startTime).format("DD-MM-YYYY H:mm A"));
+
+
     };
 
     const onReset = () => {
@@ -282,12 +305,12 @@ const PTShedule = (props) => {
     return (
         <>
             <div className="doctor-schedule-container">
-                <div className="all-schedule">
-                    <select>
+                <div className="all-schedule" >
+                    <select onChange={handleDate} >
                         {allDays && allDays.length > 0
                             ? allDays.map((item, index) => {
                                 return (
-                                    <option key={index} value={item.value}>
+                                    <option key={index} value={item.value} >
                                         {item.label}
                                     </option>
                                 );

@@ -22,6 +22,8 @@ const ListBooking = () => {
     const [amountBooking, setAmountBooing] = useState(30000);
     const [bookingId, setBookingId] = useState(2)
     const staffInfo = useSelector((state) => state.staff.staffInfo);
+    const [statusPage, setStatusPage] = useState("")
+
     const options = {
 
         position: "top-right",
@@ -47,15 +49,17 @@ const ListBooking = () => {
             .finally(() => {
                 setBookingOfPtLoading(false);
             });
-    }, []);
+    }, [statusPage]);
     const [messRes, setMessRes] = useState()
     const handleIdBooking = (id, CustomerId, CustomerName, StaffId) => {
         getAcceptBooking(schedule, id, CustomerId, CustomerName, StaffId, amountBooking).then((response) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
+                setStatusPage(Date.now())
             } else {
                 toast.error("Fail", options)
+
             }
 
 
@@ -68,6 +72,7 @@ const ListBooking = () => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
+                setStatusPage(Date.now())
             } else {
                 toast.error("Fail", options)
             }
@@ -89,7 +94,7 @@ const ListBooking = () => {
                     />
                 </div>
             ) : (
-                <div className="listCenterContent ">
+                <div className="listStaffBookingContent ">
                     <InfiniteScroll
                         dataLength={8}
                         style={{ display: "flex", flexDirection: "column", gap: "20px" }}
