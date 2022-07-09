@@ -1,6 +1,7 @@
 import { Input, Button, Menu, Dropdown, Badge } from "antd";
 import * as actions from "../../store/actions";
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import moment from "moment";
 import {
   AddressBook,
   BookmarksSimple,
@@ -59,17 +60,17 @@ const HomeHeader = (props) => {
 
   }, []);
   const cartMenu = (
-    <Menu>
+    <Menu >
       {cusBooking?.map((item, index) => {
 
         return (
-          <Menu.Item key="1">{item.ServiceId}</Menu.Item>
+          <Menu.Item key="1" className="CartDrop">Đã đặt lịch với PT: {item.PTName} vào ngày {moment(item.StartTime).format("DD/MM/YYYY")} <p>Trạng thái : {item.Status}</p></Menu.Item>
         )
       })}
     </Menu>
   );
   const userMenu = (
-    <Menu>
+    <Menu className="UserDrop">
       <Menu.Item><NavLink to="/customer-infomation">Profile</NavLink></Menu.Item>
       <Menu.Item onClick={handleLogout}> Logout</Menu.Item>
 

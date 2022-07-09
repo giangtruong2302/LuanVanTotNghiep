@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Col, PageHeader, Row, Button } from "antd";
+import { PictureOutlined } from "@ant-design/icons";
+import { Breadcrumb, Col, PageHeader, Row, Button, Upload, message } from "antd";
 import "./perInfo.scss";
 import { Form, Input, Select } from "antd";
 import ava from "../../../assets/images/imgStaff/staff.png"
@@ -26,6 +27,7 @@ const customStyles = {
     },
 };
 
+
 const PerInfo = () => {
 
     const navigate = useNavigate();
@@ -47,9 +49,60 @@ const PerInfo = () => {
         draggable: true,
         progress: undefined,
     };
+    const [fileType, setFileType] = useState();
+    const [fileSize, setFileSize] = useState()
+    const beforeUpload = (file) => {
+        const isJpgOrPng =
+            file.type === "image/jpeg" ||
+            file.type === "image/png" ||
+            file.type === "image/svg" ||
+            file.type === "image/jpg";
+        const fileType = file.type?.split("/")[1];
+        fileType && setFileType(fileType);
+        if (!isJpgOrPng) {
+            message.error("you can only upload file JPG/PNG?SVG/JPEG !");
+        }
+        if (file.size) {
+            const isLt5M = file.size / 1024 / 1024 < 5;
+            setFileSize(file.size / 1024 / 1024 < 1 ? 1 : file.size / 1024 / 1024);
+            if (!isLt5M) {
+                message.error("Your image must smaller than 5MB");
+            }
+            return isJpgOrPng && isLt5M;
+        }
+        return isJpgOrPng;
+    };
+    const [loading, setLoading] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    const [fileName, setFileName] = useState();
+    const getBase64 = (img, callback) => {
+        setLoading(false);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(img);
+    };
+    const handleChangeImage = async (info) => {
+
+        setLoading(true);
+        if (info.file) {
+            getBase64(info.file.originFileObj, (imgUrl) => {
+                setImageUrl(imgUrl);
+                setFileName(info.file.name);
+                setLoading(false);
+            });
+        }
+    };
+    const uploadButton = (
+        <div className="btnUpload">
+            {loading ? <PictureOutlined /> : <PictureOutlined />}
+            <div className="text">Change Image</div>
+        </div>
+    );
+
+
     const onFinish = (values) => {
         console.log("check", values)
-        updateCusDetail(cusInfo["id"], values.fullName, values.Gender, values.DayOfBirth, values.phoneNumber, values.address, values.email, cusInfo["roleId"], cusInfo["AccountCustomer.CustomerImage"], cusInfo["AccountCustomer.CenterId"]).then((response) => {
+        updateCusDetail(cusInfo["id"], values.fullName, values.Gender, values.DayOfBirth, values.phoneNumber, values.address, values.email, cusInfo["roleId"], cusInfo["AccountCustomer.CustomerImage"], imageUrl, cusInfo["AccountCustomer.CenterId"]).then((response) => {
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
 
@@ -59,6 +112,10 @@ const PerInfo = () => {
             }
         })
     };
+
+
+    console.log('url', imageUrl)
+    console.log('fileName', fileName)
 
     const onReset = () => {
         form.resetFields();
@@ -92,6 +149,9 @@ const PerInfo = () => {
                 setCusDetailLoading(false);
             });
     }, []);
+
+
+
     return (
         <div className="CusDetailBgContainer">
             <div className="backToHome">
@@ -188,6 +248,17 @@ const PerInfo = () => {
                                 >
                                     <Input />
                                 </Form.Item>
+                                Avatar:
+                                <Upload
+                                    name="avatar"
+                                    listType="picture-card"
+                                    className="avatar-uploader"
+                                    showUploadList={false}
+                                    beforeUpload={beforeUpload}
+                                    onChange={handleChangeImage}
+                                >
+                                    {uploadButton}
+                                </Upload>
 
                                 <ToastContainer />
 
@@ -250,6 +321,7 @@ const PerInfo = () => {
                                             <button className={"btn-sua"} onClick={openModal}>Sửa thông tin</button>
 
                                         </span>
+
                                         <span >
                                             <Link to={"/booking-of-cus"} className={"btn-check-book"}>Xem booking</Link>
                                         </span>

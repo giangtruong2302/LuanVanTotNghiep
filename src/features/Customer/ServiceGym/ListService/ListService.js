@@ -92,6 +92,9 @@ const ListService = () => {
                   <div className={classes.lineService}></div>
                   <div className={classes.serviceInfo}>
                     <div className={classes.info}>
+                      <p className={classes.textNameService}>
+                        {item.ServiceName}
+                      </p>
                       <img
                         src={kickboxing}
                         style={{
@@ -103,9 +106,7 @@ const ListService = () => {
                           flexGrow: 0,
                         }}
                       />
-                      <p className={classes.textNameService}>
-                        {item.ServiceName}
-                      </p>
+
                     </div>
                     <div className={classes.detailInfo}>
                       <p>{item.Price}</p>

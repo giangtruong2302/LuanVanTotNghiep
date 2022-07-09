@@ -40,7 +40,7 @@ body {
   }
 
   .titlePageSignUp {
-    padding-top: 20px;
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -49,8 +49,8 @@ body {
     opacity: 0.9;
     background-color: rgb(29, 27, 27);
     border-radius: 20px;
-    margin-top: 2rem;
-    height: 680px;
+
+    height: auto;
 
     .titleInputSignUp {
       color: white;
@@ -58,15 +58,21 @@ body {
       font-size: 17px;
     }
 
+    .avatar-uploader {
+
+      background-color: transparent;
+    }
+
+
     .inputField {
-      border-radius: 14px;
+      border-radius: 10px;
       background-color: transparent;
       color: white;
     }
 
     .selectgender {
 
-      background-color: transparent;
+      background-color: transparent !important;
     }
 
     .inputLogin {

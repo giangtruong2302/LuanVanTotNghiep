@@ -24,7 +24,7 @@ const LoginPage = () => {
         .then((res) => {
           const dataStaff = res.data;
           dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
-          navigate(`/staff-personal-page/${res.data.id}`);
+          navigate("/staff-personal-page");
         })
         .catch(() => {
           message.error("login fail");

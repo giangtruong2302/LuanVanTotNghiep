@@ -16,14 +16,16 @@ const ServiceGym = () => {
             <ArrowLeft size={24} color="#ffffff" weight="duotone" />
             <div className="textBackToHome">Back to home</div>
           </NavLink>
-
+          <div>
+            <SearchService />
+          </div>
         </div>
 
         <div className="listItem">
-          <ListService />
+          <ListService /> <HomeFooter />
 
         </div>
-        <HomeFooter />
+
       </div>
 
     </div>

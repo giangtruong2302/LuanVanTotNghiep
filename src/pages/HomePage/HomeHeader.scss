@@ -1,5 +1,5 @@
 .home-header-container {
-  height: 100px;
+  height: 70px;
   width: 140%;
   padding: 0 40px;
   position: sticky;
@@ -7,7 +7,7 @@
   background-color: #fff;
   z-index: 99999;
 
-
+  .CartDrop {}
 
 
   .home-header-content {
@@ -92,10 +92,12 @@
 
 
           .User {
-            padding-top: 50px;
+            padding-top: 10px;
           }
 
-          .cart {}
+          .cart {
+            padding-top: 10px;
+          }
 
 
 

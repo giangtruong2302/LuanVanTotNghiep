@@ -15,8 +15,6 @@ import bgLogin from "../../../assets/images/banner/bgLogin.jpg"
 const { Password } = Input;
 const CustomerLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogin = async (values) => {

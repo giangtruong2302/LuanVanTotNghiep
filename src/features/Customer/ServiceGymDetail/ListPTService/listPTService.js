@@ -115,7 +115,7 @@ const ListPTService = () => {
             ]}
             extra={
               <div className="ptSchedule">
-                <PTShedule ptId={item.id} />
+                <PTShedule ptId={item.id} ptName={item.StaffName} />
               </div>
             }
           >

@@ -18,6 +18,7 @@ import { getDetailPT } from "./PtScheduleAPI";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getDetailService } from "./PtScheduleAPI";
+import { getDisCount } from "./PtScheduleAPI";
 
 const customStyles = {
     content: {
@@ -44,6 +45,7 @@ const PTShedule = (props) => {
     const [scheduleId, setScheduleId] = useState(new Date());
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [secondMonth, SetSecondMonth] = useState("2629743000");
 
     function openModal(e) {
         setIsOpen(true);
@@ -172,12 +174,34 @@ const PTShedule = (props) => {
     const [detailService, setDetailService] = useState();
     const [nodetailService, setNoDetailService] = useState(false);
     const [, setDetailServiceLoading] = useState(true);
+    const [discount, setDiscount] = useState();
+    const [nodetailDiscount, setNoDetailDiscount] = useState(false);
+    const [, setDetailDiscountLoading] = useState(true);
+    const [priceDiscount, setPriceDiscount] = useState();
     const onHandleServiceId = (value) => {
-        getDetailService(value).then((response) => {
 
+        console.log('daywork', value)
+        getDetailService(value).then((response) => {
+            setEndTime((parseInt(dayWork)) + ((parseInt(secondMonth)) * (parseInt(response.serviceDetail.WorkDuration))))
             if (response.serviceDetail) {
 
+                getDisCount(response.serviceDetail.idDiscount).then((response) => {
+
+                    if (response.discount) {
+                        setDiscount(response.discount.DiscountRate);
+                        setNoDetailDiscount(false);
+                    } else {
+                        setNoDetailDiscount(true);
+                    }
+                })
+                    .catch(() => {
+                        setNoDetailDiscount(true);
+                    })
+                    .finally(() => {
+                        setDetailDiscountLoading(false);
+                    });
                 setDetailService(response.serviceDetail);
+                setPriceDiscount(response.serviceDetail.Price);
                 setNoDetailService(false);
             } else {
                 setNoDetailService(true);
@@ -189,6 +213,7 @@ const PTShedule = (props) => {
             .finally(() => {
                 setDetailServiceLoading(false);
             });
+
     }
     const onHandleCenterId = (value) => {
         getPtOfCenter(value, 1).then((response) => {
@@ -233,10 +258,7 @@ const PTShedule = (props) => {
 
     };
 
-    const onChangeEndTime = (date, dateString) => {
 
-        setEndTime(date)
-    };
     const options = {
 
         position: "top-center",
@@ -253,20 +275,19 @@ const PTShedule = (props) => {
     // const date = new Date(myDate);
     // const timestampSeconds = Math.floor(date.getTime() / 1000);
     //TimeStampToString
+    // var time = new Date(1657558800000);
+    // console.log(time.toLocaleDateString());
 
-
-    const [date, setDate] = useState()
     const handleDate = (e) => {
         // console.log(timestampSeconds);
 
 
 
         getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
+            setDayWork(e.target.value);
+
+            console.log("Date: " + e.target.value)
             if (response.ScheduleWorking.rows) {
-                setDayWork(e.target.value)
-                // console.log("Date: " + dayWork.getDate() +
-                //     "/" + (dayWork.getMonth() + 1) +
-                //     "/" + dayWork.getFullYear())
                 setTimeDetail(response.ScheduleWorking.rows);
                 setNoTimeDetail(false);
             } else {
@@ -285,7 +306,7 @@ const PTShedule = (props) => {
 
 
     const onFinish = (values) => {
-        createBooking(cusInfo["AccountCustomer.id"], parseInt(values.pt), cusInfo["fullName"], "", values.center, values.service, (new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dayWork)), endTime, status, values.discount, values.Price, scheduleId).then((response) => {
+        createBooking(cusInfo["AccountCustomer.id"], parseInt(values.pt), cusInfo["fullName"], props.ptName, values.center, values.service, (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(dayWork)).format("YYYY-MM-DD")), (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(endTime)).format("YYYY-MM-DD")), status, values.discount, ((priceDiscount) - (((priceDiscount) * (discount)) / 100)), scheduleId).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -347,7 +368,7 @@ const PTShedule = (props) => {
                                         })
                                     ) :
                                     (
-                                        "n/a"
+                                        "Ngày này, PT chưa đăng lịch nhận booking"
                                     )
                                 }
                             </div>
@@ -371,9 +392,9 @@ const PTShedule = (props) => {
                                         >
                                             <Input />
                                         </Form.Item>
-                                        Ngày bắt đầu : {(new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dayWork))}
-
+                                        Ngày bắt đầu : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dayWork)}
                                         <p></p>
+
                                         Center :
                                         <Form.Item
                                             name="center"
@@ -443,13 +464,16 @@ const PTShedule = (props) => {
                                             })}
                                             </Select>
                                         </Form.Item>
+                                        Ngày kết thúc : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(endTime)}
+                                        <br></br>
+                                        Khuyến mãi : {discount} %
 
                                         <Form.Item
                                             name="price"
                                             label="Giá"
 
                                         >
-                                            {detailService?.Price}
+                                            {(priceDiscount) - (((priceDiscount) * (discount)) / 100)}
                                         </Form.Item>
                                         <Form.Item
                                             name="discount"
