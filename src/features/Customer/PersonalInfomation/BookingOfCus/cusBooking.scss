@@ -1,10 +1,33 @@
-.BookingProfileBg {
+.BookProfileBg {
 
-    height: auto;
+    height: 100vh;
     max-width: 100vw;
-    background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
+    //background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
 
     // overflow: auto;
+    .backToHome {
+        width: 100%;
+        background: #a50000;
+
+        height: 60px;
+
+        .backtoHome {
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            // width: fit-content;
+            .textBackToHome {
+                font-family: "roboto";
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+                color: white;
+            }
+        }
+    }
+
     .containerListPT {
         max-width: 100vw;
         // margin: 0 auto;
@@ -18,11 +41,13 @@
         font-size: 50px;
         min-height: 100vh;
         overflow: hidden;
+        margin-top: 20px;
 
 
 
         .titlePageBooking {
             padding-right: 150px;
+
 
 
             .PTinfo {
@@ -40,7 +65,7 @@
                     //padding: 0 20px;
                     padding-left: 10px;
                     padding-right: 10px;
-                    padding-top: 30px;
+
                     gap: 15px;
                     position: relative;
                     width: 100vw;

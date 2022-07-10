@@ -54,7 +54,7 @@ const OutStandingPT = (props) => {
                 >
                   <div
                     className="bg-image section-specialty"
-                    style={{ backgroundImage: `url(${img})` }}
+                    style={{ backgroundImage: `url(${item.StaffImage})` }}
                   ></div>
                   <div className="specialty-name">{item.StaffName}</div>
                 </NavLink>

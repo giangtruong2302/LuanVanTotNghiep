@@ -15,5 +15,9 @@ const getDetailService = (id) => {
 const getDisCount = (id) => {
     return axios.get(`/api/get-discount-detail?id=${id}`);
 };
-export { getTimeWorking, createBooking, getDetailPT, getDetailService, getDisCount };
+
+const getTimeById = (id) => {
+    return axios.get(`/api/get-time-working-by-id?id=${id}`);
+};
+export { getTimeWorking, createBooking, getDetailPT, getDetailService, getDisCount, getTimeById };
 

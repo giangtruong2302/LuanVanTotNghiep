@@ -6,7 +6,7 @@ import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Link } from "react-router-dom";
 import kickboxing from "../../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 import { getAllService } from "../ServiceAPI";
-
+import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 const ListService = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
@@ -96,27 +96,31 @@ const ListService = () => {
                         {item.ServiceName}
                       </p>
                       <img
-                        src={kickboxing}
+                        src={item.ServiceImage}
                         style={{
-                          borderRadius: "100px",
-                          width: "90px",
-                          height: "90px",
+
+                          width: "300px",
+                          height: "118px",
                           flex: "none",
                           order: 0,
                           flexGrow: 0,
+                          marginLeft: "20px",
+                          opacity: "0.6",
+                          transform: "skew(-20deg)"
                         }}
                       />
 
                     </div>
                     <div className={classes.detailInfo}>
-                      <p>{item.Price}</p>
+                      <p>{item.Price} /</p>
                       <span className={classes.lineDetailInfo}></span>
-                      <p>{item.WorkDuration}</p>
+                      <p>{item.WorkDuration} Month</p>
                     </div>
                   </div>
                 </Link>
               );
             })}
+            <HomeFooter />
           </InfiniteScroll>
         </div>
       )}

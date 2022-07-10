@@ -57,6 +57,19 @@
                     }
                 }
 
+
+                .btn-no {
+
+                    min-width: 120px;
+                    background-color: rgb(187, 184, 184);
+
+                    &:hover {
+                        background-color: rgb(187, 184, 184);
+                        color: black;
+                    }
+
+                }
+
                 .btn-vie {
                     min-width: 120px;
 

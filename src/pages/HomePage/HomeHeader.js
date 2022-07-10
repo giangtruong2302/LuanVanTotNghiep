@@ -176,7 +176,7 @@ const HomeHeader = (props) => {
               {(cusInfo)
                 ?
                 <div className="cusArea">
-                  <div className="cusName">{cusInfo["AccountCustomer.CustomerName"]}</div>
+                  <img className="imgCus" src={cusInfo["AccountCustomer.CustomerImage"]} />
                   <div className="User">
 
                     <Dropdown

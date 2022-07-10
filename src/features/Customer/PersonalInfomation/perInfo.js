@@ -61,7 +61,15 @@ const PerInfo = () => {
     const onFinishReview = (values) => {
 
         console.log('check', values)
-        createReview(valueRate, values.ReviewContent, cusInfo["AccountCustomer.id"], values.center)
+        createReview(valueRate, values.ReviewContent, cusInfo["AccountCustomer.id"], values.center).then((response) => {
+            if (response.message.errCode === 0) {
+                toast.success("Success", options)
+
+            } else {
+
+                toast.error("Fail", options);
+            }
+        })
 
     };
 
@@ -141,7 +149,7 @@ const PerInfo = () => {
     const onFinish = (values) => {
         console.log("check", values)
         updateCusDetail(cusInfo["AccountCustomer.id"], cusInfo["AccountCustomer.ExternalId"], values.fullName, values.Gender, values.dayOfBirth, values.phoneNumber, values.address, roleId, imageUrl, fileName, values.email, cusInfo["AccountCustomer.CenterId"]).then((response) => {
-            if (response.message.errorCode === 0) {
+            if (response.errorCode === 0) {
                 toast.success("Success", options)
                 setStatusPage(Date.now())
             } else {
@@ -340,7 +348,7 @@ const PerInfo = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={ava} className="imgCus" />
+                                    <img src={(cusDetail?.CustomerImage) ? cusDetail?.CustomerImage : ava} className="imgCus" />
                                 </Col>
                                 <Col span={20} className="infoDetailCus">
                                     <div className="nameCusAndPosition">

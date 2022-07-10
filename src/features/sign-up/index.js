@@ -7,8 +7,19 @@ import "./signUp.scss";
 import { values } from "lodash";
 import { getAllGymCenter } from "./signUpAPI";
 import { createUser } from "./signUpAPI"
+import { ToastContainer, toast } from 'react-toastify';
 const { Option } = Select;
 const SignUp = () => {
+  const options = {
+
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
   const [form] = Form.useForm();
   const [genderValue, setGenderValue] = useState()
   const [isSignUp, setIsSignUp] = useState(false);
@@ -43,7 +54,15 @@ const SignUp = () => {
 
   const onFinish = (values) => {
     console.log("check values: ", values);
-    createUser(Math.floor(Math.random() * 1000), values.email, values.password, values.fullName, imageUrl, fileName, active, values.username, roleId.toString(), Math.floor(Math.random() * 1000), gender, values.dayOfBirth, values.phonenumber, values.address, centerId)
+    createUser(Math.floor(Math.random() * 1000), values.email, values.password, values.fullName, imageUrl, fileName, active, values.username, roleId.toString(), Math.floor(Math.random() * 1000), gender, values.dayOfBirth, values.phonenumber, values.address, centerId).then((response) => {
+      if (response.errCode === 0) {
+        toast.success("Success", options)
+
+      } else { toast.error("Fail", options) }
+
+
+
+    })
   };
   const onHandleGenderValue = (value) => {
     console.log("value", value)
@@ -250,6 +269,7 @@ const SignUp = () => {
 
 
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

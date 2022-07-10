@@ -5,6 +5,9 @@ import StaggerAnimation from "../../../component/StaggerAnimation";
 import { getBookingDetail } from "./bookingAPI";
 import { Empty } from "antd";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
+import moment from "moment";
 
 const Booking = () => {
     const [bookDetail, setBookDetail] = useState();
@@ -31,10 +34,19 @@ const Booking = () => {
     return (
 
         <div className="BookingProfileBg">
+            <div className="backToHome">
+                <NavLink to="/staff-personal-page" className="backtoHome">
+                    <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+                    <div className="textBackToHome">Back to home</div>
+                </NavLink>
+                <div>
+                </div>
 
+            </div>
             <div className="containerListPT">
                 Lịch Booking
                 <div className="titlePageBooking">
+
                     <div className="PTinfo">
                         {noBookDetail ? (
                             <div className="noData">
@@ -69,8 +81,8 @@ const Booking = () => {
                                                             <div className="info">
 
                                                                 <p className={"infoCus"}>Khách hàng : {item.CustomerName}</p>
-                                                                <p className={"infoCus"}>Ngày bắt đầu : {item.StartTime}</p>
-                                                                <p className={"infoCus"}>Ngày kết thúc : {item.EndTime}</p>
+                                                                <p className={"infoCus"}>Ngày bắt đầu : {moment(item.StartTime).format("DD-MM-YYYY")}</p>
+                                                                <p className={"infoCus"}>Ngày kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")}</p>
 
                                                             </div>
                                                             <div className="infoService">

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./cusBooking.scss";
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
 import { Empty } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { getCusBooking } from "./cusBookingAPI";
 import { useSelector } from "react-redux";
+import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 const BookingOfCus = () => {
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [cusBooking, setCusBooking] = useState();
@@ -29,8 +32,14 @@ const BookingOfCus = () => {
     }, []);
     return (
 
-        <div className="BookingProfileBg">
+        <div className="BookProfileBg">
+            <div className="backToHome">
+                <NavLink to="/customer-infomation" className="backtoHome">
+                    <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
+                    <div className="textBackToHome">Back</div>
+                </NavLink>
 
+            </div>
             <div className="containerListPT">
                 Lịch Booking
                 <div className="titlePageBooking">
@@ -94,6 +103,7 @@ const BookingOfCus = () => {
                     </div>
 
                 </div>
+                <HomeFooter />
             </div>
         </div>
     );

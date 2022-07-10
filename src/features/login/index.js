@@ -112,7 +112,7 @@ const LoginPage = () => {
                       )}
                     </Field>
                   </FormAnt.Item>
-                  <div className="classes.btnContainer">
+                  <div className="btnContainer">
                     <button
                       className="btnLogin"
                       type="submit"

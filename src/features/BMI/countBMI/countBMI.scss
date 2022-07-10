@@ -1,32 +1,45 @@
-.formBMI {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    border-radius: 20px;
-    height: 300px;
-    padding-top: 20px;
-    margin-top: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 20%;
-    align-items: center;
-    margin-left: 40%;
+.bgBmi {
+    padding-bottom: 85px;
 
-    .textHeight {
-        font-weight: bold;
-        font-size: 20px;
-    }
+    .formBMI {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 10px;
+        height: 300px;
+        padding-top: 50px;
+        margin-top: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+        width: 100%;
+        align-items: center;
 
-    .inputHeight {}
 
-    .textWeight {
-        font-weight: bold;
-        font-size: 20px;
-    }
+        .textHeight {
+            font-weight: bold;
+            font-size: 20px;
+        }
 
-    .inputWeight {}
+        .inputHeight {}
 
-    .btnBMI {
-        margin-top: 20px;
+        .textWeight {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .inputWeight {}
+
+        .btnBMI {
+            margin-top: 20px;
+            border-radius: 10px;
+            width: 100px;
+            height: 40px;
+            font-size: 17px;
+            font-weight: bold;
+            background: #a50000;
+            color: white;
+
+
+        }
     }
 }

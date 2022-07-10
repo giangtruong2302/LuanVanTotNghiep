@@ -304,10 +304,27 @@ const PTShedule = (props) => {
         getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
             setDayWork(e.target.value);
 
-            console.log("Date: " + e.target.value)
+
             if (response.ScheduleWorking.rows) {
                 setTimeDetail(response.ScheduleWorking.rows);
                 setNoTimeDetail(false);
+                getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
+                    setDayWork(e.target.value);
+
+
+                    if (response.ScheduleWorking.rows) {
+                        setTimeDetail(response.ScheduleWorking.rows);
+                        setNoTimeDetail(false);
+                    } else {
+                        setNoTimeDetail(true);
+                    }
+                })
+                    .catch(() => {
+                        setTimeDetail(true);
+                    })
+                    .finally(() => {
+                        setTimeDetailLoading(false);
+                    });
             } else {
                 setNoTimeDetail(true);
             }
@@ -381,7 +398,12 @@ const PTShedule = (props) => {
                                     (
                                         timeDetail?.map((item, index) => {
                                             return (
-                                                <button className={"btn-vie"} value={item.id} onClick={(e) => openModal(e)} >{item.TimeId}</button>
+                                                (
+                                                    (item.Status === 0) ?
+                                                        <button disabled className="btn-no" value={item.id} onClick={(e) => openModal(e)} >{item.TimeId}</button>
+                                                        :
+                                                        <button className="btn-vie" value={item.id} onClick={(e) => openModal(e)} >{item.TimeId}</button>
+                                                )
                                             )
                                         })
                                     ) :

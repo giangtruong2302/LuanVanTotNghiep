@@ -7,7 +7,7 @@
   background-color: #fff;
   z-index: 99999;
 
-  .CartDrop {}
+
 
 
   .home-header-content {
@@ -54,17 +54,6 @@
 
 
 
-        .login {
-          display: flex;
-
-          .logoLogin {}
-
-          .textLogin {
-            font-size: 14px;
-          }
-
-
-        }
 
         .sub-title {
           font-weight: 400;
@@ -80,33 +69,43 @@
     .Cuscontent {
       width: 15%;
 
+      .login {
+        display: flex;
+
+
+        .logoLogin {
+          margin-top: 20px;
+          margin-left: 30px;
+        }
+
+        .textLogin {
+          margin-top: 20px;
+          font-size: 14px;
+        }
+
+
+      }
+
+
       .cusArea {
         display: flex;
         flex-direction: row;
         width: 100%;
 
 
-        .cusName {
-
-          font-weight: bold;
-          font-size: 15px;
-
-          padding-right: 50px;
+        .imgCus {
+          width: 35px;
+          border-radius: 50%;
+          margin-top: 10px;
 
         }
 
         .User {
-
-
-
-          padding-top: 23px;
-
+          margin-left: 80px;
+          margin-top: 25px;
         }
 
-        .Notify {
-          position: fixed;
-
-        }
+        .Notify {}
 
       }
     }

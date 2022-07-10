@@ -65,6 +65,8 @@
             z-index: -0;
 
 
+
+
             .contentInfo {
                 box-sizing: border-box;
 
@@ -95,26 +97,7 @@
                     padding-left: 150px;
                     position: absolute;
 
-                    .btnContainer {
-                        .btnLogin {
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 700;
-                            font-size: 18px;
-                            line-height: 22px;
-                            /* identical to box height, or 122% */
-                            text-align: center;
-                            letter-spacing: 0.4px;
-                            /* Linear */
-                            background: linear-gradient(90deg, #fd409a -3.78%, #223263 79.03%);
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text;
-                            text-fill-color: transparent;
-                            border-radius: 10px;
-                            border: none;
-                        }
-                    }
+
 
 
                     .nameCusAndPosition {
@@ -175,6 +158,7 @@
                             font-weight: bold;
                             font-size: 20px;
                             border-radius: 30px;
+
                         }
 
                         .btn-check-book {

@@ -53,7 +53,7 @@ const Specialty = (props) => {
                 >
                   <div
                     className="bg-image section-specialty"
-                    style={{ backgroundImage: `url(${img})` }}
+                    style={{ backgroundImage: `url(${item.ServiceImage})` }}
                   ></div>
                   <div className="specialty-name">{item.ServiceName}</div>
                 </NavLink>

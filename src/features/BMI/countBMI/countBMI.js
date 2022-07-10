@@ -46,7 +46,7 @@ const CountBMI = () => {
 
 
     return (
-        <div>
+        <div className="bgBmi">
             <form className="formBMI">
                 <label className="textHeight">Chiều cao (Đơn vị: m)</label>
                 <input className="heightInput" type="text" onChange={(event) => handleHeight(event)}></input>
