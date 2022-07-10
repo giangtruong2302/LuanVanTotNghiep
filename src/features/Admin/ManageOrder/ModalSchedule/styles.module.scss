@@ -1,4 +1,4 @@
-.createStaff {
+.orderDetail {
   margin-top: 20px;
 
   :global {
@@ -94,42 +94,62 @@
       -webkit-text-fill-color: transparent;
     }
   }
-  .createStaffContainer {
+  .orderContainer {
     display: flex;
     gap: 6px;
-    min-height: 590px;
+    flex-direction: column;
+    min-height: 290px;
     max-height: 100%;
     padding: 10px;
     margin-top: 10px;
 
-    .formInfo {
-      margin: 0 auto;
-      .inputRecovery {
-        background: #fcf7fe;
-        border-radius: 10px;
-        width: 315px;
-        height: 44px;
-        padding: 10px;
-        border: 0px solid #ffffff;
+    .contentOrder {
+      display: flex;
+      gap: 10px;
+      height: 100%;
+      .leftContent {
         display: flex;
-        align-items: center;
-
-        &:focus {
-          border-color: #40a9ff;
-          box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
-          outline: 0;
-        }
-        &:focus-visible {
-          border-color: #40a9ff;
-        }
-        input {
-          background: #fcf7fe;
+        flex-direction: column;
+        gap: 25px;
+        border-right: 1px solid gray;
+        padding-right: 5px;
+        .orderInfo {
+          width: 100%;
+          display: flex;
+          gap: 40%;
+          .textLeftInfo {
+            text-align: start;
+            justify-content: flex-start;
+            font-size: 14px;
+            width: 100px;
+          }
+          .textRightInfo {
+            text-align: start;
+            justify-content: flex-end;
+            font-size: 14px;
+          }
         }
       }
-      .inputError {
-        border-color: #ff7875;
-        box-shadow: 0 0 0 2px rgb(255 77 79 / 20%);
-        outline: 0;
+      .rightContent {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        .orderInfo {
+          width: 100%;
+          display: flex;
+          gap: 35%;
+          .textLeftInfo {
+            text-align: start;
+            justify-content: flex-start;
+            font-size: 14px;
+            width: 100px;
+          }
+          .textRightInfo {
+            text-align: start;
+            justify-content: flex-end;
+            font-size: 14px;
+          }
+        }
       }
       .btnRecovery {
         margin-top: 65px !important;

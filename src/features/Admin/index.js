@@ -37,6 +37,7 @@ import {
   Planet,
   CalendarCheck,
   Book,
+  ListNumbers,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -136,8 +137,8 @@ const AdminPage = () => {
   const handleViewListManager = () => {
     navigate("/admin/view-list-manager");
   };
-  const handleViewListSchedule = () => {
-    navigate("/admin/view-list-schedule-working");
+  const handleViewListOrder = () => {
+    navigate("/admin/view-list-order");
   };
   const handleViewListBlog = () => {
     navigate("/admin/view-list-blog");
@@ -154,100 +155,7 @@ const AdminPage = () => {
             mode="inline"
             defaultSelectedKeys={["1"]}
             itemIcon={<RightCircleOutlined />}
-            // items={[
-            //   getItem(
-            //     <FormattedMessage id="admin.manage-gym.manage-center" />,
-            //     "sub1",
-            //     <Buildings size={20} color="#f4f1f1" weight="fill" />,
-            //     [
-            //       {
-            //         label: "Centers",
-            //         key: "sub21",
-            //         icon: <Buildings size={20} color="#f4f1f1" weight="fill" />,
-            //         children: [
-            //           center && center.length > 0
-            //             ? center.map((item, index) => {
-            //                 return {
-            //                   label: "item.CenterName,",
-            //                   key: "index",
-            //                   icon: (
-            //                     <MapPinLine
-            //                       size={20}
-            //                       color="#eeeee7"
-            //                       weight="fill"
-            //                     />
-            //                   ),
-            //                   onClick: handleChangeCenter,
-            //                 };
-            //               })
-            //             : "",
-            //         ],
-            //       },
-            //       // getItem(
-            //       //   <FormattedMessage id="admin.manage-gym.staff" />,
-            //       //   "sub2",
-            //       //   <UsersThree size={20} color="#f4f1f1" weight="fill" />,
-            //       //   [
-            //       //     {
-            //       //       label: (
-            //       //         <FormattedMessage id="admin.manage-gym.list-of-staff" />
-            //       //       ),
-            //       //       key: "1",
-            //       //       onClick: handleChangeListStaffs,
-            //       //     },
-            //       //     getItem(
-            //       //       <FormattedMessage id="admin.manage-gym.create-staff" />,
-            //       //       "2"
-            //       //     ),
-            //       //     getItem(
-            //       //       <FormattedMessage id="admin.manage-gym.update-staff" />,
-            //       //       "3"
-            //       //     ),
-            //       //   ]
-            //       // ),
-            //       // getItem(
-            //       //   <FormattedMessage id="admin.manage-gym.customer" />,
-            //       //   "sub3",
-            //       //   <UsersFour size={20} color="#f4f1f1" weight="fill" />,
-            //       //   [
-            //       //     getItem(
-            //       //       <FormattedMessage id="admin.manage-gym.list-of-cus" />,
-            //       //       "4"
-            //       //     ),
-            //       //   ]
-            //       // ),
-            //       // getItem(
-            //       //   <FormattedMessage id="admin.manage-gym.revenue" />,
-            //       //   "sub4",
-            //       //   <Coins size={20} color="#f4f1f1" weight="fill" />,
-            //       //   [
-            //       //     getItem(
-            //       //       <FormattedMessage id="admin.manage-gym.list-of-revenue" />,
-            //       //       "5"
-            //       //     ),
-            //       //   ]
-            //       // ),
-            //       getItem(
-            //         "Blog",
-            //         "sub5",
-            //         <Books size={20} color="#f4f1f1" weight="fill" />,
-            //         [
-            //           getItem(
-            //             <FormattedMessage id="admin.manage-gym.list-of-blog" />,
-            //             "6"
-            //           ),
-            //           getItem(
-            //             <FormattedMessage id="admin.manage-gym.create-blog" />,
-            //             "7"
-            //           ),
-            //           getItem(
-            //             <FormattedMessage id="admin.manage-gym.update-blog" />,
-            //             "8"
-            //           ),
-            //         ]
-            //       ),
-            //     ]
-            //   ),
+
             //   getItem(
             //     <FormattedMessage id="admin.manage-gym.manage-account" />,
             //     "sub6",
@@ -336,12 +244,12 @@ const AdminPage = () => {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
-              icon={<CalendarCheck size={20} weight="bold" color="#fff" />}
+              icon={<ListNumbers size={20} weight="bold" color="#fff" />}
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
-              title="Quản lý Lịch làm việc"
+              title="Quản lý Đơn hàng"
             >
-              <Menu.Item onClick={handleViewListSchedule}>
-                Xem danh sách khung giờ làm việc
+              <Menu.Item onClick={handleViewListOrder}>
+                Xem danh sách đơn hàng
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu

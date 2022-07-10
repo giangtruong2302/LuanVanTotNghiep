@@ -7,8 +7,7 @@ const PhoneRenderer = (props) => {
   return (
     <>
       <div className="phoneContainer">
-        <div className="phoneText">{props.data.PhoneNumber}</div>
-        <Phone color="#0a0700" weight="light" />
+        <div className="phoneText">{props.data.createdAt}</div>
       </div>
     </>
   );

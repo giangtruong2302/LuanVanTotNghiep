@@ -8,14 +8,14 @@ const StaffRenderer = (props) => {
   const [idPT] = useState("1");
   return (
     <>
-      <Link to={`/pt-detail/${idPT}`} className="staffContainer">
+      <div className="staffContainer">
         <div className="avatar">
           {/* <img
             src={props.data.ServiceImage ? props.data.ServiceImage : avaPT}
           /> */}
         </div>
-        <div className="staffText">{props.data.StaffId}</div>
-      </Link>
+        <div className="staffText">#{props.data.id}</div>
+      </div>
     </>
   );
 };

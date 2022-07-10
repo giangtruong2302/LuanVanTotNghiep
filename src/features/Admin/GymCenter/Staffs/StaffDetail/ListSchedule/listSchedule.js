@@ -6,10 +6,7 @@ import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
-import {
-  getAllSchedule,
-  getAllWorkingOfStaff,
-} from "../../../../ManageScheduleWorking/scheduleAPI";
+import { getAllSchedule, getAllWorkingOfStaff } from "../scheduleAPI";
 import frameworkcomponents from "./path";
 // import { getAllCustomerOfCenter } from "../CusAPI";
 import { isVisible } from "@testing-library/user-event/dist/utils";

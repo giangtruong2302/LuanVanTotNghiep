@@ -15,7 +15,7 @@ import CreateService from "./ModalSchedule/modalAddService";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const { Search } = Input;
-const ScheduleWorking = () => {
+const Order = () => {
   const navigate = useNavigate();
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [status, setStatus] = useState("");
@@ -39,7 +39,7 @@ const ScheduleWorking = () => {
       <PageHeader
         className="site-page-header"
         onBack={() => navigate("/admin")}
-        subTitle="Back to dashboard"
+        subTitle="Back to dashboard of system"
         style={{
           top: 0,
           position: "sticky",
@@ -73,7 +73,7 @@ const ScheduleWorking = () => {
         draggable
         pauseOnHover
       />
-      <Fab
+      {/* <Fab
         mainButtonStyles={{ backgroundColor: "#1363DF" }}
         icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
         alwaysShowTitle={true}
@@ -84,7 +84,7 @@ const ScheduleWorking = () => {
         >
           <Plus size={20} color="#Ffff" weight="fill" />
         </Action>
-      </Fab>
+      </Fab> */}
       {showModalAdd && (
         <CreateService
           showModal={showModalAdd}
@@ -95,4 +95,4 @@ const ScheduleWorking = () => {
     </div>
   );
 };
-export default ScheduleWorking;
+export default Order;

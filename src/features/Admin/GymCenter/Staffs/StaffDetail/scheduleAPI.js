@@ -1,4 +1,4 @@
-import axios from "../../../axios";
+import axios from "../../../../../axios";
 
 const getAllSchedule = (page) => {
   return axios.get(`/api/get-all-schedule?page=${page}`);

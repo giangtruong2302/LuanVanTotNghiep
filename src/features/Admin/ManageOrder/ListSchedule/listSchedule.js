@@ -6,7 +6,7 @@ import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
-import { getAllSchedule } from "../scheduleAPI";
+import { getAllSchedule, handleGetAllOrder } from "../orderAPI";
 import frameworkcomponents from "./path";
 // import { getAllCustomerOfCenter } from "../CusAPI";
 import { isVisible } from "@testing-library/user-event/dist/utils";
@@ -33,7 +33,7 @@ const ListSchedule = (props) => {
     },
 
     {
-      field: "StaffName",
+      field: "Order",
       flex: 2,
       // width: 215,
       // headerName: "PT",
@@ -42,18 +42,32 @@ const ListSchedule = (props) => {
     },
 
     {
-      field: "DayWork",
+      field: "BookingReservationId",
       // width: 215,
       // headerName: "Email",
       // type: "rightAligned",
       cellRenderer: "emailRenderer",
     },
     {
-      field: "TimeId",
+      field: "Status",
       // width: 215,
       // headerName: "Address",
       // type: "rightAligned",
       cellRenderer: "addressRenderer",
+    },
+    {
+      field: "Amount",
+      // width: 215,
+      // headerName: "Address",
+      // type: "rightAligned",
+      cellRenderer: "statusRenderer",
+    },
+    {
+      field: "DayCreateOrder",
+      // width: 215,
+      // headerName: "Address",
+      // type: "rightAligned",
+      cellRenderer: "phoneRenderer",
     },
   ]);
   const [gridApiCustomer, setGridApiCustomer] = useState();
@@ -67,10 +81,10 @@ const ListSchedule = (props) => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllSchedule(parseInt(page))
+          handleGetAllOrder(parseInt(page))
             .then((res) => {
               // console.log(res.data.data);
-              const data = res.schedule;
+              const data = res.order;
               if (data && data.rows.length > 0) {
                 const lastRow = () => {
                   if (parseInt(data.totalPage) <= 1) return data.count;
