@@ -49,7 +49,7 @@ const ListPT = () => {
         </div>
       ) : (
         <div className="listPTContent">
-          <InfiniteScroll
+          <InfiniteScroll className="scrollPT"
             dataLength={getAllStaff?.length ? getAllStaff.length : 0}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             loader={
@@ -70,8 +70,8 @@ const ListPT = () => {
                         src={kickboxing}
                         style={{
                           borderRadius: "100px",
-                          width: "80px",
-                          height: "80px",
+                          width: "90px",
+                          height: "90px",
                           flex: "none",
                           order: 0,
                           flexGrow: 0,

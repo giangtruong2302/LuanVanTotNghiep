@@ -7,6 +7,9 @@ import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import ListPTService from "./ListPTService/listPTService";
 import { useParams } from "react-router-dom";
 import { getServiceGymDetail } from "./serviceGymDetailAPI";
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
+import HomeFooter from "../../../pages/HomePage/HomeFooter";
 
 const ServiceGymDetail = () => {
   const navigate = useNavigate();
@@ -36,24 +39,13 @@ const ServiceGymDetail = () => {
   return (
 
     <div className="ServiceGymDetailBg">
-      <PageHeader
-        className="site-page-header"
-        onBack={() => navigate("/")}
-        subTitle="Back to home"
-        style={{
-          zIndex: "99",
-          top: 0,
-          position: "sticky",
-          background:
-            "linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%)",
-          color: "#fff",
-          fontWeight: "600",
-        }}
-        extra={[
-          <Question size={20} color="#eeeee7" weight="fill" />,
-          <List size={20} color="#eeeee7" weight="fill" />,
-        ]}
-      />
+      <div className="backToHome">
+        <NavLink to="/" className="backtoHome">
+          <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+          <div className="textBackToHome">Back to home</div>
+        </NavLink>
+
+      </div>
 
       <div className="ServiceDetailContent">
         <Row>
@@ -86,33 +78,18 @@ const ServiceGymDetail = () => {
                     <p>WorkDuration : {servicesDetail?.WorkDuration}</p>
                     <p>Price : {servicesDetail?.Price}</p>
                   </div>
-                  {!isSeeMoreServiceDetail && (
-                    <span
-                      onClick={() => setIsSeeMoreServiceDetail(true)}
-                      className="linkSeemore"
-                    >
-                      See more
-                    </span>
-                  )}
-                  {isSeeMoreServiceDetail ? (
-                    <>
-                      <div className="serviceDetailDefineSeemore">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dolorem voluptatum hic id sint voluptatibus
-                        sapiente similique dolore veritatis perspiciatis tempora
-                        magni, dignissimos impedit error beatae veniam quaerat
-                        fuga minima quam.
-                      </div>
-                      <span
-                        onClick={() => setIsSeeMoreServiceDetail(false)}
-                        className="linkCollapse"
-                      >
-                        Collapse
-                      </span>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+
+                  <div className="serviceDetailDefineSeemore">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing
+                    elit. Dolorem voluptatum hic id sint voluptatibus
+                    sapiente similique dolore veritatis perspiciatis tempora
+                    magni, dignissimos impedit error beatae veniam quaerat
+                    fuga minima quam.
+                  </div>
+
+
+
+
                 </div>
               </Col>
             </Row>
@@ -122,6 +99,7 @@ const ServiceGymDetail = () => {
           </Col>
         </Row>
       </div>
+      <HomeFooter />
     </div>
   );
 };

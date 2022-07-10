@@ -88,26 +88,25 @@ const ListService = () => {
                   to={`/service-detail/${item.id}`}
                   className={classes.service}
                 >
-                  <div className={classes.breadcumService}>
-                    <div className={classes.categoryService}>{item.id}</div>
-                  </div>
+
                   <div className={classes.lineService}></div>
                   <div className={classes.serviceInfo}>
                     <div className={classes.info}>
+                      <p className={classes.textNameService}>
+                        {item.ServiceName}
+                      </p>
                       <img
                         src={kickboxing}
                         style={{
                           borderRadius: "100px",
-                          width: "30px",
-                          height: "30px",
+                          width: "90px",
+                          height: "90px",
                           flex: "none",
                           order: 0,
                           flexGrow: 0,
                         }}
                       />
-                      <p className={classes.textNameService}>
-                        {item.ServiceName}
-                      </p>
+
                     </div>
                     <div className={classes.detailInfo}>
                       <p>{item.Price}</p>

@@ -1,29 +1,33 @@
 .listCenterContent {
-  overflow: auto;
-  height: 100vh;
+
+  overflow: hidden;
+  height: auto;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   // align-items: flex-start;
-  padding: 0 20px;
+  padding-top: 30px;
   gap: 15px;
   position: relative;
   width: 100vw;
   // height: calc(100% - 20px);
-
+  background-color: white;
   border-radius: 5px;
+  padding-bottom: 30px;
 
-  :global {
-    .infinite-scroll-component__outerdiv {
-      width: 100%;
-    }
+
+  .scroll {
+    width: 100%;
+    overflow-x: hidden;
   }
 
+
   .Center {
+
     box-sizing: border-box;
     margin: 0 auto;
-    width: 100%;
-    height: 119px;
+    width: 1000px;
+    height: 150px;
     background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
     /* light blue */
     border: 1px solid #141415;
@@ -49,8 +53,10 @@
       padding-right: 250px;
 
       .infoCen {
+        margin-top: 20px;
         display: flex;
         align-items: center;
+        width: 300px;
 
 
         .textNameCenter {
@@ -61,15 +67,14 @@
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
-          font-size: 14px;
+          font-size: 20px;
           line-height: 17px;
           margin-top: 5px;
           /* identical to box height */
 
           /* Black blue */
 
-          color: #223263;
-
+          color: black;
           /* Inside auto layout */
 
           flex: none;
@@ -87,22 +92,26 @@
         justify-content: flex-end;
         width: 100%;
         height: 17px;
+        color: black;
 
 
 
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 20px;
         line-height: 17px;
         /* identical to box height */
 
         /* #000000 */
 
-        color: rgba(0, 0, 0, 0.65);
+
 
         .addressCenter {
-          margin-left: 150px;
+          margin-top: 5px;
+          margin-left: 200px;
+
+          width: 600px;
         }
 
         .lineDetailInfoCenter {

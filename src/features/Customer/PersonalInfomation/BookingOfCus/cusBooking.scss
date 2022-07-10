@@ -1,6 +1,6 @@
 .BookingProfileBg {
 
-    height: 100vh;
+    height: auto;
     max-width: 100vw;
     background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
 
@@ -16,29 +16,10 @@
         font-family: "roboto";
         font-weight: bold;
         font-size: 50px;
+        min-height: 100vh;
+        overflow: hidden;
 
-        .backToHome {
-            width: 100%;
-            background: linear-gradient(305.38deg, #949292 -50.47%, #f2edf0 94.82%);
-            height: 60px;
-            padding-left: 20px;
 
-            .backtoHome {
-                padding-top: 15px;
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-
-                // width: fit-content;
-                .textBackToHome {
-                    font-family: "roboto";
-                    font-size: 14px;
-                    font-weight: 400;
-                    margin-left: 10px;
-                    color: #223263;
-                }
-            }
-        }
 
         .titlePageBooking {
             padding-right: 150px;
@@ -50,8 +31,8 @@
                 margin-left: 200px;
 
                 .listBookingContent {
-                    overflow: auto;
-                    max-height: auto;
+                    overflow: hidden;
+                    min-height: auto;
                     display: flex;
                     margin: 0 10px;
                     flex-direction: column;

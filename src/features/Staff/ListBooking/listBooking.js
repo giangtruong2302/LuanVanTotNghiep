@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { getAcceptBooking } from "./listBookingAPI";
 import { getCancelBooking } from "./listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import moment from "moment";
 const ListBooking = () => {
     const [noService, setNoservice] = useState(false);
     const [bookingOfPt, setBookingOfPt] = useState();
@@ -22,6 +23,8 @@ const ListBooking = () => {
     const [amountBooking, setAmountBooing] = useState(30000);
     const [bookingId, setBookingId] = useState(2)
     const staffInfo = useSelector((state) => state.staff.staffInfo);
+    const [statusPage, setStatusPage] = useState("")
+
     const options = {
 
         position: "top-right",
@@ -47,15 +50,17 @@ const ListBooking = () => {
             .finally(() => {
                 setBookingOfPtLoading(false);
             });
-    }, []);
+    }, [statusPage]);
     const [messRes, setMessRes] = useState()
-    const handleIdBooking = (id, CustomerId, CustomerName, StaffId) => {
-        getAcceptBooking(schedule, id, CustomerId, CustomerName, StaffId, amountBooking).then((response) => {
+    const handleIdBooking = (id, ScheduleId) => {
+        getAcceptBooking(schedule, id, ScheduleId).then((response) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
+                setStatusPage(Date.now())
             } else {
                 toast.error("Fail", options)
+
             }
 
 
@@ -68,6 +73,7 @@ const ListBooking = () => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
+                setStatusPage(Date.now())
             } else {
                 toast.error("Fail", options)
             }
@@ -89,7 +95,7 @@ const ListBooking = () => {
                     />
                 </div>
             ) : (
-                <div className="listCenterContent ">
+                <div className="listStaffBookingContent ">
                     <InfiniteScroll
                         dataLength={8}
                         style={{ display: "flex", flexDirection: "column", gap: "20px" }}
@@ -116,12 +122,12 @@ const ListBooking = () => {
 
                                                 </div>
                                                 <div className="infoService">
-                                                    <p className={"textNameCenter"}>Thời gia bắt đầu: {item.StartTime}</p>
-                                                    <p className={"textNameCenter"}>Thời gia kết thúc : {item.EndTime}</p>
+                                                    <p className={"textNameCenter"}>Thời gia bắt đầu: {moment(item.StartTime).format("DD-MM-YYYY")} </p>
+                                                    <p className={"textNameCenter"}>Thời gia kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")}</p>
                                                     <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
                                                 </div>
                                                 <div className="detailInfo">
-                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.CustomerId, item.CustomerName, item.StaffId)} >Xác nhận</button>
+                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId)} >Xác nhận</button>
                                                     <span className="lineDetailInfo"></span>
                                                     <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id)} >Từ chối</button>
                                                 </div>

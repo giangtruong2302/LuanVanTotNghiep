@@ -71,7 +71,7 @@ const ListCenter = () => {
         </div>
       ) : (
         <div className="listCenterContent">
-          <InfiniteScroll
+          <InfiniteScroll className="scroll"
             dataLength={getAllGymCenter?.length ? getAllGymCenter.length : 0}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             loader={
@@ -92,8 +92,8 @@ const ListCenter = () => {
                           src={chinhanh}
                           style={{
                             borderRadius: "6px",
-                            width: "80px",
-                            height: "80px",
+                            width: "180px",
+                            height: "100px",
                             flex: "none",
                             order: 0,
                             flexGrow: 0,
@@ -104,7 +104,7 @@ const ListCenter = () => {
                       <div className="detailInfoCenter">
                         <div className="addressCenter">{item.CenterAddress}</div>
                         <span className="lineDetailInfoCenter"></span>
-                        <p>6/month</p>
+
                       </div>
                     </div>
                   </Link>
