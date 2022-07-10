@@ -1,4 +1,5 @@
 import { Input, Button, Menu, Dropdown, Badge } from "antd";
+import { BellOutlined } from '@ant-design/icons';
 import * as actions from "../../store/actions";
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import moment from "moment";
@@ -14,7 +15,7 @@ import {
   SignOut,
   Gear,
   User,
-  ShoppingCart
+
 } from "phosphor-react";
 import React, { useState, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
@@ -170,67 +171,66 @@ const HomeHeader = (props) => {
               </li>
             </ul>
           </div>
+          <div className="Cuscontent">
+            <>
+              {(cusInfo)
+                ?
+                <div className="cusArea">
+                  <div className="cusName">{cusInfo["AccountCustomer.CustomerName"]}</div>
+                  <div className="User">
 
-          <div className="right-content">
-            <div className="Cuscontent">
-              <>
-                {(cusInfo)
-                  ?
-                  <div className="cusArea">
-
-                    <div className="User">
-                      <Dropdown.Button
-                        style={{ float: 'right' }}
-                        overlay={userMenu}
-                        icon={
-                          <UserOutlined
-                            style={{
-                              fontSize: '28px',
-                              backgroundColor: '#f0f0f0',
-                              borderRadius: '50%',
-                            }}
-                          />
-                        }
-                      ></Dropdown.Button>
-                    </div>
-                    <div className="cart">
-                      <Dropdown.Button
-                        style={{ float: 'right' }}
-                        overlay={cartMenu}
-                        icon={
-
-
-                          <ShoppingCartOutlined
-                            style={{
-                              fontSize: '28px',
-                              backgroundColor: '#f0f0f0',
-                              borderRadius: '50%',
-                            }}
-                          />
-
-
-                        }
-                      ></Dropdown.Button>
-                    </div>
+                    <Dropdown
+                      overlay={userMenu}
+                    >
+                      <Gear
+                        style={{
+                          fontSize: '30px',
+                          backgroundColor: '#f0f0f0',
+                          borderRadius: '50%',
+                        }} />
+                    </Dropdown>
 
                   </div>
-                  :
-                  <NavLink to="/login">
-                    <div className="login">
-                      <div className="logoLogin">
-                        <SignIn size={24} color="#1a1a19" weight="fill" />
-                      </div>
-                      <span className="textLogin">
-                        <FormattedMessage id="homeHeader.login" />
-                      </span>
+                  <div className="Notify">
+                    <Dropdown
+                      // style={{ float: 'right' }}
+                      placement="bottomRight"
+                      overlay={cartMenu}
+                    >
+                      <Badge count={countBooking} offset={[0, 0]}>
+                        <BellOutlined
+
+                          size="small"
+                          style={{
+                            fontSize: '28px',
+                            backgroundColor: '#f0f0f0',
+                            borderRadius: '50%',
+                          }}
+                        />
+                      </Badge>
+                    </Dropdown>
+                  </div>
+
+                </div>
+                :
+                <NavLink to="/login">
+                  <div className="login">
+                    <div className="logoLogin">
+                      <SignIn size={24} color="#1a1a19" weight="fill" />
                     </div>
-                  </NavLink>
+                    <span className="textLogin">
+                      <FormattedMessage id="homeHeader.login" />
+                    </span>
+                  </div>
+                </NavLink>
 
-                }
+              }
 
 
-              </>
-            </div>
+            </>
+          </div>
+          <div className="right-content">
+
             <div className="support">
               <i className="fas fa-question-circle"></i>
               <FormattedMessage id="homeHeader.support" />

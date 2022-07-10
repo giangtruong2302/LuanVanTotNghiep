@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Col, PageHeader, Row, Button } from "antd";
+import { Breadcrumb, Col, PageHeader, Row, Button, message, Upload } from "antd";
 import ava from "../../../assets/images/imgStaff/staff.png"
 import { useParams } from "react-router-dom";
 import { getPTDetail } from "./PersonalInfoAPI";
@@ -10,6 +10,7 @@ import { updateStaffDetail } from "./PersonalInfoAPI";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import './PersonalInfo.scss';
+import { PictureOutlined } from "@ant-design/icons";
 const { Option } = Select;
 const customStyles = {
     content: {
@@ -41,13 +42,64 @@ const PersonalInfoStaff = () => {
     const id = useParams();
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [form] = Form.useForm();
+    const [fileType, setFileType] = useState();
+    const [fileSize, setFileSize] = useState()
+    const [statusPage, setStatusPage] = useState("")
+    const beforeUpload = (file) => {
+        const isJpgOrPng =
+            file.type === "image/jpeg" ||
+            file.type === "image/png" ||
+            file.type === "image/svg" ||
+            file.type === "image/jpg";
+        const fileType = file.type?.split("/")[1];
+        fileType && setFileType(fileType);
+        if (!isJpgOrPng) {
+            message.error("you can only upload file JPG/PNG?SVG/JPEG !");
+        }
+        if (file.size) {
+            const isLt5M = file.size / 1024 / 1024 < 5;
+            setFileSize(file.size / 1024 / 1024 < 1 ? 1 : file.size / 1024 / 1024);
+            if (!isLt5M) {
+                message.error("Your image must smaller than 5MB");
+            }
+            return isJpgOrPng && isLt5M;
+        }
+        return isJpgOrPng;
+    };
+    const [loading, setLoading] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    const [fileName, setFileName] = useState();
+    const getBase64 = (img, callback) => {
+        setLoading(false);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(img);
+    };
+    console.log("")
+    const handleChangeImage = async (info) => {
+
+        setLoading(true);
+        if (info.file) {
+            getBase64(info.file.originFileObj, (imgUrl) => {
+                setImageUrl(imgUrl);
+                setFileName(info.file.name);
+                setLoading(false);
+            });
+        }
+    };
+    const uploadButton = (
+        <div className="btnUpload">
+            {loading ? <PictureOutlined /> : <PictureOutlined />}
+            <div className="text">Change Image</div>
+        </div>
+    );
 
     const onFinish = (values) => {
 
-        updateStaffDetail(staffInfo["id"], values.fullName, values.email, values.phoneNumber, values.Gender, values.DayOfBirth, values.address, staffInfo["roleId"], staffInfo["AccountStaff.StaffImage"], staffInfo["AccountStaff.CenterId"], staffInfo["AccountStaff.SalaryId"]).then((response) => {
-            if (response.message.errorCode === 0) {
+        updateStaffDetail(staffInfo["AccountStaff.id"], staffInfo["AccountStaff.ExternalId"], values.fullName, values.email, imageUrl, fileName, values.phoneNumber, values.Gender, values.address, staffInfo["roleId"], values.DayOfBirth, staffInfo["AccountStaff.CenterId"], staffInfo["AccountStaff.SalaryId"]).then((response) => {
+            if (response.errorCode === 0) {
                 toast.success("Success", options)
-
+                setStatusPage(Date.now())
             } else {
 
                 toast.error("Fail", options);
@@ -87,7 +139,7 @@ const PersonalInfoStaff = () => {
             .finally(() => {
                 setInfoDetailLoading(false);
             });
-    }, []);
+    }, [statusPage]);
     return (
         <div className="StaffDetailContainer">
             <div className="StaffProfile">
@@ -213,6 +265,17 @@ const PersonalInfoStaff = () => {
                                                 >
                                                     <Input />
                                                 </Form.Item>
+                                                Avatar:
+                                                <Upload
+                                                    name="avatar"
+                                                    listType="picture-card"
+                                                    className="avatar-uploader"
+                                                    showUploadList={false}
+                                                    beforeUpload={beforeUpload}
+                                                    onChange={handleChangeImage}
+                                                >
+                                                    {uploadButton}
+                                                </Upload>
 
                                                 <ToastContainer />
 

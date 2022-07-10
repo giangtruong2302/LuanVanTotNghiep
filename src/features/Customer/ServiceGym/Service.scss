@@ -1,48 +1,42 @@
 .ServiceProfileBg {
-    background-color: #fff;
+
     max-height: 100vh;
     max-width: 100vw;
 
 
 
-    .containerServiceList {
-        max-width: 100vw;
-        // margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+    .backToHome {
+        width: 100%;
+        background: #a50000;
 
-        .backToHome {
-            width: 100%;
-            background: #a50000;
+        height: 60px;
 
-            height: 60px;
+        .backToHomeLink {
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
 
-            .backtoHome {
-                padding-top: 15px;
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-
-                // width: fit-content;
-                .textBackToHome {
-                    font-family: "roboto";
-                    font-size: 18px;
-                    font-weight: 400;
-                    margin-left: 10px;
-                    color: white;
-                }
+            // width: fit-content;
+            .textBackToHome {
+                font-family: "roboto";
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+                color: white;
             }
         }
+    }
 
-        .listItem {
-            width: 100%;
-            margin-top: 15px;
 
-            height: calc(100vh - 160px);
-            // height: calc(100vh -);
 
-        }
+
+    .listItem {
+        width: 100%;
+
+
+        height: calc(100vh - 160px);
+        // height: calc(100vh -);
+
     }
 }

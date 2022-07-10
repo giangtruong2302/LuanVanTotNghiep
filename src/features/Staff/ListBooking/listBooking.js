@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { getAcceptBooking } from "./listBookingAPI";
 import { getCancelBooking } from "./listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import moment from "moment";
 const ListBooking = () => {
     const [noService, setNoservice] = useState(false);
     const [bookingOfPt, setBookingOfPt] = useState();
@@ -121,8 +122,8 @@ const ListBooking = () => {
 
                                                 </div>
                                                 <div className="infoService">
-                                                    <p className={"textNameCenter"}>Thời gia bắt đầu: {item.StartTime}</p>
-                                                    <p className={"textNameCenter"}>Thời gia kết thúc : {item.EndTime}</p>
+                                                    <p className={"textNameCenter"}>Thời gia bắt đầu: {moment(item.StartTime).format("DD-MM-YYYY")} </p>
+                                                    <p className={"textNameCenter"}>Thời gia kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")}</p>
                                                     <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
                                                 </div>
                                                 <div className="detailInfo">

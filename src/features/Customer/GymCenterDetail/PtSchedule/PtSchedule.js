@@ -19,7 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getDetailService } from "./PtScheduleAPI";
 import { getDisCount } from "./PtScheduleAPI";
-
+import { getCenterDetail } from "../centerDetailAPI"
 const customStyles = {
     content: {
         top: '50%',
@@ -46,10 +46,28 @@ const PTShedule = (props) => {
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [secondMonth, SetSecondMonth] = useState("2629743000");
-
+    const [centerDetail, setCenterDetail] = useState();
+    const [nocenterDetail, setNoCenterDetail] = useState(false);
+    const [, setCenterDetailLoading] = useState(true);
+    const [centerName, setCenterName] = useState();
     function openModal(e) {
         setIsOpen(true);
         setScheduleId(e.target.value)
+        getCenterDetail(props.centerId).then((response) => {
+            if (response.centerDetail) {
+                setCenterName(response.centerDetail.CenterName)
+                setCenterDetail(response.centerDetail);
+                setNoCenterDetail(false);
+            } else {
+                setNoCenterDetail(true);
+            }
+        })
+            .catch(() => {
+                setNoCenterDetail(true);
+            })
+            .finally(() => {
+                setCenterDetailLoading(false);
+            });
 
     }
 
@@ -167,7 +185,7 @@ const PTShedule = (props) => {
             });
     }, []);
     const [form] = Form.useForm();
-    const [status, setStatus] = useState("PENDING")
+    const [status, setStatus] = useState("")
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [centerId, setCenterId] = useState();
@@ -306,7 +324,7 @@ const PTShedule = (props) => {
 
 
     const onFinish = (values) => {
-        createBooking(cusInfo["AccountCustomer.id"], parseInt(values.pt), cusInfo["fullName"], props.ptName, values.center, values.service, (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(dayWork)).format("YYYY-MM-DD")), (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(endTime)).format("YYYY-MM-DD")), status, values.discount, ((priceDiscount) - (((priceDiscount) * (discount)) / 100)), scheduleId).then((response) => {
+        createBooking(cusInfo["AccountCustomer.id"], props.ptId, cusInfo["fullName"], props.ptName, values.center, values.service, (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(dayWork)).format("YYYY-MM-DD")), (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(endTime)).format("YYYY-MM-DD")), status, values.discount, ((priceDiscount) - (((priceDiscount) * (discount)) / 100)), scheduleId).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -392,57 +410,9 @@ const PTShedule = (props) => {
                                         >
                                             <Input />
                                         </Form.Item>
+
                                         Ngày bắt đầu : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dayWork)}
-                                        <p></p>
-
-                                        Center :
-                                        <Form.Item
-                                            name="center"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-
-
-                                        >
-                                            <Select
-                                                placeholder="Select a center"
-                                                onChange={onHandleCenterId}
-                                            >
-                                                {allGymCenter?.map((item, index) => {
-                                                    return (
-                                                        <>
-                                                            <Option value={item.id} >{item.CenterName}</Option>
-
-                                                        </>
-                                                    )
-                                                })}
-                                            </Select>
-                                        </Form.Item>
-                                        PT :
-                                        <Form.Item
-                                            name="pt"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                placeholder="Select your PT"
-                                                onChange={onHandlePTId}
-                                            >
-                                                {PtOfCenter?.map((item, index) => {
-                                                    return (
-                                                        <>
-                                                            <Option value={item.id}> {item.StaffName}</Option>
-
-                                                        </>
-                                                    )
-                                                })}
-                                            </Select>
-                                        </Form.Item>
+                                        <br></br>
                                         Service :
                                         <Form.Item
                                             name="service"
@@ -464,16 +434,24 @@ const PTShedule = (props) => {
                                             })}
                                             </Select>
                                         </Form.Item>
-                                        Ngày kết thúc : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(endTime)}
-                                        <br></br>
-                                        Khuyến mãi : {discount} %
+                                        <p> Center : {centerName}</p>
+
+
+
+                                        <p>
+                                            PT : {props.ptName}
+                                        </p>
+
+
+                                        <p> Ngày kết thúc : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(endTime)}</p>
+                                        <p>Khuyến mãi : {discount} %</p>
 
                                         <Form.Item
                                             name="price"
                                             label="Giá"
 
                                         >
-                                            {(priceDiscount) - (((priceDiscount) * (discount)) / 100)}
+                                            {((priceDiscount) - (((priceDiscount) * (discount)) / 100)) ? ((priceDiscount) - (((priceDiscount) * (discount)) / 100)) + " VND" : "0 VND"}
                                         </Form.Item>
                                         <Form.Item
                                             name="discount"

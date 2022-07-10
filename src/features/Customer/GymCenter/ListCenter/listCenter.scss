@@ -1,7 +1,7 @@
 .listCenterContent {
 
   overflow: hidden;
-  height: 420px;
+  height: auto;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
@@ -13,6 +13,7 @@
   // height: calc(100% - 20px);
   background-color: white;
   border-radius: 5px;
+  padding-bottom: 30px;
 
 
   .scroll {

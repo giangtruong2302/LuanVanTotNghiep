@@ -10,25 +10,25 @@ import "../../../pages/HomePage/HomePage.scss"
 const ServiceGym = () => {
   return (
     <div className="ServiceProfileBg">
-      <div className="containerServiceList">
-        <div className="backToHome">
-          <NavLink to="/" className="backToHomeLink">
-            <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-            <div className="textBackToHome">Back to home</div>
-          </NavLink>
-          <div>
-            <SearchService />
-          </div>
-        </div>
 
-        <div className="listItem">
-          <ListService /> <HomeFooter />
-
-        </div>
+      <div className="backToHome">
+        <NavLink to="/" className="backToHomeLink">
+          <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+          <div className="textBackToHome">Back to home</div>
+        </NavLink>
 
       </div>
+      <div>
+        <SearchService />
+      </div>
+      <div className="listItem">
+        <ListService />
 
+      </div>
+      <HomeFooter />
     </div>
+
+
   );
 };
 export default ServiceGym;

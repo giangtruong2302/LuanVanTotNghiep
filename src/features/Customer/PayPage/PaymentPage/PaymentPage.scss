@@ -1,146 +1,197 @@
-.titlePage {
-    width: 100%;
+.PaymentBg {
+    background-color: #fff;
+    max-height: auto;
+    max-width: 100vw;
+    overflow: hidden;
+
+    .containerPayment {
+        max-width: 100vw;
+        // margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 40px;
+
+        .backToHome {
+            width: 100%;
+            background: #a50000;
+            height: 60px;
+            padding-left: 20px;
+
+            .backtoHome {
+                padding-top: 15px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                .textBackToHome {
+                    font-family: "roboto";
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-left: 10px;
+                    color: white;
+                }
+            }
 
 
-    margin-top: 40px;
-    justify-content: center;
 
-    .step {
-        margin-top: 30px;
-        width: 60%;
-        margin-left: 340px;
-    }
-}
-
-.pageContent {
-    width: 100%;
-    margin-top: 50px;
-
-    .cusOrder {
-        border-radius: 40px;
-        float: left;
-        width: 50%;
-        border: 1px solid;
-        padding: 10px;
-        box-shadow: 3px 3px 3px 5px #cdcccc;
-        margin-left: 100px;
-        height: 400px;
-
-        .total {
-            float: right;
-            margin-right: 50px;
-            font-size: 40px;
-            margin-top: 20px;
         }
 
-        .orderTitle {
-            text-align: left;
-            font-size: 35px;
-            border-bottom: solid rgb(207, 203, 203) 1px;
-            margin-left: 30px;
-            padding-bottom: 10px;
-        }
-
-        .content {
+        .titlePage {
             width: 100%;
 
 
-            .leftContent {
-                float: left;
-                width: 50%;
-                padding-bottom: 20px;
-                border-bottom: solid rgb(207, 203, 203) 1px;
+            margin-top: 40px;
+            justify-content: center;
 
+            .thisIsPayment {
+                font-size: 30px;
+                text-align: center;
+                font-weight: bold;
             }
 
-            .rightContent {
-                float: right;
-                width: 50%;
-                padding-bottom: 20px;
-                border-bottom: solid rgb(207, 203, 203) 1px;
-
+            .step {
+                margin-top: 30px;
+                width: 60%;
+                margin-left: 340px;
             }
         }
 
-
-        .itemTitle {
-            margin-left: 50px;
-            margin-top: 12px;
-            text-align: left;
-            font-size: 24px;
-
-        }
-
-        .itemContent {
-            margin-left: 50px;
-            margin-top: 12px;
-            text-align: left;
-            font-size: 19px;
-            color: #9f9e9e;
-        }
-
-
-    }
-
-    .methodPayment {
-        border-radius: 40px;
-        text-align: left;
-        font-size: 30px;
-        float: right;
-        width: 30%;
-        border: 1px solid;
-        padding: 10px;
-        box-shadow: 3px 3px 3px 5px #cdcccc;
-        margin-right: 150px;
-        height: 280px;
-
-
-        .methodTiltle {
-            text-align: left;
-            font-size: 35px;
-            border-bottom: solid rgb(207, 203, 203) 1px;
-            margin-left: 30px;
-            padding-bottom: 10px;
-        }
-
-        .methodChoose {
-            margin-left: 30px;
-            margin-top: 12px;
-            text-align: left;
-            font-size: 20px;
-            ;
-        }
-
-        .imgMethod {
+        .pageContent {
             width: 100%;
+            margin-top: 50px;
 
-            .momo {
-                width: 20%;
+            .cusOrder {
+                border-radius: 40px;
                 float: left;
-                margin-top: 20px;
-                margin-left: 100px;
-            }
-
-            .stripe {
-                width: 20%;
+                width: 50%;
+                border: 1px solid;
+                padding: 10px;
                 box-shadow: 3px 3px 3px 5px #cdcccc;
-                height: 80px;
+                margin-left: 100px;
+                height: 400px;
+
+                .total {
+                    float: right;
+                    margin-right: 50px;
+                    font-size: 40px;
+                    margin-top: 20px;
+                }
+
+                .orderTitle {
+                    text-align: left;
+                    font-size: 35px;
+                    border-bottom: solid rgb(207, 203, 203) 1px;
+                    margin-left: 30px;
+                    padding-bottom: 10px;
+                }
+
+                .content {
+                    width: 100%;
+
+
+                    .leftContent {
+                        float: left;
+                        width: 50%;
+                        padding-bottom: 20px;
+                        border-bottom: solid rgb(207, 203, 203) 1px;
+
+                    }
+
+                    .rightContent {
+                        float: right;
+                        width: 50%;
+                        padding-bottom: 20px;
+                        border-bottom: solid rgb(207, 203, 203) 1px;
+
+                    }
+                }
+
+
+                .itemTitle {
+                    margin-left: 50px;
+                    margin-top: 12px;
+                    text-align: left;
+                    font-size: 24px;
+
+                }
+
+                .itemContent {
+                    margin-left: 50px;
+                    margin-top: 12px;
+                    text-align: left;
+                    font-size: 19px;
+                    color: #9f9e9e;
+                }
+
+
+            }
+
+            .methodPayment {
+                border-radius: 40px;
+                text-align: left;
+                font-size: 30px;
                 float: right;
-                margin-top: 20px;
-                margin-right: 90px;
+                width: 30%;
+                border: 1px solid;
+                padding: 10px;
+                box-shadow: 3px 3px 3px 5px #cdcccc;
+                margin-right: 150px;
+                height: 280px;
+
+
+                .methodTiltle {
+                    text-align: left;
+                    font-size: 35px;
+                    border-bottom: solid rgb(207, 203, 203) 1px;
+                    margin-left: 30px;
+                    padding-bottom: 10px;
+                }
+
+                .methodChoose {
+                    margin-left: 30px;
+                    margin-top: 12px;
+                    text-align: left;
+                    font-size: 20px;
+                    ;
+                }
+
+                .imgMethod {
+                    width: 100%;
+
+                    .momo {
+                        width: 20%;
+                        float: left;
+                        margin-top: 20px;
+                        margin-left: 100px;
+                    }
+
+                    .stripe {
+                        width: 20%;
+                        box-shadow: 3px 3px 3px 5px #cdcccc;
+                        height: 80px;
+                        float: right;
+                        margin-top: 20px;
+                        margin-right: 90px;
+                    }
+                }
+            }
+
+            .btn-pay {
+                background-color: rgb(60, 218, 42);
+                margin-top: 30px;
+                color: white;
+                margin-left: 180px;
+                border-radius: 25px;
+                border: none;
+                box-shadow: 5px 5px 5px 5px #dddbdb;
+                font-weight: bold;
+                font-size: 30px;
+                width: 200px;
+                height: 60px;
+                border: solid black 1px;
             }
         }
-    }
-
-    .btn-pay {
-        background-color: rgb(60, 218, 42);
-        margin-top: 30px;
-        color: white;
-        margin-right: 80px;
-        border-radius: 25px;
-        border: none;
-        box-shadow: 5px 5px 5px 5px #dddbdb;
-        font-weight: bold;
-        width: 350px;
     }
 }

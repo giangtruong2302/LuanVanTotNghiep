@@ -39,9 +39,10 @@ const ListPTService = () => {
   const [center, SetCenter] = useState();
   const [totalPage, setTotalPage] = useState(0);
   const [selectCenterId, setSelectSenterId] = useState(1);
-
+  const [centerId, setCenterId] = useState()
 
   const onChangeCenter = (value) => {
+    setCenterId(value);
     getPtOfService(value, 1).then((response) => {
 
       if (response.ptOfCenter.rows) {
@@ -115,7 +116,7 @@ const ListPTService = () => {
             ]}
             extra={
               <div className="ptSchedule">
-                <PTShedule ptId={item.id} ptName={item.StaffName} />
+                <PTShedule ptId={item.id} ptName={item.StaffName} centerId={centerId} />
               </div>
             }
           >
