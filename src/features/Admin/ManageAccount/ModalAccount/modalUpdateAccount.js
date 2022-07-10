@@ -62,7 +62,7 @@ const UpdateAccount = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitCreateStaff = useCallback(
+  const handleSubmitUpdateStaff = useCallback(
     (values) => {
       console.log("check values: ", values);
       //setDifferentPass(false)
@@ -174,7 +174,7 @@ const UpdateAccount = (props) => {
                 onSubmit={async (values) => {
                   console.log("check values:", values);
                   setSaving(true);
-                  handleSubmitCreateStaff(values);
+                  handleSubmitUpdateStaff(values);
                   // let newValues: CreateStaffAccountType = values
                   // if (imageUrl && croppedAreaPixels) {
                   //   const croppedImage = await getCroppedImg(

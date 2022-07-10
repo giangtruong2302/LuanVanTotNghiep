@@ -12,6 +12,7 @@ LicenseManager.setLicenseKey(
 );
 
 const ListStaff = (props) => {
+  const [status, setStatus] = useState("");
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -92,6 +93,12 @@ const ListStaff = (props) => {
       flex: 0,
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
+      action: {
+        action1: (value) => {
+          // console.log("check value update:", value);
+          setStatus(value);
+        },
+      },
     },
     {
       field: "staff",
@@ -130,7 +137,7 @@ const ListStaff = (props) => {
     minWidth: 100,
   };
   const [gridApiCustomer, setGridApiCustomer] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
     return {
@@ -168,7 +175,7 @@ const ListStaff = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.searchValue]);
+  }, [CenterId, props.searchValue, props.status, status]);
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
@@ -176,7 +183,7 @@ const ListStaff = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.searchValue]);
+  }, [serverSideDatasource, props.searchValue, props.status, status]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

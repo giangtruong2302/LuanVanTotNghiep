@@ -2,7 +2,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import classes from "./styles.module.scss";
 import Summarize from "./Summarize/summarize";
 import QuickAccess from "./QuickAccess/QuickAccess";
-import logo from "../../../assets/images/image 48.png";
+// import logo from "../../../assets/images/image 48.png";
+import logo from "../../../assets/images/banner/logo11.png";
+import logo1 from "../../../assets/images/banner/logo12.png";
+import logo2 from "../../../assets/images/banner/logo13.png";
+
 import Notifications from "./Notifications/notifications";
 import AreaChart from "./Reservation/areaChart";
 import { Link } from "react-router-dom";
@@ -72,7 +76,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Customer",
         description: "Swap",
-        link: `/admin/merchant/${1}/customers`,
+        link: `/admin/merchant/:branchId/customers`,
       },
 
       {
@@ -138,7 +142,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Customer",
         description: "Swap",
-        link: `/admin/merchant/${1}/customers`,
+        link: `/admin/merchant/:branchId/customers`,
       },
 
       {
@@ -159,7 +163,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Gym",
         description: "Swap",
-        link: "/system/gym-config",
+        link: "/admin/merchant/gym-config",
       },
       {
         image: (
@@ -189,7 +193,7 @@ const DashboardBranchCenter = (props) => {
         ),
         title: "Account",
         description: "Swap",
-        link: "/admin/merchant/settings",
+        link: "/admin/setting-account",
       },
     ],
     []
@@ -215,7 +219,7 @@ const DashboardBranchCenter = (props) => {
     ],
     []
   );
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   useEffect(() => {
     try {
       getAllStaffOfCenter(parseInt(CenterId), "", 1)
@@ -286,10 +290,10 @@ const DashboardBranchCenter = (props) => {
                     />
                   </div>
                   <div className={classes.summarizeItem}>
-                    <Summarize image={logo} title="Staff" total={staffTotal} />
+                    <Summarize image={logo1} title="Staff" total={staffTotal} />
                   </div>
                   <div className={classes.summarizeItem}>
-                    <Summarize image={logo} title="Something" total={1.2022} />
+                    <Summarize image={logo2} title="Something" total={1.2022} />
                   </div>
                 </div>
               </div>

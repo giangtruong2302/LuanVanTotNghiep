@@ -128,7 +128,7 @@ const ListAccount = (props) => {
     },
   ]);
   const [gridApiCustomer, setGridApiCustomer] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
 

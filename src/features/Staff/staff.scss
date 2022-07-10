@@ -41,8 +41,6 @@
         }
 
         .titlePage {
-
-
             .PTinfo {
                 display: flex;
                 flex-direction: row;
@@ -50,7 +48,6 @@
                 padding-bottom: 30px;
                 background: linear-gradient(360deg, #ffffff 80.28%, #717c7c 100%);
                 justify-content: center;
-
 
                 .PtName {
                     font-size: 25px;
@@ -62,7 +59,6 @@
                         gap: 20px;
                         padding-left: 30px;
                         padding-top: 30px;
-
 
                         .btnBook {
                             background-color: yellow;
@@ -95,12 +91,10 @@
                             box-shadow: 1px 1px 8px 1px grey;
                             height: 80px;
                         }
-
                     }
                 }
 
                 .imgPT {
-
                     gap: 20px;
                     height: 230px;
                     width: 190px;
@@ -109,11 +103,8 @@
                     box-shadow: 1px 1px 8px 1px #888;
                 }
             }
-
         }
     }
-
-
 }
 
 @media only screen and (max-width: 46.1875em) {
@@ -135,30 +126,20 @@
             font-weight: bold;
             font-size: 50px;
 
-
             .titlePage {
-
-
                 .PTinfo {
                     display: flex;
                     flex-direction: column;
                     margin-right: 250px;
                     padding-bottom: 30px;
 
-
-
                     .PtName {
                         font-size: 20px;
                         margin-left: 25px;
                         margin-top: 50px;
-
-
-
-
                     }
 
                     .imgPT {
-
                         gap: 20px;
                         height: 230px;
                         width: 190px;
@@ -168,10 +149,7 @@
                         margin-left: 120px;
                     }
                 }
-
             }
         }
-
-
     }
 }

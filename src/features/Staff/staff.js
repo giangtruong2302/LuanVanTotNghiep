@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Form, Select, Button } from "antd"
 import ListBooking from "./ListBooking/listBooking";
 import ava from "../../assets/images/imgStaff/staff.png";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import { getPtDetail } from "../Customer/PTDetail/PtDetailAPI";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -14,13 +14,12 @@ import { getAllTimeWorking } from "./staffAPI";
 import { ToastContainer, toast } from 'react-toastify';
 const customStyles = {
     content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
     },
 };
 const options = {
@@ -84,8 +83,11 @@ const Staff = () => {
     }
 
     function afterOpenModal() {
-        subtitle.style.color = '#f00';
+        subtitle.style.color = "#f00";
+    }
 
+    function closeModal() {
+        setIsOpen(false);
     }
 
     function closeModal() {
@@ -182,7 +184,6 @@ const Staff = () => {
 
     }, []);
     return (
-
         <div className="PTProfileBg1">
 
             <div className="containerListPT">
@@ -273,6 +274,9 @@ const Staff = () => {
                 </div>
             </div>
         </div>
+
+
+
     );
 };
 export default Staff;

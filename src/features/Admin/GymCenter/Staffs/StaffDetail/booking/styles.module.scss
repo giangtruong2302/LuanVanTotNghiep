@@ -1,0 +1,60 @@
+.cardUpcomingBooking {
+  background: #ffffff;
+  border: 0.5px solid #ebf0ff;
+  border-radius: 10px;
+  padding: 10px 2px 12px 14px;
+  .date {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 8px;
+  }
+  .col {
+    display: flex;
+    align-items: flex-start;
+    .itemCol {
+      width: 25%;
+      .imgBooking {
+        width: 100%;
+        position: relative;
+        border-radius: 5px;
+        margin-right: 12px;
+        &:before {
+          content: "";
+          display: block;
+          padding-top: 90%;
+        }
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+      }
+    }
+    .contentBooking {
+      width: 70%;
+      margin-left: 12px;
+      .title {
+        color: #223263;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        line-height: 1.3;
+      }
+      .value {
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+    }
+  }
+  .styles_staggerContainer__CDLfw .styles_staggerLoading__0RSt6 {
+    margin-top: 0;
+    justify-items: center !important;
+  }
+}

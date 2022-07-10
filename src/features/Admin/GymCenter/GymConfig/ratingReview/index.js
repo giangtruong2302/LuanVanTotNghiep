@@ -4,6 +4,7 @@ import { Star } from "phosphor-react";
 import { UIEvent, useEffect, useState } from "react";
 import Masonry from "react-masonry-component";
 import ReviewItemCard from "./reviewItem/ReviewItemCard";
+import { handleGetAllReviewOfCenter } from "./reviewAPI";
 
 const RatingReview = () => {
   // const handleUIEvent = (e) => {
@@ -15,6 +16,20 @@ const RatingReview = () => {
   //     }
   //   }
   // };
+  const [dataReview, setDataReview] = useState();
+  const CenterId = localStorage.getItem("CenterId");
+
+  useEffect(() => {
+    try {
+      handleGetAllReviewOfCenter(CenterId, 1).then((res) => {
+        if (res) {
+          setDataReview(res.reviewOfCenter.rows);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <div className="ratingAndReviewContainer" id="scrollableDiv">
       <div className="title">Rating & Reviews</div>
@@ -24,12 +39,11 @@ const RatingReview = () => {
       </div>
       <div className="container">
         <Masonry className="reviewContainer">
-          <ReviewItemCard />
-          <ReviewItemCard />
-          <ReviewItemCard />
-          <ReviewItemCard />
-          <ReviewItemCard />
-          <ReviewItemCard />
+          {dataReview && dataReview.length > 0
+            ? dataReview.map((item, index) => {
+                return <ReviewItemCard reviewItem={item} />;
+              })
+            : "no data to show"}
         </Masonry>
         {/* {loadingMore ? (
         <div className={classes.loadingContainer}>

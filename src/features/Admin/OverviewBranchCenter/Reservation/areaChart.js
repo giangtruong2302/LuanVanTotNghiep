@@ -3,47 +3,100 @@ import ReactDOM from "react-dom";
 import { Line, G2 } from "@ant-design/plots";
 
 import { each, findIndex } from "@antv/util";
-
+import { handleGetChartBooking } from "../CenterAPI";
+import moment from "moment";
+const countCreatedAtElInArr = (arr = [], el1) => {
+  let count = 0;
+  arr.forEach((el) => {
+    // console.log("el.createdAt === el", el);
+    if (moment(el.createdAt).format("YYYY-MM-DD") === el1) count++;
+  });
+  return count;
+};
 const AreaChart = () => {
+  const CenterId = localStorage.getItem("CenterId");
+  const [allDataChart, setDataChart] = useState([]);
+  useEffect(() => {
+    handleGetChartBooking(CenterId ? CenterId : -1, 1).then((res) => {
+      const newArr = [];
+      const countCreatedAtArr = res.bookingOfCenter.count;
+      countCreatedAtArr.forEach((el) => {
+        // console.log(el.createdAt);
+        if (
+          countCreatedAtElInArr(
+            countCreatedAtArr,
+            moment(el.createdAt).format("YYYY-MM-DD")
+          ) > 0
+        ) {
+          // console.log(newArr.some((el1) => el1.createdAt === el.createdAt));
+          if (
+            !newArr.some(
+              (el1) =>
+                moment(el1.createdAt).format("YYYY-MM-DD") ===
+                moment(el.createdAt).format("YYYY-MM-DD")
+            )
+          ) {
+            const newCount = countCreatedAtElInArr(
+              countCreatedAtArr,
+              moment(el.createdAt).format("YYYY-MM-DD")
+            );
+            const newObj = {
+              id: el.id,
+              createdAt: moment(el.createdAt).format("dddd"),
+              count: newCount,
+            };
+            newArr.push(newObj);
+          }
+        } else {
+          newArr.push(el);
+        }
+      });
+      //dsad
+      console.log(newArr);
+      setData(newArr);
+      // setDataChart(moment(newArr.createdAt).format("dddd"));
+      setDataChart(newArr);
+    });
+  }, [CenterId]);
+  console.log("check all data: ", allDataChart);
   const { InteractionAction, registerInteraction, registerAction } = G2;
-  const data = [
+  const [data, setData] = useState([
     {
-      year: "1991",
-      value: 3,
+      id: 1,
+      createdAt: "Mon",
+      count: 3,
     },
     {
-      year: "1992",
-      value: 4,
+      id: 2,
+      createdAt: "Tue",
+      count: 4,
     },
     {
-      year: "1993",
-      value: 3.5,
+      id: 3,
+      createdAt: "Wed",
+      count: 3.5,
     },
     {
-      year: "1994",
-      value: 5,
+      id: 4,
+      createdAt: "Thurs",
+      count: 5,
     },
     {
-      year: "1995",
-      value: 4.9,
+      id: 5,
+      createdAt: "Fri",
+      count: 4.9,
     },
     {
-      year: "1996",
+      id: 6,
+      year: "Sat",
       value: 6,
     },
     {
-      year: "1997",
+      id: 7,
+      year: "Sun",
       value: 7,
     },
-    {
-      year: "1998",
-      value: 9,
-    },
-    {
-      year: "1999",
-      value: 13,
-    },
-  ];
+  ]);
   G2.registerShape("point", "custom-point", {
     draw(cfg, container) {
       const point = {
@@ -81,7 +134,6 @@ const AreaChart = () => {
       const evt = this.context.event;
 
       if (evt.data) {
-        // items: 数组对象，当前 tooltip 显示的每条内容
         const { items } = evt.data;
         const pointGeometries = view.geometries.filter(
           (geom) => geom.type === "point"
@@ -174,8 +226,8 @@ const AreaChart = () => {
   });
   const config = {
     data,
-    xField: "year",
-    yField: "value",
+    xField: "createdAt",
+    yField: "count",
     label: {},
     point: {
       size: 5,
@@ -204,6 +256,7 @@ const AreaChart = () => {
       },
     ],
   };
+  console.log("check data: ", data);
   return <Line {...config} />;
 };
 export default AreaChart;

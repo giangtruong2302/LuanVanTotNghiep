@@ -19,15 +19,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
 import { toast } from "react-toastify";
+import { getAllCenter } from "../../AdminAPI";
 import classes from "./styles.module.scss";
-import { CreateManagerSchema } from "./validation";
-import { handleCreateNewManager } from "./ModalAccountAPI";
+import { CreateManagerSchema, UpdateManagerSchema } from "./validation";
+import { handleCreateNewManager, handleUpdateManager } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateAccount = (props) => {
   console.log("check props update: ", props);
+  const [allCenter, setAllCenter] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -62,25 +65,34 @@ const UpdateAccount = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitCreateStaff = useCallback(
+  const handleSubmitUpdateManager = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      console.log("check values: ", values, fileName, imageUrl);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewManager(
-          values.email,
-          values.password,
+
+        handleUpdateManager(
           values.fullName,
-          values.isActive,
-          values.userName,
-          values.roleId
+          // values.password,
+          values.email,
+          values.phoneNumber,
+          values.gender,
+          values.address,
+          values.roleId,
+          imageUrl,
+          fileName,
+          values.centerId,
+          values.salaryId,
+          props.data.AccountId,
+          props.data.ExternalId
         )
           .then((res) => {
             props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
             if (res.data.success === true) {
-              message.success("create new staff account is success !");
+              message.success("update new staff account is success !");
             } else {
               message.error(res.data.data.email[0]);
             }
@@ -98,7 +110,7 @@ const UpdateAccount = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -106,11 +118,14 @@ const UpdateAccount = (props) => {
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
+  console.log("check imageUrl: ", imageUrl);
+
   const handleChangeImage = async (info) => {
     setLoading(true);
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
@@ -126,6 +141,12 @@ const UpdateAccount = (props) => {
     if (props.showModal) {
       setIsModalVisible(true);
     }
+    getAllCenter(1).then((res) => {
+      // console.log("first");
+      if (res) {
+        setAllCenter(res.centers.rows);
+      }
+    });
   }, [props]);
 
   const handleCancel = () => {
@@ -144,7 +165,7 @@ const UpdateAccount = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Update Account</span>
+          <span className={classes.nameCreate}>Update Manager Info</span>
           {differentPass ? (
             <p style={{ color: "#ff0000" }}>
               password is different current password
@@ -158,23 +179,26 @@ const UpdateAccount = (props) => {
             <span className={classes.titleLeft}>Infomation</span>
             <div className={classes.formInfo}>
               <Formik
-                validationSchema={CreateManagerSchema}
+                validationSchema={UpdateManagerSchema}
                 initialValues={{
-                  email: props.data.email,
-                  password: "",
-                  fullName: props.data.fullName,
-                  // avatar: "",
-                  isActive: true,
-                  userName: props.data.userName,
-                  roleId: props.data.roleId,
-                  // gender: "",
+                  email: props.data.ManagerEmail,
+                  name: props.data.ManagerName,
+                  // password: "",
+                  phoneNumber: props.data.ManagerPhone,
+                  gender: props.data.Gender,
                   // dob: "",
-                  // address: "",
+                  address: props.data.ManagerAddress,
+                  roleId: props.data.RoleId,
+                  centerId: props.data.centerId,
+                  salaryId: props.data.SalaryId,
+                  // avatar: "",
+                  // isActive: true,
+                  // userName: "",
                 }}
                 onSubmit={async (values) => {
                   console.log("check values:", values);
                   setSaving(true);
-                  handleSubmitCreateStaff(values);
+                  handleSubmitUpdateManager(values);
                   // let newValues: CreateStaffAccountType = values
                   // if (imageUrl && croppedAreaPixels) {
                   //   const croppedImage = await getCroppedImg(
@@ -228,26 +252,25 @@ const UpdateAccount = (props) => {
                       <FormAnt.Item
                         style={{ marginTop: "10px" }}
                         validateStatus={
-                          Boolean(touched?.fullName && errors?.fullName)
+                          Boolean(touched?.name && errors?.name)
                             ? "error"
                             : "success"
                         }
                         help={
-                          Boolean(touched?.fullName && errors?.fullName) &&
-                          errors?.fullName
+                          Boolean(touched?.name && errors?.name) && errors?.name
                         }
                       >
-                        <Field name="fullName">
+                        <Field name="name">
                           {({ field }) => (
                             <Input
                               {...field}
-                              name="fullName"
+                              name="name"
                               className={` ${
-                                touched?.fullName && errors?.fullName
+                                touched?.name && errors?.name
                                   ? classes.inputError
                                   : ""
                               } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Full name"
+                              placeholder="Manager name"
                             />
                           )}
                         </Field>
@@ -255,29 +278,56 @@ const UpdateAccount = (props) => {
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
-                          Boolean(touched?.userName && errors?.userName)
+                          Boolean(touched?.address && errors?.address)
                             ? "error"
                             : "success"
                         }
                         help={
-                          Boolean(touched?.userName && errors?.userName) &&
-                          errors?.userName
+                          Boolean(touched?.address && errors?.address) &&
+                          errors?.address
                         }
                       >
-                        <Field name="userName">
+                        <Field name="address">
                           {({ field }) => (
                             <Input
                               {...field}
-                              name="userName"
+                              name="address"
                               className={` ${
                                 touched?.userName && errors?.userName
                                   ? classes.inputError
                                   : ""
                               } ${classes.inputRecovery} ant-picker `}
-                              placeholder="user name"
+                              placeholder="Address"
                             />
                           )}
                         </Field>
+                      </FormAnt.Item>
+                      <FormAnt.Item
+                        //style={{ margin: '5px' }}
+                        validateStatus={
+                          Boolean(touched?.gender && errors?.gender)
+                            ? "error"
+                            : "success"
+                        }
+                        help={
+                          Boolean(touched?.gender && errors?.gender) &&
+                          errors?.roleId
+                        }
+                      >
+                        <Select
+                          className={` ${
+                            touched?.gender && errors?.gender
+                              ? classes.inputError
+                              : ""
+                          } ${classes.inputRecovery} ant-picker `}
+                          placeholder="Gender"
+                          onChange={(value) => {
+                            setFieldValue("gender", value);
+                          }}
+                        >
+                          <Option value="true">Name</Option>
+                          <Option value="false">Nữ</Option>
+                        </Select>
                       </FormAnt.Item>
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
@@ -298,19 +348,15 @@ const UpdateAccount = (props) => {
                               : ""
                           } ${classes.inputRecovery} ant-picker `}
                           placeholder="Role"
-                          defaultValue={props.data.roleId}
                           onChange={(value) => {
                             setFieldValue("roleId", value);
                           }}
                         >
                           <Option value="1">Admin</Option>
                           <Option value="2">Manager of Center</Option>
-                          <Option value="3">PT</Option>
-                          <Option value="4">Lễ tân</Option>
-                          <Option value="5">Customer</Option>
                         </Select>
                       </FormAnt.Item>
-                      {/* <FormAnt.Item
+                      <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
                           Boolean(touched?.phoneNumber && errors?.phoneNumber)
@@ -333,18 +379,74 @@ const UpdateAccount = (props) => {
                                   : ""
                               } ${classes.inputRecovery} ant-picker `}
                               initialValueFormat="national"
-                              country="US"
-                              onChange={(value) =>
-                                setFieldValue("phoneNumber", value?.slice(2))
-                              }
-                              value={""}
-                              international={false}
                               placeholder="Phone number"
                               name="phoneNumber"
                             />
                           )}
                         </Field>
                       </FormAnt.Item>
+                      <FormAnt.Item
+                        //style={{ margin: '5px' }}
+                        validateStatus={
+                          Boolean(touched?.centerId && errors?.centerId)
+                            ? "error"
+                            : "success"
+                        }
+                        help={
+                          Boolean(touched?.centerId && errors?.centerId) &&
+                          errors?.centerId
+                        }
+                      >
+                        <Select
+                          className={` ${
+                            touched?.salaryId && errors?.centerId
+                              ? classes.inputError
+                              : ""
+                          } ${classes.inputRecovery} ant-picker `}
+                          placeholder="Center "
+                          onChange={(value) => {
+                            setFieldValue("centerId", value);
+                          }}
+                        >
+                          {allCenter && allCenter.length > 0
+                            ? allCenter.map((item, index) => {
+                                return (
+                                  <Option key={index} value={item.id}>
+                                    {item.CenterName}
+                                  </Option>
+                                );
+                              })
+                            : ""}
+                        </Select>
+                      </FormAnt.Item>
+                      <FormAnt.Item
+                        //style={{ margin: '5px' }}
+                        validateStatus={
+                          Boolean(touched?.salaryId && errors?.salaryId)
+                            ? "error"
+                            : "success"
+                        }
+                        help={
+                          Boolean(touched?.salaryId && errors?.salaryId) &&
+                          errors?.salaryId
+                        }
+                      >
+                        <Select
+                          className={` ${
+                            touched?.salaryId && errors?.salaryId
+                              ? classes.inputError
+                              : ""
+                          } ${classes.inputRecovery} ant-picker `}
+                          placeholder="Salary Rate"
+                          onChange={(value) => {
+                            setFieldValue("salaryId", value);
+                          }}
+                        >
+                          <Select.Option value="1">4.000.000</Select.Option>
+                          <Option value="2">5.000.000</Option>
+                        </Select>
+                      </FormAnt.Item>
+                      {/*
 
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
@@ -400,6 +502,33 @@ const UpdateAccount = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item> */}
+                      {/* <FormAnt.Item
+                        //style={{ margin: '5px' }}
+                        validateStatus={
+                          Boolean(touched?.password && errors?.password)
+                            ? "error"
+                            : "success"
+                        }
+                        help={
+                          Boolean(touched?.password && errors?.password) &&
+                          errors?.password
+                        }
+                      >
+                        <Field name="password">
+                          {({ field }) => (
+                            <Input.Password
+                              {...field}
+                              name="password"
+                              className={` ${
+                                touched?.password && errors?.password
+                                  ? classes.inputError
+                                  : ""
+                              } ${classes.inputRecovery} ant-picker `}
+                              placeholder="Password"
+                            />
+                          )}
+                        </Field>
+                      </FormAnt.Item> */}
                       <span className={classes.titleLeft}>Login info</span>
                       <FormAnt.Item
                         style={{ marginTop: "20px" }}
@@ -428,60 +557,7 @@ const UpdateAccount = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item>
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password && errors?.password)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password && errors?.password) &&
-                          errors?.password
-                        }
-                      >
-                        <Field name="password">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password"
-                              className={` ${
-                                touched?.password && errors?.password
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password2 && errors?.password2)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password2 && errors?.password2) &&
-                          errors?.password2
-                        }
-                      >
-                        <Field name="password2">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password2"
-                              className={` ${
-                                touched?.password2 && errors?.password2
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Confirm Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
+
                       <button
                         className={classes.btnRecovery}
                         type="submit"
@@ -492,7 +568,7 @@ const UpdateAccount = (props) => {
                             <StaggerAnimation></StaggerAnimation>
                           </div>
                         ) : (
-                          "Create"
+                          "Update"
                         )}
                       </button>
                     </Form>
@@ -507,7 +583,7 @@ const UpdateAccount = (props) => {
             <div className={classes.changeThumbnailContainer}>
               <div className={classes.image}>
                 <Cropper
-                  image={imageUrl ? imageUrl + " " : unknow}
+                  image={imageUrl ? imageUrl : props.data.ManagerImage}
                   crop={crop}
                   zoom={zoom}
                   aspect={2 / 2}

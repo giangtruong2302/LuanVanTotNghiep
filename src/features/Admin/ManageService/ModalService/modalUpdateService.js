@@ -27,7 +27,8 @@ const UpdateService = (props) => {
   console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -71,16 +72,17 @@ const UpdateService = (props) => {
         setSaving(true);
         handleUpdateService(
           props.data.id,
-          values.ServiceName ? values.ServiceName : "",
-          values.WorkDuration ? values.WorkDuration : "",
-          values.Price ? values.Price : "",
-          ""
+          values.ServiceName,
+          values.WorkDuration,
+          values.Price,
+          imageUrl,
+          fileName
         )
           .then((res) => {
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
             if (res.data.success === true) {
-              message.success("create new staff account is success !");
+              message.success("update service is success !");
             } else {
               message.error(res.data.data.email[0]);
             }
@@ -98,7 +100,7 @@ const UpdateService = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -111,6 +113,7 @@ const UpdateService = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }

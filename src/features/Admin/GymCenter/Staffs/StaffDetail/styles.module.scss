@@ -1,0 +1,89 @@
+.customerProfileBackground {
+  // background-image: url("../../assets/images/Background.png");
+  height: calc(100vh - 168px);
+  background-size: cover;
+  .container {
+    max-width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    .topProfile {
+    }
+    .imgBaner {
+      width: 100%;
+      height: 140px;
+      z-index: 0;
+      object-fit: cover;
+    }
+    .infoCustomer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: -70px;
+      .infoLeft {
+        display: flex;
+        justify-content: center;
+        .imgInfo {
+          width: 200px;
+          height: 150px;
+          border-radius: 10px;
+          margin-left: 20px;
+          padding: 5px;
+          background: #fff;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+          }
+        }
+        .nameInfo {
+          width: 70%;
+          font-weight: 700;
+          font-size: 16px;
+          color: #223263;
+          display: flex;
+          align-items: flex-end;
+          padding-bottom: 25px;
+          margin-left: 25px;
+        }
+      }
+      .infoRight {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+      }
+    }
+    .bottomProfile {
+      display: flex;
+      margin-top: 20px;
+      height: calc(100% - 248px);
+      .titleBooking {
+        color: #223263;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+      .upcomingBooking {
+        width: 30%;
+        border-top: 1px solid #ebf0ff;
+        padding: 17px 20px;
+        height: 100%;
+        .cardUpcoming {
+          margin: 5.5px 0;
+        }
+        .loading {
+          // margin-top: -20px;
+        }
+      }
+      .bookingHistory {
+        width: 70%;
+        padding: 17px 20px 13px 17px;
+        border-top: 1px solid #ebf0ff;
+        border-left: 1px solid #ebf0ff;
+      }
+    }
+  }
+}

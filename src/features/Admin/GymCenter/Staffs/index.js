@@ -7,18 +7,26 @@ import ListStaff from "./ListStaff/listStaff";
 import { PageHeader, Input } from "antd";
 import { Action, Fab } from "react-tiny-fab";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import CreateManager from "./ModalManager/modalAddAccount";
+// import CreateManager from "./ModalManager/modalAddStaff";
+import CreateStaff from "./ModalManager/modalAddStaff";
+import { setNestedObjectValues } from "formik";
 const { Search } = Input;
 const Staffs = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [showModal, setShowModalAdd] = useState(false);
+  const [status, setStatus] = useState("");
   const handleShowModalAdd = (isVisible) => {
     setShowModalAdd(isVisible);
   };
   const onSearchValue = (value) => {
     setSearchValue(value);
+  };
+  const takeStatus = (value) => {
+    setStatus(value);
   };
   return (
     <div className="PTProfileBg">
@@ -46,23 +54,38 @@ const Staffs = () => {
         }
       />
       <div className={classes.listItem}>
-        <ListStaff searchValue={searchValue} />
+        <ListStaff searchValue={searchValue} status={status} />
       </div>
       {showModal && (
-        <CreateManager handleModal={handleShowModalAdd} showModal={showModal} />
+        <CreateStaff
+          handleModal={handleShowModalAdd}
+          showModal={showModal}
+          takeStatus={takeStatus}
+        />
       )}
       <Fab
-        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
+        mainButtonStyles={{ backgroundColor: "#1363DF" }}
         icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
         alwaysShowTitle={true}
       >
         <Action
-          style={{ backgroundColor: "#A9A9A9" }}
+          style={{ backgroundColor: "#1363DF" }}
           onClick={() => setShowModalAdd(true)}
         >
           <Plus size={20} color="#Ffff" weight="fill" />
         </Action>
       </Fab>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { AgGridReact } from "ag-grid-react";
 import { Gear } from "phosphor-react";
 import frameworkcomponents from "./path";
 import { getAllCustomerOfCenter } from "../CusAPI";
+import { useSelector } from "react-redux";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
@@ -126,7 +127,9 @@ const ListCustomer = (props) => {
     },
   ]);
   const [gridApiCustomer, setGridApiCustomer] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const IdCenter = useSelector((state) => state.user.userInfo);
+  console.log(IdCenter);
+  const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
     return {

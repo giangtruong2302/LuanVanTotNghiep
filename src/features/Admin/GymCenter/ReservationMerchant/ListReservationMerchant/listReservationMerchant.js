@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const ListReservationMerchant = () => {
   const [dataRes, setDataRes] = useState();
-  const CenterId = localStorage.getItem("centerId");
+  const CenterId = localStorage.getItem("CenterId");
   useEffect(() => {
     try {
       getAllReservationOfCenter(CenterId, 1)

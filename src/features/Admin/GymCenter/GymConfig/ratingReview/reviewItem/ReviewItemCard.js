@@ -5,7 +5,11 @@ import React, { ChangeEvent, useRef } from "react";
 import human from "../../../../../../assets/images/ratingandreview/image 47.png";
 import "./ReviewItem.scss";
 
-const ReviewItemCard = () => {
+const ReviewItemCard = (props) => {
+  const checkboxRef = useRef();
+  const onChangeLabel = () => {
+    checkboxRef.current?.classList.toggle("hide");
+  };
   return (
     <div className="reviewItemContainer">
       <div className="reviewItem">
@@ -15,12 +19,19 @@ const ReviewItemCard = () => {
               <img src={human} alt="" />
             </div>
             <div className="infor">
-              <div className="name">{"props.reviewItem.name"}</div>
+              <div className="name">{props.reviewItem.CustomerId}</div>
               <div className="date">
                 {moment(new Date("02/23/2000")).format("MM/DD/YYYY")}
               </div>
               <div className="rating">
-                <Rate allowHalf defaultValue={"props.reviewItem.ratingPoint"} />{" "}
+                <Rate
+                  allowHalf
+                  defaultValue={
+                    props.reviewItem.ratingPoint
+                      ? props.reviewItem.ratingPoint
+                      : 5
+                  }
+                />{" "}
                 {"9"}.0
               </div>
             </div>
@@ -28,8 +39,8 @@ const ReviewItemCard = () => {
           <div className="reviewRight">
             <label
               className={`${"checkbox"}`}
-              //ref={checkboxRef}
-              //onChange={onChangeLabel}
+              ref={checkboxRef}
+              onChange={onChangeLabel}
             >
               <input
                 type="checkbox"
@@ -43,11 +54,7 @@ const ReviewItemCard = () => {
             </label>
           </div>
         </div>
-        <div className="reviewInfo">
-          {
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt eget eu porttitor aenean. Tellus ac elementum in amet ultrices quis malesuada malesuada volutpat. Massa, sapien lacus, ultricies magna dictum pharetra, urna amet, risus at urna pretium non volutpat. Aenean turpis elit ipsum id leo eu nam nulla. "
-          }
-        </div>
+        <div className="reviewInfo">{props.reviewItem.reviewContent}</div>
       </div>
     </div>
   );

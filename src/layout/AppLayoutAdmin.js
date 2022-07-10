@@ -19,6 +19,10 @@ import {
   DashboardBranchCenter,
   GymConfig,
   RatingAndReview,
+  CustomerProfile,
+  StaffProfile,
+  Blog,
+  ScheduleWorking,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -79,10 +83,16 @@ const AppLayoutAdmin = () => {
             element={<Customers />}
           />
           <Route
-            path="/admin/merchant/:branchId/reservation-detail/:id"
+            path="/admin/view-customer-info/:id"
+            element={<CustomerProfile />}
+          />
+          <Route path="/admin/view-staff-info/:id" element={<StaffProfile />} />
+          <Route
+            path="/admin/merchant/reservation-detail/:id"
             element={<ReservationDetail />}
           />
           <Route path="/admin/view-list-account" element={<Account />} />
+          <Route path="/admin/view-list-blog" element={<Blog />} />
           <Route
             path="/admin/setting-account"
             element={<SettingAccountAdmin />}
@@ -90,6 +100,10 @@ const AppLayoutAdmin = () => {
           <Route
             path="/admin/view-list-service"
             element={<ServiceAllSystem />}
+          />
+          <Route
+            path="/admin/view-list-schedule-working"
+            element={<ScheduleWorking />}
           />
           <Route path="/admin/view-list-manager" element={<Manager />} />
         </Route>

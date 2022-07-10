@@ -5,15 +5,38 @@
   cursor: pointer;
   transition: color 0.3s;
 }
+.bgAdmin {
+  .cursor {
+    pointer-events: none;
+
+    &__ball {
+      position: fixed;
+      top: 0;
+      left: 0;
+      mix-blend-mode: difference;
+      z-index: 1000;
+
+      circle {
+        fill: #f7f8fa;
+      }
+    }
+  }
+}
 
 .trigger:hover {
   color: #1890ff;
 }
 
 .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  margin: 0 auto;
+  height: 80px;
+  width: 80px;
+  // margin: 10px;
+  // background: rgba(255, 255, 255, 0.3);
+  background: url("../../assets/images/logo/GHGym.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  // background-color: #fff;
 }
 
 .sitelayout .sitelayoutbackground {
@@ -22,6 +45,8 @@
 .infoUser {
   float: right;
   margin-right: 20px;
+  // display: flex;
+  // gap: 8px;
 }
 .notificationAdmin {
   cursor: pointer;

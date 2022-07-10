@@ -26,7 +26,8 @@ const { Option } = Select;
 const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -69,16 +70,18 @@ const CreateService = (props) => {
       try {
         setSaving(true);
         handleCreateNewService(
-          values.ServiceName ? values.ServiceName : "",
-          values.WorkDuration ? values.WorkDuration : "",
-          values.Price ? values.Price : "",
-          ""
+          values.ServiceName,
+          values.WorkDuration,
+          values.Price,
+          imageUrl,
+          fileName
         )
           .then((res) => {
-            if (res.data.success === true) {
+            if (res.errCode === 0) {
+              message.success("create new service is success");
               props.handleModal(false);
             } else {
-              message.error(res.data.data.email[0]);
+              message.error(res.message);
             }
             props.takeStatus("complete" + Date.now());
 
@@ -97,7 +100,7 @@ const CreateService = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -110,10 +113,12 @@ const CreateService = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
   };
+  console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}

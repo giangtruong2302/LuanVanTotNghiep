@@ -1,0 +1,165 @@
+import React, { useEffect, useState } from "react";
+import classes from "./styles.module.scss";
+import { NavLink } from "react-router-dom";
+import Masonry from "react-masonry-component";
+
+import { ArrowLeft, XCircle } from "phosphor-react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import StaggerAnimation from "../../../component/StaggerAnimation";
+// import SearchPT from "./SearchPT/searchPT";
+import { Gear, Plus, SquaresFour } from "phosphor-react";
+import { Action, Fab } from "react-tiny-fab";
+import { isVisible } from "@testing-library/user-event/dist/utils";
+// import CreateAccount from "./ModalManager/modalAddManager";
+import CreateAccount from "./ModalAccount/modalAddBlog";
+// import ListStaff from "./ListStaff/listStaff";
+import { PageHeader, Input, Row, Col } from "antd";
+import { useNavigate } from "react-router-dom";
+import handleGetAllBlog from "./BlogAPI";
+// import ListAccount from "./ListManager/listAccount";
+// import ListManager from "./ListManager/listManager";
+const { Search } = Input;
+const Blog = () => {
+  const navigate = useNavigate();
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [dataBlog, setDataBlog] = useState();
+  const [page, setPage] = useState(2);
+  const [hasMore, setHasMore] = useState(true);
+  const [status, setStatus] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const handleShowModalAdd = (isVisible) => {
+    setShowModalAdd(isVisible);
+  };
+  const showModalAddAcc = () => {
+    setShowModalAdd(true);
+    // alert("aa");
+  };
+  const takeStatus = (value) => {
+    setStatus(value);
+  };
+  useEffect(() => {
+    try {
+      handleGetAllBlog(1)
+        .then((res) => {
+          console.log("check blogs ", res.blog);
+          setDataBlog(res.blog.rows);
+          for (let i = 2; i <= res.totalPage; i++) {
+            handleGetAllBlog(i)
+              .then((res) => {
+                if (res.blog) {
+                  const data = res.blog.rows;
+                  setDataBlog((prev) => {
+                    if (prev !== undefined) return [...prev, ...data];
+                  });
+                }
+              })
+              .catch((error) => console.log(error));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  const fetchNextPageService = async () => {
+    handleGetAllBlog(page)
+      .then((response) => {
+        const data = response.blog.rows;
+        if (data && data.length > 0) {
+          console.log(response);
+          setDataBlog((prev) => {
+            if (prev !== undefined) return [...prev, ...data];
+          });
+          if (data.length === 0 || data.length < 10) {
+            setHasMore(false);
+          }
+          setPage(page + 1);
+        }
+      })
+      .catch(() => {
+        // setFlag(true);
+        setHasMore(false);
+      })
+      .finally(() => {
+        // setFlag(true);
+        console.log("success");
+        // setHasMore(false)
+      });
+  };
+  console.log("check data blog: ", dataBlog);
+  const onSearchCus = (value) => {
+    console.log("check search value: ", value);
+    setSearchValue(value);
+  };
+  return (
+    <div className={classes.BlogProfileBg}>
+      <PageHeader
+        className="site-page-header"
+        onBack={() => navigate("/admin/manage-center")}
+        subTitle="Back to dashboard center"
+        style={{
+          top: 0,
+          position: "sticky",
+          zIndex: "9",
+          background:
+            "linear-gradient(305.38deg, #fff -50.47%, #f2edf0 94.82%)",
+          color: "#fff",
+          fontWeight: "600",
+        }}
+        extra={
+          <Search
+            style={{ borderRadius: "8px !important" }}
+            placeholder="search reservation of center"
+            // loading
+            onSearch={onSearchCus}
+            enterButton
+          />
+        }
+      />
+      <div className={classes.listItem}>
+        <Row className={classes.contentItems}>
+          <Masonry style={{ width: "100%", padding: "10px" }}>
+            {dataBlog &&
+              dataBlog.length > 0 &&
+              dataBlog.map((item, index) => {
+                return (
+                  <Col span={5} className={classes.item} key={index}>
+                    <span className={classes.xCircle}>
+                      <XCircle size={22} weight="fill" color="#fff" />
+                    </span>
+                    <div className={classes.titleContent}>{item.Title}</div>
+                    <div className={classes.contentReview}>{item.Content}</div>
+
+                    <button className={classes.btnUpdateBlog}>Update</button>
+                    <button className={classes.btnSeeDetail}>Detail</button>
+                  </Col>
+                );
+              })}
+          </Masonry>
+        </Row>
+      </div>
+      <Fab
+        mainButtonStyles={{ backgroundColor: "#1363DF" }}
+        icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
+        alwaysShowTitle={true}
+      >
+        <Action
+          style={{ backgroundColor: "#1363DF" }}
+          onClick={showModalAddAcc}
+        >
+          <Plus size={20} color="#Ffff" weight="fill" />
+        </Action>
+      </Fab>
+      {showModalAdd && (
+        <CreateAccount
+          showModal={showModalAdd}
+          handleModal={handleShowModalAdd}
+          takeStatus={takeStatus}
+        />
+      )}
+    </div>
+  );
+};
+export default Blog;

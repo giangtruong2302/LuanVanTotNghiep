@@ -4,6 +4,7 @@ import "./admin.scss";
 import { useNavigate } from "react-router-dom";
 import * as actions from "../../store/actions";
 import avatar from "../../assets/images/logo/logoGHGym.png";
+import logo from "../../assets/images/logo/GHGYMLogo.png";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -33,6 +34,9 @@ import {
   UsersFour,
   UsersThree,
   UserSwitch,
+  Planet,
+  CalendarCheck,
+  Book,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -56,10 +60,12 @@ function getItem(label, key, icon, children, type) {
 }
 
 const AdminPage = () => {
+  const userInfo = useSelector((state) => state.user.userInfo);
+
   const navigate = useNavigate();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
   console.log("check role: ", roleId);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [center, setCenter] = useState([]);
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
@@ -67,8 +73,8 @@ const AdminPage = () => {
     navigate("/admin/manage-staffs");
   };
   const handleChangeCenter = (CenterId, CenterName) => {
-    navigate("/admin/manage-center");
-    localStorage.setItem("centerId", CenterId);
+    navigate(`/admin/manage-center`);
+    localStorage.setItem("CenterId", CenterId.toString());
     console.log("check center id after change: ", CenterId);
   };
   const handleLogout = () => {
@@ -130,10 +136,16 @@ const AdminPage = () => {
   const handleViewListManager = () => {
     navigate("/admin/view-list-manager");
   };
+  const handleViewListSchedule = () => {
+    navigate("/admin/view-list-schedule-working");
+  };
+  const handleViewListBlog = () => {
+    navigate("/admin/view-list-blog");
+  };
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <NavLink to="" exact={true}>
+    <Layout style={{ height: "100vh" }} className="bgAdmin">
+      <Sider trigger={null} collapsible collapsed={collapsed} icon={logo}>
+        <NavLink to="/admin" exact={true}>
           <div className="logo" />
         </NavLink>
         {roleId && roleId === 1 && (
@@ -315,12 +327,30 @@ const AdminPage = () => {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
-              icon={<UserCircle size={20} weight="bold" color="#fff" />}
+              icon={<Planet size={20} weight="bold" color="#fff" />}
               title="Quản lý Dịch vụ"
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
             >
               <Menu.Item onClick={handleViewListService}>
                 Xem danh sách dịch vụ
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<CalendarCheck size={20} weight="bold" color="#fff" />}
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title="Quản lý Lịch làm việc"
+            >
+              <Menu.Item onClick={handleViewListSchedule}>
+                Xem danh sách khung giờ làm việc
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<Book size={20} weight="bold" color="#fff" />}
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title="Quản lý Blog"
+            >
+              <Menu.Item onClick={handleViewListBlog}>
+                Xem danh sách Blog
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.Item
@@ -358,21 +388,11 @@ const AdminPage = () => {
             itemIcon={<RightCircleOutlined />}
             items={[
               {
-                label: "Quận 8",
+                label: "Center",
                 key: "21",
                 icon: <MapPinLine size={20} color="#eeeee7" weight="fill" />,
-                onClick: handleChangeCenter,
+                // onClick: handleChangeCenter,
               },
-              getItem(
-                <FormattedMessage id="admin.manage-gym.manage-account" />,
-                "sub6",
-                <UserCircle size={20} color="#f4f1f1" weight="fill" />,
-                [
-                  getItem("Xem danh sách tài khoản", "8"),
-                  getItem("Tạo tài khoản", "10"),
-                  getItem("Cập nhật tài khoản", "11"),
-                ]
-              ),
 
               {
                 key: "12",
@@ -439,10 +459,15 @@ const AdminPage = () => {
           </span>
           <span className="infoUser">
             <img
-              src={avatar}
-              style={{ width: "80px", height: "80px", borderRadius: "100px" }}
+              src={userInfo && userInfo.avatar}
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "100px",
+                paddingRight: "3px",
+              }}
             />
-            <span>Duong Truong Giang</span> &nbsp;
+            <span>{userInfo && userInfo.fullName}</span> &nbsp;
             <Dropdown overlay={menu} placement={"bottomLeft"} arrow>
               <Button
                 style={{ outline: "none", border: "none" }}

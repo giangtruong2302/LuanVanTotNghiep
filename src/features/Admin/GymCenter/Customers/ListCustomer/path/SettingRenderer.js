@@ -1,16 +1,104 @@
-import { Popover } from "antd";
-import { Gear } from "phosphor-react";
-import React from "react";
+import { Menu, message, Modal, Popover } from "antd";
+import "antd/dist/antd.css";
+import {
+  CheckSquareOffset,
+  Gear,
+  Password,
+  UserCircle,
+  XCircle,
+} from "phosphor-react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./customizeListPT.scss";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+// import UpdateAccount from "../../ModalManager/modalUpdateAccount";
+// import { handleDeleteManager } from "../../ModalManager/ModalAccountAPI";
+// import UpdateStaff from "../../ModalManager/modalUpdateStaff";
+// import { handleDeleteStaff } from "../../ModalManager/ModalAccountAPI";
+import { toast } from "react-toastify";
+const { confirm } = Modal;
 
-const SettingRenderer = () => {
+const SettingRenderer = (props) => {
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [showPopOver, setShowPopOver] = useState(false);
+  const handleModal = (isVisible) => {
+    setShowModal(isVisible);
+  };
+  const [status, setStatus] = useState("");
+  const takeStatus = (value) => {
+    setStatus(value);
+    props.colDef.action.action1("update" + Date.now());
+  };
+  const handleViewCusInfo = () => {
+    navigate(`/admin/view-customer-info/${props.data.id}`);
+  };
+  function confirmDelete() {
+    confirm({
+      title: `Do you want to delete ${
+        // props.data.firstName + " " + props.data.lastName
+        ""
+      }`,
+      icon: <ExclamationCircleOutlined />,
+      centered: true,
+      // content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      onOk() {
+        return console.log("role id: ");
+        // return handleDeleteStaff(
+        //   props.data.ExternalId,
+        //   props.data.RoleId.toString()
+        // )
+        //   .then((res) => {
+        //     toast.success("delete success");
+        //     props.colDef.action.action1("delete" + Date.now());
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
+      },
+      onCancel() {
+        ("");
+      },
+    });
+  }
+  const content = (
+    <Menu>
+      <Menu.Item
+        key="2"
+        onClick={handleViewCusInfo}
+        style={{ color: "#53d1b6" }}
+      >
+        <UserCircle size={18} color="#53d1b6" weight="fill" />
+        VIEW CUSTOMER INFO
+      </Menu.Item>
+    </Menu>
+  );
+  const handleClickChange = (visible) => {
+    setShowPopOver(visible);
+  };
+  // console.log("check show popover: ", showPopOver);
+  console.log("check props setting: ", props.data);
   return (
     <>
-      <Popover trigger={"click"}>
+      <Popover
+        content={content}
+        trigger={"click"}
+        showPopOver={showPopOver}
+        placement="right"
+        onVisibleChange={handleClickChange}
+      >
         <div className="settingContainer">
           <Gear color="#0a0700" weight="light" />
         </div>
       </Popover>
+      {/* {showModal && (
+        <UpdateStaff
+          handleModal={handleModal}
+          showModal={showModal}
+          data={props.data}
+          takeStatus={takeStatus}
+        />
+      )} */}
     </>
   );
 };
