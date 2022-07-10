@@ -1,0 +1,84 @@
+.BlogProfileBg {
+  // background-color: aqua;
+  // background: #2c3639;
+  background-image: url("../../../assets/images/banner/bgBlog.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .listItem {
+    height: calc(100vh - 200px);
+    overflow: auto;
+    padding-top: 10px;
+    padding-left: 120px;
+    overflow-x: hidden;
+    padding-bottom: 15px;
+    // margin: 0 auto;
+    .contentItems {
+      display: flex;
+      gap: 20px;
+      flex-direction: row;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        border: 1px solid transparent;
+        color: #dcd7c9;
+        background-color: #a27b5c;
+        padding: 10px;
+        box-sizing: border-box;
+        //box-shadow: 3px 3px 20px rgba(214, 214, 214, 0.15);
+        border: 0.3vw solid #ffffff;
+        border-radius: 5px;
+        min-height: 180px;
+        max-height: auto;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        .titleContent {
+          color: #fff;
+          font-weight: 600;
+          font-size: 18px;
+          text-align: center;
+          padding-bottom: 5px;
+          border-bottom: 1px solid #fff;
+        }
+        .contentReview {
+          height: 200px;
+          overflow: auto;
+          padding-bottom: 20px;
+        }
+        .xCircle {
+          position: absolute;
+          top: -7%;
+          left: 195px;
+          position: relative;
+          cursor: pointer;
+        }
+        .btnUpdateBlog {
+          border: 1px solid transparent;
+          border-radius: 6px;
+          background-color: #53e70e;
+          color: #fff;
+          font-weight: 500;
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          -ms-border-radius: 6px;
+          -o-border-radius: 6px;
+        }
+        .btnSeeDetail {
+          border: 1px solid transparent;
+          border-radius: 6px;
+          background-color: #4b3ec7;
+          color: #fff;
+          font-weight: 500;
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          -ms-border-radius: 6px;
+          -o-border-radius: 6px;
+        }
+      }
+    }
+  }
+}

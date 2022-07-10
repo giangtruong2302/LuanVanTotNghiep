@@ -78,8 +78,8 @@ const CreateService = (props) => {
         )
           .then((res) => {
             if (res.errCode === 0) {
-              props.handleModal(false);
               message.success("create new service is success");
+              props.handleModal(false);
             } else {
               message.error(res.message);
             }
@@ -118,6 +118,7 @@ const CreateService = (props) => {
       });
     }
   };
+  console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}

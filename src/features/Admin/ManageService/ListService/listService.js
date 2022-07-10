@@ -7,6 +7,8 @@ import { AgGridReact } from "ag-grid-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
 import { getAllService } from "../serviceAPI";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import frameworkcomponents from "./path";
 // import { getAllCustomerOfCenter } from "../CusAPI";
 import { isVisible } from "@testing-library/user-event/dist/utils";
@@ -222,6 +224,17 @@ const ListService = (props) => {
         frameworkComponents={frameworkcomponents}
         onGridReady={onGridReady}
         // suppressContextMenu={true}
+      />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </div>
   );

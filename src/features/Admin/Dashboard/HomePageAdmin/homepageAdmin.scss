@@ -1,6 +1,7 @@
 .HomepageAdminBg {
   height: 100%;
   overflow: auto;
+
   .titleHomeAdmin {
     font-size: 24px;
     font-weight: 700px;
@@ -11,39 +12,74 @@
     padding-left: 3px !important;
     gap: 50px;
     padding: 8px 0;
-    height: 100px;
-    // margin: 0 auto;
+    min-height: 100px;
+    max-height: 100%; // margin: 0 auto;
     .gymCenterTotal {
-      height: 100%;
+      min-height: 100px;
+      max-height: 100%;
       border-radius: 6px;
+      padding: 10px 10px 10px 10px;
       display: flex;
       flex-direction: column;
+      // flex-direction: column;
       text-align: center;
       background-color: transparent;
       box-shadow: 1px 1px 8px 1px #888;
       &:hover {
         box-shadow: 1px 1px 8px 1px #00bfff;
         cursor: pointer;
+      }
+      .bgCenterTotal {
+        background: url("../../../../assets/images/banner/289048829_1167860817104208_3424094009605653790_n.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        left: 0;
+
+        min-height: 100px;
+        max-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
       }
     }
     .serviceOfGHGym {
-      height: 100%;
+      min-height: 100px;
+      max-height: 100%;
+      border-radius: 6px;
+      padding: 10px 10px 10px 10px;
       display: flex;
       flex-direction: column;
-      border-radius: 6px;
+      // flex-direction: column;
       text-align: center;
       background-color: transparent;
       box-shadow: 1px 1px 8px 1px #888;
       &:hover {
         box-shadow: 1px 1px 8px 1px #00bfff;
         cursor: pointer;
+      }
+      .bgServiceTotal {
+        background: url("../../../../assets/images/banner/logo13.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        left: 0;
+
+        min-height: 100px;
+        max-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
       }
     }
     .accountCusTotal {
-      height: 100%;
+      min-height: 100px;
+      max-height: 100%;
       border-radius: 6px;
+      padding: 10px 10px 10px 10px;
       display: flex;
       flex-direction: column;
+      // flex-direction: column;
       text-align: center;
       background-color: transparent;
       box-shadow: 1px 1px 8px 1px #888;
@@ -51,16 +87,47 @@
         box-shadow: 1px 1px 8px 1px #00bfff;
         cursor: pointer;
       }
+      .bgCustomerTotal {
+        background: url("../../../../assets/images/banner/logo12.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        left: 0;
+
+        min-height: 100px;
+        max-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
     }
     .serviceHours {
-      height: 100%;
+      min-height: 100px;
+      max-height: 100%;
       border-radius: 6px;
+      padding: 10px 10px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      // flex-direction: column;
       text-align: center;
       background-color: transparent;
       box-shadow: 1px 1px 8px 1px #888;
       &:hover {
         box-shadow: 1px 1px 8px 1px #00bfff;
         cursor: pointer;
+      }
+      .bgStaffTotal {
+        background: url("../../../../assets/images/banner/logo11.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 0;
+        left: 0;
+
+        min-height: 100px;
+        max-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
       }
     }
   }
@@ -74,14 +141,16 @@
       .rightChart {
         height: 100%;
         .rightChartContent {
-          // border-left: 1px solid #edf;
-          padding-left: 20px;
+          border-left: 1px solid #edf;
+          // padding-left: 10px;
+          // display: flex;
+          // gap: 10px;
           // box-shadow: 1px 1px 8px 1px #888;
-          padding-top: 20px;
-          margin: 0 auto;
+          // padding-top: 20px;
+          // margin: 0 auto;
           display: flex;
-          flex-direction: column;
-          gap: 10px;
+          // flex-direction: column;
+          gap: 30px;
         }
       }
     }
@@ -122,6 +191,21 @@
       text-align: start;
       background-color: transparent;
       box-shadow: 1px 1px 8px 1px #888;
+
+      .unresolvedOnTopHeader {
+        display: flex;
+        gap: 70%;
+
+        .unresolvedOnTopTitle {
+          text-align: start;
+          justify-content: flex-start;
+        }
+        .viewDetailUnresolved {
+          text-align: start;
+          // float: right;
+          justify-content: flex-end;
+        }
+      }
     }
   }
 }

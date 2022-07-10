@@ -74,17 +74,28 @@ const Service = () => {
         pauseOnHover
       />
       <Fab
-        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
+        mainButtonStyles={{ backgroundColor: "#1363DF" }}
         icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
         alwaysShowTitle={true}
       >
         <Action
-          style={{ backgroundColor: "#A9A9A9" }}
+          style={{ backgroundColor: "#1363DF" }}
           onClick={showModalAddAcc}
         >
           <Plus size={20} color="#Ffff" weight="fill" />
         </Action>
       </Fab>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {showModalAdd && (
         <CreateService
           showModal={showModalAdd}

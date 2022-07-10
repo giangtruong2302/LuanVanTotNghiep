@@ -21,6 +21,7 @@ import {
   RatingAndReview,
   CustomerProfile,
   StaffProfile,
+  Blog,
   ScheduleWorking,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
@@ -91,6 +92,7 @@ const AppLayoutAdmin = () => {
             element={<ReservationDetail />}
           />
           <Route path="/admin/view-list-account" element={<Account />} />
+          <Route path="/admin/view-list-blog" element={<Blog />} />
           <Route
             path="/admin/setting-account"
             element={<SettingAccountAdmin />}

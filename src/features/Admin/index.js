@@ -4,6 +4,7 @@ import "./admin.scss";
 import { useNavigate } from "react-router-dom";
 import * as actions from "../../store/actions";
 import avatar from "../../assets/images/logo/logoGHGym.png";
+import logo from "../../assets/images/logo/GHGYMLogo.png";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -64,7 +65,7 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
   console.log("check role: ", roleId);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [center, setCenter] = useState([]);
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
@@ -143,8 +144,8 @@ const AdminPage = () => {
   };
   return (
     <Layout style={{ height: "100vh" }} className="bgAdmin">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <NavLink to="" exact={true}>
+      <Sider trigger={null} collapsible collapsed={collapsed} icon={logo}>
+        <NavLink to="/admin" exact={true}>
           <div className="logo" />
         </NavLink>
         {roleId && roleId === 1 && (

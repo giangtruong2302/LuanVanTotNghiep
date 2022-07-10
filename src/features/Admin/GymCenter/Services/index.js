@@ -54,12 +54,12 @@ const Services = () => {
         <ListService searchValue={searchValue} status={status} />
       </div>
       <Fab
-        mainButtonStyles={{ backgroundColor: "#A9A9A9" }}
+        mainButtonStyles={{ backgroundColor: "#1363DF" }}
         icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
         alwaysShowTitle={true}
       >
         <Action
-          style={{ backgroundColor: "#A9A9A9" }}
+          style={{ backgroundColor: "#1363DF" }}
           onClick={() => setShowModalAdd(true)}
         >
           <Plus size={20} color="#Ffff" weight="fill" />

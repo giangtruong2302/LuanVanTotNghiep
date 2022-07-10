@@ -6,6 +6,10 @@ import human from "../../../../../../assets/images/ratingandreview/image 47.png"
 import "./ReviewItem.scss";
 
 const ReviewItemCard = (props) => {
+  const checkboxRef = useRef();
+  const onChangeLabel = () => {
+    checkboxRef.current?.classList.toggle("hide");
+  };
   return (
     <div className="reviewItemContainer">
       <div className="reviewItem">
@@ -35,8 +39,8 @@ const ReviewItemCard = (props) => {
           <div className="reviewRight">
             <label
               className={`${"checkbox"}`}
-              //ref={checkboxRef}
-              //onChange={onChangeLabel}
+              ref={checkboxRef}
+              onChange={onChangeLabel}
             >
               <input
                 type="checkbox"
