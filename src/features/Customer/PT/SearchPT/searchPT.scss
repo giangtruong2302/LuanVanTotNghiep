@@ -1,12 +1,15 @@
 .searchContainer {
   display: flex;
   align-items: center;
+
   .searchSelected {
     margin-right: 20px;
   }
+
   .searchSection {
     margin-top: 28px;
     flex: 1;
+
     :global {
       .ant-input {
         border-right: none;
@@ -14,30 +17,36 @@
         outline: none;
         padding: 4px 10px;
       }
+
       .ant-btn {
         border-left: none;
         height: 40px;
         width: 40px;
       }
+
       .ant-input:hover,
       .ant-input:focus {
         border-color: #fb7181;
         border-right: 1px solid #fb7181;
       }
+
       .ant-btn:hover,
       .ant-btn:focus,
       .ant-btn:active {
-        color: #9098b1;
+        color: black;
         border-color: #fb7181;
         background: #fff;
       }
     }
+
     .searchCustomer {
       border-radius: 10px;
     }
   }
 }
+
 .titlePTList {
+
   letter-spacing: 0.4px;
   font-size: 18px;
   font-weight: 600;
@@ -49,6 +58,7 @@
   background-clip: text;
   text-fill-color: transparent;
 }
+
 :global {
   .ant-form-item {
     margin-bottom: 0;

@@ -17,15 +17,15 @@ const HomeFooter = () => {
       <div className="footerLeft">
         <p className="title-footer-GHGym">Hệ thống GH GYM</p>
         <p>
-          <Phone size={18} color="#1d1b1b" weight="fill" /> 0337657262
+          <Phone size={32} color="#ffffff" /> 0337657262
         </p>
         <p>
-          <MapPinLine size={18} color="#1d1b1b" weight="fill" /> 180 Cao lỗ
+          <MapPinLine size={32} color="#ffffff" /> 180 Cao lỗ
           phường 5 Quận 8
         </p>
         <p>
-          <CalendarCheck size={18} color="#1d1b1b" weight="fill" /> Thứ Hai -
-          Chủ Nhật 6:00 - 22:00
+          <CalendarCheck size={32} color="#ffffff" /> Thứ Hai -
+          Thứ Bảy 6:00 - 22:00
         </p>
       </div>
       <div className="footerCenter">
@@ -43,9 +43,9 @@ const HomeFooter = () => {
       <div className="footerRight">
         <p className="textSocialMedia">Mạng xã hội</p>
         <div className="social-media">
-          <FacebookLogo size={24} color="#063684" weight="fill" />
-          <InstagramLogo size={24} color="#c06007" weight="fill" />
-          <YoutubeLogo size={24} color="#c00707" weight="fill" />
+          <FacebookLogo size={32} color="#ffffff" />
+          <YoutubeLogo size={32} color="#ffffff" />
+          <InstagramLogo size={32} color="#ffffff" />
         </div>
       </div>
     </div>

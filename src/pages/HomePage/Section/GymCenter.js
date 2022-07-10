@@ -48,7 +48,7 @@ const GymCenter = (props) => {
                 //onClick={() => this.handleViewDetailSpecialty(item)}
                 >
                   <div
-                    className="bg-image section-specialty"
+                    className="bgCenter "
                     style={{ backgroundImage: `url(${img})` }}
                   ></div>
                   <div className="specialty-name">{item.CenterName}</div>

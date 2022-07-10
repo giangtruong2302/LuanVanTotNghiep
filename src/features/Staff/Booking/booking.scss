@@ -1,11 +1,13 @@
 .BookingProfileBg {
 
-    height: 100vh;
+    height: auto;
     max-width: 100vw;
     background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
 
+
     // overflow: auto;
     .containerListPT {
+        overflow-y: hidden;
         max-width: 100vw;
         // margin: 0 auto;
         display: flex;
@@ -16,6 +18,7 @@
         font-family: "roboto";
         font-weight: bold;
         font-size: 50px;
+        height: auto;
 
         .backToHome {
             width: 100%;

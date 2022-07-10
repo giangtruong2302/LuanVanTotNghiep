@@ -5,7 +5,6 @@ import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
 import { getTimeWorking } from "./PtScheduleAPI";
-import { useParams } from "react-router-dom";
 import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -19,6 +18,8 @@ import { getDetailPT } from "./PtScheduleAPI";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getDetailService } from "./PtScheduleAPI";
+import { getDisCount } from "./PtScheduleAPI";
+import { getCenterDetail } from "../centerDetailAPI"
 const customStyles = {
     content: {
         top: '50%',
@@ -41,12 +42,33 @@ const PTShedule = (props) => {
         draggable: true,
         progress: undefined,
     });;
-    const [startDate, setStartDate] = useState(new Date());
+    const [scheduleId, setScheduleId] = useState(new Date());
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [modalIsOpen, setIsOpen] = React.useState(false);
-
-    function openModal() {
+    const [secondMonth, SetSecondMonth] = useState("2629743000");
+    const [centerDetail, setCenterDetail] = useState();
+    const [nocenterDetail, setNoCenterDetail] = useState(false);
+    const [, setCenterDetailLoading] = useState(true);
+    const [centerName, setCenterName] = useState();
+    function openModal(e) {
         setIsOpen(true);
+        setScheduleId(e.target.value)
+        getCenterDetail(props.centerId).then((response) => {
+            if (response.centerDetail) {
+                setCenterName(response.centerDetail.CenterName)
+                setCenterDetail(response.centerDetail);
+                setNoCenterDetail(false);
+            } else {
+                setNoCenterDetail(true);
+            }
+        })
+            .catch(() => {
+                setNoCenterDetail(true);
+            })
+            .finally(() => {
+                setCenterDetailLoading(false);
+            });
+
     }
 
     function afterOpenModal() {
@@ -116,27 +138,14 @@ const PTShedule = (props) => {
     const [PtOfCenter, setPtOfCenter] = useState();
     const [noPtOfCenter, setNoPtOfCenter] = useState(false);
     const [, setPtOfCenterLoading] = useState(true);
-
+    const [dayWork, setDayWork] = useState();
     const [allService, setAllService] = useState();
     const [noService, setNoService] = useState(false);
     const [, setServiceLoading] = useState(true);
 
 
     useEffect(() => {
-        getTimeWorking(props.ptId, 1).then((response) => {
-            if (response.ScheduleWorking.rows) {
-                setTimeDetail(response.ScheduleWorking.rows);
-                setNoTimeDetail(false);
-            } else {
-                setNoTimeDetail(true);
-            }
-        })
-            .catch(() => {
-                setTimeDetail(true);
-            })
-            .finally(() => {
-                setTimeDetailLoading(false);
-            });
+
     }, []);
     useEffect(() => {
 
@@ -176,19 +185,41 @@ const PTShedule = (props) => {
             });
     }, []);
     const [form] = Form.useForm();
-    const [status, setStatus] = useState("PENDING")
+    const [status, setStatus] = useState("")
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [centerId, setCenterId] = useState();
     const [detailService, setDetailService] = useState();
     const [nodetailService, setNoDetailService] = useState(false);
     const [, setDetailServiceLoading] = useState(true);
+    const [discount, setDiscount] = useState();
+    const [nodetailDiscount, setNoDetailDiscount] = useState(false);
+    const [, setDetailDiscountLoading] = useState(true);
+    const [priceDiscount, setPriceDiscount] = useState();
     const onHandleServiceId = (value) => {
-        getDetailService(value).then((response) => {
 
+        console.log('daywork', value)
+        getDetailService(value).then((response) => {
+            setEndTime((parseInt(dayWork)) + ((parseInt(secondMonth)) * (parseInt(response.serviceDetail.WorkDuration))))
             if (response.serviceDetail) {
 
+                getDisCount(response.serviceDetail.idDiscount).then((response) => {
+
+                    if (response.discount) {
+                        setDiscount(response.discount.DiscountRate);
+                        setNoDetailDiscount(false);
+                    } else {
+                        setNoDetailDiscount(true);
+                    }
+                })
+                    .catch(() => {
+                        setNoDetailDiscount(true);
+                    })
+                    .finally(() => {
+                        setDetailDiscountLoading(false);
+                    });
                 setDetailService(response.serviceDetail);
+                setPriceDiscount(response.serviceDetail.Price);
                 setNoDetailService(false);
             } else {
                 setNoDetailService(true);
@@ -200,12 +231,13 @@ const PTShedule = (props) => {
             .finally(() => {
                 setDetailServiceLoading(false);
             });
+
     }
     const onHandleCenterId = (value) => {
         getPtOfCenter(value, 1).then((response) => {
 
             if (response.ptOfCenter.rows) {
-                console.log(response.ptOfCenter)
+
 
                 setPtOfCenter(response.ptOfCenter.rows);
                 setNoPtOfCenter(false);
@@ -240,12 +272,11 @@ const PTShedule = (props) => {
     };
     const onChangeStartTime = (date, dateString) => {
 
-        setStartTime(dateString)
-    };
-    const onChangeEndTime = (date, dateString) => {
+        setStartTime(date._d)
 
-        setEndTime(dateString)
     };
+
+
     const options = {
 
         position: "top-center",
@@ -256,12 +287,44 @@ const PTShedule = (props) => {
         draggable: true,
         progress: undefined,
     };
-    const [messRes, setMessRes] = useState("");
 
+    //dateToTimeStamp
+    // var myDate = "7-7-2022";
+    // const date = new Date(myDate);
+    // const timestampSeconds = Math.floor(date.getTime() / 1000);
+    //TimeStampToString
+    // var time = new Date(1657558800000);
+    // console.log(time.toLocaleDateString());
+
+    const handleDate = (e) => {
+        // console.log(timestampSeconds);
+
+
+
+        getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
+            setDayWork(e.target.value);
+
+            console.log("Date: " + e.target.value)
+            if (response.ScheduleWorking.rows) {
+                setTimeDetail(response.ScheduleWorking.rows);
+                setNoTimeDetail(false);
+            } else {
+                setNoTimeDetail(true);
+            }
+        })
+            .catch(() => {
+                setTimeDetail(true);
+            })
+            .finally(() => {
+                setTimeDetailLoading(false);
+            });
+
+
+    }
 
 
     const onFinish = (values) => {
-        createBooking(cusInfo["AccountCustomer.id"], parseInt(values.pt), cusInfo["fullName"], "", values.center, values.service, startTime, endTime, status).then((response) => {
+        createBooking(cusInfo["AccountCustomer.id"], props.ptId, cusInfo["fullName"], props.ptName, values.center, values.service, (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(dayWork)).format("YYYY-MM-DD")), (moment(new Intl.DateTimeFormat('en-Us', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(endTime)).format("YYYY-MM-DD")), status, values.discount, ((priceDiscount) - (((priceDiscount) * (discount)) / 100)), scheduleId).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -273,6 +336,10 @@ const PTShedule = (props) => {
         })
 
 
+
+
+
+
     };
 
     const onReset = () => {
@@ -282,12 +349,12 @@ const PTShedule = (props) => {
     return (
         <>
             <div className="doctor-schedule-container">
-                <div className="all-schedule">
-                    <select>
+                <div className="all-schedule" >
+                    <select onChange={handleDate} >
                         {allDays && allDays.length > 0
                             ? allDays.map((item, index) => {
                                 return (
-                                    <option key={index} value={item.value}>
+                                    <option key={index} value={item.value} >
                                         {item.label}
                                     </option>
                                 );
@@ -314,12 +381,12 @@ const PTShedule = (props) => {
                                     (
                                         timeDetail?.map((item, index) => {
                                             return (
-                                                <button className={"btn-vie"} onClick={openModal}>{item.TimeWork}</button>
+                                                <button className={"btn-vie"} value={item.id} onClick={(e) => openModal(e)} >{item.TimeId}</button>
                                             )
                                         })
                                     ) :
                                     (
-                                        "n/a"
+                                        "Ngày này, PT chưa đăng lịch nhận booking"
                                     )
                                 }
                             </div>
@@ -343,78 +410,9 @@ const PTShedule = (props) => {
                                         >
                                             <Input />
                                         </Form.Item>
-                                        Ngày bắt đầu :
-                                        <Form.Item
-                                            name="StartTime"
 
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-                                        >
-                                            <DatePicker format={"DD-MM-YYYY"} onChange={onChangeStartTime} />
-                                        </Form.Item>
-                                        Ngày kết thúc :
-                                        <Form.Item
-                                            name="EndTime"
-
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-                                        >
-                                            <DatePicker format={"DD-MM-YYYY"} onChange={onChangeEndTime} />
-                                        </Form.Item>
-                                        Center :
-                                        <Form.Item
-                                            name="center"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-
-
-                                        >
-                                            <Select
-                                                placeholder="Select a center"
-                                                onChange={onHandleCenterId}
-                                            >
-                                                {allGymCenter?.map((item, index) => {
-                                                    return (
-                                                        <>
-                                                            <Option value={item.id} >{item.CenterName}</Option>
-
-                                                        </>
-                                                    )
-                                                })}
-                                            </Select>
-                                        </Form.Item>
-                                        PT :
-                                        <Form.Item
-                                            name="pt"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                placeholder="Select your PT"
-                                                onChange={onHandlePTId}
-                                            >
-                                                {PtOfCenter?.map((item, index) => {
-                                                    return (
-                                                        <>
-                                                            <Option value={item.id}> {item.StaffName}</Option>
-
-                                                        </>
-                                                    )
-                                                })}
-                                            </Select>
-                                        </Form.Item>
+                                        Ngày bắt đầu : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dayWork)}
+                                        <br></br>
                                         Service :
                                         <Form.Item
                                             name="service"
@@ -436,13 +434,28 @@ const PTShedule = (props) => {
                                             })}
                                             </Select>
                                         </Form.Item>
+                                        <p> Center : {centerName}</p>
+
+
+
+                                        <p>
+                                            PT : {props.ptName}
+                                        </p>
+
+
+                                        <p> Ngày kết thúc : {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(endTime)}</p>
+                                        <p>Khuyến mãi : {discount} %</p>
 
                                         <Form.Item
                                             name="price"
                                             label="Giá"
 
                                         >
-                                            {detailService?.Price}
+                                            {((priceDiscount) - (((priceDiscount) * (discount)) / 100)) ? ((priceDiscount) - (((priceDiscount) * (discount)) / 100)) + " VND" : "0 VND"}
+                                        </Form.Item>
+                                        <Form.Item
+                                            name="discount"
+                                        >
                                         </Form.Item>
                                         <div>
 

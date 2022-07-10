@@ -1,28 +1,34 @@
 import React from "react";
-import classes from "./styles.module.scss";
+import "./Service.scss"
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import SearchService from "./SearchService/SearchService";
 import ListService from "./ListService/ListService";
+import HomeFooter from "../../../pages/HomePage/HomeFooter";
+import "../../../pages/HomePage/HomePage.scss"
 
 const ServiceGym = () => {
   return (
-    <div className={classes.ServiceProfileBg}>
-      <div className={classes.containerServiceList}>
-        <div className={classes.backToHome}>
-          <NavLink to="/" className={classes.backToHomeLink}>
-            <ArrowLeft size={24} color="#292829" weight="duotone" />
-            <div className={classes.textBackToHome}>Back to home</div>
-          </NavLink>
-          <div>
-            <SearchService />
-          </div>
-        </div>
-        <div className={classes.listItem}>
-          <ListService />
-        </div>
+    <div className="ServiceProfileBg">
+
+      <div className="backToHome">
+        <NavLink to="/" className="backToHomeLink">
+          <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+          <div className="textBackToHome">Back to home</div>
+        </NavLink>
+
       </div>
+      <div>
+        <SearchService />
+      </div>
+      <div className="listItem">
+        <ListService />
+
+      </div>
+      <HomeFooter />
     </div>
+
+
   );
 };
 export default ServiceGym;

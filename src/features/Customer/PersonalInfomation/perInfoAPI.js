@@ -4,7 +4,13 @@ const getCusDetail = (id) => {
     return axios.get(`/api/get-detail-customer?id=${id}`);
 };
 
-const updateCusDetail = (id, fullName, Gender, DayOfBirth, phoneNumber, address, email, roleId, avatar, centerId) => {
-    return axios.put(`/api/update-customer`, { id: id, fullName: fullName, Gender: Gender, DayOfBirth: DayOfBirth, phoneNumber: phoneNumber, address: address, email: email, roleId: roleId, avatar: avatar, centerId: centerId });
+const updateCusDetail = (id, ExternalId, fullName, gender, dob, phoneNumber, address, roleId, avatar, fileName, email, centerId) => {
+    return axios.put(`/api/admin/update-account`, { id: id, ExternalId: ExternalId, fullName: fullName, gender: gender, dob: dob, phoneNumber: phoneNumber, address: address, roleId: roleId, avatar: avatar, fileName: fileName, email: email, centerId: centerId });
 };
-export { getCusDetail, updateCusDetail };
+const getAllGymCenter = (page) => {
+    return axios.get(`/api/get-all-center?page=${page}`);
+};
+const createReview = (ratingPoint, reviewContent, CustomerId, CenterId) => {
+    return axios.post(`/api/admin/create-new-review`, { ratingPoint: ratingPoint, reviewContent: reviewContent, CustomerId, CenterId });
+};
+export { getCusDetail, updateCusDetail, getAllGymCenter, createReview };

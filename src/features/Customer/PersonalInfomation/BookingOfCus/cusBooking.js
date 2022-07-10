@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./cusBooking.scss";
+import moment from "moment";
+import { Empty } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { getCusBooking } from "./cusBookingAPI";
@@ -33,7 +35,7 @@ const BookingOfCus = () => {
                 Lịch Booking
                 <div className="titlePageBooking">
                     <div className="PTinfo">
-                        {/* {noBookDetail ? (
+                        {noCusBooking ? (
                             <div className="noData">
                                 <Empty
                                     image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
@@ -43,52 +45,52 @@ const BookingOfCus = () => {
                                     description={"No Data"}
                                 />
                             </div>
-                        ) : ( */}
-                        <div className="listBookingContent ">
-                            <InfiniteScroll
-                                dataLength={8}
-                                style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-                                loader={
-                                    <div className={"loading"}>
-                                        <StaggerAnimation />
-                                    </div>
-                                }
-                                hasMore={true}
-                            >
-                                {/* {bookDetail?.map((item, index) => {
+                        ) : (
+                            <div className="listBookingContent ">
+                                <InfiniteScroll
+                                    dataLength={8}
+                                    style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                                    loader={
+                                        <div className={"loading"}>
+                                            <StaggerAnimation />
+                                        </div>
+                                    }
+                                    hasMore={true}
+                                >
+                                    {/* {bookDetail?.map((item, index) => {
 
                                     return ( */}
-                                <>
-                                    {cusBooking?.map((item, index) => {
-                                        return (
-                                            <div className="Center">
-                                                <div className="centerInfo">
-                                                    <div className="info">
+                                    <>
+                                        {cusBooking?.map((item, index) => {
+                                            return (
+                                                <div className="Center">
+                                                    <div className="centerInfo">
+                                                        <div className="info">
 
-                                                        <p className={"infoCus"}>Khách hàng : {item.CustomerName} </p>
-                                                        <p className={"infoCus"}>Ngày bắt đầu : {item.StartTime}</p>
-                                                        <p className={"infoCus"}>Ngày kết thúc : {item.EndTime}</p>
+                                                            <p className={"infoCus"}>Khách hàng : {item.CustomerName} </p>
+                                                            <p className={"infoCus"}>Ngày bắt đầu : {moment(item.StartTime).format("DD-MM-YYYY")}    </p>
+                                                            <p className={"infoCus"}>Ngày kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")} </p>
+
+                                                        </div>
+                                                        <div className="infoService">
+                                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : {item.ServiceId} </p>
+                                                            <p className={"textNameCenter"}>Huấn luyện viên : {item.PTName}</p>
+                                                            <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
+                                                        </div>
 
                                                     </div>
-                                                    <div className="infoService">
-                                                        <p className={"textNameCenter"}>Dịch vụ đăng ký : {item.ServiceId} </p>
-                                                        <p className={"textNameCenter"}>Huấn luyện viên : {item.PTName}</p>
-                                                        <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
-                                                    </div>
-
                                                 </div>
-                                            </div>
-                                        )
-                                    })}
+                                            )
+                                        })}
 
-                                </>
-                                {/* )
+                                    </>
+                                    {/* )
                                 })} */}
 
-                            </InfiniteScroll>
-                        </div>
-                        {/* )
-                        } */}
+                                </InfiniteScroll>
+                            </div>
+                        )
+                        }
                     </div>
 
                 </div>

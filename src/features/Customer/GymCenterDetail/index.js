@@ -7,7 +7,10 @@ import chinhanh from "../../../assets/images/gym-place/chiNhanh1.jpg";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import './CenterDetail.scss'
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
 import ListPTCenter from "./ListPtOfCenter/listPtOfCenter";
+import HomeFooter from "../../../pages/HomePage/HomeFooter";
 const GymDetailPage = () => {
     const navigate = useNavigate();
 
@@ -35,24 +38,13 @@ const GymDetailPage = () => {
     // console.log('check', getCenterDetail)
     return (
         <div className="CenterDetailBgContainer">
-            <PageHeader
-                className="site-page-header"
-                onBack={() => navigate("/")}
-                subTitle="Back to home"
-                style={{
-                    top: 0,
-                    position: "sticky",
-                    zIndex: "9",
-                    background:
-                        "linear-gradient(305.38deg, #171717 -50.47%, #f2edf0 94.82%)",
-                    color: "#fff",
-                    fontWeight: "600",
-                }}
-                extra={[
-                    <Question size={20} color="#eeeee7" weight="fill" />,
-                    <List size={20} color="#eeeee7" weight="fill" />,
-                ]}
-            />
+            <div className="backToHome">
+                <NavLink to="/" className="backtoHome">
+                    <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+                    <div className="textBackToHome">Back to home</div>
+                </NavLink>
+
+            </div>
 
             <div className="breadcumDetail" >
                 <Breadcrumb>
@@ -106,6 +98,7 @@ const GymDetailPage = () => {
                     <ListPTCenter />
                 </Row>
             </div>
+            <HomeFooter />
         </div>
     )
 }

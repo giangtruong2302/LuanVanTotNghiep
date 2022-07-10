@@ -1,12 +1,12 @@
 .listPTContent {
-  overflow: auto;
+
   max-height: auto;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   // align-items: flex-start;
   //padding: 0 20px;
-  padding-top: 50px;
+  padding-top: 120px;
   gap: 15px;
   position: relative;
   width: 100vw;
@@ -14,17 +14,19 @@
 
   border-radius: 5px;
 
-  :global {
-    .infinite-scroll-component__outerdiv {
-      width: 100%;
-    }
+
+  .srcollPT {
+    width: 100%;
+    overflow-x: hidden;
   }
+
 
   .PT {
     box-sizing: border-box;
     margin: 0 auto;
-    width: 100%;
-    height: 119px;
+
+    width: 70%;
+    height: 120px;
     background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
     /* light blue */
     border: 1px solid #141415;
@@ -61,7 +63,7 @@
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
-          font-size: 14px;
+          font-size: 20px;
           line-height: 17px;
           margin-top: 20px;
           /* identical to box height */
@@ -90,14 +92,14 @@
 
         font-family: "Inter";
         font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
+        font-weight: 500;
+        font-size: 18px;
         line-height: 17px;
         /* identical to box height */
 
         /* #000000 */
 
-        color: rgba(0, 0, 0, 0.65);
+        color: black;
 
         .lineDetailInfoPT {
           width: 1px;
@@ -105,7 +107,7 @@
           font-family: "Inter";
           font-style: normal;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 18px;
           line-height: 17px;
           /* identical to box height */
 
