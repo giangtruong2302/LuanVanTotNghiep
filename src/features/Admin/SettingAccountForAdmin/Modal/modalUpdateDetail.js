@@ -1,6 +1,13 @@
 import { PictureOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Field, FieldProps, Form, Formik } from "formik";
-import { DatePicker, Form as FormAnt, Input, Modal } from "antd";
+import {
+  DatePicker,
+  Form as FormAnt,
+  Input,
+  message,
+  Modal,
+  Select,
+} from "antd";
 // import { message, Modal, Upload } from "antd";
 import AppLoader from "../../../../component/AppLoader";
 import classes from "./styles.module.scss";
@@ -11,14 +18,21 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Cropper from "react-easy-crop";
 import { ChangeDetailSchema } from "./validation";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { handleChangeInfoManager } from "./UpdateInfoManagerAPI";
+import { Toast } from "react-bootstrap";
+import StaggerAnimation from "../../../../component/StaggerAnimation";
 // import { Area, Point } from "react-easy-crop/types";
+const { Option } = Select;
 
 const ChangeDetail = (props) => {
   console.log(props);
+  const dispatch = useDispatch();
+
   const [isModalVisible, setIsShowModalVisible] = useState(true);
 
   const [loading, setLoading] = useState(false);
-
+  const [saving, setSaving] = useState(false);
   useEffect(() => {
     if (props.showModal) {
       setIsShowModalVisible(true);
@@ -46,6 +60,40 @@ const ChangeDetail = (props) => {
       </div>
     );
   }, []);
+  const handleSubmitUpdatePersonalDetail = useCallback(
+    (values) => {
+      try {
+        setSaving(true);
+        handleChangeInfoManager(
+          props.data.id,
+          values.name,
+          values.gender,
+          "",
+          values.phoneNumber,
+          values.address,
+          values.email,
+          props.data.RoleId,
+          props.data.ManagerImage,
+          props.data.public_id_image,
+          props.data.Centered,
+          props.data.SalaryId,
+          props.data.ExternalId
+        )
+          .then((res) => {
+            message.success("update info success");
+            props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
+          })
+          .catch((error) => {
+            console.log("error is: ", error);
+          });
+      } catch (error) {
+        console.log(error);
+        setSaving(false);
+      }
+    },
+    [dispatch]
+  );
   return (
     <>
       <Modal
@@ -67,15 +115,15 @@ const ChangeDetail = (props) => {
             <Formik
               validationSchema={ChangeDetailSchema}
               initialValues={{
-                firstName: props.firstName,
-                lastName: props.lastName,
-                gender: props.gender,
-                dob: props.dob,
-                address: props.address,
+                name: props.data.ManagerName,
+                email: props.data.ManagerEmail,
+                phoneNumber: props.data.ManagerPhone,
+                gender: props.data.Gender,
+                address: props.data.ManagerAddress,
               }}
               onSubmit={async (values) => {
                 console.log("check values:", values);
-                // handleSubmitUpdatePersonalDetail(values)
+                handleSubmitUpdatePersonalDetail(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -84,22 +132,21 @@ const ChangeDetail = (props) => {
                     <FormAnt.Item
                       style={{ margin: "10px" }}
                       validateStatus={
-                        Boolean(touched?.firstName && errors?.firstName)
+                        Boolean(touched?.name && errors?.name)
                           ? "error"
                           : "success"
                       }
                       help={
-                        Boolean(touched?.firstName && errors?.firstName) &&
-                        errors?.firstName
+                        Boolean(touched?.name && errors?.name) && errors?.name
                       }
                     >
-                      <Field name="firstName">
+                      <Field name="name">
                         {({ field }) => (
                           <Input
                             {...field}
-                            name="firstName"
+                            name="name"
                             className={classes.inputRecovery}
-                            placeholder="first name"
+                            placeholder="Manager name"
                           />
                         )}
                       </Field>
@@ -107,28 +154,51 @@ const ChangeDetail = (props) => {
                     <FormAnt.Item
                       style={{ margin: "10px" }}
                       validateStatus={
-                        Boolean(touched?.lastName && errors?.lastName)
+                        Boolean(touched?.email && errors?.email)
                           ? "error"
                           : "success"
                       }
                       help={
-                        Boolean(touched?.lastName && errors?.lastName) &&
-                        errors?.lastName
+                        Boolean(touched?.email && errors?.email) &&
+                        errors?.email
                       }
                     >
-                      <Field name="lastName">
+                      <Field name="email">
                         {({ field }) => (
                           <Input
                             {...field}
-                            name="lastName"
+                            name="email"
                             className={classes.inputRecovery}
-                            placeholder="last name"
+                            placeholder="Email"
                           />
                         )}
                       </Field>
                     </FormAnt.Item>
                     <FormAnt.Item
                       style={{ margin: "10px" }}
+                      validateStatus={
+                        Boolean(touched?.phoneNumber && errors?.phoneNumber)
+                          ? "error"
+                          : "success"
+                      }
+                      help={
+                        Boolean(touched?.phoneNumber && errors?.phoneNumber) &&
+                        errors?.phoneNumber
+                      }
+                    >
+                      <Field name="phoneNumber">
+                        {({ field }) => (
+                          <Input
+                            {...field}
+                            name="phoneNumber"
+                            className={classes.inputRecovery}
+                            placeholder="Phone Number"
+                          />
+                        )}
+                      </Field>
+                    </FormAnt.Item>
+                    <FormAnt.Item
+                      //style={{ margin: '5px' }}
                       validateStatus={
                         Boolean(touched?.gender && errors?.gender)
                           ? "error"
@@ -136,41 +206,23 @@ const ChangeDetail = (props) => {
                       }
                       help={
                         Boolean(touched?.gender && errors?.gender) &&
-                        errors?.gender
+                        errors?.roleId
                       }
                     >
-                      <Field
-                        className={classes.inputRecovery}
-                        name="gender"
+                      <Select
+                        className={` ${
+                          touched?.gender && errors?.gender
+                            ? classes.inputError
+                            : ""
+                        } ${classes.inputRecovery} ant-picker `}
                         placeholder="Gender"
-                        as="select"
-                      >
-                        {["MALE", "FEMALE", "OTHER"].map((i) => (
-                          <option key={i} value={i}>
-                            {i}{" "}
-                          </option>
-                        ))}
-                      </Field>
-                    </FormAnt.Item>
-                    <FormAnt.Item
-                      style={{ margin: "10px" }}
-                      validateStatus={
-                        Boolean(touched?.dob && errors?.dob)
-                          ? "error"
-                          : "success"
-                      }
-                      help={Boolean(touched?.dob && errors?.dob) && errors?.dob}
-                    >
-                      <DatePicker
-                        onChange={(dateString) => {
-                          const startday =
-                            moment(dateString).format("YYYY-MM-DD");
-                          setFieldValue("dob", startday);
-                          console.log(startday);
+                        onChange={(value) => {
+                          setFieldValue("gender", value);
                         }}
-                        className={classes.inputRecovery}
-                        defaultValue={moment(props.dob, "YYYY-MM-DD")}
-                      />
+                      >
+                        <Option value="true">Nam</Option>
+                        <Option value="false">Nữ</Option>
+                      </Select>
                     </FormAnt.Item>
                     <FormAnt.Item
                       style={{ margin: "10px" }}
@@ -200,14 +252,13 @@ const ChangeDetail = (props) => {
                       type="submit"
                       style={{ margin: "10px" }}
                     >
-                      Save
-                      {/* {isLoading ? (
-                        <div style={{ marginLeft: '100px' }}>
+                      {saving ? (
+                        <div style={{ marginLeft: "100px" }}>
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        'Submit'
-                      )} */}
+                        "Save"
+                      )}
                     </button>
                   </Form>
                 );

@@ -1,22 +1,23 @@
 import { PictureOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Field, FieldProps, Form, Formik } from "formik";
-import { DatePicker, Form as FormAnt, Input, Modal } from "antd";
+import { DatePicker, Form as FormAnt, Input, message, Modal } from "antd";
 // import { message, Modal, Upload } from "antd";
 import AppLoader from "../../../../component/AppLoader";
 import classes from "./styles.module.scss";
 import ava from "../../../../assets/images/imgStaff/dyno.jpg";
-
+import { handleChangePassword } from "./UpdateInfoManagerAPI";
 import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Cropper from "react-easy-crop";
 import { ChangeDetailSchema, ChangePasswordSchema } from "./validation";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 // import { Area, Point } from "react-easy-crop/types";
 
 const ChangePassword = (props) => {
   console.log(props);
   const [isModalVisible, setIsShowModalVisible] = useState(true);
-
+  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const ChangePassword = (props) => {
       setIsShowModalVisible(true);
     }
   }, [props]);
-
+  const dispatch = useDispatch();
   const handleCancel = () => {
     setIsShowModalVisible(false);
     props.handleModal(false);
@@ -46,6 +47,30 @@ const ChangePassword = (props) => {
       </div>
     );
   }, []);
+  const handleSubmitChangePassword = useCallback(
+    (values) => {
+      try {
+        setSaving(true);
+        handleChangePassword(
+          values.oldPassword,
+          values.password,
+          values.password2,
+          props.data.id
+        )
+          .then((res) => {
+            message.success("update password is success");
+            props.handleModal(false);
+          })
+          .catch((error) => {
+            console.log("check error: ", error);
+          });
+      } catch (error) {
+        console.log(error);
+        setSaving(false);
+      }
+    },
+    [dispatch]
+  );
   return (
     <>
       <Modal
@@ -59,8 +84,11 @@ const ChangePassword = (props) => {
       >
         <div className={classes.changeInfoContainer}>
           <div className={classes.titleChangeInfo}>
-            <span className={classes.nameChangeInfo}>
-              Update Personal Detail
+            <span
+              className={classes.nameChangeInfo}
+              style={{ paddingLeft: "40px" }}
+            >
+              Change Password
             </span>
           </div>
           <div className={classes.containerChangeInfo}>
@@ -73,7 +101,7 @@ const ChangePassword = (props) => {
               }}
               onSubmit={async (values) => {
                 console.log("check values:", values);
-                // handleSubmitUpdatePersonalDetail(values)
+                handleSubmitChangePassword(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -143,7 +171,7 @@ const ChangePassword = (props) => {
                             {...field}
                             name="password2"
                             className={classes.inputRecovery}
-                            placeholder="Current Password"
+                            placeholder="Confirm Password"
                           />
                         )}
                       </Field>

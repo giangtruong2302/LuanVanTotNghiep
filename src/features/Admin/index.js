@@ -38,6 +38,7 @@ import {
   CalendarCheck,
   Book,
   ListNumbers,
+  IdentificationBadge,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -88,7 +89,7 @@ const AdminPage = () => {
         {
           key: "1",
           icon: <User size={20} color="#171717" weight="fill" />,
-          label: <NavLink to="/admin/reservation">Profile</NavLink>,
+          label: <NavLink to="/admin/setting-account">Profile</NavLink>,
         },
         {
           key: "2",
@@ -226,7 +227,9 @@ const AdminPage = () => {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
-              icon={<UserCircle size={20} weight="bold" color="#fff" />}
+              icon={
+                <IdentificationBadge size={20} weight="bold" color="#fff" />
+              }
               title="Quản lý Manager of Center"
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
             >

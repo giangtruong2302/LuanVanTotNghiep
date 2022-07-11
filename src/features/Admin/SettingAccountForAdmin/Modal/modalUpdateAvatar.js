@@ -7,6 +7,8 @@ import ava from "../../../../assets/images/imgStaff/dyno.jpg";
 import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Cropper from "react-easy-crop";
+import { handleChangeInfoManager } from "./UpdateInfoManagerAPI";
+import { useDispatch } from "react-redux";
 // import { Area, Point } from "react-easy-crop/types";
 
 const ChangeAvatar = (props) => {
@@ -14,9 +16,11 @@ const ChangeAvatar = (props) => {
   const [isModalVisible, setIsShowModalVisible] = useState(true);
   const [crop, setCrop] = useState({ x: 50, y: 50 });
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [saving, setSaving] = useState(false);
   const [zoom, setZoom] = useState(1);
+  const dispatch = useDispatch();
   const getBase64 = (img, callback) => {
     setLoading(false);
     const reader = new FileReader();
@@ -34,11 +38,37 @@ const ChangeAvatar = (props) => {
     setIsShowModalVisible(false);
     props.handleModal(false);
   };
-  const handleOk = () => {
-    // setLoadingUpdate(true)
-    // setLoading(false)
-    // showCroppedImage()
-  };
+  const handleOk = useCallback(() => {
+    try {
+      setSaving(true);
+      handleChangeInfoManager(
+        props.data.id,
+        props.data.ManagerName,
+        props.data.Gender,
+        "",
+        props.data.ManagerPhone,
+        props.data.ManagerAddress,
+        props.data.ManagerEmail,
+        props.data.RoleId,
+        imageUrl,
+        fileName,
+        props.data.Centered,
+        props.data.SalaryId,
+        props.data.ExternalId
+      )
+        .then((res) => {
+          message.success("update info success");
+          props.takeStatus("complete" + Date.now());
+          props.handleModal(false);
+        })
+        .catch((error) => {
+          console.log("error is: ", error);
+        });
+    } catch (error) {
+      console.log(error);
+      setSaving(false);
+    }
+  }, [dispatch, imageUrl, fileName]);
   const onCropComplete = useCallback((_croppedArea, croppedAreaPixels) => {
     // setCroppedAreaPixels(croppedAreaPixels)
   }, []);
@@ -47,6 +77,7 @@ const ChangeAvatar = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
@@ -76,10 +107,10 @@ const ChangeAvatar = (props) => {
           <div className={classes.titleUpdateAvatar}>Update Avatar</div>
           <div className={classes.image}>
             <Cropper
-              image={imageUrl ? imageUrl : ava}
+              image={imageUrl ? imageUrl : props.avatar}
               crop={crop}
               zoom={zoom}
-              aspect={2 / 2}
+              aspect={3 / 3}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}

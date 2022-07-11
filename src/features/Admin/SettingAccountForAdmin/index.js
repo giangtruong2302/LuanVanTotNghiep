@@ -20,6 +20,7 @@ import { handleGetInfoManager } from "./SettingAccountAPI";
 const SettingAccountForAdmin = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const [infoDetail, setInfoDetail] = useState();
+  const [status, setStatus] = useState("");
   console.log("check user info: ", userInfo);
   const [showModal, setShowModal] = useState(false);
   const handleModal = (isVisible) => {
@@ -38,6 +39,9 @@ const SettingAccountForAdmin = () => {
   //   ? userInfo["AccountManager.ManagerName"]
   //   : "";
   // console.log("check image: ", image);
+  const takeStatus = (value) => {
+    setStatus(value);
+  };
   useEffect(() => {
     handleGetInfoManager(userInfo.ExternalId ? userInfo.ExternalId : -1)
       .then((res) => {
@@ -49,7 +53,7 @@ const SettingAccountForAdmin = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [userInfo]);
+  }, [userInfo, status]);
   return (
     <>
       <div className="settingAccountBg">
@@ -189,19 +193,24 @@ const SettingAccountForAdmin = () => {
         <ChangeAvatar
           handleModal={handleModal}
           showModal={showModal}
-          avatar={ava}
+          data={infoDetail}
+          takeStatus={takeStatus}
+          avatar={infoDetail.ManagerImage ? infoDetail.ManagerImage : ava}
         />
       )}
       {showModalDetail && (
         <ChangeDetail
           handleModal={handleModalDetail}
           showModal={showModalDetail}
+          data={infoDetail}
+          takeStatus={takeStatus}
         />
       )}
       {showModalPassword && (
         <ChangePassword
           handleModal={handleModalPassword}
           showModal={showModalPassword}
+          data={infoDetail}
         />
       )}
     </>

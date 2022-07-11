@@ -16,11 +16,13 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 // import UpdateStaff from "../../ModalManager/modalUpdateStaff";
 // import { handleDeleteStaff } from "../../ModalManager/ModalAccountAPI";
 import { toast } from "react-toastify";
+import UpdateCustomer from "../../ModalManager/modalUpdateCustomer";
 const { confirm } = Modal;
 
 const SettingRenderer = (props) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+
   const [showPopOver, setShowPopOver] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
@@ -65,11 +67,23 @@ const SettingRenderer = (props) => {
     <Menu>
       <Menu.Item
         key="2"
+        onClick={() => setShowModal(true)}
+        style={{ color: "#53d1b6" }}
+      >
+        <CheckSquareOffset size={18} color="#53d1b6" weight="fill" />
+        UPDATE CUSTOMER INFO
+      </Menu.Item>
+      <Menu.Item
+        key="3"
         onClick={handleViewCusInfo}
         style={{ color: "#53d1b6" }}
       >
         <UserCircle size={18} color="#53d1b6" weight="fill" />
         VIEW CUSTOMER INFO
+      </Menu.Item>
+      <Menu.Item key="4" onClick={confirmDelete} style={{ color: "#FD409A" }}>
+        <XCircle size={18} color="#FD409A" weight="fill" />
+        DELETE STAFF
       </Menu.Item>
     </Menu>
   );
@@ -91,14 +105,14 @@ const SettingRenderer = (props) => {
           <Gear color="#0a0700" weight="light" />
         </div>
       </Popover>
-      {/* {showModal && (
-        <UpdateStaff
+      {showModal && (
+        <UpdateCustomer
           handleModal={handleModal}
           showModal={showModal}
           data={props.data}
           takeStatus={takeStatus}
         />
-      )} */}
+      )}
     </>
   );
 };
