@@ -27,7 +27,7 @@ const ServiceDetail = React.lazy(() =>
 );
 const Staff = React.lazy(() => import("../features/Staff/staff"));
 const Booking = React.lazy(() => import("../features/Staff/Booking/booking"));
-const Review = React.lazy(() => import("../features/Customer/Review"));
+
 const PerInfo = React.lazy(() =>
   import("../features/Customer/PersonalInfomation/perInfo")
 );
@@ -35,7 +35,7 @@ const SendEmail = React.lazy(() => import("../features/sendEmail/index"));
 export {
   SendEmail,
   PerInfo,
-  Review,
+
   Staff,
   Home,
   LoginPage,

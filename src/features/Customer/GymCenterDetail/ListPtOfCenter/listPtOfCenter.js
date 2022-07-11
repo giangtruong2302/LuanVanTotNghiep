@@ -107,7 +107,7 @@ const ListPTCenter = () => {
                             <List.Item.Meta
                                 avatar={<Avatar src={item.avatar} />}
                                 title={<a href={item.href}>{item.StaffName}</a>}
-                                description={item.StaffEmail + " SĐT: " + item.StaffPhoneNumber}
+                                description={item.StaffEmail}
 
                             />
                         </NavLink>

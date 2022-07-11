@@ -4,7 +4,7 @@ import "./ptSchedule.scss";
 import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
-import { getTimeWorking } from "./PtScheduleAPI";
+import { getTimeById, getTimeWorking } from "./PtScheduleAPI";
 import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -53,6 +53,7 @@ const PTShedule = (props) => {
     function openModal(e) {
         setIsOpen(true);
         setScheduleId(e.target.value)
+        console.log(e.target.value)
         getCenterDetail(props.centerId).then((response) => {
             if (response.centerDetail) {
                 setCenterName(response.centerDetail.CenterName)
@@ -297,34 +298,16 @@ const PTShedule = (props) => {
     // console.log(time.toLocaleDateString());
 
     const handleDate = (e) => {
-        // console.log(timestampSeconds);
+        console.log(e.target.value);
 
 
 
         getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
             setDayWork(e.target.value);
-
-
             if (response.ScheduleWorking.rows) {
                 setTimeDetail(response.ScheduleWorking.rows);
                 setNoTimeDetail(false);
-                getTimeWorking(props.ptId, e.target.value, 1).then((response) => {
-                    setDayWork(e.target.value);
 
-
-                    if (response.ScheduleWorking.rows) {
-                        setTimeDetail(response.ScheduleWorking.rows);
-                        setNoTimeDetail(false);
-                    } else {
-                        setNoTimeDetail(true);
-                    }
-                })
-                    .catch(() => {
-                        setTimeDetail(true);
-                    })
-                    .finally(() => {
-                        setTimeDetailLoading(false);
-                    });
             } else {
                 setNoTimeDetail(true);
             }
