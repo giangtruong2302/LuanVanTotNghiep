@@ -37,9 +37,9 @@ const OutStandingPT = (props) => {
           <span className="title-section">
             <FormattedMessage id="homepage.out-standing-pt" />
           </span>
-          <button className="btn-section">
+          <NavLink to={`/Personal-Training`} className="btn-section">
             <FormattedMessage id="homepage.moreInfo" />
-          </button>
+          </NavLink>
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
@@ -47,7 +47,7 @@ const OutStandingPT = (props) => {
 
               return (
                 <NavLink
-                  to="/pt-detail/1"
+                  to={`/pt-detail/${item.id}`}
                   className="section-customize specialty-child"
                 //key={index}
                 //onClick={() => this.handleViewDetailSpecialty(item)}

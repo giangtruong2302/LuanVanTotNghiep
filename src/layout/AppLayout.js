@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AppSuspense from "../component/AppSuspense";
 import CustomerLoginPage from "../features/Customer/login";
-import Review from "../features/Customer/Review";
+
 
 import { SendEmail } from "../features/sendEmail";
 import Booking from "../features/Staff/Booking/booking";
@@ -51,7 +51,7 @@ const AppLayout = () => {
         <Route path="/staff-personal-page" element={<Staff />} />
         <Route path="/pt-booking" element={<Booking />} />
         <Route path="/login" element={<CustomerLoginPage />} />
-        <Route path="/customer-review" element={<Review />} />
+
         <Route path="/customer-infomation" element={<PerInfo />} />
         <Route path="/send-email" element={<SendEmail />} />
         <Route path="/bmi" element={<BMI />} />

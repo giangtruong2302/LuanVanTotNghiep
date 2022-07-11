@@ -124,9 +124,9 @@ const ListPTService = () => {
             <NavLink to={`/pt-detail/${item.id}`}>
 
               <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
+                avatar={<Avatar src={item.StaffImage} />}
                 title={<a href={item.href}>{item.StaffName}</a>}
-                description={item.StaffEmail + "Số điện thoại PT:" + item.StaffPhoneNumber}
+                description={"Email: " + item.StaffEmail}
 
               />
             </NavLink>

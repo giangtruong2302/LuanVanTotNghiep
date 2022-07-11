@@ -36,9 +36,10 @@ const Specialty = (props) => {
           <span className="title-section">
             <FormattedMessage id="homepage.specialty-popular" />
           </span>
-          <button className="btn-section">
+          <NavLink to={`/service-gym`} className="btn-section">
             <FormattedMessage id="homepage.moreInfo" />
-          </button>
+          </NavLink>
+
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
@@ -46,7 +47,7 @@ const Specialty = (props) => {
 
               return (
                 <NavLink
-                  to="/service-detail/${item.id}"
+                  to={`service-detail/${item.id}`}
                   className="section-customize specialty-child"
                 //key={index}
                 //onClick={() => this.handleViewDetailSpecialty(item)}

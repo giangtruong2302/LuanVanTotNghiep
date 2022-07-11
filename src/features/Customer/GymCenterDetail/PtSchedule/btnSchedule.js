@@ -8,6 +8,7 @@ const ButtonSchedule = (props) => {
   const [timeDetail, setTimeDetail] = useState();
   useEffect(() => {
     getTimeById(props.data.TimeId)
+
       .then((res) => {
         console.log("check time detail: ", res);
         setTimeDetail(res.time);
@@ -18,23 +19,27 @@ const ButtonSchedule = (props) => {
   }, [props.data]);
   return (
     <>
-      <button
-        disabled
-        className="btn-no"
-        value={timeDetail?.id}
-        onClick={(e) => props.openModal(e)}
-      >
-        {timeDetail?.TimeWork}
-      </button>
-      {/* :
-      <button
-        className="btn-vie"
-        value={timeDetail?.id}
-        onClick={props.handleShowModalBooking}
-      >
-        {" "}
-        {timeDetail?.TimeWork}
-      </button> */}
+      {props.data.Status === 0 ?
+        <button
+          disabled
+          className="btn-no"
+          value={timeDetail?.id}
+          onClick={(e) => props.open(e)}
+        >
+          {timeDetail?.TimeWork}
+        </button>
+        :
+        <button
+          className="btn-vie"
+          value={timeDetail?.id}
+          onClick={(e) => props.open(e)}
+        >
+          {" "}
+          {timeDetail?.TimeWork}
+        </button>
+      }
+
+
     </>
   );
 };

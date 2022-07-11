@@ -75,8 +75,8 @@ const ServiceGymDetail = () => {
                 <div className="serviceDetailAbout">
                   <div className="serviceDetailTitle">{servicesDetail?.ServiceName}</div>
                   <div className="serviceDetailDefine">
-                    <p>WorkDuration : {servicesDetail?.WorkDuration}</p>
-                    <p>Price : {servicesDetail?.Price}</p>
+                    <p>WorkDuration : {servicesDetail?.WorkDuration} month</p>
+                    <p>Price : {servicesDetail?.Price} VND</p>
                   </div>
 
                   <div className="serviceDetailDefineSeemore">

@@ -4,6 +4,7 @@ import "./Specialty.scss";
 import { FormattedMessage } from "react-intl";
 import img from "../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 import { getAllGymCenter } from "./SectionAPI";
+import { NavLink } from "react-router-dom";
 const GymCenter = (props) => {
   const [allGymCenter, setAllGymCenter] = useState();
   const [noGymCenter, setNoGymCenter] = useState(false);
@@ -34,15 +35,18 @@ const GymCenter = (props) => {
           <span className="title-section">
             <FormattedMessage id="homepage.gym-center" />
           </span>
-          <button className="btn-section">
+
+          <NavLink to={`/gym-center`} className="btn-section">
             <FormattedMessage id="homepage.moreInfo" />
-          </button>
+          </NavLink>
         </div>
         <div className="section-body">
           <Slider {...props.settings}>
             {allGymCenter?.map((item, index) => {
               return (
-                <div
+
+                <NavLink
+                  to={`/center-detail/${item.id}`}
                   className="section-customize specialty-child"
                 //key={index}
                 //onClick={() => this.handleViewDetailSpecialty(item)}
@@ -52,7 +56,7 @@ const GymCenter = (props) => {
                     style={{ backgroundImage: `url(${img})` }}
                   ></div>
                   <div className="specialty-name">{item.CenterName}</div>
-                </div>
+                </NavLink>
               )
             })}
 
