@@ -22,12 +22,19 @@ const ButtonSchedule = (props) => {
         disabled
         className="btn-no"
         value={timeDetail?.id}
-        //  onClick={(e) => openModal(e)}
+        onClick={(e) => props.openModal(e)}
       >
         {timeDetail?.TimeWork}
       </button>
       {/* :
-                                                        <button className="btn-vie" value={item.id} onClick={(e) => openModal(e)} >{item.TimeId}</button> */}
+      <button
+        className="btn-vie"
+        value={timeDetail?.id}
+        onClick={props.handleShowModalBooking}
+      >
+        {" "}
+        {timeDetail?.TimeWork}
+      </button> */}
     </>
   );
 };

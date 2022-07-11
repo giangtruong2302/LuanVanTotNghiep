@@ -21,6 +21,7 @@ import { getDetailService } from "./PtScheduleAPI";
 import { getDisCount } from "./PtScheduleAPI";
 import { getCenterDetail } from "../centerDetailAPI";
 import ButtonSchedule from "./btnSchedule";
+import { isVisible } from "@testing-library/user-event/dist/utils";
 const customStyles = {
   content: {
     top: "50%",
@@ -142,8 +143,18 @@ const PTShedule = (props) => {
   const [allService, setAllService] = useState();
   const [noService, setNoService] = useState(false);
   const [, setServiceLoading] = useState(true);
-
-  useEffect(() => {}, []);
+  const [form] = Form.useForm();
+  const [status, setStatus] = useState("");
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
+  const [centerId, setCenterId] = useState();
+  const [detailService, setDetailService] = useState();
+  const [nodetailService, setNoDetailService] = useState(false);
+  const [, setDetailServiceLoading] = useState(true);
+  const [discount, setDiscount] = useState();
+  const [nodetailDiscount, setNoDetailDiscount] = useState(false);
+  const [, setDetailDiscountLoading] = useState(true);
+  const [priceDiscount, setPriceDiscount] = useState();
   useEffect(() => {
     getAllGymCenter("1")
       .then((response) => {
@@ -179,18 +190,7 @@ const PTShedule = (props) => {
         setServiceLoading(false);
       });
   }, []);
-  const [form] = Form.useForm();
-  const [status, setStatus] = useState("");
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
-  const [centerId, setCenterId] = useState();
-  const [detailService, setDetailService] = useState();
-  const [nodetailService, setNoDetailService] = useState(false);
-  const [, setDetailServiceLoading] = useState(true);
-  const [discount, setDiscount] = useState();
-  const [nodetailDiscount, setNoDetailDiscount] = useState(false);
-  const [, setDetailDiscountLoading] = useState(true);
-  const [priceDiscount, setPriceDiscount] = useState();
+
   const onHandleServiceId = (value) => {
     console.log("daywork", value);
     getDetailService(value)
@@ -246,6 +246,9 @@ const PTShedule = (props) => {
       .finally(() => {
         setPtOfCenterLoading(false);
       });
+  };
+  const handleShowModalBooking = (isVisible) => {
+    setIsOpen(isVisible);
   };
   const onHandlePTId = (value) => {
     getDetailPT(value)
@@ -354,6 +357,7 @@ const PTShedule = (props) => {
 
   const onReset = () => {
     form.resetFields();
+    setIsOpen(false);
   };
 
   return (
@@ -386,107 +390,118 @@ const PTShedule = (props) => {
               <div className="time-content-btns">
                 {timeDetail && timeDetail.length > 0
                   ? timeDetail?.map((item, index) => {
-                      return <ButtonSchedule data={item} />;
+                      return (
+                        <div>
+                          <ButtonSchedule
+                            data={item}
+                            // onClick={(e) => openModal(e)}
+                            openModal={openModal}
+                            handleShowModalBooking={handleShowModalBooking}
+                          />
+                        </div>
+                      );
                     })
                   : "Ngày này, PT chưa đăng lịch nhận booking"}
               </div>
-              <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-              >
-                <h1>Form đăng ký</h1>
-                <div ref={(_subtitle) => (subtitle = _subtitle)}>
-                  <Form form={form} name="control-hooks" onFinish={onFinish}>
-                    Email :
-                    <Form.Item
-                      name="email"
-                      rules={[
-                        {
-                          required: true,
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
-                    Ngày bắt đầu :{" "}
-                    {new Intl.DateTimeFormat("vi-VN", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    }).format(dayWork)}
-                    <br></br>
-                    Service :
-                    <Form.Item
-                      name="service"
-                      rules={[
-                        {
-                          required: true,
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select a service"
-                        onChange={onHandleServiceId}
+              {modalIsOpen && (
+                <Modal
+                  isOpen={modalIsOpen}
+                  onAfterOpen={afterOpenModal}
+                  onCancel={closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <h1>Form đăng ký</h1>
+                  <div ref={(_subtitle) => (subtitle = _subtitle)}>
+                    <Form form={form} name="control-hooks" onFinish={onFinish}>
+                      Email :
+                      <Form.Item
+                        name="email"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
                       >
-                        {" "}
-                        {allService?.map((item, index) => {
-                          return (
-                            <>
-                              <Option value={item.id}>
-                                {item.ServiceName}
-                              </Option>
-                            </>
-                          );
-                        })}
-                      </Select>
-                    </Form.Item>
-                    <p> Center : {centerName}</p>
-                    <p>PT : {props.ptName}</p>
-                    <p>
-                      {" "}
-                      Ngày kết thúc :{" "}
+                        <Input />
+                      </Form.Item>
+                      Ngày bắt đầu :{" "}
                       {new Intl.DateTimeFormat("vi-VN", {
                         year: "numeric",
                         month: "2-digit",
                         day: "2-digit",
-                      }).format(endTime)}
-                    </p>
-                    <p>Khuyến mãi : {discount} %</p>
-                    <Form.Item name="price" label="Giá">
-                      {priceDiscount - (priceDiscount * discount) / 100
-                        ? priceDiscount -
-                          (priceDiscount * discount) / 100 +
-                          " VND"
-                        : "0 VND"}
-                    </Form.Item>
-                    <Form.Item name="discount"></Form.Item>
-                    <div>
-                      <ToastContainer
-                        position="top-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                      />
+                      }).format(dayWork)}
+                      <br></br>
+                      Service :
+                      <Form.Item
+                        name="service"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Select
+                          placeholder="Select a service"
+                          onChange={onHandleServiceId}
+                        >
+                          {" "}
+                          {allService?.map((item, index) => {
+                            return (
+                              <>
+                                <Option value={item.id}>
+                                  {item.ServiceName}
+                                </Option>
+                              </>
+                            );
+                          })}
+                        </Select>
+                      </Form.Item>
+                      <p> Center : {centerName}</p>
+                      <p>PT : {props.ptName}</p>
+                      <p>
+                        {" "}
+                        Ngày kết thúc :{" "}
+                        {new Intl.DateTimeFormat("vi-VN", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        }).format(endTime)}
+                      </p>
+                      <p>Khuyến mãi : {discount} %</p>
+                      <Form.Item name="price" label="Giá">
+                        {priceDiscount - (priceDiscount * discount) / 100
+                          ? priceDiscount -
+                            (priceDiscount * discount) / 100 +
+                            " VND"
+                          : "0 VND"}
+                      </Form.Item>
+                      <Form.Item name="discount"></Form.Item>
+                      <div>
+                        <ToastContainer
+                          position="top-right"
+                          autoClose={5000}
+                          hideProgressBar={false}
+                          newestOnTop={false}
+                          closeOnClick
+                          rtl={false}
+                          pauseOnFocusLoss
+                          draggable
+                          pauseOnHover
+                        />
 
-                      <ToastContainer />
-                    </div>
-                    <Button type="primary" htmlType="submit">
-                      Submit
-                    </Button>
-                    <Button htmlType="button" onClick={onReset}>
-                      Reset
-                    </Button>
-                  </Form>
-                </div>
-              </Modal>
+                        <ToastContainer />
+                      </div>
+                      <Button type="primary" htmlType="submit">
+                        Submit
+                      </Button>
+                      <Button htmlType="button" onClick={onReset}>
+                        Reset
+                      </Button>
+                    </Form>
+                  </div>
+                </Modal>
+              )}
 
               <div className="book-free">
                 <span>
