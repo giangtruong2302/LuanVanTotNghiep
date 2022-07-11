@@ -1,14 +1,41 @@
-body {}
-
 .StaffDetailContainer {
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
+    min-height: 100vh;
 
+    .backToHome {
+        width: 100%;
+        color: white;
+        background: #a50000;
+        height: 65px;
 
+        .titleStaffPage {
+
+            color: black;
+        }
+
+        .backtoHome {
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            // width: fit-content;
+            .textBackToHome {
+                font-family: "roboto";
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+                color: white;
+            }
+        }
+    }
 
     .StaffProfile {
         border-radius: 20px;
         width: 60%;
         height: 450px;
-        margin-top: 150px;
+        margin-top: 80px;
         margin-left: 300px;
         border: solid black 1px;
         background-color: white;
@@ -81,6 +108,10 @@ body {}
                             font-weight: bold;
                             font-size: 20px;
                             border-radius: 30px;
+
+                            &:hover {
+                                background: #df0c0c;
+                            }
                         }
                     }
                 }

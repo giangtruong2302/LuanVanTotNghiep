@@ -13,9 +13,9 @@
 
         .backToHome {
             width: 100%;
-            background: linear-gradient(305.38deg, #949292 -50.47%, #f2edf0 94.82%);
+            background: #a50000;
+
             height: 60px;
-            padding-left: 20px;
 
             .backToHomeLink {
                 padding-top: 15px;
@@ -23,12 +23,13 @@
                 align-items: center;
                 margin-bottom: 10px;
 
+                // width: fit-content;
                 .textBackToHome {
                     font-family: "roboto";
-                    font-size: 14px;
+                    font-size: 18px;
                     font-weight: 400;
                     margin-left: 10px;
-                    color: #223263;
+                    color: white;
                 }
             }
         }

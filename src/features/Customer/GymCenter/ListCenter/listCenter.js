@@ -6,7 +6,7 @@ import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Link } from "react-router-dom";
 import chinhanh from "../../../../assets/images/gym-place/chiNhanh1.jpg";
 import { getAllGymCenter } from "../gymCenterAPI";
-
+import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 const ListCenter = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -92,8 +92,8 @@ const ListCenter = () => {
                           src={chinhanh}
                           style={{
                             borderRadius: "6px",
-                            width: "180px",
-                            height: "100px",
+                            width: "220px",
+                            height: "130px",
                             flex: "none",
                             order: 0,
                             flexGrow: 0,
@@ -112,6 +112,7 @@ const ListCenter = () => {
                 </div>
               );
             })}
+
           </InfiniteScroll>
         </div>
       )}

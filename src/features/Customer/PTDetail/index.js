@@ -76,7 +76,7 @@ const PTDetail = () => {
 
             <Row>
               <Col className="avatarPTDetail" span={4}>
-                <img src={ava} className="imgPT" />
+                <img src={ptDetail?.StaffImage} className="imgPT" />
               </Col>
               <Col span={20} className="infoDetailPT">
                 <div className="namePTAndPosition">

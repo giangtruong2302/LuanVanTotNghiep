@@ -67,14 +67,15 @@ const ListPT = () => {
                   <div className="ptInfo">
                     <div className="infoPt">
                       <img
-                        src={kickboxing}
+                        src={item.StaffImage}
                         style={{
                           borderRadius: "100px",
-                          width: "90px",
-                          height: "90px",
+                          width: "110px",
+                          height: "110px",
                           flex: "none",
                           order: 0,
                           flexGrow: 0,
+                          marginTop: "10px"
                         }}
                       />
                       <p className={"textNamePT"}>{item.StaffName}</p>

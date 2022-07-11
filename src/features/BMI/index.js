@@ -3,6 +3,7 @@ import "./index.scss";
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import CountBMI from "./countBMI/countBMI";
+import HomeFooter from "../../pages/HomePage/HomeFooter";
 
 
 
@@ -13,7 +14,7 @@ const BMI = () => {
             <div className="containerBMIList">
                 <div className="backToHome">
                     <NavLink to="/" className="backToHomeLink">
-                        <ArrowLeft size={24} color="#292829" weight="duotone" />
+                        <ArrowLeft size={24} color="#ffffff" weight="duotone" />
                         <div className="textBackToHome">Back to home</div>
                     </NavLink>
                 </div>
@@ -21,7 +22,12 @@ const BMI = () => {
                     <CountBMI />
 
                 </div>
+
+
+                <HomeFooter />
+
             </div>
+
         </div>
     );
 };

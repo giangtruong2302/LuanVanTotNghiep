@@ -12,6 +12,10 @@ import moment from "moment";
 import { createSchedule } from "./staffAPI";
 import { getAllTimeWorking } from "./staffAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
+import * as actions from "../../store/actions";
+import { useDispatch } from "react-redux";
 const customStyles = {
     content: {
         top: "50%",
@@ -76,8 +80,7 @@ const Staff = () => {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [modalTimeWorkIsOpen, setModalTimeWorkIsOpen] = React.useState(false);
     const staffInfo = useSelector((state) => state.staff.staffInfo);
-    console.log('staffInfo', staffInfo)
-    console.log("check staff info: ", staffInfo["AccountStaff.id"]);
+    const dispatch = useDispatch();
     function openModal() {
         setIsOpen(true);
     }
@@ -131,6 +134,10 @@ const Staff = () => {
     const [allTime, setAllTime] = useState();
     const [noAllTime, setNoAllTime] = useState(false);
     const [, setAllTimeLoading] = useState(true);
+    const handleLogout = () => {
+        dispatch(dispatch(actions.staffLogout()));
+        navigate("/staff-login");
+    };
     const onFinish = (values) => {
 
         console.log('check', values)
@@ -184,9 +191,17 @@ const Staff = () => {
 
     }, []);
     return (
-        <div className="PTProfileBg1">
+        <div className="StaffProfilePage">
 
             <div className="containerListPT">
+                <div className="backToHome">
+                    <div className="backtoHome" onClick={handleLogout}>
+                        <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
+                        <div className="textBackToHome">Logout</div>
+
+                    </div>
+
+                </div>
                 Page Staff Booking
                 <div className="titlePage">
                     <div className="PTinfo">
@@ -197,16 +212,16 @@ const Staff = () => {
 
 
                                 {(staffInfo["roleId"] === 4 ?
-                                    <Link to={`/scanqr`}> <button className="btnBook">Scan QR</button></Link>
+                                    <Link to={`/scanqr`}> <button className="btn-book">Scan QR</button></Link>
                                     :
-                                    <Link to={`/pt-booking/`}> <button className="btnBook">Lịch booking</button></Link>
+                                    <Link to={`/pt-booking/`}> <button className="btn-book">Lịch booking</button></Link>
                                 )}
-                                <Link to={`/staff-info/${ptDetail?.id}`}> <button className="btnInfo">Thông tin cá nhân</button></Link>
+                                <Link to={`/staff-info/${ptDetail?.id}`}> <button className="btn-book">Thông tin cá nhân</button></Link>
 
 
-                                <button className="btnSalary" onClick={openModal}>Salary</button>
+                                <button className="btn-book" onClick={openModal}>Salary</button>
                                 {(staffInfo["roleId"] === 3 ?
-                                    <button className="btnSalary" onClick={openModalTimeWork}>Đăng ký lịch làm</button>
+                                    <button className="btn-book" onClick={openModalTimeWork}>Đăng ký lịch làm</button>
                                     : "")}
                                 <Modal
                                     isOpen={modalIsOpen}

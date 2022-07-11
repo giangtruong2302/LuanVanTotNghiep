@@ -17,9 +17,9 @@ const GymCenter = () => {
         </div>
         <div className="listItem">
           <ListCenter />
-
+          <HomeFooter />
         </div>
-        <HomeFooter />
+
       </div>
     </div>
   );

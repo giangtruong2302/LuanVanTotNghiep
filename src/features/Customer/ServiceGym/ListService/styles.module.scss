@@ -1,5 +1,5 @@
 .listServiceContent {
-  overflow: auto;
+
 
   max-height: auto;
   height: calc(100% - 450px);
@@ -12,15 +12,17 @@
   gap: 25px;
   position: relative;
   width: 100vw;
-  //padding: 0 20px;
+
   height: calc(100% - 20px);
 
   border-radius: 5px;
 
+
+
   :global {
     .infinite-scroll-component__outerdiv {
       width: 100%;
-      padding-bottom: 40px;
+      // padding-bottom: 40px;
     }
   }
 
@@ -30,11 +32,11 @@
     margin: 0 auto;
     max-width: 100%;
     height: 119px;
-
+    border-radius: 30px;
     background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
     /* light blue */
     border: 1px solid #131314;
-    border-radius: 10px;
+
     /* Inside auto layout */
     flex: none;
     order: 0;
@@ -43,6 +45,8 @@
 
     flex-direction: column;
     padding: 42px;
+
+
 
 
     .breadcumService {
@@ -124,17 +128,23 @@
           max-width: auto;
           height: 17px;
           margin-left: 20px;
-          font-family: "Inter";
+          font-family: 'Arial', sans-serif;
           font-style: normal;
           font-weight: 600;
-          font-size: 18px;
+          font-size: 30px;
           line-height: 17px;
-          margin-top: 20px;
+
+          margin-top: 25px;
+          margin-left: 50px;
+
+          // text-decoration-color: white;
+
+          // text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
           /* identical to box height */
 
           /* Black blue */
 
-          color: #223263;
+          color: black;
 
           /* Inside auto layout */
 
@@ -149,7 +159,7 @@
         flex-direction: row;
         align-items: flex-start;
         padding: 0px;
-        gap: 29px;
+        gap: 2px;
         justify-content: flex-end;
         width: 100%;
         height: 17px;
@@ -157,13 +167,16 @@
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 25px;
         line-height: 17px;
+        text-decoration-color: white;
+
+        text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
         /* identical to box height */
 
         /* #000000 */
 
-        color: black;
+        color: white;
 
         .lineDetailInfo {
           width: 1px;

@@ -1,5 +1,5 @@
 .scanContain {
-    padding-top: 50px;
+    padding-top: 5px;
     text-align: center;
     width: 500px;
     height: 100px;
@@ -8,10 +8,11 @@
     .resultScan {
         font-size: 18px;
 
-        .dataScan {
-            font-size: 20px;
-            font-weight: bold;
-        }
+    }
+
+    .dataScan {
+        font-size: 20px;
+        font-weight: bold;
     }
 
 }

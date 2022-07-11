@@ -11,6 +11,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import './PersonalInfo.scss';
 import { PictureOutlined } from "@ant-design/icons";
+
+import { NavLink } from "react-router-dom";
+import { ArrowLeft } from "phosphor-react";
 const { Option } = Select;
 const customStyles = {
     content: {
@@ -142,6 +145,14 @@ const PersonalInfoStaff = () => {
     }, [statusPage]);
     return (
         <div className="StaffDetailContainer">
+            <div className="backToHome">
+                <NavLink to="/staff-personal-page" className="backtoHome">
+                    <ArrowLeft size={24} color="#ffffff" weight="duotone" />
+                    <div className="textBackToHome">Back to home</div>
+                </NavLink>
+                <div>
+                </div>
+            </div>
             <div className="StaffProfile">
 
 
@@ -160,7 +171,7 @@ const PersonalInfoStaff = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={ava} className="imgStaff" />
+                                    <img src={infoDetail?.StaffImage} className="imgStaff" />
                                 </Col>
                                 <Col span={20} className="infoDetailStaff">
                                     <div className="nameStaffAndPosition">

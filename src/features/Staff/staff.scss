@@ -1,5 +1,5 @@
-.PTProfileBg1 {
-    background: linear-gradient(180deg, #ffffff 60.28%, #717c7c 100%);
+.StaffProfilePage {
+
     max-height: 100vh;
     max-width: 100vw;
 
@@ -15,13 +15,22 @@
         font-family: "roboto";
         font-weight: bold;
         font-size: 50px;
-        background: #7a8484;
+        overflow-x: hidden;
+
+
+        //  background: #7a8484;
+
 
         .backToHome {
             width: 100%;
-            background: linear-gradient(305.38deg, #949292 -35.47%, #f2edf0 94.82%);
-            height: 60px;
-            padding-left: 20px;
+            color: white;
+            background: #a50000;
+            height: 65px;
+
+            .titleStaffPage {
+
+                color: black;
+            }
 
             .backtoHome {
                 padding-top: 15px;
@@ -32,21 +41,22 @@
                 // width: fit-content;
                 .textBackToHome {
                     font-family: "roboto";
-                    font-size: 14px;
+                    font-size: 18px;
                     font-weight: 400;
                     margin-left: 10px;
-                    color: #223263;
+                    color: white;
                 }
             }
         }
 
         .titlePage {
             .PTinfo {
+                margin-top: 10px;
                 display: flex;
                 flex-direction: row;
                 //margin-left: 200px;
                 padding-bottom: 30px;
-                background: linear-gradient(360deg, #ffffff 80.28%, #717c7c 100%);
+                //  background: linear-gradient(360deg, #ffffff 80.28%, #717c7c 100%);
                 justify-content: center;
 
                 .PtName {
@@ -60,15 +70,24 @@
                         padding-left: 30px;
                         padding-top: 30px;
 
-                        .btnBook {
-                            background-color: yellow;
-                            border-radius: 20px;
-                            width: 160px;
+                        .btn-book {
+                            padding-bottom: 15px;
+                            padding-left: 23px;
+                            padding-right: 23px;
+                            padding-top: 15px;
+                            margin-right: 10px;
+
+                            background: #a50000;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
                             font-weight: bold;
-                            box-sizing: border-box;
-                            box-shadow: 1px 1px 8px 1px grey;
-                            color: black !important;
-                            height: 80px;
+                            font-size: 20px;
+                            border-radius: 30px;
+
+                            &:hover {
+                                background: #df0c0c;
+                            }
                         }
 
                         .btnInfo {
