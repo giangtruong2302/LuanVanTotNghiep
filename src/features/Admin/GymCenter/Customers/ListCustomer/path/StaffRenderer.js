@@ -8,9 +8,11 @@ const StaffRenderer = (props) => {
   const [idPT] = useState("1");
   return (
     <>
-      <Link to={`/pt-detail/${idPT}`} className="staffContainer">
+      <Link to={`/admin/view-customer-info/${idPT}`} className="staffContainer">
         <div className="avatar">
-          <img src={avaPT} />
+          <img
+            src={props.data.CustomerImage ? props.data.CustomerImage : avaPT}
+          />
         </div>
         <div className="staffText">{props.data.CustomerName}</div>
       </Link>

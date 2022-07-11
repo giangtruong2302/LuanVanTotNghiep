@@ -52,7 +52,7 @@ const Customers = () => {
         }
       />
       <div className={classes.listItem}>
-        <ListCustomer searchValue={searchValue} />
+        <ListCustomer searchValue={searchValue} status={status} />
       </div>
       <Fab
         mainButtonStyles={{ backgroundColor: "#1363DF" }}

@@ -1,7 +1,7 @@
 import axios from "../../../../../axios";
 // import axios from 'axios'
 
-const handleCreateNewStaff = (
+const handleCreateNewCustomer = (
   fullName,
   password,
   email,
@@ -13,7 +13,7 @@ const handleCreateNewStaff = (
   avatar,
   fileName,
   centerId,
-  salaryId,
+
   id,
   ExternalId
 ) => {
@@ -30,7 +30,7 @@ const handleCreateNewStaff = (
     avatar,
     fileName,
     centerId,
-    salaryId,
+
     id,
     ExternalId,
   }); // req.body.email, req.body.password //
@@ -67,9 +67,9 @@ const handleUpdateStaff = (
     ExternalId,
   }); // req.body.email, req.body.password //
 };
-const handleDeleteStaff = (ExternalId, roleId) => {
+const handleDeleteStaff = (ExternalId, roleId, id) => {
   return axios.delete(`/api/admin/delete-account`, {
-    data: { ExternalId: ExternalId, roleId: roleId },
+    data: { ExternalId: ExternalId, roleId: roleId, id },
   });
 };
-export { handleCreateNewStaff, handleUpdateStaff, handleDeleteStaff };
+export { handleCreateNewCustomer, handleUpdateStaff, handleDeleteStaff };

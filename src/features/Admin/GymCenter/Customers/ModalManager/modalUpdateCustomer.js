@@ -20,7 +20,7 @@ import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
-import { CreateStaffSchema, UpdateStaffSchema } from "./validation";
+import { UpdateCustomerSchema } from "./validation";
 // import { handleCreateNewAcount } from "./ModalAccountAPI";
 import { getDetailCenter } from "../../../AdminAPI";
 import { handleCreateNewStaff, handleUpdateStaff } from "./ModalAccountAPI";
@@ -180,21 +180,22 @@ const UpdateCustomer = (props) => {
             <span className={classes.titleLeft}>Infomation</span>
             <div className={classes.formInfo}>
               <Formik
-                validationSchema={UpdateStaffSchema}
+                validationSchema={UpdateCustomerSchema}
                 initialValues={{
-                  email: props.data.StaffEmail ? props.data.StaffEmail : "",
-                  name: props.data.StaffName ? props.data.StaffName : "",
+                  email: props.data.CustomerEmail
+                    ? props.data.CustomerEmail
+                    : "",
+                  name: props.data.CustomerName ? props.data.CustomerName : "",
                   // password: "",
-                  phoneNumber: props.data.StaffPhoneNumber
-                    ? props.data.StaffPhoneNumber
+                  phoneNumber: props.data.PhoneNumber
+                    ? props.data.PhoneNumber
                     : "",
                   gender: props.data.Gender ? props.data.Gender : "",
-                  roleId: props.data.RoleId ? props.data.RoleId.toString() : "",
+                  roleId: props.data.RoleId ? props.data.RoleId : "",
                   dob: props.data.DayOfBirth ? props.data.DayOfBirth : "",
                   address: props.data.Address ? props.data.Address : "",
 
                   centerId: props.data.CenterId ? props.data.CenterId : "",
-                  salaryId: props.data.SalaryId ? props.data.SalaryId : "",
                   // avatar: "",
                   // isActive: true,
                   // userName: "",
@@ -229,7 +230,7 @@ const UpdateCustomer = (props) => {
                                   ? classes.inputError
                                   : ""
                               } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Staff name"
+                              placeholder="Customer name"
                             />
                           )}
                         </Field>
@@ -280,9 +281,6 @@ const UpdateCustomer = (props) => {
                               : ""
                           } ${classes.inputRecovery} ant-picker `}
                           placeholder="Gender"
-                          defaultValue={
-                            props.data.Gender ? props.data.Gender : ""
-                          }
                           onChange={(value) => {
                             setFieldValue("gender", value);
                           }}
@@ -303,58 +301,25 @@ const UpdateCustomer = (props) => {
                           errors?.centerId
                         }
                       >
-                        <Field name="centerId">
-                          {({ field }) => (
-                            <Input
-                              {...field}
-                              name="centerId"
-                              className={` ${
-                                touched?.centerId && errors?.address
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              // placeholder="Center"
-                              value={
-                                detailCenter && detailCenter.CenterName
-                                  ? detailCenter.CenterName
-                                  : ""
-                              }
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item>
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.roleId && errors?.roleId)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.roleId && errors?.roleId) &&
-                          errors?.roleId
-                        }
-                      >
                         <Select
                           className={` ${
-                            touched?.roleId && errors?.roleId
+                            touched?.salaryId && errors?.centerId
                               ? classes.inputError
                               : ""
                           } ${classes.inputRecovery} ant-picker `}
-                          placeholder="Role"
-                          defaultValue={
-                            props.data.RoleId && props.data.RoleId === 3
-                              ? "PT"
-                              : "Le tan"
-                          }
+                          placeholder="Center "
                           onChange={(value) => {
-                            setFieldValue("roleId", value);
+                            setFieldValue("centerId", value);
                           }}
                         >
-                          <Option value="3">PT</Option>
-                          <Option value="4">Lễ tân</Option>
+                          <Option value={props.data.CenterId}>
+                            {props.data.CenterId && props.data.CenterId === 1
+                              ? "Cơ sở Phạm Ngũ Lão"
+                              : "Cơ sở Lý Thường Kiệt"}
+                          </Option>
                         </Select>
                       </FormAnt.Item>
+
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
@@ -388,38 +353,6 @@ const UpdateCustomer = (props) => {
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
-                          Boolean(touched?.salaryId && errors?.salaryId)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.salaryId && errors?.salaryId) &&
-                          errors?.salaryId
-                        }
-                      >
-                        <Select
-                          className={` ${
-                            touched?.salaryId && errors?.salaryId
-                              ? classes.inputError
-                              : ""
-                          } ${classes.inputRecovery} ant-picker `}
-                          placeholder="Salary Rate"
-                          defaultValue={
-                            props.data.SalaryId && props.data.SalaryId === 1
-                              ? "4.000.000 VND"
-                              : "5.000.000 VND"
-                          }
-                          onChange={(value) => {
-                            setFieldValue("salaryId", value);
-                          }}
-                        >
-                          <Select.Option value="1">4.000.000</Select.Option>
-                          <Option value="2">5.000.000</Option>
-                        </Select>
-                      </FormAnt.Item>
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
                           Boolean(touched?.dob && errors?.dob)
                             ? "error"
                             : "success"
@@ -430,9 +363,6 @@ const UpdateCustomer = (props) => {
                       >
                         <DatePicker
                           placeholder="Date of Birth"
-                          // defaultValue={
-                          //   props.data.DayOfBirth ? props.data.DayOfBirth : ""
-                          // }
                           onChange={(dateString) => {
                             const startday =
                               moment(dateString).format("YYYY-MM-DD");
@@ -475,33 +405,7 @@ const UpdateCustomer = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item>
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password && errors?.password)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password && errors?.password) &&
-                          errors?.password
-                        }
-                      >
-                        <Field name="password">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              // name="password"
-                              className={` ${
-                                touched?.password && errors?.password
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
+
                       <button
                         className={classes.btnRecovery}
                         type="submit"
@@ -512,7 +416,7 @@ const UpdateCustomer = (props) => {
                             <StaggerAnimation></StaggerAnimation>
                           </div>
                         ) : (
-                          "Update"
+                          "Submit"
                         )}
                       </button>
                     </Form>
@@ -527,7 +431,7 @@ const UpdateCustomer = (props) => {
             <div className={classes.changeThumbnailContainer}>
               <div className={classes.image}>
                 <Cropper
-                  image={imageUrl ? imageUrl : props.data.StaffImage}
+                  image={imageUrl ? imageUrl : props.data.CustomerImage}
                   crop={crop}
                   zoom={zoom}
                   aspect={2 / 2}

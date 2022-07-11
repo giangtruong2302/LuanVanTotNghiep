@@ -87,6 +87,7 @@ const ListCustomer = (props) => {
       address: "tp hcm",
     },
   ]);
+  const [status, setStatus] = useState("");
   console.log("check search value: ", props.searchValue);
   const [columnDefs] = useState([
     {
@@ -94,6 +95,12 @@ const ListCustomer = (props) => {
       flex: 0,
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
+      action: {
+        action1: (value) => {
+          // console.log("check value update:", value);
+          setStatus(value);
+        },
+      },
     },
 
     {
@@ -168,7 +175,7 @@ const ListCustomer = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.searchValue]);
+  }, [CenterId, props.searchValue, props.status, status]);
   const gridOptions = {
     rowSelection: "single",
     rowModelType: "serverSide",
@@ -186,7 +193,7 @@ const ListCustomer = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.searchValue]);
+  }, [serverSideDatasource, props.searchValue, props.status, status]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

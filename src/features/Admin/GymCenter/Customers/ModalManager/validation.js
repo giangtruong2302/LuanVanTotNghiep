@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const CreateStaffSchema = () => {
+export const CreateCustomerSchema = () => {
   return yup.object({
     email: yup.string().required("Please enter your email"),
     name: yup.string().required("Please enter your staff name"),
@@ -14,10 +14,9 @@ export const CreateStaffSchema = () => {
     address: yup.string().required("Please enter your address"),
     roleId: yup.string().required("Please select role of account "),
     centerId: yup.string().required("Please select center id "),
-    salaryId: yup.string().required("Please select salary id "),
   });
 };
-export const UpdateStaffSchema = () => {
+export const UpdateCustomerSchema = () => {
   return yup.object({
     email: yup.string().required("Please enter your email"),
     name: yup.string().required("Please enter your staff name"),
@@ -29,8 +28,6 @@ export const UpdateStaffSchema = () => {
     gender: yup.string().required("Please select gender"),
     dob: yup.string().required("Please enter your date of birth"),
     address: yup.string().required("Please enter your address"),
-    roleId: yup.string().required("Please select role of account "),
     centerId: yup.string().required("Please select center id "),
-    salaryId: yup.string().required("Please select salary id "),
   });
 };

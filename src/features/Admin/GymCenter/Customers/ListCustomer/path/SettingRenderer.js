@@ -17,6 +17,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 // import { handleDeleteStaff } from "../../ModalManager/ModalAccountAPI";
 import { toast } from "react-toastify";
 import UpdateCustomer from "../../ModalManager/modalUpdateCustomer";
+import { handleDeleteStaff } from "../../ModalManager/ModalAccountAPI";
 const { confirm } = Modal;
 
 const SettingRenderer = (props) => {
@@ -45,18 +46,19 @@ const SettingRenderer = (props) => {
       centered: true,
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
-        return console.log("role id: ");
-        // return handleDeleteStaff(
-        //   props.data.ExternalId,
-        //   props.data.RoleId.toString()
-        // )
-        //   .then((res) => {
-        //     toast.success("delete success");
-        //     props.colDef.action.action1("delete" + Date.now());
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
+        // return console.log("role id: ");
+        return handleDeleteStaff(
+          props.data.ExternalId,
+          props.data.RoleId,
+          props.data.id
+        )
+          .then((res) => {
+            toast.success("delete success");
+            props.colDef.action.action1("delete" + Date.now());
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       },
       onCancel() {
         ("");

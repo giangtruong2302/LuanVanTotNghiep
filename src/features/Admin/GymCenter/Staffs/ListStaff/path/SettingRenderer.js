@@ -43,7 +43,7 @@ const SettingRenderer = (props) => {
           props.data.RoleId.toString()
         )
           .then((res) => {
-            toast.success("delete success");
+            toast.success(res.errMessage);
             props.colDef.action.action1("delete" + Date.now());
           })
           .catch((error) => {

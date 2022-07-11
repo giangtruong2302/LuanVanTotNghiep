@@ -17,11 +17,11 @@ import moment from "moment";
 import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
-import { handleCreateNewStaff } from "./ModalAccountAPI";
+import { handleCreateNewCustomer } from "./ModalAccountAPI";
 // import { Area, Point } from "react-easy-crop/types";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
-import { CreateStaffSchema } from "./validation";
+import { CreateCustomerSchema } from "./validation";
 import { getAllCenter } from "../../../AdminAPI";
 
 const { Option } = Select;
@@ -108,11 +108,9 @@ const CreateCustomer = (props) => {
   const handleSubmitCreateStaff = useCallback(
     (values) => {
       console.log("check values: ", values);
-      //setDifferentPass(false)
-      // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewStaff(
+        handleCreateNewCustomer(
           values.name,
           values.password,
           values.email,
@@ -165,33 +163,26 @@ const CreateCustomer = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Create Staff</span>
-          {differentPass ? (
-            <p style={{ color: "#ff0000" }}>
-              password is different current password
-            </p>
-          ) : (
-            ""
-          )}
+          <span className={classes.nameCreate}>Create Customer</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.containerLeft}>
             <span className={classes.titleLeft}>Infomation</span>
             <div className={classes.formInfo}>
               <Formik
-                validationSchema={CreateStaffSchema}
+                validationSchema={CreateCustomerSchema}
                 initialValues={{
                   email: "",
                   name: "",
                   password: "",
                   phoneNumber: "",
                   gender: false,
-                  roleId: "",
+                  roleId: "5",
                   dob: "",
                   address: "",
 
                   centerId: "",
-                  salaryId: "",
+                  // salaryId: "",
                   // avatar: "",
                   // isActive: true,
                   // userName: "",
@@ -226,7 +217,7 @@ const CreateCustomer = (props) => {
                                   ? classes.inputError
                                   : ""
                               } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Staff name"
+                              placeholder="Customer name"
                             />
                           )}
                         </Field>
@@ -319,33 +310,7 @@ const CreateCustomer = (props) => {
                             : ""}
                         </Select>
                       </FormAnt.Item>
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.roleId && errors?.roleId)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.roleId && errors?.roleId) &&
-                          errors?.roleId
-                        }
-                      >
-                        <Select
-                          className={` ${
-                            touched?.roleId && errors?.roleId
-                              ? classes.inputError
-                              : ""
-                          } ${classes.inputRecovery} ant-picker `}
-                          placeholder="Role"
-                          onChange={(value) => {
-                            setFieldValue("roleId", value);
-                          }}
-                        >
-                          <Option value="3">PT</Option>
-                          <Option value="4">Lễ tân</Option>
-                        </Select>
-                      </FormAnt.Item>
+
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
@@ -376,33 +341,6 @@ const CreateCustomer = (props) => {
                         </Field>
                       </FormAnt.Item>
 
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.salaryId && errors?.salaryId)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.salaryId && errors?.salaryId) &&
-                          errors?.salaryId
-                        }
-                      >
-                        <Select
-                          className={` ${
-                            touched?.salaryId && errors?.salaryId
-                              ? classes.inputError
-                              : ""
-                          } ${classes.inputRecovery} ant-picker `}
-                          placeholder="Salary Rate"
-                          onChange={(value) => {
-                            setFieldValue("salaryId", value);
-                          }}
-                        >
-                          <Select.Option value="1">4.000.000</Select.Option>
-                          <Option value="2">5.000.000</Option>
-                        </Select>
-                      </FormAnt.Item>
                       <FormAnt.Item
                         //style={{ margin: '5px' }}
                         validateStatus={
