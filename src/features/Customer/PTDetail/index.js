@@ -100,7 +100,7 @@ const PTDetail = () => {
             </Row>
             <Row className="timeInfo" >
               <Col span={12}>
-                <PTShedule ptId={id.id} />
+                <PTShedule ptId={id.id} ptName={ptDetail?.StaffName} centerId={ptDetail?.CenterId} />
               </Col>
               <Col span={12} >
                 <PTSchedulePayment />

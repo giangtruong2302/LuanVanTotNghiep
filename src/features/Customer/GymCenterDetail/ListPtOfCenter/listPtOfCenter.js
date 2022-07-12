@@ -37,6 +37,7 @@ const ListPTCenter = () => {
             if (response.ptOfCenter.rows) {
                 console.log(response.ptOfCenter)
                 setTotalPage(response.totalPage)
+
                 setPtOfCenter(response.ptOfCenter.rows);
                 setNoPtOfCenter(false);
             } else {
@@ -97,7 +98,7 @@ const ListPTCenter = () => {
                         ]}
                         extra={
                             <div className="ptSchedule">
-                                <PTShedule ptId={item.id} />
+                                <PTShedule ptId={item.id} ptName={item.StaffName} centerId={item.CenterId} />
                             </div>
                         }
                     >
