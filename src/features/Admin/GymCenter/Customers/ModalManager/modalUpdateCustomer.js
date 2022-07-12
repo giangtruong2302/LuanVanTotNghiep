@@ -29,7 +29,7 @@ const UpdateCustomer = (props) => {
   console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -122,7 +122,7 @@ const UpdateCustomer = (props) => {
           values.gender,
           values.address,
           values.roleId.toString(),
-          imageUrl,
+          imageUrl ? imageUrl : props.data.CustomerImage,
           fileName,
           values.centerId,
           values.salaryId,

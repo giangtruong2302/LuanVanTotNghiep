@@ -28,6 +28,11 @@ const Staffs = () => {
   const takeStatus = (value) => {
     setStatus(value);
   };
+  const onChangeSearchStaff = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    });
+  };
   return (
     <div className="PTProfileBg">
       <PageHeader
@@ -49,6 +54,7 @@ const Staffs = () => {
             placeholder="search reservation of center"
             // loading
             onSearch={onSearchValue}
+            onChange={onChangeSearchStaff}
             enterButton
           />
         }

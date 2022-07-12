@@ -39,6 +39,7 @@ import {
   Book,
   ListNumbers,
   IdentificationBadge,
+  AlignCenterHorizontal,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -140,6 +141,9 @@ const AdminPage = () => {
   };
   const handleViewListOrder = () => {
     navigate("/admin/view-list-order");
+  };
+  const handleViewListCenter = () => {
+    navigate("/admin/view-list-center");
   };
   const handleViewListBlog = () => {
     navigate("/admin/view-list-blog");
@@ -244,6 +248,17 @@ const AdminPage = () => {
             >
               <Menu.Item onClick={handleViewListService}>
                 Xem danh sách dịch vụ
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={
+                <AlignCenterHorizontal size={20} weight="bold" color="#fff" />
+              }
+              title="Quản lý Center"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListCenter}>
+                Xem danh sách Center
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu

@@ -23,6 +23,7 @@ import {
   StaffProfile,
   Blog,
   Order,
+  Center,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -93,6 +94,7 @@ const AppLayoutAdmin = () => {
           />
           <Route path="/admin/view-list-account" element={<Account />} />
           <Route path="/admin/view-list-blog" element={<Blog />} />
+          <Route path="/admin/view-list-center" element={<Center />} />
           <Route
             path="/admin/setting-account"
             element={<SettingAccountAdmin />}

@@ -32,6 +32,11 @@ const Manager = () => {
     console.log("check search value: ", value);
     setSearchValue(value);
   };
+  const onChangeSearchManager = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    }, 700);
+  };
   return (
     <div className="PTProfileBg">
       <PageHeader
@@ -53,6 +58,7 @@ const Manager = () => {
             placeholder="search reservation of center"
             // loading
             onSearch={onSearchCus}
+            onChange={onChangeSearchManager}
             enterButton
           />
         }

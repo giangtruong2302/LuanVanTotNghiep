@@ -54,6 +54,7 @@ const StaffProfile = React.lazy(() =>
 );
 const Order = React.lazy(() => import("../features/Admin/ManageOrder"));
 const Blog = React.lazy(() => import("../features/Admin/ManagerBlog"));
+const Center = React.lazy(() => import("../features/Admin/ManageCenter"));
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
   GymConfig,
@@ -76,5 +77,6 @@ export {
   CustomerProfile,
   StaffProfile,
   Order,
+  Center,
   Blog,
 };

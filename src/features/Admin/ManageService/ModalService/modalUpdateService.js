@@ -27,7 +27,7 @@ const UpdateService = (props) => {
   console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -75,7 +75,7 @@ const UpdateService = (props) => {
           values.ServiceName,
           values.WorkDuration,
           values.Price,
-          imageUrl,
+          imageUrl ? imageUrl : props.data.ServiceImage,
           fileName
         )
           .then((res) => {
@@ -345,7 +345,9 @@ const UpdateService = (props) => {
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>
                         <Cropper
-                          image={imageUrl ? imageUrl + " " : unknow}
+                          image={
+                            imageUrl ? imageUrl + " " : props.data.ServiceImage
+                          }
                           crop={crop}
                           zoom={zoom}
                           aspect={2 / 2}

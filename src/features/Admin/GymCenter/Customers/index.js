@@ -26,6 +26,11 @@ const Customers = () => {
   const handleShowModalAdd = (isVisible) => {
     setShowModalAdd(isVisible);
   };
+  const onChangeSearchCustomer = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    });
+  };
   return (
     <div className="PTProfileBg">
       <PageHeader
@@ -47,6 +52,7 @@ const Customers = () => {
             placeholder="search reservation of center"
             // loading
             enterButton
+            onChange={onChangeSearchCustomer}
             onSearch={onSearchValue}
           />
         }

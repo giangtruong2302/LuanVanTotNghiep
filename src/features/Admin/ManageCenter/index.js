@@ -6,13 +6,17 @@ import { ArrowLeft } from "phosphor-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
 import { isVisible } from "@testing-library/user-event/dist/utils";
-import CreateAccount from "./ModalAccount/modalAddAccount";
+// import CreateAccount from "./ModalService/modalAddService";
 // import ListStaff from "./ListStaff/listStaff";
 import { PageHeader, Input } from "antd";
 import { useNavigate } from "react-router-dom";
-import ListAccount from "./ListAccount/listAccount";
+import ListService from "./ListService/listService";
+import CreateService from "./ModalService/modalAddService";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ListManager from "./ListService/listService";
 const { Search } = Input;
-const Account = () => {
+const Center = () => {
   const navigate = useNavigate();
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [status, setStatus] = useState("");
@@ -31,17 +35,12 @@ const Account = () => {
     console.log("check search value: ", value);
     setSearchValue(value);
   };
-  const onChangeSearchAccount = (e) => {
-    setTimeout(() => {
-      setSearchValue(e.target.value);
-    });
-  };
   return (
-    <div className="PTProfileBg">
+    <div className="CenterProfileBg">
       <PageHeader
         className="site-page-header"
-        onBack={() => navigate("/admin/manage-center")}
-        subTitle="Back to dashboard center"
+        onBack={() => navigate("/admin")}
+        subTitle="Back to dashboard"
         style={{
           top: 0,
           position: "sticky",
@@ -54,17 +53,27 @@ const Account = () => {
         extra={
           <Search
             style={{ borderRadius: "8px !important" }}
-            placeholder="search reservation of center"
+            placeholder="search service of center"
             // loading
             onSearch={onSearchCus}
-            onChange={onChangeSearchAccount}
             enterButton
           />
         }
       />
       <div className={classes.listItem}>
-        <ListAccount status={status} searchValue={searchValue} />
+        <ListManager status={status} searchValue={searchValue} />
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Fab
         mainButtonStyles={{ backgroundColor: "#1363DF" }}
         icon={<SquaresFour size={24} color="#Ffff" weight="fill" />}
@@ -77,8 +86,19 @@ const Account = () => {
           <Plus size={20} color="#Ffff" weight="fill" />
         </Action>
       </Fab>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {showModalAdd && (
-        <CreateAccount
+        <CreateService
           showModal={showModalAdd}
           handleModal={handleShowModalAdd}
           takeStatus={takeStatus}
@@ -87,4 +107,4 @@ const Account = () => {
     </div>
   );
 };
-export default Account;
+export default Center;

@@ -6,7 +6,7 @@ import { LicenseManager } from "ag-grid-enterprise";
 import { AgGridReact } from "ag-grid-react";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
-import { getAllService } from "../serviceAPI";
+import { getAllCenter } from "../serviceAPI";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import frameworkcomponents from "./path";
@@ -17,81 +17,7 @@ LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
 );
 
-const ListService = (props) => {
-  const [rowData] = useState([
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-    {
-      setting: <Gear size={20} color="#0a0700" weight="light" />,
-      status: "Active",
-      staff: "Duong Giang",
-      phone: "033 765 7262",
-      email: "giangtruong2302@gmail.com",
-      address: "tp hcm",
-    },
-  ]);
+const ListManager = (props) => {
   const [status, setStatus] = useState("");
 
   const [columnDefs] = useState([
@@ -107,9 +33,16 @@ const ListService = (props) => {
         },
       },
     },
-
     {
-      field: "ServiceName",
+      field: "Status",
+      flex: 1,
+      // width: 215,
+      // headerName: "PT",
+      // type: "rightAligned",
+      cellRenderer: "statusRenderer",
+    },
+    {
+      field: "CenterName",
       flex: 2,
       // width: 215,
       // headerName: "PT",
@@ -118,14 +51,14 @@ const ListService = (props) => {
     },
 
     {
-      field: "workDuration",
+      field: "PhoneNumber",
       // width: 215,
       // headerName: "Email",
       // type: "rightAligned",
       cellRenderer: "emailRenderer",
     },
     {
-      field: "Price",
+      field: "Address",
       // width: 215,
       // headerName: "Address",
       // type: "rightAligned",
@@ -143,10 +76,10 @@ const ListService = (props) => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllService(props.searchValue, parseInt(page))
+          getAllCenter("", parseInt(page))
             .then((res) => {
               // console.log(res.data.data);
-              const data = res.services;
+              const data = res.centers;
               if (data && data.rows.length > 0) {
                 const lastRow = () => {
                   if (parseInt(data.totalPage) <= 1) return data.count;
@@ -239,4 +172,4 @@ const ListService = (props) => {
     </div>
   );
 };
-export default ListService;
+export default ListManager;

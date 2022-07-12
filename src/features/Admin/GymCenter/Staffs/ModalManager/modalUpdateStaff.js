@@ -29,7 +29,7 @@ const UpdateStaff = (props) => {
   console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -122,8 +122,8 @@ const UpdateStaff = (props) => {
           values.gender,
           values.address,
           values.roleId.toString(),
-          imageUrl,
-          fileName,
+          imageUrl ? imageUrl : props.data.StaffImage,
+          fileName ? fileName : props.data.public_id_image,
           values.centerId,
           values.salaryId,
           props.data?.AccountId,

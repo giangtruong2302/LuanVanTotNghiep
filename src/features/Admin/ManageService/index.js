@@ -27,6 +27,11 @@ const Service = () => {
     setShowModalAdd(true);
     // alert("aa");
   };
+  const onChangeSearchServiceSystem = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    }, 700);
+  };
   const takeStatus = (value) => {
     setStatus(value);
   };
@@ -54,6 +59,7 @@ const Service = () => {
             style={{ borderRadius: "8px !important" }}
             placeholder="search service of center"
             // loading
+            onChange={onChangeSearchServiceSystem}
             onSearch={onSearchCus}
             enterButton
           />

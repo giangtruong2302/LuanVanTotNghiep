@@ -22,6 +22,11 @@ const Services = () => {
   const onSearchValue = (value) => {
     setSearchValue(value);
   };
+  const onChangeSearchService = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    }, 600);
+  };
   const takeStatus = (value) => {
     setStatus(value);
   };
@@ -46,6 +51,7 @@ const Services = () => {
             placeholder="search reservation of center"
             // loading
             onSearch={onSearchValue}
+            onChange={onChangeSearchService}
             enterButton
           />
         }

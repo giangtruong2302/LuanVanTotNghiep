@@ -29,7 +29,7 @@ const UpdateAccount = (props) => {
   const [allCenter, setAllCenter] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -74,14 +74,13 @@ const UpdateAccount = (props) => {
         setSaving(true);
 
         handleUpdateManager(
-          values.fullName,
-          // values.password,
+          values.name,
           values.email,
           values.phoneNumber,
           values.gender,
           values.address,
           values.roleId,
-          imageUrl,
+          imageUrl ? imageUrl : props.data.ManagerImage,
           fileName,
           values.centerId,
           values.salaryId,

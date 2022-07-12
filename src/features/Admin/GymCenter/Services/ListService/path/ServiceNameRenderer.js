@@ -7,7 +7,9 @@ const ServiceNameRenderer = (props) => {
     <>
       <div className="seviceNameContainer">
         <div className="avatar">
-          <img src={service} />
+          <img
+            src={props.data.ServiceImage ? props.data.ServiceImage : service}
+          />
         </div>
         <div className="serviceNameText">{props.data.ServiceName}</div>
       </div>

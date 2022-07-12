@@ -1,6 +1,7 @@
 import { PageHeader } from "antd";
 import { Input } from "antd";
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ListReservationMerchant from "./ListReservationMerchant/listReservationMerchant";
@@ -8,8 +9,14 @@ import { getAllReservationOfCenter } from "./ReservationAPI";
 import classes from "./styles.module.scss";
 const { Search } = Input;
 const ReservationMerchant = () => {
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-
+  const onChangeSearch = (e) => {
+    console.log(e.target.value);
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    }, 1000);
+  };
   return (
     <>
       <div className="reservationCenterBg">
@@ -30,14 +37,15 @@ const ReservationMerchant = () => {
             <Search
               style={{ borderRadius: "8px !important" }}
               placeholder="search reservation of center"
-              loading
+              // loading
+              onChange={(e) => onChangeSearch(e)}
               enterButton
             />
           }
         />
         <div className={classes.filterBooking}></div>
         <div className={classes.listReservationMerchant}>
-          <ListReservationMerchant />
+          <ListReservationMerchant searchValue={searchValue} />
         </div>
       </div>
     </>

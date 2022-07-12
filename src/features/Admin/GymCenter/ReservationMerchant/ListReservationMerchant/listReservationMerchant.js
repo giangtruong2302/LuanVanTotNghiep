@@ -7,12 +7,13 @@ import { getAllReservationOfCenter } from "../ReservationAPI";
 import { message } from "antd";
 import { useState } from "react";
 
-const ListReservationMerchant = () => {
+const ListReservationMerchant = (props) => {
   const [dataRes, setDataRes] = useState();
   const CenterId = localStorage.getItem("CenterId");
+  console.log("check props: ", props.searchValue);
   useEffect(() => {
     try {
-      getAllReservationOfCenter(CenterId, 1)
+      getAllReservationOfCenter(CenterId, props.searchValue, 1)
         .then((res) => {
           console.log("check res reservation: ", res);
           if (
@@ -27,7 +28,7 @@ const ListReservationMerchant = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [CenterId]);
+  }, [CenterId, props.searchValue]);
   return (
     <div className="listItemReservation">
       <InfiniteScroll
