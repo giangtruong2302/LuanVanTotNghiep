@@ -112,7 +112,7 @@ const ListService = () => {
 
                     </div>
                     <div className={classes.detailInfo}>
-                      <p>{item.Price} /</p>
+                      <p>{item.Price} VND /</p>
                       <span className={classes.lineDetailInfo}></span>
                       <p>{item.WorkDuration} Month</p>
                     </div>

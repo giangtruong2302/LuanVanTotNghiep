@@ -461,22 +461,17 @@ const PerInfo = () => {
                                                     {valueRate ? <span className="ant-rate-text">{desc[valueRate - 1]}</span> : ''}
                                                 </span>
 
-                                                <div className={"btnContainer"}>
-                                                    <button
-                                                        className={"btnLogin"}
-                                                        type="submit"
-                                                        style={{ cursor: "pointer" }}
-                                                        onClick={() => handleRate(valueRate)}
-                                                    >
-                                                        Gửi Review
-                                                    </button>
+                                                <div className={"btnReView"}>
+                                                    <Button type="primary" htmlType="submit" onClick={() => handleRate(valueRate)}>
+                                                        Submit
+                                                    </Button>
                                                 </div>
 
                                             </Form>
                                         </div>
 
 
-
+                                        <ToastContainer />
                                     </Modal>
 
 

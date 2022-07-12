@@ -197,8 +197,8 @@ const PTShedule = (props) => {
       .then((response) => {
         setEndTime(
           parseInt(dayWork) +
-            parseInt(secondMonth) *
-              parseInt(response.serviceDetail.WorkDuration)
+          parseInt(secondMonth) *
+          parseInt(response.serviceDetail.WorkDuration)
         );
         if (response.serviceDetail) {
           getDisCount(response.serviceDetail.idDiscount)
@@ -280,6 +280,53 @@ const PTShedule = (props) => {
     draggable: true,
     progress: undefined,
   };
+  var now = new Date; // now
+
+  now.setHours(0);   // set hours to 0
+  now.setMinutes(0); // set minutes to 0
+  now.setSeconds(0); // set seconds to 0
+
+  var startOfDay = Math.floor(now / 1000);
+  const [timeStampToday, setTimeStampToday] = useState(startOfDay * 1000)
+
+  useEffect(() => {
+    getTimeWorking(props.ptId, timeStampToday, 1)
+      .then((response) => {
+        console.log("PTID", props.ptId)
+        console.log("TimeStamp", timeStampToday)
+
+        if (response.ScheduleWorking.rows) {
+          setTimeDetail(response.ScheduleWorking.rows);
+          console.log('timedetail today', response)
+          setNoTimeDetail(false);
+          getTimeWorking(props.ptId, timeStampToday, 1)
+            .then((response) => {
+              setDayWork(timeStampToday);
+
+              if (response.ScheduleWorking.rows) {
+                setTimeDetail(response.ScheduleWorking.rows);
+                setNoTimeDetail(false);
+              } else {
+                setNoTimeDetail(true);
+              }
+            })
+            .catch(() => {
+              setTimeDetail(true);
+            })
+            .finally(() => {
+              setTimeDetailLoading(false);
+            });
+        } else {
+          setNoTimeDetail(true);
+        }
+      })
+      .catch(() => {
+        setTimeDetail(true);
+      })
+      .finally(() => {
+        setTimeDetailLoading(false);
+      });
+  }, []);
 
   const handleDate = (e) => {
     // console.log(timestampSeconds);
@@ -357,7 +404,7 @@ const PTShedule = (props) => {
 
   const onReset = () => {
     form.resetFields();
-    setIsOpen(false);
+
   };
 
   return (
@@ -367,12 +414,12 @@ const PTShedule = (props) => {
           <select onChange={handleDate}>
             {allDays && allDays.length > 0
               ? allDays.map((item, index) => {
-                  return (
-                    <option key={index} value={item.value}>
-                      {item.label}
-                    </option>
-                  );
-                })
+                return (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })
               : ""}
           </select>
         </div>
@@ -390,24 +437,24 @@ const PTShedule = (props) => {
               <div className="time-content-btns">
                 {timeDetail && timeDetail.length > 0
                   ? timeDetail?.map((item, index) => {
-                      return (
-                        <div>
-                          <ButtonSchedule
-                            data={item}
-                            // onClick={(e) => openModal(e)}
-                            openModal={openModal}
-                            handleShowModalBooking={handleShowModalBooking}
-                          />
-                        </div>
-                      );
-                    })
+                    return (
+                      <div>
+                        <ButtonSchedule
+                          data={item}
+                          // onClick={(e) => openModal(e)}
+                          open={openModal}
+                          handleShowModalBooking={handleShowModalBooking}
+                        />
+                      </div>
+                    );
+                  })
                   : "Ngày này, PT chưa đăng lịch nhận booking"}
               </div>
               {modalIsOpen && (
                 <Modal
                   isOpen={modalIsOpen}
                   onAfterOpen={afterOpenModal}
-                  onCancel={closeModal}
+                  onRequestClose={closeModal}
                   style={customStyles}
                   contentLabel="Example Modal"
                 >
@@ -472,8 +519,8 @@ const PTShedule = (props) => {
                       <Form.Item name="price" label="Giá">
                         {priceDiscount - (priceDiscount * discount) / 100
                           ? priceDiscount -
-                            (priceDiscount * discount) / 100 +
-                            " VND"
+                          (priceDiscount * discount) / 100 +
+                          " VND"
                           : "0 VND"}
                       </Form.Item>
                       <Form.Item name="discount"></Form.Item>
