@@ -3,28 +3,37 @@ const handleGetDetailOrder = (bookingId) => {
   return axios.get(`/api/get-detail-order?bookingId=${bookingId}`);
 };
 const handlePayWithStripe = (
-  token,
+  tokenId,
   amount,
-  id,
+  orderId,
   bookingId,
   CustomerId,
   Status,
   createAt,
   to,
   subject,
-  body
+  htmlContent
 ) => {
   return axios.post(`/payment-stripe`, {
-    token,
+    tokenId,
     amount,
-    id,
+    orderId,
     bookingId,
     CustomerId,
     Status,
     createAt,
     to,
     subject,
-    body,
+    htmlContent,
   });
 };
-export { handleGetDetailOrder, handlePayWithStripe };
+const handleGetDetailCustomerByExternalId = (ExternalId) => {
+  return axios.get(
+    `/api/get-detail-customer-by-externalId?ExternalId=${ExternalId}`
+  );
+};
+export {
+  handleGetDetailOrder,
+  handlePayWithStripe,
+  handleGetDetailCustomerByExternalId,
+};

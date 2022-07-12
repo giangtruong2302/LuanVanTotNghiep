@@ -37,17 +37,20 @@ const PaymentPage = () => {
     try {
       handlePayWithStripe(
         token,
-        detailOrder.amount,
-        detailOrder.id,
-        detailOrder.ReservationId,
-        detailOrder.CustomerId,
-        detailOrder.Status,
-        detailOrder.createdAt,
-        detailCus.CustomerEmail,
+        detailOrder?.amount,
+        detailOrder?.id,
+        detailOrder?.ReservationId,
+        state.item.CustomerId,
+        detailOrder?.Status,
+        detailOrder?.createdAt,
+        detailCus?.CustomerEmail,
         "BOOKING AT GHGYM",
         "YOUR QR CODE"
       ).then((res) => {
         console.log("check paymnent with stripe: ", res);
+        message.success(
+          "thanh toan thanh cong! Chung toi se gui email cho ban"
+        );
       });
     } catch (error) {
       console.log(error);
@@ -58,6 +61,7 @@ const PaymentPage = () => {
       handleGetDetailOrder(state.item.id)
         .then((res) => {
           console.log("check order detail: ", res.order);
+          setDetailOrder(res.order);
         })
         .catch((error) => {
           message.error(error);
@@ -65,6 +69,7 @@ const PaymentPage = () => {
       handleGetDetailCustomer(state.item.CustomerId)
         .then((res) => {
           if (res.cusDetail) {
+            console.log("check cus detail: ", res.cusDetail);
             setDetailCus(res.cusDetail);
           }
         })
@@ -107,7 +112,7 @@ const PaymentPage = () => {
             <div className="content">
               <div className="leftContent">
                 <div className="itemTitle">Mã giao dịch</div>
-                <div className="itemContent">A651HVH1641</div>
+                <div className="itemContent">{state.item?.id}</div>
                 <div className="itemTitle">Khách hàng</div>
                 <div className="itemContent">{state.item.CustomerName}</div>
               </div>
@@ -155,7 +160,7 @@ const PaymentPage = () => {
                 name={state.item.CustomerName}
                 image={detailCus?.CustomerImage}
                 description="Thanks for payment booking "
-                amount={1000} //se sua lai giong vs gia that de v de test
+                amount={detailOrder?.amount} //se sua lai giong vs gia that de v de test
                 email={detailCus?.CustomerEmail}
                 token={onToken}
                 stripeKey={`pk_test_51LJw5FAZSrSS1g1Fw8sCcbkbuIwnq43uVQ6v4yt4oOCz4uViqITYPQAek49w0y5kZX6yE2qjYeF0IQeGmKCRRjD900uiS52NeK`}

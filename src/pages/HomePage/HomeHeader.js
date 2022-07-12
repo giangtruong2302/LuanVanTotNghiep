@@ -26,37 +26,50 @@ import { LANGUAGES } from "../../utils/constant";
 import "./HomeHeader.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { getCusBooking } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
+import { handleGetDetailCustomerByExternalId } from "../../features/Customer/PayPage/PaymentPage/paymentAPI";
 const { Search } = Input;
 const HomeHeader = (props) => {
   const navigate = useNavigate();
 
   const cusInfo = useSelector((state) => state.cus.cusInfo);
+  console.log("check info ", cusInfo);
   const handleLogout = () => {
     dispatch(dispatch(actions.cusLogout()));
     navigate("/");
   };
+
   const [countBooking, setCountBooking] = useState();
   const [cusBooking, setCusBooking] = useState();
   const [noCusBooking, setNoCusBooking] = useState(false);
   const [, setCusBookingLoading] = useState(true);
   useEffect(() => {
     if (cusInfo) {
-      getCusBooking(cusInfo["AccountCustomer.id"], 1)
-        .then((response) => {
-          if (response.bookingOfCus.rows) {
-            setCountBooking(response.bookingOfCus.count);
-            setCusBooking(response.bookingOfCus.rows);
-            setNoCusBooking(false);
-          } else {
-            setNoCusBooking(true);
-          }
-        })
-        .catch(() => {
-          setNoCusBooking(true);
-        })
-        .finally(() => {
-          setCusBookingLoading(false);
-        });
+      try {
+        handleGetDetailCustomerByExternalId(cusInfo.ExternalId)
+          .then((res) => {
+            if (res.cusDetail) {
+              getCusBooking(res.cusDetail.id, 1)
+                .then((response) => {
+                  if (response.bookingOfCus.rows) {
+                    setCountBooking(response.bookingOfCus.count);
+                    setCusBooking(response.bookingOfCus.rows);
+                    setNoCusBooking(false);
+                  } else {
+                    setNoCusBooking(true);
+                  }
+                })
+                .catch(() => {
+                  setNoCusBooking(true);
+                })
+                .finally(() => {
+                  setCusBookingLoading(false);
+                });
+            }
+          })
+          .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, []);
   const cartMenu = (
