@@ -145,6 +145,9 @@ const AdminPage = () => {
   const handleViewListCenter = () => {
     navigate("/admin/view-list-center");
   };
+  const handleViewListSchedule = () => {
+    navigate("/admin/view-list-schedule");
+  };
   const handleViewListBlog = () => {
     navigate("/admin/view-list-blog");
   };
@@ -259,6 +262,15 @@ const AdminPage = () => {
             >
               <Menu.Item onClick={handleViewListCenter}>
                 Xem danh sách Center
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<CalendarCheck size={20} weight="bold" color="#fff" />}
+              title="Quản lý Lịch làm việc"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListSchedule}>
+                Xem danh sách Lịch làm việc trong tuần
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu

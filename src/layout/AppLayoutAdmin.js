@@ -23,6 +23,7 @@ import {
   StaffProfile,
   Blog,
   Order,
+  Schedule,
   Center,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
@@ -105,6 +106,7 @@ const AppLayoutAdmin = () => {
           />
           <Route path="/admin/view-list-order" element={<Order />} />
           <Route path="/admin/view-list-manager" element={<Manager />} />
+          <Route path="/admin/view-list-schedule" element={<Schedule />} />
         </Route>
       </Routes>
     </AppSuspense>

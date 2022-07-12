@@ -111,6 +111,9 @@
         .itemContent {
           margin-left: 50px;
           margin-top: 12px;
+          display: flex;
+          flex-direction: row;
+          gap: 15px;
           text-align: left;
           font-size: 19px;
           color: #9f9e9e;
