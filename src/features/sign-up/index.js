@@ -1,7 +1,7 @@
 import { Form, Input, Select, Upload, message } from "antd";
 import { PictureOutlined } from "@ant-design/icons";
 import { React, useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signupSchema } from "./validation";
 import "./signUp.scss";
 import { values } from "lodash";
@@ -20,6 +20,7 @@ const SignUp = () => {
     draggable: true,
     progress: undefined,
   };
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [genderValue, setGenderValue] = useState()
   const [isSignUp, setIsSignUp] = useState(false);
@@ -58,6 +59,10 @@ const SignUp = () => {
       if (response.errCode === 0) {
         toast.success("Success", options)
 
+
+        setTimeout(() => {
+          navigate(`/login`);
+        }, 5000);
       } else { toast.error("Fail", options) }
 
 
@@ -216,6 +221,11 @@ const SignUp = () => {
             <div className="titleInputSignUp"> Gender : </div>
             <Form.Item
               name="gender"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
               <Select
                 className="selectgender"
@@ -229,6 +239,11 @@ const SignUp = () => {
             <div className="titleInputSignUp"> Center : </div>
             <Form.Item
               name="center"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
               <Select
                 className="selectgender"
@@ -247,9 +262,14 @@ const SignUp = () => {
               name="avatar"
               listType="picture-card"
               className="avatar-uploader"
-              showUploadList={false}
+              showUploadList={true}
               beforeUpload={beforeUpload}
               onChange={handleChangeImage}
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
               {uploadButton}
             </Upload>

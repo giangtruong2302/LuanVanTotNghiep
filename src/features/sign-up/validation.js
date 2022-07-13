@@ -9,5 +9,7 @@ export const signupSchema = () => {
     phoneNumber: yup.string().required("please enter your phone number"),
     address: yup.string().required("please enter your address"),
     gender: yup.string().required("choose your address"),
+    center: yup.string().required("choose your center"),
+    avatar: yup.string().required("choose your avatar"),
   });
 };

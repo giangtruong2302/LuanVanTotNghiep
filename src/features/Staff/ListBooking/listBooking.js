@@ -24,7 +24,8 @@ const ListBooking = () => {
     const [bookingId, setBookingId] = useState(2)
     const staffInfo = useSelector((state) => state.staff.staffInfo);
     const [statusPage, setStatusPage] = useState("")
-
+    const [page, setPage] = useState(2);
+    const [hasMore, setHasMore] = useState(true);
     const options = {
 
         position: "top-right",
@@ -52,8 +53,8 @@ const ListBooking = () => {
             });
     }, [statusPage]);
     const [messRes, setMessRes] = useState()
-    const handleIdBooking = (id, ScheduleId) => {
-        getAcceptBooking(schedule, id, ScheduleId).then((response) => {
+    const handleIdBooking = (id, ScheduleId, CustomerId, CustomerName, price) => {
+        getAcceptBooking(schedule, id, CustomerId, CustomerName, ScheduleId, price).then((response) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
@@ -81,6 +82,31 @@ const ListBooking = () => {
 
         })
     }
+    const fetchNextPageService = async () => {
+        getAllBookingOfPT(staffInfo["AccountStaff.id"], page)
+            .then((response) => {
+                const data = response.bookingOfPT.rows;
+                if (data && data.length > 0) {
+                    console.log(response);
+                    setBookingOfPt((prev) => {
+                        if (prev !== undefined) return [...prev, ...data];
+                    });
+                    if (data.length === 0 || data.length < 10) {
+                        setHasMore(false);
+                    }
+                    setPage(page + 1);
+                }
+            })
+            .catch(() => {
+                // setFlag(true);
+                setHasMore(false);
+            })
+            .finally(() => {
+                // setFlag(true);
+                console.log("success");
+                // setHasMore(false)
+            });
+    };
 
     return (
         <>
@@ -104,7 +130,9 @@ const ListBooking = () => {
                                 <StaggerAnimation />
                             </div>
                         }
-                        hasMore={true}
+
+                        hasMore={hasMore}
+                        next={fetchNextPageService}
                     >
                         {bookingOfPt?.map((item, index) => {
 
@@ -127,7 +155,7 @@ const ListBooking = () => {
                                                     <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
                                                 </div>
                                                 <div className="detailInfo">
-                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId)} >Xác nhận</button>
+                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId, item.CustomerId, item.CustomerName, item.price)} >Xác nhận</button>
                                                     <span className="lineDetailInfo"></span>
                                                     <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id)} >Từ chối</button>
                                                 </div>

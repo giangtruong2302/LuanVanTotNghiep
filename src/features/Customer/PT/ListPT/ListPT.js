@@ -10,10 +10,11 @@ import PTDetail from "../../PTDetail";
 
 const ListPT = () => {
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [allStaff, setAllStaff] = useState();
   const [noStaff, setNoStaff] = useState(false);
   const [, setStaffLoading] = useState(true);
+
 
   useEffect(() => {
 
@@ -33,7 +34,31 @@ const ListPT = () => {
         setStaffLoading(false);
       });
   }, []);
-
+  const fetchNextPageService = async () => {
+    getAllStaff(page)
+      .then((response) => {
+        const data = response.pts.rows;
+        if (data && data.length > 0) {
+          console.log(response);
+          setAllStaff((prev) => {
+            if (prev !== undefined) return [...prev, ...data];
+          });
+          if (data.length === 0 || data.length < 10) {
+            setHasMore(false);
+          }
+          setPage(page + 1);
+        }
+      })
+      .catch(() => {
+        // setFlag(true);
+        setHasMore(false);
+      })
+      .finally(() => {
+        // setFlag(true);
+        console.log("success");
+        // setHasMore(false)
+      });
+  };
 
   return (
     <>
@@ -58,7 +83,7 @@ const ListPT = () => {
               </div>
             }
             hasMore={hasMore}
-            next={() => { console.log("aaaaaaa") }}
+            next={fetchNextPageService}
           >
             {allStaff?.map((item, index) => {
 

@@ -9,7 +9,7 @@ import { getAllGymCenter } from "../gymCenterAPI";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 const ListCenter = () => {
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [allGymCenter, setAllGymCenter] = useState();
   const [noGymCenter, setNoGymCenter] = useState(false);
   const [, setGymCenterLoading] = useState(true);
@@ -32,6 +32,7 @@ const ListCenter = () => {
         setGymCenterLoading(false);
       });
   }, []);
+
   console.log("data check", allGymCenter?.length)
   const fetchNextPageCenter = async () => {
     getAllGymCenter(page)
