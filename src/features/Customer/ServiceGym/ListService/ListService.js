@@ -15,7 +15,7 @@ const ListService = () => {
   const [, setServiceLoading] = useState(true);
 
   useEffect(() => {
-    getAllService("1")
+    getAllService("", "1")
       .then((response) => {
         if (response.services.rows.length > 0) {
           setAllService(response.services.rows);

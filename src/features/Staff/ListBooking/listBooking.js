@@ -52,8 +52,8 @@ const ListBooking = () => {
             });
     }, [statusPage]);
     const [messRes, setMessRes] = useState()
-    const handleIdBooking = (id, ScheduleId) => {
-        getAcceptBooking(schedule, id, ScheduleId).then((response) => {
+    const handleIdBooking = (id, ScheduleId, CustomerId, CustomerName, price) => {
+        getAcceptBooking(schedule, id, CustomerId, CustomerName, ScheduleId, price).then((response) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
@@ -127,7 +127,7 @@ const ListBooking = () => {
                                                     <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
                                                 </div>
                                                 <div className="detailInfo">
-                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId)} >Xác nhận</button>
+                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId, item.CustomerId, item.CustomerName, item.price)} >Xác nhận</button>
                                                     <span className="lineDetailInfo"></span>
                                                     <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id)} >Từ chối</button>
                                                 </div>

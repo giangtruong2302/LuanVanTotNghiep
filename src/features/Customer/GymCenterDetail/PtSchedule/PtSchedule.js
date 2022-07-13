@@ -190,11 +190,12 @@ const PTShedule = (props) => {
         setServiceLoading(false);
       });
   }, []);
-
+  const [idDiscount, setIdDiscount] = useState();
   const onHandleServiceId = (value) => {
     console.log("daywork", value);
     getDetailService(value)
       .then((response) => {
+        setIdDiscount(response.serviceDetail.idDiscount)
         setEndTime(
           parseInt(dayWork) +
           parseInt(secondMonth) *
@@ -369,11 +370,11 @@ const PTShedule = (props) => {
 
   const onFinish = (values) => {
     createBooking(
-      cusInfo["AccountCustomer.id"],
+      cusInfo["ExternalId"],
       props.ptId,
       cusInfo["fullName"],
       props.ptName,
-      values.center,
+      props.centerId,
       values.service,
       moment(
         new Intl.DateTimeFormat("en-Us", {
@@ -390,7 +391,7 @@ const PTShedule = (props) => {
         }).format(endTime)
       ).format("YYYY-MM-DD"),
       status,
-      values.discount,
+      idDiscount,
       priceDiscount - (priceDiscount * discount) / 100,
       scheduleId
     ).then((response) => {

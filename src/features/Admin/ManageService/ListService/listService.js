@@ -165,7 +165,7 @@ const ListService = (props) => {
             .catch(() => {
               params.api.showLoadingOverlay();
             });
-        } catch (error) {}
+        } catch (error) { }
       },
     };
   }, [CenterId, props.status, props.searchValue, status]);
@@ -223,7 +223,7 @@ const ListService = (props) => {
         overlayLoadingTemplate={agOverLaytheme}
         frameworkComponents={frameworkcomponents}
         onGridReady={onGridReady}
-        // suppressContextMenu={true}
+      // suppressContextMenu={true}
       />
       <ToastContainer
         position="bottom-left"
