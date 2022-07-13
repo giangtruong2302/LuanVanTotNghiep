@@ -27,93 +27,24 @@ const ListSchedule = (props) => {
       suppressMovable: true,
       // width: 30,
       headerName: "STAFF NAME",
-      flex: 2,
+      flex: 1,
       cellRenderer: "staffRenderer",
-      cellStyle: {
-        // you can use either came case or dashes, the grid converts to whats needed
-        borderLeft: "solid 0.5px #eee",
-        borderTop: "solid 0.5px #eee",
-        borderBottom: "solid 0.5px #eee",
-        borderRight: "solid 0.5px #eee",
-      },
+      // cellStyle: {
+      //   // you can use either came case or dashes, the grid converts to whats needed
+      //   borderLeft: "solid 0.5px #eee",
+      //   borderTop: "solid 0.5px #eee",
+      //   borderBottom: "solid 0.5px #eee",
+      //   borderRight: "solid 0.5px #eee",
+      // },
     },
 
     {
       field: "mon",
-      suppressMovable: true,
+      // suppressMovable: true,
       // width: 252,
       flex: 1,
-      headerName: "MON",
+      headerName: "Day work of week",
       cellRenderer: "dayRenderer",
-      // cellStyle: cellClass,
-    },
-    {
-      field: "tue",
-      suppressMovable: true,
-      // width: 145,
-      // type: "rightAligned",
-      // headerClass: "ag-right-aligned-header",
-      headerName: "TUE",
-      cellRenderer: "dayRenderer",
-
-      // cellRenderer: "tueRenderer",
-      // cellStyle: cellClass,
-    },
-
-    {
-      field: "wed",
-      suppressMovable: true,
-      // width: 243,
-      // type: "rightAligned",
-      // headerClass: "ag-right-aligned-header",
-      headerName: "WED",
-      cellRenderer: "dayRenderer",
-
-      // cellRenderer: "wedRenderer",
-      // cellStyle: cellClass,
-    },
-    {
-      field: "thu",
-      suppressMovable: true,
-      // width: 243,
-      // type: "rightAligned",
-      // headerClass: "ag-right-aligned-header",
-      headerName: "THU",
-      cellRenderer: "dayRenderer",
-
-      // cellRenderer: "thuRenderer",
-      // cellStyle: cellClass,
-    },
-    {
-      field: "fri",
-      suppressMovable: true,
-      // width: 356,
-      // type: "leftAligned",
-      // headerClass: "ag-right-aligned-header",
-      headerName: "FRI",
-      // cellRenderer: "friRenderer",
-      cellRenderer: "dayRenderer",
-
-      // cellStyle: cellClass,
-    },
-    {
-      field: "sat",
-      suppressMovable: true,
-      // width: 125,
-      headerName: "SAT",
-      // cellRenderer: "satRenderer",
-      cellRenderer: "dayRenderer",
-
-      // cellStyle: cellClass,
-    },
-    {
-      field: "sun",
-      suppressMovable: true,
-      // width: 125,
-      headerName: "SUN",
-      // cellRenderer: "sunRenderer",
-      cellRenderer: "dayRenderer",
-
       // cellStyle: cellClass,
     },
   ]);
