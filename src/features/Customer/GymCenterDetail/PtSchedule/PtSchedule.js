@@ -4,7 +4,7 @@ import "./ptSchedule.scss";
 import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
-import { getTimeWorking } from "./PtScheduleAPI";
+import { getCusDetail, getTimeWorking } from "./PtScheduleAPI";
 import { Form, Input, Select, Button, DatePicker } from "antd";
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -155,6 +155,9 @@ const PTShedule = (props) => {
   const [nodetailDiscount, setNoDetailDiscount] = useState(false);
   const [, setDetailDiscountLoading] = useState(true);
   const [priceDiscount, setPriceDiscount] = useState();
+  const [cusDetail, setCusDetail] = useState();
+  const [noCusDetail, setNoCusDetail] = useState(false);
+  const [, setCusDetailLoading] = useState(true);
   useEffect(() => {
     getAllGymCenter("1")
       .then((response) => {
@@ -291,6 +294,7 @@ const PTShedule = (props) => {
   const [timeStampToday, setTimeStampToday] = useState(startOfDay * 1000)
 
   useEffect(() => {
+
     getTimeWorking(props.ptId, timeStampToday, 1)
       .then((response) => {
         console.log("PTID", props.ptId)
@@ -326,6 +330,22 @@ const PTShedule = (props) => {
       })
       .finally(() => {
         setTimeDetailLoading(false);
+      });
+  }, []);
+  useEffect(() => {
+    getCusDetail(cusInfo["ExternalId"]).then((response) => {
+      if (response.cusDetail) {
+        setCusDetail(response.cusDetail);
+        setNoCusDetail(false);
+      } else {
+        setNoCusDetail(true);
+      }
+    })
+      .catch(() => {
+        setNoCusDetail(true);
+      })
+      .finally(() => {
+        setCusDetailLoading(false);
       });
   }, []);
 
@@ -370,7 +390,7 @@ const PTShedule = (props) => {
 
   const onFinish = (values) => {
     createBooking(
-      cusInfo["ExternalId"],
+      cusDetail?.id,
       props.ptId,
       cusInfo["fullName"],
       props.ptName,
