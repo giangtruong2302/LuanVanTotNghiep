@@ -22,10 +22,7 @@ const ServiceGym = () => {
         <div>
           <SearchService />
         </div>
-        <div className="listItem">
-          <ListService />
 
-        </div>
 
       </div>
 

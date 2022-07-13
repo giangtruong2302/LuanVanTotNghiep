@@ -10,6 +10,8 @@ import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
 
 const Booking = () => {
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(2);
     const [bookDetail, setBookDetail] = useState();
     const [noBookDetail, setNoBookDetail] = useState(false);
     const [, setBookDetailLoading] = useState(true);
@@ -31,6 +33,31 @@ const Booking = () => {
                 setBookDetailLoading(false);
             });
     }, []);
+    const fetchNextPageService = async () => {
+        getBookingDetail(staffInfo["AccountStaff.id"], page)
+            .then((response) => {
+                const data = response.bookingOfPT.rows;
+                if (data && data.length > 0) {
+                    console.log(response);
+                    setBookDetail((prev) => {
+                        if (prev !== undefined) return [...prev, ...data];
+                    });
+                    if (data.length === 0 || data.length < 10) {
+                        setHasMore(false);
+                    }
+                    setPage(page + 1);
+                }
+            })
+            .catch(() => {
+                // setFlag(true);
+                setHasMore(false);
+            })
+            .finally(() => {
+                // setFlag(true);
+                console.log("success");
+                // setHasMore(false)
+            });
+    };
     return (
 
         <div className="BookingProfileBg">
@@ -68,7 +95,8 @@ const Booking = () => {
                                             <StaggerAnimation />
                                         </div>
                                     }
-                                    hasMore={true}
+                                    hasMore={hasMore}
+                                    next={fetchNextPageService}
                                 >
                                     {bookDetail?.map((item, index) => {
 

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form as FormAnt, Input, Select } from "antd";
 import "./SearchService.scss";
 import { Form, Formik } from "formik";
+import ListService from "../ListService/ListService";
 const { Search } = Input;
 const { Option } = Select;
 const SearchService = () => {
+  const [searchValue, setSearchValue] = useState("");
   const onSearch = (value) => {
     console.log(value);
+    setSearchValue(value);
   };
   return (
     <>
@@ -34,6 +37,7 @@ const SearchService = () => {
         </div>
       </div>
       <div className="titleService">Service GH GYM list</div>
+      <ListService searchValue={searchValue} />
     </>
   );
 };

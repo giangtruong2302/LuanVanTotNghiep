@@ -61,7 +61,7 @@ const PerInfo = () => {
     const onFinishReview = (values) => {
 
         console.log('check', values)
-        createReview(valueRate, values.ReviewContent, cusInfo["AccountCustomer.id"], values.center).then((response) => {
+        createReview(valueRate, values.ReviewContent, cusInfo["ExternalId"], values.center).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -148,7 +148,7 @@ const PerInfo = () => {
     const [roleId, setRoleId] = useState("5")
     const onFinish = (values) => {
         console.log("check", values)
-        updateCusDetail(cusInfo["AccountCustomer.id"], cusInfo["AccountCustomer.ExternalId"], values.fullName, values.Gender, values.dayOfBirth, values.phoneNumber, values.address, roleId, imageUrl, fileName, values.email, cusInfo["AccountCustomer.CenterId"]).then((response) => {
+        updateCusDetail(cusInfo["id"], cusInfo["ExternalId"], values.fullName, values.Gender, values.dayOfBirth, values.phoneNumber, values.address, roleId, imageUrl, fileName, values.email, cusInfo["AccountCustomer.CenterId"]).then((response) => {
             if (response.errorCode === 0) {
                 toast.success("Success", options)
                 setStatusPage(Date.now())
@@ -191,7 +191,7 @@ const PerInfo = () => {
     }
     let subtitle;
     useEffect(() => {
-        getCusDetail(cusInfo["AccountCustomer.id"]).then((response) => {
+        getCusDetail(cusInfo["ExternalId"]).then((response) => {
             if (response.cusDetail) {
                 setCusDetail(response.cusDetail);
                 setNoCusDetail(false);
@@ -310,7 +310,7 @@ const PerInfo = () => {
                                     name="avatar"
                                     listType="picture-card"
                                     className="avatar-uploader"
-                                    showUploadList={false}
+                                    showUploadList={true}
                                     beforeUpload={beforeUpload}
                                     onChange={handleChangeImage}
                                 >

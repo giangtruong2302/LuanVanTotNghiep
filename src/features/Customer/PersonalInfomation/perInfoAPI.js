@@ -1,7 +1,7 @@
 import axios from "../../../axios";
 
-const getCusDetail = (id) => {
-    return axios.get(`/api/get-detail-customer?id=${id}`);
+const getCusDetail = (ExternalId) => {
+    return axios.get(`/api/get-detail-customer-by-externalId?ExternalId=${ExternalId}`);
 };
 
 const updateCusDetail = (id, ExternalId, fullName, gender, dob, phoneNumber, address, roleId, avatar, fileName, email, centerId) => {
