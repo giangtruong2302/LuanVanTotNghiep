@@ -174,7 +174,7 @@ const PTShedule = (props) => {
   }, []);
 
   useEffect(() => {
-    getAllService(1)
+    getAllService("", 1)
       .then((response) => {
         if (response.services.rows.length > 0) {
           setAllService(response.services.rows);

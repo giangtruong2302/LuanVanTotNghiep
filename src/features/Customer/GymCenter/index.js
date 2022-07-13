@@ -5,6 +5,7 @@ import { ArrowLeft } from "phosphor-react";
 import ListCenter from "./ListCenter/listCenter";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
 import "../../../pages/HomePage/HomePage.scss"
+import SearchCenter from "./SearchCenter/SearchCenter";
 const GymCenter = () => {
   return (
     <div className="CenterProfileBg">
@@ -16,8 +17,7 @@ const GymCenter = () => {
           </NavLink>
         </div>
         <div className="listItem">
-          <ListCenter />
-          <HomeFooter />
+          <SearchCenter />
         </div>
 
       </div>

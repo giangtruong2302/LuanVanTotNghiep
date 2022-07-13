@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import classes from "./styles.module.scss";
 import { Empty } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import kickboxing from "../../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 import { getAllService } from "../ServiceAPI";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
-const ListService = () => {
+const ListService = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
   const [allService, setAllService] = useState();
@@ -15,22 +15,47 @@ const ListService = () => {
   const [, setServiceLoading] = useState(true);
 
   useEffect(() => {
-    getAllService("", "1")
-      .then((response) => {
-        if (response.services.rows.length > 0) {
-          setAllService(response.services.rows);
-          setNoService(false);
-        } else {
+    if (props.searchValue != "") {
+      getAllService(props.searchValue, "1")
+        .then((response) => {
+          if (response.services.rows.length > 0) {
+            setAllService(response.services.rows);
+            setNoService(false);
+          } else {
+            setNoService(true);
+          }
+        })
+        .catch(() => {
           setNoService(true);
-        }
-      })
-      .catch(() => {
-        setNoService(true);
-      })
-      .finally(() => {
-        setServiceLoading(false);
-      });
-  }, []);
+        })
+        .finally(() => {
+          setServiceLoading(false);
+        });
+    }
+    else {
+      getAllService("", "1")
+        .then((response) => {
+          if (response.services.rows.length > 0) {
+            setAllService(response.services.rows);
+            setNoService(false);
+          } else {
+            setNoService(true);
+          }
+        })
+        .catch(() => {
+          setNoService(true);
+        })
+        .finally(() => {
+          setServiceLoading(false);
+        });
+    }
+  }, [props.searchValue]);
+  console.log("useeffect serach", props.searchValue)
+
+
+
+
+  console.log("search:", props.searchValue)
   const fetchNextPageService = async () => {
     getAllService(page)
       .then((response) => {
@@ -56,6 +81,9 @@ const ListService = () => {
         // setHasMore(false)
       });
   };
+  const functionSearch = () => {
+
+  }
 
   return (
     <>
@@ -70,7 +98,7 @@ const ListService = () => {
           />
         </div>
       ) : (
-        <div className={classes.listServiceContent}>
+        <div className={classes.listServiceContent} id="scrollableDiv">
           <InfiniteScroll
             dataLength={allService?.length ? allService.length : 0}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
@@ -81,6 +109,8 @@ const ListService = () => {
             }
             hasMore={hasMore}
             next={fetchNextPageService}
+            scrollableTarget="scrollableDiv"
+
           >
             {allService?.map((item, index) => {
               return (

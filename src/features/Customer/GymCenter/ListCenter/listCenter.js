@@ -6,8 +6,9 @@ import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Link } from "react-router-dom";
 import chinhanh from "../../../../assets/images/gym-place/chiNhanh1.jpg";
 import { getAllGymCenter } from "../gymCenterAPI";
+import { getCenterByName } from "../gymCenterAPI";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
-const ListCenter = () => {
+const ListCenter = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
   const [allGymCenter, setAllGymCenter] = useState();
@@ -15,23 +16,41 @@ const ListCenter = () => {
   const [, setGymCenterLoading] = useState(true);
 
   useEffect(() => {
+    if (props.searchValue != "") {
+      getCenterByName(props.searchValue).then((response) => {
 
-    getAllGymCenter("1").then((response) => {
-
-      if (response.centers.rows.length > 0) {
-        setAllGymCenter(response.centers.rows);
-        setNoGymCenter(false);
-      } else {
-        setNoGymCenter(true);
-      }
-    })
-      .catch(() => {
-        setNoGymCenter(true);
+        if (response.center.length > 0) {
+          setAllGymCenter(response.center);
+          setNoGymCenter(false);
+        } else {
+          setNoGymCenter(true);
+        }
       })
-      .finally(() => {
-        setGymCenterLoading(false);
-      });
-  }, []);
+        .catch(() => {
+          setNoGymCenter(true);
+        })
+        .finally(() => {
+          setGymCenterLoading(false);
+        });
+    }
+    else {
+      getAllGymCenter("1").then((response) => {
+
+        if (response.centers.rows.length > 0) {
+          setAllGymCenter(response.centers.rows);
+          setNoGymCenter(false);
+        } else {
+          setNoGymCenter(true);
+        }
+      })
+        .catch(() => {
+          setNoGymCenter(true);
+        })
+        .finally(() => {
+          setGymCenterLoading(false);
+        });
+    }
+  }, [props.searchValue]);
 
   console.log("data check", allGymCenter?.length)
   const fetchNextPageCenter = async () => {
@@ -115,6 +134,7 @@ const ListCenter = () => {
             })}
 
           </InfiniteScroll>
+          <HomeFooter />
         </div>
       )}
     </>

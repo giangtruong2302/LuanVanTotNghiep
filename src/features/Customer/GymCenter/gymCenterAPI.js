@@ -3,4 +3,7 @@ import axios from "../../../axios";
 const getAllGymCenter = (page) => {
     return axios.get(`/api/get-all-center?page=${page}`);
 };
-export { getAllGymCenter };
+const getCenterByName = (centerName) => {
+    return axios.get(`/api/get-center-by-name?centerName=${centerName}`)
+}
+export { getAllGymCenter, getCenterByName };

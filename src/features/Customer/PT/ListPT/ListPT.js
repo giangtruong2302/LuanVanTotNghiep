@@ -8,7 +8,9 @@ import kickboxing from "../../../../assets/images/service/phong-tap-mma-gym-tphc
 import { getAllStaff } from "../PtAPI";
 import PTDetail from "../../PTDetail";
 
-const ListPT = () => {
+import { getStaffByName } from "../PtAPI";
+import HomeFooter from "../../../../pages/HomePage/HomeFooter";
+const ListPT = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
   const [allStaff, setAllStaff] = useState();
@@ -18,22 +20,43 @@ const ListPT = () => {
 
   useEffect(() => {
 
-    getAllStaff("1").then((response) => {
+    if (props.searchValue != "") {
+      getStaffByName(props.searchValue).then((response) => {
 
-      if (response.pts.rows.length > 0) {
-        setAllStaff(response.pts.rows);
-        setNoStaff(false);
-      } else {
-        setNoStaff(true);
-      }
-    })
-      .catch(() => {
-        setNoStaff(true);
+        if (response.staff.length > 0) {
+          setAllStaff(response.staff);
+          setNoStaff(false);
+        } else {
+          setNoStaff(true);
+        }
       })
-      .finally(() => {
-        setStaffLoading(false);
-      });
-  }, []);
+        .catch(() => {
+          setNoStaff(true);
+        })
+        .finally(() => {
+          setStaffLoading(false);
+        });
+    }
+    else {
+      getAllStaff("1").then((response) => {
+
+        if (response.pts.rows.length > 0) {
+          setAllStaff(response.pts.rows);
+          setNoStaff(false);
+        } else {
+          setNoStaff(true);
+        }
+      })
+        .catch(() => {
+          setNoStaff(true);
+        })
+        .finally(() => {
+          setStaffLoading(false);
+        });
+    }
+
+  }, [props.searchValue]);
+  console.log("useeffect serach", props.searchValue)
   const fetchNextPageService = async () => {
     getAllStaff(page)
       .then((response) => {
@@ -116,6 +139,7 @@ const ListPT = () => {
               )
             })}
           </InfiniteScroll>
+          <HomeFooter />
         </div>
       )}
     </>

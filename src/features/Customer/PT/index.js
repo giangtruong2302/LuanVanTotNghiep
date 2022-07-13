@@ -20,9 +20,7 @@ const PersonalTraining = () => {
             <SearchPT />
           </div>
         </div>
-        <div className="listItem">
-          <ListPT /><HomeFooter />
-        </div>
+
 
       </div>
     </div>
