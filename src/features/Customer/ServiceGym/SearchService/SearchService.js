@@ -11,6 +11,11 @@ const SearchService = () => {
     console.log(value);
     setSearchValue(value);
   };
+  const onChangeSearchServiceSystem = (e) => {
+    setTimeout(() => {
+      setSearchValue(e.target.value);
+    }, 700);
+  };
   return (
     <>
       <div className="searchContainer">
@@ -29,7 +34,9 @@ const SearchService = () => {
                   className="searchService"
                   placeholder="Search service of GH GYM..."
                   allowClear
+                  onChange={onChangeSearchServiceSystem}
                   onSearch={onSearch}
+                  enterButton
                 />
               </FormAnt.Item>
             </Form>

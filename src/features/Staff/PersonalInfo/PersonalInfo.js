@@ -281,9 +281,14 @@ const PersonalInfoStaff = () => {
                                                     name="avatar"
                                                     listType="picture-card"
                                                     className="avatar-uploader"
-                                                    showUploadList={false}
+                                                    showUploadList={true}
                                                     beforeUpload={beforeUpload}
                                                     onChange={handleChangeImage}
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                        },
+                                                    ]}
                                                 >
                                                     {uploadButton}
                                                 </Upload>
