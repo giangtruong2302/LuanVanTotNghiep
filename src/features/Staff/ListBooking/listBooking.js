@@ -24,7 +24,8 @@ const ListBooking = () => {
     const [bookingId, setBookingId] = useState(2)
     const staffInfo = useSelector((state) => state.staff.staffInfo);
     const [statusPage, setStatusPage] = useState("")
-
+    const [page, setPage] = useState(2);
+    const [hasMore, setHasMore] = useState(true);
     const options = {
 
         position: "top-right",
@@ -81,6 +82,31 @@ const ListBooking = () => {
 
         })
     }
+    const fetchNextPageService = async () => {
+        getAllBookingOfPT(staffInfo["AccountStaff.id"], page)
+            .then((response) => {
+                const data = response.bookingOfPT.rows;
+                if (data && data.length > 0) {
+                    console.log(response);
+                    setBookingOfPt((prev) => {
+                        if (prev !== undefined) return [...prev, ...data];
+                    });
+                    if (data.length === 0 || data.length < 10) {
+                        setHasMore(false);
+                    }
+                    setPage(page + 1);
+                }
+            })
+            .catch(() => {
+                // setFlag(true);
+                setHasMore(false);
+            })
+            .finally(() => {
+                // setFlag(true);
+                console.log("success");
+                // setHasMore(false)
+            });
+    };
 
     return (
         <>
@@ -104,7 +130,9 @@ const ListBooking = () => {
                                 <StaggerAnimation />
                             </div>
                         }
-                        hasMore={true}
+
+                        hasMore={hasMore}
+                        next={fetchNextPageService}
                     >
                         {bookingOfPt?.map((item, index) => {
 
