@@ -64,7 +64,7 @@ const CreateService = (props) => {
   const dispatch = useDispatch();
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -89,7 +89,7 @@ const CreateService = (props) => {
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -173,7 +173,7 @@ const CreateService = (props) => {
                 // address: "",
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 setSaving(true);
                 handleSubmitCreateStaff(values);
                 // let newValues: CreateStaffAccountType = values

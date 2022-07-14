@@ -26,7 +26,7 @@ import { getDetailCenter } from "../../../AdminAPI";
 import { handleCreateNewStaff, handleUpdateStaff } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateStaff = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -109,7 +109,7 @@ const UpdateStaff = (props) => {
   };
   const handleSubmitUpdateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -130,18 +130,14 @@ const UpdateStaff = (props) => {
           props.data?.ExternalId
         )
           .then((res) => {
-            if (res.errorCode === 0) {
-              props.takeStatus("complete" + Date.now());
-              setSaving(false);
-              toast.success("update staff account is success !");
-              props.handleModal(false);
-            } else {
-              toast.error("update fail");
-            }
+            props.takeStatus("complete" + Date.now());
+            setSaving(false);
+            toast.success("update staff account is success !");
+            props.handleModal(false);
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -200,7 +196,7 @@ const UpdateStaff = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateStaff(values);
                 }}

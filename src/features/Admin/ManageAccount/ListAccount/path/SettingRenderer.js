@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import "./customizeListPT.scss";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import UpdateAccount from "../../ModalAccount/modalUpdateAccount";
+import { handleDeleteStaff } from "../../../GymCenter/Customers/ModalManager/ModalAccountAPI";
 const { confirm } = Modal;
 
 const SettingRenderer = (props) => {
@@ -12,6 +13,9 @@ const SettingRenderer = (props) => {
   const [showPopOver, setShowPopOver] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
+  };
+  const takeStatus = (value) => {
+    props.colDef.action.action1("update" + value + Date.now());
   };
   function confirmDelete() {
     confirm({
@@ -23,15 +27,19 @@ const SettingRenderer = (props) => {
       centered: true,
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
-        console.log("first");
-        // return doDeleteStaff(currentSalon.salonId, props.data.id)
-        //   .then(() => {
-        //     props.colDef.action.action1("delete" + props.data.id);
-        //     message.success("Success");
-        //   })
-        //   .catch(() => {
-        //     message.error("Failure");
-        //   });
+        // console.log("first");
+        return handleDeleteStaff(
+          props.data.ExternalId,
+          props.data.roleId,
+          props.data.id
+        )
+          .then(() => {
+            props.colDef.action.action1("delete" + props.data.id);
+            message.success("Success");
+          })
+          .catch(() => {
+            message.error("Failure");
+          });
       },
       onCancel() {
         ("");
@@ -68,7 +76,7 @@ const SettingRenderer = (props) => {
   const handleClickChange = (visible) => {
     setShowPopOver(visible);
   };
-  console.log("check show popover: ", showPopOver);
+  // console.log("check show popover: ", showPopOver);
   return (
     <>
       <Popover
@@ -87,6 +95,7 @@ const SettingRenderer = (props) => {
           handleModal={handleModal}
           showModal={showModal}
           data={props.data}
+          takeStatus={takeStatus}
         />
       )}
     </>

@@ -26,7 +26,7 @@ import StaggerAnimation from "../../../../component/StaggerAnimation";
 const { Option } = Select;
 
 const ChangeDetail = (props) => {
-  console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsShowModalVisible] = useState(true);
@@ -122,7 +122,7 @@ const ChangeDetail = (props) => {
                 address: props.data.ManagerAddress,
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 handleSubmitUpdatePersonalDetail(values);
               }}
             >

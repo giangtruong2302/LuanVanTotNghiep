@@ -2,6 +2,13 @@
   :global {
     .ant-input-group .ant-input {
       border-radius: 8px;
+      width: 200px;
+    }
+    .ant-input-group > .ant-input:first-child,
+    .ant-input-group-addon:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      width: 240px;
     }
   }
 }

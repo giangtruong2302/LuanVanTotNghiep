@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./styles.module.scss";
 
 const Summarize = (props) => {
-  console.log("check props: ", props);
+  // console.log("check props: ", props);
   return (
     <div className={classes.cardSummarize}>
       <div className={classes.imagesSummarize}>

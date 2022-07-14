@@ -65,7 +65,7 @@ const Blog = () => {
     try {
       handleGetAllBlog(1)
         .then((res) => {
-          console.log("check blogs ", res.blog);
+          // console.log("check blogs ", res.blog);
           setDataBlog(res.blog.rows);
           for (let i = 2; i <= res.totalPage; i++) {
             handleGetAllBlog(i)
@@ -112,9 +112,9 @@ const Blog = () => {
         // setHasMore(false)
       });
   };
-  console.log("check data blog: ", dataBlog);
+  // console.log("check data blog: ", dataBlog);
   const onSearchCus = (value) => {
-    console.log("check search value: ", value);
+    // console.log("check search value: ", value);
     setSearchValue(value);
   };
   return (

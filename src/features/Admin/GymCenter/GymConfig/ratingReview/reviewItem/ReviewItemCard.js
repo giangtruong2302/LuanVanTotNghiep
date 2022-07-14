@@ -1,27 +1,62 @@
-import { Rate } from "antd";
+import { message, Rate } from "antd";
 import "antd/dist/antd.css";
 import moment from "moment";
-import React, { ChangeEvent, useRef } from "react";
+import React, { ChangeEvent, useEffect, useRef } from "react";
+import { useState } from "react";
 import human from "../../../../../../assets/images/ratingandreview/image 47.png";
+import { handleGetDetailCustomer } from "../../../Customers/CustomerDetail/CusDetailAPI";
+import { handleHideReview } from "../reviewAPI";
 import "./ReviewItem.scss";
 
 const ReviewItemCard = (props) => {
   const checkboxRef = useRef();
+  const [detailCustomer, setDetailCustomer] = useState();
   const onChangeLabel = () => {
     checkboxRef.current?.classList.toggle("hide");
+    const Status = props.reviewItem.Status === 0 ? 1 : 0;
+    handleHideReview(props.reviewItem.id, Status)
+      .then((res) => {
+        message.success(res.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  useEffect(() => {
+    if (props.reviewItem.Status === 0) {
+      checkboxRef.current?.classList.toggle("hide");
+    }
+    handleGetDetailCustomer(props.reviewItem.CustomerId)
+      .then((res) => {
+        setDetailCustomer(res.cusDetail);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [props]);
   return (
     <div className="reviewItemContainer">
       <div className="reviewItem">
         <div className="customerInfo">
           <div className="reviewLeft">
             <div className="image">
-              <img src={human} alt="" />
+              <img
+                src={
+                  detailCustomer && detailCustomer?.CustomerImage
+                    ? detailCustomer?.CustomerImage
+                    : human
+                }
+                alt=""
+              />
             </div>
             <div className="infor">
-              <div className="name">{props.reviewItem.CustomerId}</div>
+              <div className="name">
+                {detailCustomer?.CustomerName
+                  ? detailCustomer?.CustomerName
+                  : ""}
+              </div>
               <div className="date">
-                {moment(new Date("02/23/2000")).format("MM/DD/YYYY")}
+                {moment(props.reviewItem.createdAt).format("DD/MM/YYYY")}
               </div>
               <div className="rating">
                 <Rate

@@ -4,7 +4,7 @@ import "./customizeListPT.scss";
 import avaPT from "../../../../../assets/images/service/phong-tap-mma-gym-tphcm.png";
 
 const StaffRenderer = (props) => {
-  console.log("check props path: ", props);
+  // console.log("check props path: ", props);
   const [idPT] = useState("1");
   return (
     <>

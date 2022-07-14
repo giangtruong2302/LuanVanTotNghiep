@@ -29,7 +29,7 @@ const Manager = () => {
     setStatus(value);
   };
   const onSearchCus = (value) => {
-    console.log("check search value: ", value);
+    // console.log("check search value: ", value);
     setSearchValue(value);
   };
   const onChangeSearchManager = (e) => {

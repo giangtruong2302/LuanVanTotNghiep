@@ -88,7 +88,7 @@ const ListCustomer = (props) => {
     },
   ]);
   const [status, setStatus] = useState("");
-  console.log("check search value: ", props.searchValue);
+  // console.log("check search value: ", props.searchValue);
   const [columnDefs] = useState([
     {
       field: "setting",
@@ -135,10 +135,10 @@ const ListCustomer = (props) => {
   ]);
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const IdCenter = useSelector((state) => state.user.userInfo);
-  console.log(IdCenter);
+  // console.log(IdCenter);
   const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
-    console.log("check cuurent salon:", CenterId);
+    // console.log("check cuurent salon:", CenterId);
     return {
       getRows: function (params) {
         // loading?.classList.remove("hidden");

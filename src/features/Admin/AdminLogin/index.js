@@ -16,7 +16,7 @@ const AdminLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const handleLogin = async (values) => {
-    console.log("check info ", values);
+    // console.log("check info ", values);
     const email = values ? values.email : "";
     const password = values ? values.password : "";
     try {

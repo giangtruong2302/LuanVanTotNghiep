@@ -67,7 +67,7 @@ const AdminPage = () => {
 
   const navigate = useNavigate();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
-  console.log("check role: ", roleId);
+  // console.log("check role: ", roleId);
   const [collapsed, setCollapsed] = useState(true);
   const [center, setCenter] = useState([]);
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const AdminPage = () => {
   const handleChangeCenter = (CenterId, CenterName) => {
     navigate(`/admin/manage-center`);
     localStorage.setItem("CenterId", CenterId.toString());
-    console.log("check center id after change: ", CenterId);
+    // console.log("check center id after change: ", CenterId);
   };
   const handleLogout = () => {
     dispatch(dispatch(actions.processLogout()));
@@ -120,7 +120,7 @@ const AdminPage = () => {
   useEffect(() => {
     try {
       getAllCenter(1).then((res) => {
-        console.log("check res: ", res.centers);
+        // console.log("check res: ", res.centers);
         if (res && res.centers.rows.length > 0) {
           setCenter(res.centers.rows);
         }
@@ -129,7 +129,7 @@ const AdminPage = () => {
       console.log(error);
     }
   }, []);
-  console.log("check center: ", center);
+  // console.log("check center: ", center);
   const handleViewListAccount = () => {
     navigate("/admin/view-list-account");
   };

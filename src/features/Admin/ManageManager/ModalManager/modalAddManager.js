@@ -66,7 +66,7 @@ const CreateManager = (props) => {
   const dispatch = useDispatch();
   const handleSubmitCreateManager = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -87,18 +87,12 @@ const CreateManager = (props) => {
           Math.floor(Math.random() * 2001)
         )
           .then((res) => {
-            if (res.errCode === 0) {
-              toast.success("create new manager is success !");
-              props.takeStatus("complete" + Date.now());
-              props.handleModal(false);
-            } else {
-              toast.error(res.message);
-            }
+            toast.success("create new manager is success !");
+            props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
           })
-          .catch((res) => {
-            setSaving(false);
-            console.log("check res data email: ", res);
-            message.error(res.data?.data.email);
+          .catch((error) => {
+            message.error("fail");
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -123,11 +117,11 @@ const CreateManager = (props) => {
         setImageUrl(imgUrl);
         setFileName(info.file.name);
         setLoading(false);
-        console.log("check file name: ", info.file.name);
+        // console.log("check file name: ", info.file.name);
       });
     }
   };
-  console.log("check base64: ", imageUrl);
+  // console.log("check base64: ", imageUrl);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}
@@ -194,7 +188,7 @@ const CreateManager = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateManager(values);
                   // let newValues: CreateStaffAccountType = values

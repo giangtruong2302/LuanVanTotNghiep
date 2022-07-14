@@ -52,13 +52,13 @@ const AreaChart = () => {
         }
       });
       //dsad
-      console.log(newArr);
+      // console.log(newArr);
       setData(newArr);
       // setDataChart(moment(newArr.createdAt).format("dddd"));
       setDataChart(newArr);
     });
   }, [CenterId]);
-  console.log("check all data: ", allDataChart);
+  // console.log("check all data: ", allDataChart);
   const { InteractionAction, registerInteraction, registerAction } = G2;
   const [data, setData] = useState([
     {
@@ -256,7 +256,7 @@ const AreaChart = () => {
       },
     ],
   };
-  console.log("check data: ", data);
+  // console.log("check data: ", data);
   return <Line {...config} />;
 };
 export default AreaChart;

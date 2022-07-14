@@ -26,7 +26,7 @@ import { getDetailCenter } from "../../../AdminAPI";
 import { handleCreateNewStaff, handleUpdateStaff } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateCustomer = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -109,7 +109,7 @@ const UpdateCustomer = (props) => {
   };
   const handleSubmitUpdateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -141,7 +141,7 @@ const UpdateCustomer = (props) => {
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -201,7 +201,7 @@ const UpdateCustomer = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateStaff(values);
                 }}
@@ -367,7 +367,7 @@ const UpdateCustomer = (props) => {
                             const startday =
                               moment(dateString).format("YYYY-MM-DD");
                             setFieldValue("dob", startday);
-                            console.log(startday);
+                            // console.log(startday);
                           }}
                           className={` ${
                             touched?.dob && errors?.dob

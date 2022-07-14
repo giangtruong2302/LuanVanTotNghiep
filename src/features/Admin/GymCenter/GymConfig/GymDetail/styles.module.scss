@@ -1,7 +1,7 @@
 .salonDetailContainer {
   display: flex;
-  padding-left: 210px;
-  max-width: calc(100vw - 450px);
+  padding-left: 110px;
+  max-width: calc(100vw - 350px);
   height: 100%;
 
   .salonDetailLeft {
@@ -12,7 +12,7 @@
       backdrop-filter: blur(4px);
       border-radius: 5px;
       padding: 25px 10px;
-      width: 350px;
+      width: 400px;
       height: 100%;
 
       .salonDetailInfo {
@@ -95,6 +95,7 @@
         align-items: center;
         justify-content: center;
         padding-top: 2rem;
+        // width: 390px;
         padding-bottom: 1.5rem;
       }
       .salonDetailScan {

@@ -14,7 +14,7 @@ import moment from "moment";
 // import { Area, Point } from "react-easy-crop/types";
 
 const ChangeDetail = (props) => {
-  console.log(props);
+  // console.log(props);
   const [isModalVisible, setIsShowModalVisible] = useState(true);
 
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const ChangeDetail = (props) => {
                 address: props.address,
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 // handleSubmitUpdatePersonalDetail(values)
               }}
             >

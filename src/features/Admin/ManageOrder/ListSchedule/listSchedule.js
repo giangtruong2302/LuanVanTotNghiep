@@ -121,7 +121,7 @@ const ListSchedule = (props) => {
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
-    console.log("check search value list :", props.searchValue);
+    // console.log("check search value list :", props.searchValue);
     if (props.searchValue !== "") {
       setSearchValue(props.searchValue);
     }

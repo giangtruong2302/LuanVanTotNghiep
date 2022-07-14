@@ -21,7 +21,7 @@ const SettingAccountForAdmin = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const [infoDetail, setInfoDetail] = useState();
   const [status, setStatus] = useState("");
-  console.log("check user info: ", userInfo);
+  // console.log("check user info: ", userInfo);
   const [showModal, setShowModal] = useState(false);
   const handleModal = (isVisible) => {
     setShowModal(isVisible);
@@ -46,7 +46,7 @@ const SettingAccountForAdmin = () => {
     handleGetInfoManager(userInfo.ExternalId ? userInfo.ExternalId : -1)
       .then((res) => {
         if (res) {
-          console.log("check res info: ", res.managerDetail);
+          // console.log("check res info: ", res.managerDetail);
           setInfoDetail(res.managerDetail);
         }
       })

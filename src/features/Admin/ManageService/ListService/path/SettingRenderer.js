@@ -25,18 +25,11 @@ const SettingRenderer = (props) => {
       centered: true,
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
-        console.log("check id: ", props.data.id);
+        // console.log("check id: ", props.data.id);
         return handleDeleteService(parseInt(props.data.id))
           .then((res) => {
-            if (res.errCode === 0) {
-              toast.success("Success");
-
-              props.colDef.action.action1("delete" + Date.now());
-            } else if (res.errCode === 10) {
-              toast.error("Deteled service failed with Error ", res.errMessage);
-
-              props.colDef.action.action1("delete" + Date.now());
-            }
+            toast.success("Success");
+            props.colDef.action.action1("delete" + Date.now());
           })
           .catch(() => {
             message.error("Failure");

@@ -5,4 +5,7 @@ const handleGetAllReviewOfCenter = (CenterId, page) => {
     `/api/admin/get-review-of-center?CenterId=${CenterId}&page=${page}`
   );
 };
-export { handleGetAllReviewOfCenter };
+const handleHideReview = (id, Status) => {
+  return axios.put(`/api/admin/hide-review`, { id, Status });
+};
+export { handleGetAllReviewOfCenter, handleHideReview };

@@ -33,7 +33,7 @@ const HomePageAdmin = () => {
     try {
       getAllCustomerOfSystem(1)
         .then((res) => {
-          console.log(res.customers.count);
+          // console.log(res.customers.count);
           setTotalCustomer(res.customers.count);
         })
         .catch((error) => {
@@ -132,10 +132,10 @@ const HomePageAdmin = () => {
           <Col span={11} className="unresolvedOnTop">
             <div className="unresolvedOnTopHeader">
               <span className="unresolvedOnTopTitle">
-                <p className="textUnresolvedTitle">Unresolved</p>
+                <p className="textUnresolvedTitle">Chi nhánh Phạm Ngũ Lão</p>
               </span>
               <span className="viewDetailUnresolved">
-                <NavLink to="/unresolved-detail">View Detail</NavLink>
+                <NavLink to="">View Detail</NavLink>
               </span>
             </div>
             <div className="contentUnresolve">
@@ -145,10 +145,10 @@ const HomePageAdmin = () => {
           <Col span={11} className="ageCusPopular">
             <div className="unresolvedOnTopHeader">
               <span className="unresolvedOnTopTitle">
-                <p className="textUnresolvedTitle">Unresolved</p>
+                <p className="textUnresolvedTitle">Chi nhánh Lý Thường Kiệt</p>
               </span>
               <span className="viewDetailUnresolved">
-                <NavLink to="/unresolved-detail">View Detail</NavLink>
+                <NavLink to="">View Detail</NavLink>
               </span>
             </div>
             <div className="contentUnresolve">

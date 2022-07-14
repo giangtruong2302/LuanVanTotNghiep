@@ -27,6 +27,7 @@ const CreateAccount = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ const CreateAccount = (props) => {
   const dispatch = useDispatch();
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -72,22 +73,20 @@ const CreateAccount = (props) => {
           values.email,
           values.password,
           values.fullName,
+          imageUrl,
+          fileName,
           values.isActive,
           values.userName,
-          values.roleId
+          values.roleId,
+          Math.floor(Math.random() * 2001)
         )
           .then((res) => {
+            message.success("create new account is success !");
+            props.handleModal(false);
             props.takeStatus("complete" + Date.now());
-            if (res.data.success === true) {
-              message.success("create new staff account is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
           })
-          .catch((res) => {
-            setSaving(false);
-            console.log("check res data email: ", res);
-            message.error(res.data.data.email);
+          .catch((error) => {
+            message.error(error);
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -97,7 +96,7 @@ const CreateAccount = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -110,6 +109,7 @@ const CreateAccount = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
@@ -171,7 +171,7 @@ const CreateAccount = (props) => {
                   // address: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateStaff(values);
                   // let newValues: CreateStaffAccountType = values
@@ -486,7 +486,7 @@ const CreateAccount = (props) => {
                         style={{ margin: "10px" }}
                       >
                         {saving ? (
-                          <div style={{ marginLeft: "150px" }}>
+                          <div style={{ marginLeft: "99px" }}>
                             <StaggerAnimation></StaggerAnimation>
                           </div>
                         ) : (

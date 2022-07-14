@@ -123,7 +123,7 @@ const CreateAccount = (props) => {
   };
   const handleSubmitCreateBlog = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -181,7 +181,7 @@ const CreateAccount = (props) => {
                   centerId: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateBlog(values);
                 }}

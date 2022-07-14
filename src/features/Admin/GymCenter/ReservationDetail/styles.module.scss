@@ -27,6 +27,17 @@
         display: flex;
         flex-direction: column;
         gap: 18px;
+        .titleReser {
+          img {
+            width: 35px;
+            height: 35px;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+          }
+        }
       }
     }
     .rightContainer {

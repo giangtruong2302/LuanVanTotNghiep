@@ -24,7 +24,7 @@ import { CreateServiceSchema } from "./validation";
 import { handleCreateNewService, handleUpdateService } from "./ModalServiceAPI";
 const { Option } = Select;
 const UpdateService = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
@@ -64,7 +64,7 @@ const UpdateService = (props) => {
   const dispatch = useDispatch();
   const handleSubmitUpdateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -87,7 +87,7 @@ const UpdateService = (props) => {
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -174,7 +174,7 @@ const UpdateService = (props) => {
                 // address: "",
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 setSaving(true);
                 handleSubmitUpdateStaff(values);
                 // let newValues: CreateStaffAccountType = values

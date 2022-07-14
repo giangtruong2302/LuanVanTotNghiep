@@ -12,7 +12,7 @@ const ReservationMerchant = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const onChangeSearch = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setTimeout(() => {
       setSearchValue(e.target.value);
     }, 1000);
@@ -36,7 +36,7 @@ const ReservationMerchant = () => {
           extra={
             <Search
               style={{ borderRadius: "8px !important" }}
-              placeholder="search reservation of center"
+              placeholder="search customer, staff, status of reservation of center"
               // loading
               onChange={(e) => onChangeSearch(e)}
               enterButton
