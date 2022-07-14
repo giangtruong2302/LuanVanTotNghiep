@@ -5,7 +5,7 @@ import "./PaymentPage.scss";
 import momo from "../../../../assets/images/logo/momo.png";
 import stripe from "../../../../assets/images/logo/stripe.png";
 import StripeCheckout from "react-stripe-checkout";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 import "../../../../pages/HomePage/HomePage.scss";
@@ -13,7 +13,11 @@ import { useState } from "react";
 import moment from "moment";
 import NumberFormat from "react-number-format";
 import { useEffect } from "react";
-import { handleGetDetailOrder, handlePayWithStripe } from "./paymentAPI";
+import {
+  handleGetDetailOrder,
+  handlePayWithMomoAPI,
+  handlePayWithStripe,
+} from "./paymentAPI";
 import { handleGetDetailCustomer } from "../../../Admin/GymCenter/Customers/CustomerDetail/CusDetailAPI";
 import { handleGetDetailService } from "../../../Admin/ManageOrder/orderAPI";
 const { Step } = Steps;
@@ -22,6 +26,7 @@ const PaymentPage = () => {
   //   state?: { name: string };
   // } = useLocation();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const [detailCus, setDetailCus] = useState();
   const [detailOrder, setDetailOrder] = useState();
   const [detailService, setDetailService] = useState();
@@ -87,6 +92,20 @@ const PaymentPage = () => {
       console.log(error);
     }
   }, [state]);
+  const handlePayWithMomo = () => {
+    try {
+      handlePayWithMomoAPI(detailOrder.id, detailOrder.amount)
+        .then((res) => {
+          console.log("check res: ", res);
+          window.location.href = res.result.payUrl;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="PaymentBg">
       <div className="containerPayment">
@@ -155,7 +174,7 @@ const PaymentPage = () => {
             <div className="imgMethod">
               {/* <img className="momo" src={momo}></img>
                             <img className="stripe" src={stripe}></img> */}
-              <div className={"momo"}></div>
+              <div className={"momo"} onClick={handlePayWithMomo}></div>
               <StripeCheckout
                 name={state.item.CustomerName}
                 image={detailCus?.CustomerImage}

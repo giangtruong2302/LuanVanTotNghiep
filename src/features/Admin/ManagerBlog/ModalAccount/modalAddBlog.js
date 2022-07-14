@@ -23,11 +23,16 @@ import classes from "./styles.module.scss";
 import { CreateBlogSchema, CreateInfoSchema } from "./validation";
 import { handleCreateNewBlog } from "./ModalAccountAPI";
 import { getAllCenter } from "../../AdminAPI";
+import { handleGetDetailManager } from "../../GymCenter/GymCenterAPI";
 const { Option } = Select;
 const CreateAccount = (props) => {
+  const externalIdOfManager = useSelector(
+    (state) => state.user.userInfo.ExternalId
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const [detailManager, setDetailManager] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -64,44 +69,8 @@ const CreateAccount = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitCreateBlog = useCallback(
-    (values) => {
-      console.log("check values: ", values);
-      //setDifferentPass(false)
-      // const sdt = formatPhoneNumber(values.phoneNumber)
-      try {
-        setSaving(true);
-        handleCreateNewBlog(
-          values.title,
-          values.content,
-          imageUrl,
-          fileName,
-          values.userName,
-          values.roleId
-        )
-          .then((res) => {
-            props.takeStatus("complete" + Date.now());
-            if (res.data.success === true) {
-              message.success("create new staff account is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
-          })
-          .catch((res) => {
-            setSaving(false);
-            console.log("check res data email: ", res);
-            message.error(res.data.data.email);
-          })
-          .finally(() => {
-            props.takeStatus("complete");
-          });
-      } catch (error) {
-        console.log(error);
-        setSaving(false);
-      }
-    },
-    [dispatch, imageUrl, fileName]
-  );
+  // console.log("check externalId of Manager: ", externalIdOfManager);
+
   const getBase64 = (img, callback) => {
     setLoading(false);
     const reader = new FileReader();
@@ -136,12 +105,54 @@ const CreateAccount = (props) => {
       .catch((error) => {
         console.log(error);
       });
+
+    handleGetDetailManager(externalIdOfManager)
+      .then((res) => {
+        if (res.managerDetail) {
+          setDetailManager(res.managerDetail);
+        }
+      })
+      .catch((error) => {
+        message.error(error);
+      });
   }, [props]);
 
   const handleCancel = () => {
     setIsModalVisible(false);
     props.handleModal(false);
   };
+  const handleSubmitCreateBlog = useCallback(
+    (values) => {
+      console.log("check values: ", values);
+      //setDifferentPass(false)
+      // const sdt = formatPhoneNumber(values.phoneNumber)
+      try {
+        setSaving(true);
+        handleCreateNewBlog(
+          values.title,
+          values.content,
+          imageUrl,
+          fileName,
+          detailManager?.id,
+          values.centerId
+        )
+          .then((res) => {
+            props.takeStatus("complete" + Date.now());
+            message.success("create new blog is success !");
+            props.handleModal(false);
+          })
+          .catch((error) => {
+            setSaving(false);
+            // console.log("check res data email: ", res);
+            message.error("fail");
+          });
+      } catch (error) {
+        console.log(error);
+        setSaving(false);
+      }
+    },
+    [dispatch, imageUrl, fileName]
+  );
   return (
     <>
       <Modal
@@ -190,7 +201,7 @@ const CreateAccount = (props) => {
                           errors?.title
                         }
                       >
-                        <Field name="tile">
+                        <Field name="title">
                           {({ field }) => (
                             <Input
                               {...field}

@@ -32,8 +32,12 @@ const handleGetDetailCustomerByExternalId = (ExternalId) => {
     `/api/get-detail-customer-by-externalId?ExternalId=${ExternalId}`
   );
 };
+const handlePayWithMomoAPI = (orderId, amount) => {
+  return axios.post(`/api/get-momo-payment-link`, { orderId, amount });
+};
 export {
   handleGetDetailOrder,
   handlePayWithStripe,
   handleGetDetailCustomerByExternalId,
+  handlePayWithMomoAPI,
 };

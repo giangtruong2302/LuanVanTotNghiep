@@ -49,8 +49,8 @@ const HomeHeader = (props) => {
         handleGetDetailCustomerByExternalId(cusInfo.ExternalId)
           .then((res) => {
             if (res.cusDetail) {
-              setDetailCustomer(res.cusDetail)
-              getCusBooking(res.cusDetail.ExternalId, 1)
+              setDetailCustomer(res.cusDetail);
+              getCusBooking(res.cusDetail.id, 1)
                 .then((response) => {
                   if (response.bookingOfCus.rows) {
                     setCountBooking(response.bookingOfCus.count);
@@ -92,7 +92,7 @@ const HomeHeader = (props) => {
                     className="btnPay"
                     style={{ borderRadius: "6px", backgroundColor: "aqua" }}
                     onClick={() => handlePay(item)}
-                  // onClick={() => console.log("check id: ", item)}
+                    // onClick={() => console.log("check id: ", item)}
                   >
                     Thanh toán
                   </button>
@@ -140,7 +140,7 @@ const HomeHeader = (props) => {
         <div className="home-header-content">
           <div className="left-content">
             <i className="fas fa-bars"></i>
-            <img className="header-logo" src={LogoGHGym} onClick={() => { }} />
+            <img className="header-logo" src={LogoGHGym} onClick={() => {}} />
           </div>
           <div className="center-content">
             <div className="child-content">
@@ -219,10 +219,7 @@ const HomeHeader = (props) => {
             <>
               {cusInfo ? (
                 <div className="cusArea">
-                  <img
-                    className="imgCus"
-                    src={detailCustomer?.CustomerImage}
-                  />
+                  <img className="imgCus" src={detailCustomer?.CustomerImage} />
                   <div className="User">
                     <Dropdown overlay={userMenu}>
                       <Gear

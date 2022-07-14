@@ -18,5 +18,26 @@ const handleCreateNewBlog = (
     centerId,
   });
 };
+const handleDeleteBlog = (id) => {
+  return axios.delete(`/api/admin/delete-blog`, { data: { id: id } });
+};
+const handleUpdateBlog = (
+  title,
+  Content,
+  BlogImage,
+  fileName,
 
-export { handleCreateNewBlog };
+  CenterId,
+  id
+) => {
+  return axios.put(`/api/admin/update-blog`, {
+    title,
+    Content,
+    BlogImage,
+    fileName,
+
+    CenterId,
+    id,
+  });
+};
+export { handleCreateNewBlog, handleDeleteBlog, handleUpdateBlog };

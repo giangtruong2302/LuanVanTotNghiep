@@ -13,9 +13,11 @@ import { isVisible } from "@testing-library/user-event/dist/utils";
 // import CreateAccount from "./ModalManager/modalAddManager";
 import CreateAccount from "./ModalAccount/modalAddBlog";
 // import ListStaff from "./ListStaff/listStaff";
-import { PageHeader, Input, Row, Col } from "antd";
+import { PageHeader, Input, Row, Col, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import handleGetAllBlog from "./BlogAPI";
+import { handleDeleteBlog } from "./ModalAccount/ModalAccountAPI";
+import UpdateBlog from "./ModalAccount/modalUpdateAccount";
 // import ListAccount from "./ListManager/listAccount";
 // import ListManager from "./ListManager/listManager";
 const { Search } = Input;
@@ -24,6 +26,8 @@ const Blog = () => {
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [dataBlog, setDataBlog] = useState();
   const [page, setPage] = useState(2);
+  const [showModalUpdate, setShowModalUpdate] = useState(false);
+  const [dataDetailBlog, setDataDetailBlog] = useState();
   const [hasMore, setHasMore] = useState(true);
   const [status, setStatus] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -34,8 +38,28 @@ const Blog = () => {
     setShowModalAdd(true);
     // alert("aa");
   };
+  const handleShowModalUpdate = (isVisible) => {
+    setShowModalUpdate(isVisible);
+  };
   const takeStatus = (value) => {
     setStatus(value);
+  };
+  const deleteBlog = (id) => {
+    console.log("check id blog ", id);
+    try {
+      handleDeleteBlog(id)
+        .then((res) => {
+          message.success("delete nlog is success");
+          setStatus("delete" + Date.now());
+        })
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleUpdateBlog = (data) => {
+    setDataDetailBlog(data);
+    setShowModalUpdate(true);
   };
   useEffect(() => {
     try {
@@ -62,7 +86,7 @@ const Blog = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [status]);
   const fetchNextPageService = async () => {
     handleGetAllBlog(page)
       .then((response) => {
@@ -126,14 +150,26 @@ const Blog = () => {
               dataBlog.map((item, index) => {
                 return (
                   <Col span={5} className={classes.item} key={index}>
-                    <span className={classes.xCircle}>
+                    <span
+                      className={classes.xCircle}
+                      onClick={() => deleteBlog(item.id)}
+                    >
                       <XCircle size={22} weight="fill" color="#fff" />
                     </span>
                     <div className={classes.titleContent}>{item.Title}</div>
+                    <div className={classes.imageBlog}>
+                      <img src={item.BlogImage ? item.BlogImage : ""} />
+                    </div>
                     <div className={classes.contentReview}>{item.Content}</div>
 
-                    <button className={classes.btnUpdateBlog}>Update</button>
-                    <button className={classes.btnSeeDetail}>Detail</button>
+                    <button
+                      className={classes.btnUpdateBlog}
+                      onClick={() => handleUpdateBlog(item)}
+                    >
+                      Update
+                    </button>
+                    <div></div>
+                    {/* <button className={classes.btnSeeDetail}>Detail</button> */}
                   </Col>
                 );
               })}
@@ -156,6 +192,14 @@ const Blog = () => {
         <CreateAccount
           showModal={showModalAdd}
           handleModal={handleShowModalAdd}
+          takeStatus={takeStatus}
+        />
+      )}
+      {showModalUpdate && (
+        <UpdateBlog
+          showModal={showModalUpdate}
+          handleModal={handleShowModalUpdate}
+          data={dataDetailBlog}
           takeStatus={takeStatus}
         />
       )}

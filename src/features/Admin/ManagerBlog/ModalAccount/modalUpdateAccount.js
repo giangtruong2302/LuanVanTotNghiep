@@ -21,16 +21,18 @@ import Cropper from "react-easy-crop";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateBlogSchema, CreateInfoSchema } from "./validation";
-import { handleCreateNewAcount } from "./ModalAccountAPI";
+// import { handleCreateNewAcount } from "./ModalAccountAPI";
 import { getAllCenter } from "../../AdminAPI";
+import { handleCreateNewBlog, handleUpdateBlog } from "./ModalAccountAPI";
 const { Option } = Select;
-const UpdateAccount = (props) => {
+const UpdateBlog = (props) => {
   console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [fileName, setFileName] = useState("");
   const [totalCenter, setTotalCenter] = useState();
-  const [fileName, setFileName] = useState();
+  // const [fileName, setFileName] = useState();
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -65,44 +67,7 @@ const UpdateAccount = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitUpdateStaff = useCallback(
-    (values) => {
-      console.log("check values: ", values);
-      //setDifferentPass(false)
-      // const sdt = formatPhoneNumber(values.phoneNumber)
-      try {
-        setSaving(true);
-        handleCreateNewAcount(
-          values.email,
-          values.password,
-          values.fullName,
-          values.isActive,
-          values.userName,
-          values.roleId
-        )
-          .then((res) => {
-            props.takeStatus("complete" + Date.now());
-            if (res.data.success === true) {
-              message.success("create new staff account is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
-          })
-          .catch((res) => {
-            setSaving(false);
-            console.log("check res data email: ", res);
-            message.error(res.data.data.email);
-          })
-          .finally(() => {
-            props.takeStatus("complete");
-          });
-      } catch (error) {
-        console.log(error);
-        setSaving(false);
-      }
-    },
-    [dispatch]
-  );
+
   const getBase64 = (img, callback) => {
     setLoading(false);
     const reader = new FileReader();
@@ -114,6 +79,7 @@ const UpdateAccount = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
@@ -142,6 +108,36 @@ const UpdateAccount = (props) => {
     setIsModalVisible(false);
     props.handleModal(false);
   };
+  const handleSubmitUpdateBlog = useCallback(
+    (values) => {
+      console.log("check values: ", values);
+      //setDifferentPass(false)
+      // const sdt = formatPhoneNumber(values.phoneNumber)
+      try {
+        setSaving(true);
+        handleUpdateBlog(
+          values.title,
+          values.content,
+          imageUrl,
+          fileName,
+          values.centerId,
+          props.data.id
+        )
+          .then((res) => {
+            message.success(res.message);
+            props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
+          })
+          .catch((error) => {
+            message.error("update blog fail");
+          });
+      } catch (error) {
+        console.log(error);
+        setSaving(false);
+      }
+    },
+    [dispatch, imageUrl, fileName]
+  );
   return (
     <>
       <Modal
@@ -154,7 +150,7 @@ const UpdateAccount = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Create New Blog</span>
+          <span className={classes.nameCreate}>Update Blog</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.containerLeft}>
@@ -163,15 +159,16 @@ const UpdateAccount = (props) => {
               <Formik
                 validationSchema={CreateBlogSchema}
                 initialValues={{
-                  title: "",
-                  content: "",
-                  managerId: "",
+                  title: props.data.Title,
+                  content: props.data.Content,
+                  // managerId:"",
                   // avatar: "",
-                  centerId: "",
+                  centerId: props.data.CenterId,
                 }}
                 onSubmit={async (values) => {
                   console.log("check values:", values);
                   setSaving(true);
+                  handleSubmitUpdateBlog(values);
                 }}
               >
                 {({ errors, touched, setFieldValue }) => {
@@ -189,7 +186,7 @@ const UpdateAccount = (props) => {
                           errors?.title
                         }
                       >
-                        <Field name="tile">
+                        <Field name="title">
                           {({ field }) => (
                             <Input
                               {...field}
@@ -251,7 +248,7 @@ const UpdateAccount = (props) => {
                               : ""
                           } ${classes.inputRecovery} ant-picker `}
                           placeholder="Center"
-                          defaultValue={props.data.centerId}
+                          defaultValue={props.data.CenterId}
                           onChange={(value) => {
                             setFieldValue("centerId", value);
                           }}
@@ -278,7 +275,7 @@ const UpdateAccount = (props) => {
                             <StaggerAnimation></StaggerAnimation>
                           </div>
                         ) : (
-                          "Create"
+                          "Update"
                         )}
                       </button>
                     </Form>
@@ -293,7 +290,7 @@ const UpdateAccount = (props) => {
             <div className={classes.changeThumbnailContainer}>
               <div className={classes.image}>
                 <Cropper
-                  image={imageUrl ? imageUrl + " " : unknow}
+                  image={imageUrl ? imageUrl + " " : props.data.BlogImage}
                   crop={crop}
                   zoom={zoom}
                   aspect={2 / 2}
@@ -321,4 +318,4 @@ const UpdateAccount = (props) => {
     </>
   );
 };
-export default UpdateAccount;
+export default UpdateBlog;
