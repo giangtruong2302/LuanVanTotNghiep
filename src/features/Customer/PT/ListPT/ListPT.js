@@ -115,6 +115,7 @@ const ListPT = (props) => {
                   <div className="ptInfo">
                     <div className="infoPt">
                       <img
+                        className="StaffImg"
                         src={item.StaffImage}
                         style={{
                           borderRadius: "100px",
@@ -139,7 +140,7 @@ const ListPT = (props) => {
               )
             })}
           </InfiniteScroll>
-          <HomeFooter />
+
         </div>
       )}
     </>

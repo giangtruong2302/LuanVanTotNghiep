@@ -109,6 +109,7 @@ const ListCenter = (props) => {
                     <div className="centerInfo">
                       <div className="infoCen">
                         <img
+                          className="centerImg"
                           src={chinhanh}
                           style={{
                             borderRadius: "6px",
@@ -134,7 +135,7 @@ const ListCenter = (props) => {
             })}
 
           </InfiniteScroll>
-          <HomeFooter />
+
         </div>
       )}
     </>

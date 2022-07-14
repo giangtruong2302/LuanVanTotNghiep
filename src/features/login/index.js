@@ -22,13 +22,16 @@ const LoginPage = () => {
     try {
       await handleLoginStaffAPI(email, password)
         .then((res) => {
-          const dataStaff = res.data;
-          dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
-          navigate("/staff-personal-page");
+          if (res.errorCode === 0) {
+            const dataStaff = res.data;
+            dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
+            navigate("/staff-personal-page");
+          } else {
+            message.error("login fail");
+          }
+
         })
-        .catch(() => {
-          message.error("login fail");
-        });
+
     } catch (error) {
       console.log(error);
     }

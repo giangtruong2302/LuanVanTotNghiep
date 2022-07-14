@@ -42,11 +42,16 @@
 
 @media only screen and (max-width: 46.1875em) {
     .listPTCenterContainer {
+
+        position: relative;
+        margin-left: 1px !important;
+
         :global {
             .ant-list-items {
                 gap: 15px;
                 display: flex;
                 flex-direction: column;
+
             }
         }
 

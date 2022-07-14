@@ -33,6 +33,7 @@ import ScanQR from "../features/Staff/Scan/ScanQR";
 import Page404 from "../features/Page404/Page404";
 
 import PaymentPage from "../features/Customer/PayPage/PaymentPage/PaymentPage";
+import RecoveryPass from "../features/Customer/RecoveryPass/RecoveryPass";
 
 
 const AppLayout = () => {
@@ -51,7 +52,6 @@ const AppLayout = () => {
         <Route path="/staff-personal-page" element={<Staff />} />
         <Route path="/pt-booking" element={<Booking />} />
         <Route path="/login" element={<CustomerLoginPage />} />
-
         <Route path="/customer-infomation" element={<PerInfo />} />
         <Route path="/send-email" element={<SendEmail />} />
         <Route path="/bmi" element={<BMI />} />
@@ -61,6 +61,7 @@ const AppLayout = () => {
         <Route path="/staff-info/:id" element={<PersonalInfoStaff />} />
         <Route path="/booking-of-cus" element={<BookingOfCus />} />
         <Route path="/404-error-notfound" element={<Page404 />} />
+        <Route path="/reset-pass" element={<RecoveryPass />} />
 
         {/* merchant */}
         <Route path="/merchant/gym-select" element={<GymSelect />} />

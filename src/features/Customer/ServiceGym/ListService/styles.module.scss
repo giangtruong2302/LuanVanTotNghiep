@@ -1,7 +1,7 @@
 .listServiceContent {
 
 
-  max-height: auto;
+  min-height: 323px;
   height: calc(100% - 450px);
   display: flex;
   margin: 0 auto;
@@ -208,17 +208,18 @@
 
 @media only screen and (max-width: 46.1875em) {
   .listServiceContent {
-    overflow: auto;
+
     max-height: auto;
+    overflow-y: hidden;
     display: flex;
-    margin: 0 auto;
+    margin-right: 30px;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px;
-    gap: 25px;
+    //padding: 10px;
+    //gap: 25px;
     position: relative;
-    width: 100vw;
-    padding: 0 20px;
+    width: 350px;
+    // padding: 0 20px;
     // height: calc(100% - 20px);
 
     border-radius: 5px;
@@ -231,9 +232,9 @@
 
     .service {
       box-sizing: border-box;
-      min-width: 70vw;
+      // width: 100px;
       margin: 0 auto;
-      max-width: 340px;
+      max-width: 330px;
       height: 119px;
       background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
       /* light blue */
@@ -246,7 +247,7 @@
       display: flex;
 
       flex-direction: column;
-      padding: 42px;
+      //padding: 42px;
 
       .breadcumService {
         display: flex;
@@ -310,8 +311,8 @@
         display: flex;
         align-items: center;
         padding: 0px;
-        gap: 10px;
-        justify-content: space-between;
+        //gap: 10px;
+        // justify-content: space-between;
         width: 100%;
         height: 30px;
         padding-top: 20px;
@@ -320,22 +321,32 @@
           display: flex;
           align-items: center;
 
+          .SerImg {
+            margin-top: 23px;
+            transform: skew(0deg) !important;
+            padding-right: 92px !important;
+            opacity: 0.4 !important;
+          }
+
           .textNameService {
+
+
             min-width: 97px;
             max-width: auto;
             height: 17px;
-            margin-left: 20px;
+            position: absolute;
             font-family: "Inter";
             font-style: normal;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: bold;
+            font-size: 25px;
             line-height: 17px;
             margin-top: 20px;
+            margin-right: 30px !important;
             /* identical to box height */
 
             /* Black blue */
 
-            color: #223263;
+            color: black;
 
             /* Inside auto layout */
 
@@ -346,7 +357,7 @@
         }
 
         .detailInfo {
-          display: flex;
+          display: none;
           flex-direction: column;
           align-items: flex-start;
           padding: 0px;

@@ -114,3 +114,128 @@
         }
     }
 }
+
+@media only screen and (max-width: 46.1875em) {
+    .CenterDetailBgContainer {
+        .backToHome {
+            width: 100%;
+            background: #a50000;
+
+            height: 60px;
+
+            .backtoHome {
+                padding-top: 15px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                // width: fit-content;
+                .textBackToHome {
+                    font-family: "roboto";
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-left: 10px;
+                    color: white;
+                }
+            }
+        }
+
+        .breadcumDetail {
+            padding: 10px 20px 20px 25px;
+        }
+
+        .CenterDetailContent {
+            display: flex;
+            gap: 15px;
+
+            //margin: 0 25px;
+
+
+            .contentInfo {
+                box-sizing: border-box;
+                padding-left: 30px;
+
+                .avatarCenterDetail {
+                    background: transparent;
+
+                    .imgCenter {
+                        height: 200px;
+                        width: 320px;
+                        border: 1px solid #f1f1f1;
+                        border-radius: 20px;
+                        box-shadow: 1px 1px 8px 1px #888;
+                    }
+                }
+
+                .infoDetailCenter {
+                    display: flex;
+                    gap: 5px;
+                    flex-direction: column;
+                    padding-left: 1px;
+                    margin-top: 30px;
+                    margin-right: 100px !important;
+
+                    width: 50px !important;
+
+                    .nameCenterAndPosition {
+                        color: #000;
+                        font-weight: 600;
+                        font-size: 15px;
+                        font-family: "Courier New", Courier, monospace;
+                    }
+
+                    .descriptionCenterDetail {
+                        font-style: italic;
+                        min-height: 130px;
+                        font-size: 15px;
+
+
+                    }
+
+                    .likeAndChat {
+                        position: absolute;
+                        margin-top: 100px;
+
+
+                        .btnLike {
+                            padding: 5px 15px;
+                            background-color: #1bbada;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                        }
+
+                        .btnChat {
+                            padding: 5px 15px;
+                            background-color: #1bbada;
+                            color: #fff;
+                            border-radius: 6px;
+                            border: 1px solid #ffff;
+                        }
+                    }
+                }
+
+                .listPTServiceContainer {
+                    :global {
+                        .ant-list-items {
+                            gap: 15px;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+
+                    .itemPTService {
+                        align-items: initial;
+                        box-sizing: border-box;
+                        box-shadow: 1px 1px 8px 1px rgb(235, 234, 234);
+                        max-width: 1200px;
+
+                        .ptSchedule {
+                            width: 400px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

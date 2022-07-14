@@ -139,6 +139,7 @@
         color: black;
         cursor: pointer;
         text-transform: uppercase;
+        margin-right: 15px;
 
         &:hover {
           color: #fff;
@@ -277,6 +278,8 @@
 
   .slick-next {
     // position: relative !important;
+    margin-right: 12px;
+    margin-bottom: 20px;
     right: -2px !important;
     z-index: 9999;
     height: 35px !important;
@@ -321,6 +324,19 @@
 
         &.handbook {
           display: flex !important;
+        }
+
+        .bgCenter {
+          background-position: center center;
+          background-repeat: no-repeat !important;
+          background-size: cover;
+          background-color: #eee;
+          width: 180px;
+          height: 120px;
+
+
+
+
         }
 
         .bg-image {
@@ -403,14 +419,25 @@
 
   .home-footer {
 
+    // padding-top: 8px;
+    // width: 100%;
+    // height: 460px;
+    // margin: 0 auto;
+    // background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(240, 235, 250, 0.1));
+    // display: flex;
+    // gap: 5px;
+    // flex-wrap: wrap;
+
+
     padding-top: 8px;
+    min-height: 250px;
     width: 100%;
-    height: 460px;
     margin: 0 auto;
-    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(240, 235, 250, 0.1));
+    background: #a50000;
     display: flex;
-    gap: 5px;
     flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
 
     .footerLeft {
       text-align: left;
@@ -455,6 +482,7 @@
     .footerRight {
       border-left: none;
       width: auto;
+      margin-bottom: 30px;
 
 
       .textSocialMedia {
@@ -474,3 +502,72 @@
     }
   }
 }
+
+// .home-footer {
+//   text-align: center;
+//   padding-top: 8px;
+//   min-height: 250px;
+//   margin: 0 auto;
+//   background: #a50000;
+//   display: flex;
+//   gap: 15px;
+//   width: 100%;
+
+//   .footerLeft {
+//     border-right: 1px solid white;
+//     width: 30%;
+//     text-align: left;
+//     padding-left: 80px;
+//     align-items: center;
+//     margin: 0 auto;
+//     color: white;
+//     font-size: 18px;
+
+//     .title-footer-GHGym {
+//       font-size: 24px;
+//       font-weight: 700;
+//       color: white;
+//     }
+//   }
+
+//   .footerCenter {
+//     color: white;
+//     width: 40%;
+//     align-items: center;
+//     margin: 0 auto;
+//     display: flex;
+//     text-align: center;
+//     flex-direction: row;
+//     gap: 15px;
+
+//     .left-blog {
+//       width: 50%;
+//       font-size: 18px;
+//     }
+
+//     .right-blog {
+//       width: 50%;
+//       font-size: 18px;
+//     }
+//   }
+
+//   .footerRight {
+//     padding-top: 50px;
+//     border-left: 1px solid white;
+//     width: 30%;
+
+//     .textSocialMedia {
+//       color: white;
+//       font-size: 20px;
+//       font-weight: 700;
+//     }
+
+//     .social-media {
+//       display: flex;
+//       gap: 15px;
+//       margin: 0 auto;
+//       align-items: center;
+//       width: 30%;
+//     }
+//   }
+// }

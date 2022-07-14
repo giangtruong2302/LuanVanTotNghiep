@@ -53,24 +53,43 @@ const PTShedule = (props) => {
   const [, setCenterDetailLoading] = useState(true);
   const [centerName, setCenterName] = useState();
   function openModal(e) {
-    setIsOpen(true);
-    setScheduleId(e.target.value);
-    getCenterDetail(props.centerId)
-      .then((response) => {
-        if (response.centerDetail) {
-          setCenterName(response.centerDetail.CenterName);
-          setCenterDetail(response.centerDetail);
-          setNoCenterDetail(false);
+    if (!cusInfo) {
+      toast.error("Chức năng cần đăng nhập", options);
+    } else {
+      setIsOpen(true);
+      setScheduleId(e.target.value);
+      getCusDetail(cusInfo["ExternalId"]).then((response) => {
+        if (response.cusDetail) {
+          setCusDetail(response.cusDetail);
+          setNoCusDetail(false);
         } else {
-          setNoCenterDetail(true);
+          setNoCusDetail(true);
         }
       })
-      .catch(() => {
-        setNoCenterDetail(true);
-      })
-      .finally(() => {
-        setCenterDetailLoading(false);
-      });
+        .catch(() => {
+          setNoCusDetail(true);
+        })
+        .finally(() => {
+          setCusDetailLoading(false);
+        });
+      getCenterDetail(props.centerId)
+        .then((response) => {
+          if (response.centerDetail) {
+            setCenterName(response.centerDetail.CenterName);
+            setCenterDetail(response.centerDetail);
+            setNoCenterDetail(false);
+          } else {
+            setNoCenterDetail(true);
+          }
+        })
+        .catch(() => {
+          setNoCenterDetail(true);
+        })
+        .finally(() => {
+          setCenterDetailLoading(false);
+        });
+    }
+
   }
 
   function afterOpenModal() {
@@ -234,46 +253,11 @@ const PTShedule = (props) => {
         setDetailServiceLoading(false);
       });
   };
-  const onHandleCenterId = (value) => {
-    getPtOfCenter(value, 1)
-      .then((response) => {
-        if (response.ptOfCenter.rows) {
-          setPtOfCenter(response.ptOfCenter.rows);
-          setNoPtOfCenter(false);
-        } else {
-          setNoPtOfCenter(true);
-        }
-      })
-      .catch(() => {
-        setNoPtOfCenter(true);
-      })
-      .finally(() => {
-        setPtOfCenterLoading(false);
-      });
-  };
+
   const handleShowModalBooking = (isVisible) => {
     setIsOpen(isVisible);
   };
-  const onHandlePTId = (value) => {
-    getDetailPT(value)
-      .then((response) => {
-        if (response.staffDetail) {
-          setptDetail(response.staffDetail);
-          setNoptDetail(false);
-        } else {
-          setNoptDetail(true);
-        }
-      })
-      .catch(() => {
-        setNoptDetail(true);
-      })
-      .finally(() => {
-        setptDetailLoading(false);
-      });
-  };
-  const onChangeStartTime = (date, dateString) => {
-    setStartTime(date._d);
-  };
+
 
   const options = {
     position: "top-center",
@@ -332,22 +316,22 @@ const PTShedule = (props) => {
         setTimeDetailLoading(false);
       });
   }, []);
-  useEffect(() => {
-    getCusDetail(cusInfo["ExternalId"]).then((response) => {
-      if (response.cusDetail) {
-        setCusDetail(response.cusDetail);
-        setNoCusDetail(false);
-      } else {
-        setNoCusDetail(true);
-      }
-    })
-      .catch(() => {
-        setNoCusDetail(true);
-      })
-      .finally(() => {
-        setCusDetailLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getCusDetail(cusInfo["ExternalId"]).then((response) => {
+  //     if (response.cusDetail) {
+  //       setCusDetail(response.cusDetail);
+  //       setNoCusDetail(false);
+  //     } else {
+  //       setNoCusDetail(true);
+  //     }
+  //   })
+  //     .catch(() => {
+  //       setNoCusDetail(true);
+  //     })
+  //     .finally(() => {
+  //       setCusDetailLoading(false);
+  //     });
+  // }, []);
 
   const handleDate = (e) => {
     // console.log(timestampSeconds);
@@ -588,6 +572,7 @@ const PTShedule = (props) => {
             )} */}
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

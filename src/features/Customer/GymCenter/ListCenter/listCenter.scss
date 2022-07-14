@@ -1,7 +1,7 @@
 .listCenterContent {
 
   overflow: hidden;
-  min-height: 440px;
+  min-height: 308px;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
@@ -147,22 +147,32 @@
 @media only screen and (max-width: 46.1875em) {
   .listCenterContent {
     .Center {
-      width: 60%;
+      width: 100%;
 
       .centerInfo {
 
 
         .infoCen {
-          display: flex;
-          flex-wrap: wrap;
+
 
           .textNameCenter {
-            padding-right: 30px;
+
+            margin-bottom: 30px;
+            position: absolute;
+            text-align: center;
+          }
+
+          .centerImg {
+            width: 230px !important;
+            height: 145px !important;
+            opacity: 0.5;
+            margin-left: 15px;
+
           }
         }
 
         .detailInfoCenter {
-          display: flex;
+          display: none;
           flex-wrap: wrap;
           align-items: flex-start;
           padding: 0px;

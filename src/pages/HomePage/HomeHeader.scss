@@ -89,8 +89,7 @@
           margin-top: 25px;
         }
 
-        .Notify {
-        }
+        .Notify {}
       }
     }
 
@@ -161,10 +160,8 @@
   .content-up {
     height: 85%;
     padding-top: 15px;
-    background-image: linear-gradient(
-      rgba(0, 0, 0, 0.25),
-      rgba(255, 255, 255, 0.1)
-    );
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25),
+        rgba(255, 255, 255, 0.1));
 
     .title1 {
       text-align: center;
@@ -213,11 +210,9 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 1)
-    );
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1));
 
     .options {
       text-align: center;
@@ -257,15 +252,17 @@
     }
   }
 }
+
 .Optionpay {
   display: flex;
   flex-direction: column;
   background-color: #49bce2;
-  .textOptionPay {
-  }
-  .optionBtn {
-  }
+
+  .textOptionPay {}
+
+  .optionBtn {}
 }
+
 //Moblie reponsive
 @media only screen and (max-width: 46.1875em) {
   .home-header-container {
@@ -282,6 +279,9 @@
       height: 100%;
       display: flex;
 
+
+
+
       .left-content {
         width: 20%;
         display: flex;
@@ -289,11 +289,12 @@
 
         .header-logo {
           background-size: 50%;
-          height: 100%;
-          min-width: 380%;
+          height: 50%;
+          min-width: 170%;
           cursor: pointer;
           transform: scale(0.6, 2);
-          margin-right: 180px;
+          margin-left: 1px;
+
         }
 
         i {
@@ -343,21 +344,21 @@
           opacity: 0;
         }
 
-        #menu__toggle:checked + .menu__btn > span {
+        #menu__toggle:checked+.menu__btn>span {
           transform: rotate(45deg);
         }
 
-        #menu__toggle:checked + .menu__btn > span::before {
+        #menu__toggle:checked+.menu__btn>span::before {
           top: 0;
           transform: rotate(0deg);
         }
 
-        #menu__toggle:checked + .menu__btn > span::after {
+        #menu__toggle:checked+.menu__btn>span::after {
           top: 0;
           transform: rotate(90deg);
         }
 
-        #menu__toggle:checked ~ .menu__box {
+        #menu__toggle:checked~.menu__box {
           left: 0 !important;
         }
 
@@ -371,9 +372,9 @@
           z-index: 1;
         }
 
-        .menu__btn > span,
-        .menu__btn > span::before,
-        .menu__btn > span::after {
+        .menu__btn>span,
+        .menu__btn>span::before,
+        .menu__btn>span::after {
           display: block;
           position: absolute;
           width: 100%;
@@ -382,12 +383,12 @@
           transition-duration: 0.25s;
         }
 
-        .menu__btn > span::before {
+        .menu__btn>span::before {
           content: "";
           top: -8px;
         }
 
-        .menu__btn > span::after {
+        .menu__btn>span::after {
           content: "";
           top: 8px;
         }
@@ -423,12 +424,50 @@
         }
       }
 
+      .Cuscontent {
+        width: 15%;
+
+        .login {
+          display: flex;
+
+          .logoLogin {
+            margin-top: 20px;
+            margin-left: 30px;
+          }
+
+          .textLogin {
+            margin-top: 20px;
+            font-size: 14px;
+          }
+        }
+
+        .cusArea {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+          .imgCus {
+            width: 35px;
+            border-radius: 50%;
+            margin-top: 10px;
+            margin-left: 80px;
+          }
+
+          .User {
+            margin-left: 10px;
+            margin-top: 25px;
+          }
+
+          .Notify {}
+        }
+      }
+
       .right-content {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
         width: 1.5mm;
-        margin-left: 200px;
+        margin-left: 130px;
 
         .support {
           padding-left: -20px;
@@ -482,7 +521,7 @@
   }
 
   .home-header-banner {
-    background-image: url("../../assets/images/banner/bannerPRGHGYM.png");
+
 
     background-size: cover;
     height: 550px;
@@ -494,10 +533,8 @@
     .content-up {
       height: 65%;
       padding-top: 15px;
-      background-image: linear-gradient(
-        rgba(0, 0, 0, 0.25),
-        rgba(255, 255, 255, 0.1)
-      );
+      background-image: linear-gradient(rgba(0, 0, 0, 0.25),
+          rgba(255, 255, 255, 0.1));
 
       .title1 {
         text-align: center;
@@ -548,11 +585,9 @@
       flex-direction: row;
       align-items: flex-start;
       justify-content: center;
-      background-image: linear-gradient(
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.9),
-        rgba(255, 255, 255, 1)
-      );
+      background-image: linear-gradient(rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 1));
 
       .options {
         padding-left: 15px;

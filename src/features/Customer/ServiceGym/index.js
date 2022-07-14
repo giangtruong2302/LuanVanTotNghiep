@@ -22,7 +22,7 @@ const ServiceGym = () => {
         <div>
           <SearchService />
         </div>
-
+        <div className="footer"><HomeFooter /></div>
 
       </div>
 

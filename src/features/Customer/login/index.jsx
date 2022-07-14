@@ -24,14 +24,17 @@ const CustomerLoginPage = () => {
     try {
       await handleLoginUserAPI(email, password)
         .then((res) => {
-          const dataCus = res.data;
-          console.log('datacus', dataCus)
-          dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
-          navigate(`/`);
+
+          if (res.errorCode === 0) {
+            const dataCus = res.data;
+            dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
+            navigate(`/`);
+          } else {
+            message.error("login fail");
+          }
+
         })
-        .catch(() => {
-          message.error("login fail");
-        });
+
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +139,7 @@ const CustomerLoginPage = () => {
             }}
           </Formik>
           <div className={"loginForm"}>
-            <Link to={"/password-recovery"} className={"forgotPassword"}>
+            <Link to={"/reset-pass"} className={"forgotPassword"}>
               Forgot password
             </Link>
             <span className="centerForgotPass"> / </span>
@@ -144,6 +147,7 @@ const CustomerLoginPage = () => {
               Sign up
             </Link>
             <div className={"versionPage"}>v1.0.0</div>
+
           </div>
         </div>
       </div>
