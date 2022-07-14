@@ -126,6 +126,7 @@ const ListService = (props) => {
                         {item.ServiceName}
                       </p>
                       <img
+                        className={classes.SerImg}
                         src={item.ServiceImage}
                         style={{
 
@@ -150,7 +151,7 @@ const ListService = (props) => {
                 </Link>
               );
             })}
-            <HomeFooter />
+
           </InfiniteScroll>
         </div>
       )}

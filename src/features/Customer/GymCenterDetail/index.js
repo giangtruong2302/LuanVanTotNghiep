@@ -79,8 +79,8 @@ const GymDetailPage = () => {
                                     Center Name: {centerDetail?.CenterName}
                                 </div>
                                 <div className="descriptionCenterDetail">
-                                    <div>Center Address: {centerDetail?.CenterAddress}  </div>
-                                    <div>Center Phone Number : {centerDetail?.CenterPhoneNumber} </div>
+                                    <div>Address: {centerDetail?.CenterAddress}  </div>
+                                    <div>Phone Number : {centerDetail?.CenterPhoneNumber} </div>
 
 
                                 </div>

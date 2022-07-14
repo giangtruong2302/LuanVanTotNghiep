@@ -62,7 +62,7 @@ const SignUp = () => {
 
         setTimeout(() => {
           navigate(`/login`);
-        }, 5000);
+        }, 4000);
       } else { toast.error("Fail", options) }
 
 

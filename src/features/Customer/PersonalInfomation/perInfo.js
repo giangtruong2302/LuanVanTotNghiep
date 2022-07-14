@@ -61,7 +61,7 @@ const PerInfo = () => {
     const onFinishReview = (values) => {
 
         console.log('check', values)
-        createReview(valueRate, values.ReviewContent, cusInfo["ExternalId"], values.center).then((response) => {
+        createReview(valueRate, values.ReviewContent, cusDetail?.id, values.center).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
