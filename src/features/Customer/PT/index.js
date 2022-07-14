@@ -19,6 +19,7 @@ const PersonalTraining = () => {
           <div>
             <SearchPT />
           </div>
+          <div className="footer"><HomeFooter /></div>
         </div>
 
 

@@ -19,7 +19,7 @@ const GymCenter = () => {
         <div className="listItem">
           <SearchCenter />
         </div>
-
+        <div className="footer"><HomeFooter /></div>
       </div>
     </div>
   );

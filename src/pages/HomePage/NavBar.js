@@ -1,5 +1,6 @@
 import React from "react"
 import "./NavBar.scss"
+import { NavLink } from "react-router-dom"
 
 
 const NavBar = () => {
@@ -8,19 +9,17 @@ const NavBar = () => {
     return (
 
         <div className="hamburger-menu">
-            <input id="menu__toggle" type="checkbox" />
-            <label className="menu__btn" for="menu__toggle">
-                <span></span>
-            </label>
 
-            <ul className="menu__box">
-                <li><a className="menu__item" >Dịch vụ</a></li>
-                <li><a className="menu__item" >Cơ sở Gym</a></li>
-                <li><a className="menu__item" >Gói dịch vụ</a></li>
-                <li><a className="menu__item" >PT</a></li>
-                <li><a className="menu__item" >Đăng nhập</a></li>
 
-            </ul>
+
+            <div className="menu__box">
+                <NavLink to={`/service-gym`} className="menu__item" >Dịch vụ</NavLink>
+                <NavLink to={`/gym-center`} className="menu__item" >Cơ sở Gym</NavLink>
+                <NavLink to={`/`} className="menu__item" >Gói dịch vụ</NavLink>
+                <NavLink to={`/Personal-Training`} className="menu__item" >PT</NavLink>
+                <NavLink to={`/login`} className="menu__item" >Đăng nhập</NavLink>
+
+            </div>
         </div>
 
     )
