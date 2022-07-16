@@ -26,15 +26,16 @@ const ButtonSchedule = (props) => {
         <button
           disabled
           className="btn-no"
-          value={timeDetail?.id}
+          value={props.data.id}
           onClick={(e) => props.open(e)}
+
         >
           {timeDetail?.StartTime.substring(0, 5)} - {timeDetail?.EndTime.substring(0, 5)}
         </button>
         :
         <button
           className="btn-vie"
-          value={timeDetail?.id}
+          value={props.data.id}
           onClick={(e) => props.open(e)}
         >
           {" "}

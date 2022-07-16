@@ -45,7 +45,7 @@ const PTShedule = (props) => {
       draggable: true,
       progress: undefined,
     });
-  const [scheduleId, setScheduleId] = useState(new Date());
+  const [scheduleId, setScheduleId] = useState();
   const cusInfo = useSelector((state) => state.cus.cusInfo);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [secondMonth, SetSecondMonth] = useState("2629743000");
@@ -112,6 +112,7 @@ const PTShedule = (props) => {
     }
 
   }
+
 
   function afterOpenModal() {
     subtitle.style.color = "#000";
@@ -302,30 +303,12 @@ const PTShedule = (props) => {
 
     getTimeWorking(props.ptId, timeStampToday, 1)
       .then((response) => {
-        console.log("PTID", props.ptId)
-        console.log("TimeStamp", timeStampToday)
 
         if (response.ScheduleWorking.rows) {
           setTimeDetail(response.ScheduleWorking.rows);
-          console.log('timedetail today', response)
+          setDayWork(timeStampToday);
           setNoTimeDetail(false);
-          getTimeWorking(props.ptId, timeStampToday, 1)
-            .then((response) => {
-              setDayWork(timeStampToday);
 
-              if (response.ScheduleWorking.rows) {
-                setTimeDetail(response.ScheduleWorking.rows);
-                setNoTimeDetail(false);
-              } else {
-                setNoTimeDetail(true);
-              }
-            })
-            .catch(() => {
-              setTimeDetail(true);
-            })
-            .finally(() => {
-              setTimeDetailLoading(false);
-            });
         } else {
           setNoTimeDetail(true);
         }
@@ -468,6 +451,8 @@ const PTShedule = (props) => {
                         <ButtonSchedule
                           data={item}
                           // onClick={(e) => openModal(e)}
+
+
                           open={openModal}
                           handleShowModalBooking={handleShowModalBooking}
                         />
@@ -551,17 +536,7 @@ const PTShedule = (props) => {
                       </Form.Item>
                       <Form.Item name="discount"></Form.Item>
                       <div>
-                        <ToastContainer
-                          position="top-right"
-                          autoClose={5000}
-                          hideProgressBar={false}
-                          newestOnTop={false}
-                          closeOnClick
-                          rtl={false}
-                          pauseOnFocusLoss
-                          draggable
-                          pauseOnHover
-                        />
+
 
                         <ToastContainer />
                       </div>

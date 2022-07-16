@@ -4,9 +4,9 @@ import "../../GymCenterDetail/PtSchedule/ptSchedule.scss";
 import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
-import { getCusDetail, getServiceOfPt, getTimeWorking } from "../../GymCenterDetail/PtSchedule/PtScheduleAPI";
+import { getCusDetail, getServiceOfPt, getTimeWorking } from "./ptScheduleAPI";
 import { Form, Input, Select, Button, DatePicker } from "antd";
-import { createBooking } from "../../GymCenterDetail/PtSchedule/PtScheduleAPI";
+import { createBooking } from "./ptScheduleAPI";
 import Modal from "react-modal";
 import { getAllGymCenter } from "../../GymCenter/gymCenterAPI";
 import { getAllService } from "../../ServiceGym/ServiceAPI";
@@ -14,12 +14,12 @@ import { getAllService } from "../../ServiceGym/ServiceAPI";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getDetailService } from "../../GymCenterDetail/PtSchedule/PtScheduleAPI";
-import { getDisCount } from "../../GymCenterDetail/PtSchedule/PtScheduleAPI";
+import { getDetailService } from "./ptScheduleAPI";
+import { getDisCount } from "./ptScheduleAPI";
 import { getCenterDetail } from "../../GymCenterDetail/centerDetailAPI";
 import { getPtDetail } from "../../PTDetail/PtDetailAPI";
 import { getServiceGymDetail } from "../serviceGymDetailAPI";
-import ButtonSchedule from "../../GymCenterDetail/PtSchedule/btnSchedule";
+import ButtonSchedule from "./BtnSchedule";
 import { isVisible } from "@testing-library/user-event/dist/utils";
 import { useParams } from "react-router-dom";
 const customStyles = {
@@ -499,17 +499,7 @@ const PTShedule = (props) => {
                                             </Form.Item>
                                             <Form.Item name="discount"></Form.Item>
                                             <div>
-                                                <ToastContainer
-                                                    position="top-right"
-                                                    autoClose={5000}
-                                                    hideProgressBar={false}
-                                                    newestOnTop={false}
-                                                    closeOnClick
-                                                    rtl={false}
-                                                    pauseOnFocusLoss
-                                                    draggable
-                                                    pauseOnHover
-                                                />
+
 
                                                 <ToastContainer />
                                             </div>
@@ -541,7 +531,7 @@ const PTShedule = (props) => {
             )} */}
                     </div>
                 </div>
-                <ToastContainer />
+
             </div>
         </>
     );

@@ -128,7 +128,7 @@ const PersonalInfoStaff = () => {
     let subtitle;
 
     useEffect(() => {
-        getPTDetail(id.id).then((response) => {
+        getPTDetail(staffInfo["ExternalId"]).then((response) => {
             if (response.staffDetail) {
                 setInfoDetail(response.staffDetail);
                 setNoInfoDetail(false);
@@ -171,7 +171,7 @@ const PersonalInfoStaff = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={infoDetail?.StaffImage} className="imgStaff" />
+                                    <img src={infoDetail?.StaffImage ? infoDetail?.StaffImage : ava} className="imgStaff" />
                                 </Col>
                                 <Col span={20} className="infoDetailStaff">
                                     <div className="nameStaffAndPosition">

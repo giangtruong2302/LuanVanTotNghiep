@@ -8,4 +8,8 @@ const getAcceptBooking = (Status, bookingId, CustomerId, CustomerName, ScheduleI
 const getCancelBooking = (Status, bookingId, ScheduleId) => {
     return axios.put(`/api/staff/cancel-booking`, { Status: Status, bookingId: bookingId, ScheduleId: ScheduleId });
 };
-export { getAllBookingOfPT, getAcceptBooking, getCancelBooking }
+
+const getServiceDetail = (id) => {
+    return axios.get(`/api/get-detail-service?id=${id}`);
+};
+export { getAllBookingOfPT, getAcceptBooking, getCancelBooking, getServiceDetail }

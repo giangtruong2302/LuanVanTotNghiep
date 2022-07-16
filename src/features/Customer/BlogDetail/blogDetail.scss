@@ -33,11 +33,7 @@
         background-position: center;
         background-size: cover;
 
-        .bgServiceDetailContent {
-            background: url("../../../assets/images/banner/bgDetail1.jpg");
-            // opacity: 0.8;
-            background-size: cover;
-        }
+
 
         .breadcumDetail {
             padding: 10px 20px 20px 0px;
@@ -47,28 +43,33 @@
             }
         }
 
-        .serviceDetailAbout {
+        .blogDetailAbout {
             display: flex;
             gap: 10px;
             flex-direction: column;
-            border-bottom: 1px solid rgb(222, 217, 217);
 
-            .serviceDetailTitle {
+
+            .blogDetailTitle {
                 color: #000;
                 font-size: 22px;
                 font-weight: 600;
             }
 
-            .serviceDetailDefine {
+            .blogDetailDefine {
                 color: #000;
                 font-size: 14px;
                 font-style: italic;
             }
 
-            .serviceDetailDefineSeemore {
+            .blogImage {
+                margin-left: 250px;
+            }
+
+            .blogDetailDefineSeemore {
+                margin-top: 10px;
                 color: rgb(95, 95, 95);
-                font-size: 14px;
-                font-style: italic;
+                font-size: 17px;
+
             }
 
             .linkCollapse {

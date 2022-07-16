@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { getAcceptBooking } from "./listBookingAPI";
 import { getCancelBooking } from "./listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import List from "./List";
 import moment from "moment";
 const ListBooking = () => {
     const [noService, setNoservice] = useState(false);
@@ -137,32 +138,7 @@ const ListBooking = () => {
                         {bookingOfPt?.map((item, index) => {
 
                             return (
-                                <>
-                                    {(item.Status) === "PENDING"
-                                        ?
-                                        <div className="Center">
-                                            <div className="centerInfo">
-                                                <div className="info">
-
-                                                    <p className={"infoCus"}>Khách hàng :{item.CustomerName}</p>
-                                                    <p className={"infoCus"}>Cơ sở : {item.CenterId}</p>
-                                                    <p className={"infoCus"}>Dịch vụ : {item.ServiceId}</p>
-
-                                                </div>
-                                                <div className="infoService">
-                                                    <p className={"textNameCenter"}>Thời gia bắt đầu: {moment(item.StartTime).format("DD-MM-YYYY")} </p>
-                                                    <p className={"textNameCenter"}>Thời gia kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")}</p>
-                                                    <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
-                                                </div>
-                                                <div className="detailInfo">
-                                                    <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId, item.CustomerId, item.CustomerName, item.price)} >Xác nhận</button>
-                                                    <span className="lineDetailInfo"></span>
-                                                    <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id, item.ScheduleId)} >Từ chối</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        : " "}
-                                </>
+                                <List data={item} accept={handleIdBooking} cancel={handleCancelBooking} />
                             )
                         })}
 

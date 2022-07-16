@@ -1,7 +1,7 @@
 import axios from "../../axios";
 
-const getPTDetail = (id) => {
-    return axios.get(`/api/get-detail-pt?id=${id}`);
+const getPTDetail = (ExternalId) => {
+    return axios.get(`/api/get-detail-staff-by-external?ExternalId=${ExternalId}`);
 };
 
 const createSchedule = (DayWork, StaffId, TimeId, Status) => {
