@@ -20,7 +20,27 @@
   .section-customize {
 
     .bgCenter {
-      width: 300%;
+      width: 200%;
+    }
+
+
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .specialty-child {
+    cursor: pointer;
+
+    .specialty-name {
+      padding: 10px 0;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      font-size: 14px;
+
+      &:hover {
+        color: #45c3d2;
+      }
     }
   }
 }

@@ -3,20 +3,23 @@ import "./ptSchedule.scss";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getTimeById } from "./PtScheduleAPI";
-
+import moment from "moment";
 const ButtonSchedule = (props) => {
   const [timeDetail, setTimeDetail] = useState();
+  const [formatTime, setFormatTime] = useState()
   useEffect(() => {
     getTimeById(props.data.TimeId)
 
       .then((res) => {
         console.log("check time detail: ", res);
         setTimeDetail(res.time);
+        setFormatTime(res.time.StartTime)
       })
       .catch((error) => {
         console.log(error);
       });
   }, [props.data]);
+
   return (
     <>
       {props.data.Status === 0 ?
@@ -26,7 +29,7 @@ const ButtonSchedule = (props) => {
           value={timeDetail?.id}
           onClick={(e) => props.open(e)}
         >
-          {timeDetail?.TimeWork}
+          {timeDetail?.StartTime.substring(0, 5)} - {timeDetail?.EndTime.substring(0, 5)}
         </button>
         :
         <button
@@ -35,7 +38,7 @@ const ButtonSchedule = (props) => {
           onClick={(e) => props.open(e)}
         >
           {" "}
-          {timeDetail?.TimeWork}
+          {timeDetail?.StartTime.substring(0, 5)} - {timeDetail?.EndTime.substring(0, 5)}
         </button>
       }
 

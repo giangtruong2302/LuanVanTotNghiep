@@ -1,11 +1,16 @@
 .bgBmi {
     padding-bottom: 85px;
 
-    .formBMI {
+    .titleInput {
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    .formCus {
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
-        border-radius: 10px;
+        border: 1px solid rgb(71, 70, 70);
+        box-shadow: 3px 3px 3px 5px #cdcccc;
         height: 300px;
         padding-top: 50px;
         margin-top: 50px;

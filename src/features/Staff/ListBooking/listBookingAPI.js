@@ -5,7 +5,7 @@ const getAllBookingOfPT = (id, page) => {
 const getAcceptBooking = (Status, bookingId, CustomerId, CustomerName, ScheduleId, Price) => {
     return axios.put(`/api/staff/accept-booking`, { Status: Status, bookingId: bookingId, CustomerId: CustomerId, CustomerName: CustomerName, ScheduleId: ScheduleId, Price: Price });
 };
-const getCancelBooking = (Status, bookingId) => {
-    return axios.put(`/api/staff/cancel-booking`, { Status: Status, bookingId: bookingId });
+const getCancelBooking = (Status, bookingId, ScheduleId) => {
+    return axios.put(`/api/staff/cancel-booking`, { Status: Status, bookingId: bookingId, ScheduleId: ScheduleId });
 };
 export { getAllBookingOfPT, getAcceptBooking, getCancelBooking }

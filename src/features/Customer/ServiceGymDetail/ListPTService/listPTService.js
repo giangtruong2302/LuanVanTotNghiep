@@ -4,9 +4,10 @@ import "./listPTService.scss";
 import { List, Avatar, Space, Select } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import PTShedule from "../../GymCenterDetail/PtSchedule/PtSchedule";
+import PTShedule from "../ScheduleWorking/PtSchedule";
 import { getPtOfService } from "./listPTServiceAPI";
-
+import { useParams } from "react-router-dom";
+import ListItem from "./ListItem";
 const { Option } = Select;
 const ListPTService = () => {
   const data = Array.from({
@@ -33,49 +34,42 @@ const ListPTService = () => {
   const onSearch = (value) => {
     console.log("search:", value);
   };
-  const [PtOfCenter, setPtOfCenter] = useState();
-  const [noPtOfCenter, setNoPtOfCenter] = useState(false);
-  const [, setPtOfCenterLoading] = useState(true);
+  const [PtOfService, setPtOfService] = useState();
+  const [noPtOfService, setNoPtOfService] = useState(false);
+  const [, setPtOfServiceLoading] = useState(true);
   const [center, SetCenter] = useState();
   const [totalPage, setTotalPage] = useState(0);
   const [selectCenterId, setSelectSenterId] = useState(1);
   const [centerId, setCenterId] = useState()
+  const [ptDetail, setptDetail] = useState();
+  const [noptDetail, setNoptDetail] = useState(false);
+  const [, setptDetailLoading] = useState(true);
+  const id = useParams();
+  useEffect(() => {
 
-  const onChangeCenter = (value) => {
-    setCenterId(value);
-    getPtOfService(value, 1).then((response) => {
+    getPtOfService(id.id, 1).then((response) => {
 
-      if (response.ptOfCenter.rows) {
-        console.log(response.ptOfCenter)
-
-        setPtOfCenter(response.ptOfCenter.rows);
-        setNoPtOfCenter(false);
+      if (response.staffOfService.rows.length > 0) {
+        setPtOfService(response.staffOfService.rows);
+        setNoPtOfService(false);
       } else {
-        setNoPtOfCenter(true);
+        setNoPtOfService(true);
       }
     })
       .catch(() => {
-        setNoPtOfCenter(true);
+        setNoPtOfService(true);
       })
       .finally(() => {
-        setPtOfCenterLoading(false);
+        setPtOfServiceLoading(false);
       });
-  };
+
+
+  }, []);
+
 
   return (
     <div className="listPTServiceContainer">
-      <div className="filterCenter">
-        <Select
 
-          optionFilterProp="children"
-          placeholder="Hãy chọn cơ sở"
-          onChange={onChangeCenter}
-        >
-
-          <Option value="1">Cơ sở quận 1</Option>
-          <Option value="2">Cơ sở quận 10</Option>
-        </Select>
-      </div>
       <List
         // style={{ display: "flex", flexDirection: "column", gap: "15px" }}
         // className="listPTCenterItems"
@@ -87,7 +81,7 @@ const ListPTService = () => {
           },
           pageSize: 5,
         }}
-        dataSource={PtOfCenter}
+        dataSource={PtOfService}
         footer={
           <div>
             <b>GH Gym</b> Danh sách PT
@@ -116,19 +110,14 @@ const ListPTService = () => {
             ]}
             extra={
               <div className="ptSchedule">
-                <PTShedule ptId={item.id} ptName={item.StaffName} centerId={centerId} />
+                <PTShedule ptId={item.StaffId} ptName={item.StaffName} />
               </div>
             }
           >
 
-            <NavLink to={`/pt-detail/${item.id}`}>
+            <NavLink to={`/pt-detail/${item.StaffId}`}>
+              <ListItem data={item} />
 
-              <List.Item.Meta
-                avatar={<Avatar src={item.StaffImage} />}
-                title={<a href={item.href}>{item.StaffName}</a>}
-                description={"Email: " + item.StaffEmail}
-
-              />
             </NavLink>
 
             {item.content}

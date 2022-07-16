@@ -21,5 +21,11 @@ const getCusDetail = (ExternalId) => {
 const getTimeById = (id) => {
     return axios.get(`/api/get-time-working-by-id?id=${id}`);
 };
-export { getTimeWorking, createBooking, getDetailPT, getDetailService, getDisCount, getTimeById, getCusDetail };
+const getPtOfService = (ServiceId, page) => {
+    return axios.get(`/api/get-staff-by-service?ServiceId=${ServiceId}&page=${page}`);
+};
+const getServiceOfPt = (StaffId, page) => {
+    return axios.get(`/api/get-service-by-staff?StaffId=${StaffId}&page=${page}`);
+};
+export { getTimeWorking, createBooking, getDetailPT, getDetailService, getDisCount, getTimeById, getCusDetail, getPtOfService, getServiceOfPt };
 

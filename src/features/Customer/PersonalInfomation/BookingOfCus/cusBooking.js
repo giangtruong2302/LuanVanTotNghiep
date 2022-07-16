@@ -9,26 +9,43 @@ import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { getCusBooking } from "./cusBookingAPI";
 import { useSelector } from "react-redux";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
+import { handleGetDetailCustomerByExternalId } from "../../PayPage/PaymentPage/paymentAPI";
 const BookingOfCus = () => {
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [cusBooking, setCusBooking] = useState();
     const [noCusBooking, setNoCusBooking] = useState(false);
     const [, setCusBookingLoading] = useState(true);
+    const [detailCustomer, setDetailCustomer] = useState();
     useEffect(() => {
-        getCusBooking(cusInfo["AccountCustomer.id"], 1).then((response) => {
-            if (response.bookingOfCus.rows) {
-                setCusBooking(response.bookingOfCus.rows);
-                setNoCusBooking(false);
-            } else {
-                setNoCusBooking(true);
+        if (cusInfo) {
+            try {
+                handleGetDetailCustomerByExternalId(cusInfo.ExternalId)
+                    .then((res) => {
+                        if (res.cusDetail) {
+                            setDetailCustomer(res.cusDetail);
+                            getCusBooking(res.cusDetail.id, 1)
+                                .then((response) => {
+                                    if (response.bookingOfCus.rows) {
+
+                                        setCusBooking(response.bookingOfCus.rows);
+                                        setNoCusBooking(false);
+                                    } else {
+                                        setNoCusBooking(true);
+                                    }
+                                })
+                                .catch(() => {
+                                    setNoCusBooking(true);
+                                })
+                                .finally(() => {
+                                    setCusBookingLoading(false);
+                                });
+                        }
+                    })
+                    .catch((error) => console.log(error));
+            } catch (error) {
+                console.log(error);
             }
-        })
-            .catch(() => {
-                setNoCusBooking(true);
-            })
-            .finally(() => {
-                setCusBookingLoading(false);
-            });
+        }
     }, []);
     return (
 
@@ -98,13 +115,16 @@ const BookingOfCus = () => {
 
                                 </InfiniteScroll>
                             </div>
+
                         )
                         }
+
                     </div>
 
                 </div>
-                <HomeFooter />
+
             </div>
+            <HomeFooter />
         </div>
     );
 }

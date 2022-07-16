@@ -85,20 +85,20 @@ const HomeHeader = (props) => {
             {item.Status === "SCHEDULED" ? (
               <div className="OptionPay">
                 <p className="textOptionPay">
-                  your PT has confirm booking. Please pay to continue
+                  Your PT has confirm booking. Please pay to continue
                 </p>
                 <div className="optionBtn">
                   <button
                     className="btnPay"
-                    style={{ borderRadius: "6px", backgroundColor: "aqua" }}
+                    // style={{ borderRadius: "6px", backgroundColor: "aqua" }}
                     onClick={() => handlePay(item)}
-                    // onClick={() => console.log("check id: ", item)}
+                  // onClick={() => console.log("check id: ", item)}
                   >
                     Thanh toán
                   </button>
                   <button
                     className="btnCancel"
-                    style={{ borderRadius: "6px", backgroundColor: "red" }}
+                  // style={{ borderRadius: "6px", backgroundColor: "red" }}
                   >
                     Hủy booking
                   </button>
@@ -140,7 +140,7 @@ const HomeHeader = (props) => {
         <div className="home-header-content">
           <div className="left-content">
             <i className="fas fa-bars"></i>
-            <img className="header-logo" src={LogoGHGym} onClick={() => {}} />
+            <img className="header-logo" src={LogoGHGym} onClick={() => { }} />
           </div>
           <div className="center-content">
             <div className="child-content">
@@ -179,16 +179,7 @@ const HomeHeader = (props) => {
                 <FormattedMessage id="homeHeader.select-doctor" />
               </div>
             </div>
-            <div className="child-content">
-              <div>
-                <b>
-                  <FormattedMessage id="homeHeader.fee" />
-                </b>
-              </div>
-              <div className="sub-title">
-                <FormattedMessage id="homeHeader.check-health" />
-              </div>
-            </div>
+
           </div>
 
           <div class="hamburger-menu">
@@ -198,21 +189,10 @@ const HomeHeader = (props) => {
             </label>
 
             <ul class="menu__box">
-              <li>
-                <a class="menu__item">Dịch vụ</a>
-              </li>
-              <li>
-                <a class="menu__item">Cơ sở Gym</a>
-              </li>
-              <li>
-                <a class="menu__item">Gói dịch vụ</a>
-              </li>
-              <li>
-                <a class="menu__item">PT</a>
-              </li>
-              <li>
-                <a class="menu__item">Đăng nhập</a>
-              </li>
+              <li> <NavLink to={`/service-gym`} className="menu__item" >Dịch vụ</NavLink></li>
+              <li><NavLink to={`/gym-center`} className="menu__item" >Cơ sở Gym</NavLink></li>
+              <li><NavLink to={`/Personal-Training`} className="menu__item" >PT</NavLink></li>
+              <li><NavLink to={`/login`} className="menu__item" >Đăng nhập</NavLink></li>
             </ul>
           </div>
           <div className="Cuscontent">
@@ -234,6 +214,7 @@ const HomeHeader = (props) => {
                   <div className="Notify">
                     <Dropdown
                       // style={{ float: 'right' }}
+                      className="dropdown"
                       placement="bottomRight"
                       overlay={cartMenu}
                     >
@@ -326,15 +307,15 @@ const HomeHeader = (props) => {
                   <FormattedMessage id="banner.child2" />
                 </div>
               </div>
-              <div className="option-child">
+              <Link to="/gym-center" className="option-child">
                 <div className="icon-child">
                   <Buildings size={24} color="#222220" weight="fill" />
                 </div>
                 <div className="text-child">
                   <FormattedMessage id="banner.child3" />
                 </div>
-              </div>
-              <div className="option-child">
+              </Link>
+              <Link to="/Personal-Training" className="option-child">
                 <div className="icon-child">
                   <AddressBook size={24} color="#222220" weight="fill" />
                 </div>
@@ -342,7 +323,7 @@ const HomeHeader = (props) => {
                   {" "}
                   <FormattedMessage id="banner.child4" />
                 </div>
-              </div>
+              </Link>
               <div className="option-child">
                 <div className="icon-child">
                   <PhoneCall size={24} color="#222220" weight="fill" />

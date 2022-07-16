@@ -90,13 +90,10 @@ const RecoveryPass = () => {
         if (values.code === code) {
             changePass(emailCus, values.password).then((response) => {
                 if (response = "OK") {
-                    console.log(response)
+
                     setIsOpen(false)
                     toast.success("Success", options)
-                    navigate(`/login`);
-                    // setTimeout(() => {
 
-                    // }, 4000);
                 }
 
             })

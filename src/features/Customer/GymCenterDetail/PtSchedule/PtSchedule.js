@@ -4,7 +4,7 @@ import "./ptSchedule.scss";
 import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
-import { getCusDetail, getTimeWorking } from "./PtScheduleAPI";
+import { getCusDetail, getServiceOfPt, getTimeWorking } from "./PtScheduleAPI";
 import { Form, Input, Select, Button, DatePicker } from "antd";
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getDetailService } from "./PtScheduleAPI";
 import { getDisCount } from "./PtScheduleAPI";
 import { getCenterDetail } from "../centerDetailAPI";
+
 import ButtonSchedule from "./btnSchedule";
 import { isVisible } from "@testing-library/user-event/dist/utils";
 const customStyles = {
@@ -52,6 +53,9 @@ const PTShedule = (props) => {
   const [nocenterDetail, setNoCenterDetail] = useState(false);
   const [, setCenterDetailLoading] = useState(true);
   const [centerName, setCenterName] = useState();
+  const [serviceOfPt, setServiceOfPt] = useState();
+  const [noServiceOfPt, setNoServiceOfPt] = useState(false);
+  const [, setServiceOfPtLoading] = useState(true);
   function openModal(e) {
     if (!cusInfo) {
       toast.error("Chức năng cần đăng nhập", options);
@@ -87,6 +91,23 @@ const PTShedule = (props) => {
         })
         .finally(() => {
           setCenterDetailLoading(false);
+        });
+
+      getServiceOfPt(props.ptId, 1)
+        .then((response) => {
+          if (response.services.rows.length > 0) {
+            setServiceOfPt(response.services.rows);
+
+            setNoServiceOfPt(false);
+          } else {
+            setNoServiceOfPt(true);
+          }
+        })
+        .catch(() => {
+          setNoServiceOfPt(true);
+        })
+        .finally(() => {
+          setServiceOfPtLoading(false);
         });
     }
 
@@ -475,7 +496,7 @@ const PTShedule = (props) => {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input placeholder={cusInfo["email"]} />
                       </Form.Item>
                       Ngày bắt đầu :{" "}
                       {new Intl.DateTimeFormat("vi-VN", {
@@ -498,7 +519,7 @@ const PTShedule = (props) => {
                           onChange={onHandleServiceId}
                         >
                           {" "}
-                          {allService?.map((item, index) => {
+                          {serviceOfPt?.map((item, index) => {
                             return (
                               <>
                                 <Option value={item.id}>

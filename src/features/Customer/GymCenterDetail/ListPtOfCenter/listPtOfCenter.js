@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import "antd/dist/antd.css";
 import "./lisPtOfCenter.scss";
 import { List, Avatar, Space, Select } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import { MessageOutlined, LikeOutlined, StarOutlined, UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import PTShedule from "../PtSchedule/PtSchedule";
 import { getPtOfCenter } from "./listPtOfCenterAPI";
@@ -105,7 +105,7 @@ const ListPTCenter = () => {
                         <NavLink to={`/pt-detail/${item.id}`}>
 
                             <List.Item.Meta
-                                avatar={<Avatar src={item.avatar} />}
+                                avatar={(item.StaffImage === "" ? <Avatar icon={<UserOutlined />} /> : <Avatar src={item.StaffImage} />)}
                                 title={<a href={item.href}>{item.StaffName}</a>}
                                 description={item.StaffEmail + " SĐT: " + item.StaffPhoneNumber}
 

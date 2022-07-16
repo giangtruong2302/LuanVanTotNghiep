@@ -68,9 +68,9 @@ const ListBooking = () => {
         })
 
     }
-    const handleCancelBooking = (id) => {
+    const handleCancelBooking = (id, ScheduleId) => {
 
-        getCancelBooking(canceled, id).then((response) => {
+        getCancelBooking(canceled, id, ScheduleId).then((response) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
@@ -146,7 +146,7 @@ const ListBooking = () => {
 
                                                     <p className={"infoCus"}>Khách hàng :{item.CustomerName}</p>
                                                     <p className={"infoCus"}>Cơ sở : {item.CenterId}</p>
-                                                    <p className={"infoCus"}>Dịch vụ đăng ký : {item.ServiceId}</p>
+                                                    <p className={"infoCus"}>Dịch vụ : {item.ServiceId}</p>
 
                                                 </div>
                                                 <div className="infoService">
@@ -157,7 +157,7 @@ const ListBooking = () => {
                                                 <div className="detailInfo">
                                                     <button className="buttonAccept" onClick={() => handleIdBooking(item.id, item.ScheduleId, item.CustomerId, item.CustomerName, item.price)} >Xác nhận</button>
                                                     <span className="lineDetailInfo"></span>
-                                                    <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id)} >Từ chối</button>
+                                                    <button className="buttonDeniend" onClick={() => handleCancelBooking(item.id, item.ScheduleId)} >Từ chối</button>
                                                 </div>
                                             </div>
                                         </div>

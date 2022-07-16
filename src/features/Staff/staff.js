@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import * as actions from "../../store/actions";
 import { useDispatch } from "react-redux";
+import OptionTime from "./OptionTime";
 const customStyles = {
     content: {
         top: "50%",
@@ -81,6 +82,7 @@ const Staff = () => {
     const [modalTimeWorkIsOpen, setModalTimeWorkIsOpen] = React.useState(false);
     const staffInfo = useSelector((state) => state.staff.staffInfo);
     const dispatch = useDispatch();
+    const [status, setStatus] = useState(1);
     function openModal() {
         setIsOpen(true);
     }
@@ -118,7 +120,7 @@ const Staff = () => {
         setTimeId(value)
     };
     const handleCreateTimeWork = () => {
-        createSchedule(timeStamp, staffInfo["AccountStaff.id"], timeId).then((response) => {
+        createSchedule(timeStamp, staffInfo["AccountStaff.id"], timeId, status).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -202,12 +204,13 @@ const Staff = () => {
                     </div>
 
                 </div>
-                Page Staff Booking
+                <div className="title">Page Staff Booking</div>
                 <div className="titlePage">
+
                     <div className="PTinfo">
                         <img src={ava} className="imgPT" />
                         <div className="PtName">
-                            Welcome, {ptDetail?.StaffName} !
+                            <div className="welcomeCus">Welcome, {ptDetail?.StaffName} !</div>
                             <div className="btnPT">
 
 
@@ -266,7 +269,7 @@ const Staff = () => {
                                             >
                                                 {allTime?.map((item, index) => {
                                                     return (
-                                                        <Option value={item.id} >{item.TimeWork}</Option>
+                                                        <OptionTime data={item} />
 
 
                                                     )

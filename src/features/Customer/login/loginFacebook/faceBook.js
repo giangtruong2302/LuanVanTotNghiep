@@ -15,7 +15,7 @@ const Facebook = () => {
 
             <FacebookLogin
                 appId="5564700986882792"
-                autoLoad={true}
+
                 fields="name,email,picture"
                 callback={responseFacebook}
                 cssClass="my-facebook-button-class"

@@ -27,3 +27,38 @@
         }
     }
 }
+
+@media only screen and (max-width: 46.1875em) {
+    .overViewPT {
+        text-align: justify;
+
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+
+        p ::marker {
+            color: black;
+            font-size: 1.5em;
+        }
+
+        .infoDetail {
+
+            margin-top: 50px;
+
+            .detailPTTitle {
+
+
+                .detailPTContent {
+
+                    ::marker {
+                        color: black;
+                        font-size: 1.5em;
+                    }
+
+                }
+            }
+        }
+    }
+}

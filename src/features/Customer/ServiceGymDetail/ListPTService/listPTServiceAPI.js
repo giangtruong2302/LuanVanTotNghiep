@@ -1,6 +1,10 @@
 import axios from "../../../../axios";
 
-const getPtOfService = (id, page) => {
-    return axios.get(`/api/${id}/get-all-pt-center?page=${page}`);
+const getPtOfService = (ServiceId, page) => {
+    return axios.get(`/api/get-staff-by-service?ServiceId=${ServiceId}&page=${page}`);
 };
-export { getPtOfService };
+
+const getPtDetail = (id) => {
+    return axios.get(`/api/get-detail-pt?id=${id}`);
+};
+export { getPtOfService, getPtDetail };
