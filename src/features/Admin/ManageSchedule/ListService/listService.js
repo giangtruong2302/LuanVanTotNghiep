@@ -12,7 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 import frameworkcomponents from "./path";
 // import { getAllCustomerOfCenter } from "../CusAPI";
 import { isVisible } from "@testing-library/user-event/dist/utils";
-import { getAllSchedule } from "../../GymCenter/Staffs/StaffDetail/scheduleAPI";
+import { getAllScheduleByWeek } from "../../GymCenter/Staffs/StaffDetail/scheduleAPI";
+import moment from "moment";
 // import CreateAccount from "../ModalService/modalAddService";
 LicenseManager.setLicenseKey(
   "For_Trialing_ag-Grid_Only-Not_For_Real_Development_Or_Production_Projects-Valid_Until-15_August_2020_[v2]_MTU5NzQ0NjAwMDAwMA==9aa5b7bf868ec5d39dc5cb979372325b"
@@ -20,36 +21,97 @@ LicenseManager.setLicenseKey(
 
 const ListSchedule = (props) => {
   const [status, setStatus] = useState("");
-
+  var startOfWeek = moment().startOf("week").toDate();
+  var endOfWeek = moment().endOf("week").toDate();
+  console.log(
+    moment(startOfWeek).format("YYYY-MM-DD hh:mm:ssZ"),
+    moment(endOfWeek).format("YYYY-MM-DD hh:mm:ssZ")
+  );
   const [columnDefs] = useState([
     {
       field: "Staffname",
       suppressMovable: true,
       // width: 30,
       headerName: "STAFF NAME",
-      flex: 1,
+      flex: 2,
       cellRenderer: "staffRenderer",
-      // cellStyle: {
-      //   // you can use either came case or dashes, the grid converts to whats needed
-      //   borderLeft: "solid 0.5px #eee",
-      //   borderTop: "solid 0.5px #eee",
-      //   borderBottom: "solid 0.5px #eee",
-      //   borderRight: "solid 0.5px #eee",
-      // },
+      cellStyle: {
+        // you can use either came case or dashes, the grid converts to whats needed
+        borderLeft: "solid 0.5px #eee",
+        borderTop: "solid 0.5px #eee",
+        borderBottom: "solid 0.5px #eee",
+        borderRight: "solid 0.5px #eee",
+      },
     },
 
     {
       field: "mon",
       // suppressMovable: true,
       // width: 252,
-      flex: 1,
-      headerName: "Day work of week",
-      cellRenderer: "dayRenderer",
+      // flex: 0,
+      headerName: "Monday",
+      cellRenderer: "mondayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "tue",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Tuesday",
+      cellRenderer: "tuesdayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "wed",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Wednesday",
+      cellRenderer: "wednesdayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "thu",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Thursday",
+      cellRenderer: "thursdayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "fri",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Friday",
+      cellRenderer: "fridayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "sat",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Satuday",
+      cellRenderer: "saturdayRenderer",
+      // cellStyle: cellClass,
+    },
+    {
+      field: "sun",
+      // suppressMovable: true,
+      // width: 252,
+      // flex: 0,
+      headerName: "Sunday",
+      cellRenderer: "sundayRenderer",
       // cellStyle: cellClass,
     },
   ]);
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("CenterId");
+  startOfWeek = moment(startOfWeek).format("YYYY-MM-DD");
+  endOfWeek = moment(endOfWeek).format("YYYY-MM-DD");
   const serverSideDatasource = useCallback(() => {
     console.log("check cuurent salon:", CenterId);
 
@@ -59,24 +121,31 @@ const ListSchedule = (props) => {
         const page = params.request.endRow / 10;
         try {
           //FOR FILTER PURPOSE
-          getAllSchedule(parseInt(page))
+          getAllScheduleByWeek(
+            props.StartTime ? props.StartTime : startOfWeek,
+            props.EndTime ? props.EndTime : endOfWeek
+          )
             .then((res) => {
               // console.log(res.data.data);
               const data = res.schedule;
-              if (data && data.rows.length > 0) {
-                const lastRow = () => {
-                  if (parseInt(data.totalPage) <= 1) return data.count;
-                  else if (page <= parseInt(data.totalPages) - 2) return -1;
-                  else return data.count;
-                };
-                // call the success callback
-                setTimeout(() => {
-                  params.successCallback(data.rows, lastRow());
-                }, 500);
-                // loading?.classList.add("hidden");
-              } else {
-                params.api.showNoRowsOverlay();
-              }
+              setTimeout(() => {
+                params.successCallback(data, data.length);
+              }, 500);
+              return data;
+              // if (data && data.length > 0) {
+              //   const lastRow = () => {
+              //     if (parseInt(data.totalPage) <= 1) return data.count;
+              //     else if (page <= parseInt(data.totalPages) - 2) return -1;
+              //     else return data.count;
+              //   };
+              //   // call the success callback
+              //   setTimeout(() => {
+              //     params.successCallback(data.rows, lastRow());
+              //   }, 500);
+              //   // loading?.classList.add("hidden");
+              // } else {
+              //   params.api.showNoRowsOverlay();
+              // }
             })
             .catch(() => {
               params.api.showLoadingOverlay();
@@ -84,7 +153,7 @@ const ListSchedule = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.status, props.searchValue, status]);
+  }, [CenterId, props.status, props.searchValue, status, props.StartTime]);
   const gridOptions = {
     // rowSelection: "single",
     rowModelType: "serverSide",
@@ -107,7 +176,13 @@ const ListSchedule = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.status, props.searchValue, status]);
+  }, [
+    serverSideDatasource,
+    props.status,
+    props.searchValue,
+    status,
+    props.StartTime,
+  ]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();
@@ -125,7 +200,7 @@ const ListSchedule = (props) => {
     <div
       className={classes.agThemeAlpineStaffs}
       style={{
-        height: 501,
+        height: 401,
         width: "100%",
         padding: "0 20px",
       }}

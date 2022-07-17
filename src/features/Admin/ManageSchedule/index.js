@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./styles.module.scss";
 import { NavLink } from "react-router-dom";
-import { ArrowLeft } from "phosphor-react";
+import { ArrowLeft, CirclesThreePlus } from "phosphor-react";
 // import SearchPT from "./SearchPT/searchPT";
 import { Gear, Plus, SquaresFour } from "phosphor-react";
 import { Action, Fab } from "react-tiny-fab";
@@ -15,12 +15,15 @@ import CreateService from "./ModalService/modalAddService";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListSchedule from "./ListService/listService";
+import IncomeTurnFilter from "./FilterSchedule/filterSchedule";
 const { Search } = Input;
 const Schedule = () => {
   const navigate = useNavigate();
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [status, setStatus] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  const [filterValueStartTime, setFilterValueStartTime] = useState();
+  const [filterValueEndTime, setFilterValueEndTime] = useState();
   const handleShowModalAdd = (isVisible) => {
     setShowModalAdd(isVisible);
   };
@@ -34,6 +37,12 @@ const Schedule = () => {
   const onSearchCus = (value) => {
     // console.log("check search value: ", value);
     setSearchValue(value);
+  };
+  const hanldeTakeFilter = (value) => {
+    let v1 = value.split("~");
+    console.log("check filter value 1", v1[0], v1[1]);
+    setFilterValueStartTime(v1[0]);
+    setFilterValueEndTime(v1[1]);
   };
   return (
     <div className="CenterProfileBg">
@@ -60,8 +69,16 @@ const Schedule = () => {
           />
         }
       />
+      <div className={classes.filterSchedule}>
+        <IncomeTurnFilter hanldeTakeFilter={hanldeTakeFilter} />
+      </div>
       <div className={classes.listItem}>
-        <ListSchedule status={status} searchValue={searchValue} />
+        <ListSchedule
+          status={status}
+          searchValue={searchValue}
+          StartTime={filterValueStartTime}
+          EndTime={filterValueEndTime}
+        />
       </div>
       <ToastContainer
         position="bottom-left"
@@ -82,8 +99,9 @@ const Schedule = () => {
         <Action
           style={{ backgroundColor: "#1363DF" }}
           onClick={showModalAddAcc}
+          text="Time Working"
         >
-          <Plus size={20} color="#Ffff" weight="fill" />
+          <CirclesThreePlus size={20} color="#Ffff" weight="fill" />
         </Action>
       </Fab>
       <ToastContainer

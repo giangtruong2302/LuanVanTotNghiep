@@ -15,6 +15,7 @@ import {
   UserSwitchOutline,
   AppstoreOutlined,
   BankOutlined,
+  SmileOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Dropdown, Layout, Menu } from "antd";
 import {
@@ -110,6 +111,56 @@ const AdminPage = () => {
           icon: <SignOut size={20} color="#1d1b1b" weight="fill" />,
           label: "Logout",
           onClick: handleLogout,
+        },
+      ]}
+    />
+  );
+  const menuDrop = (
+    <Menu
+      items={[
+        {
+          key: "1",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.antgroup.com"
+            >
+              1st menu item
+            </a>
+          ),
+        },
+        {
+          key: "2",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              2nd menu item (disabled)
+            </a>
+          ),
+          icon: <SmileOutlined />,
+          // disabled: true,
+        },
+        {
+          key: "3",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.luohanacademy.com"
+            >
+              3rd menu item (disabled)
+            </a>
+          ),
+          // disabled: true,
+        },
+        {
+          key: "4",
+          danger: true,
+          label: "a danger item",
         },
       ]}
     />
@@ -391,8 +442,10 @@ const AdminPage = () => {
             )}
           </span>
           <span className="notificationAdmin">
-            <Badge style={{ zIndex: "9999" }} count={2} size="default">
-              <BellRinging size={26} color="#ffea00" weight="fill" />
+            <Badge style={{ zIndex: "9999" }} count={5} size="default">
+              <Dropdown overlay={menuDrop}>
+                <BellRinging size={26} color="#ffea00" weight="fill" />
+              </Dropdown>
             </Badge>
           </span>
           <span className="infoUser">

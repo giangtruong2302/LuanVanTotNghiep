@@ -48,8 +48,12 @@ const handleChangeStatusOfCenter = (id, Status) => {
     Status: Status,
   });
 };
+const handleGetAllTimeWorking = (page) => {
+  return axios.get(`/api/get-all-time-working?page=${page}`);
+};
 export {
   handleCreateNewCenter,
   handleUpdateCenter,
   handleChangeStatusOfCenter,
+  handleGetAllTimeWorking,
 };

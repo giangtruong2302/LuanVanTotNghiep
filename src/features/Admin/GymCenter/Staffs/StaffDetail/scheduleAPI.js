@@ -1,7 +1,9 @@
 import axios from "../../../../../axios";
 
-const getAllSchedule = (page) => {
-  return axios.get(`/api/get-all-schedule?page=${page}`);
+const getAllScheduleByWeek = (StartTime, EndTime) => {
+  return axios.get(
+    `/api/get-all-schedule-by-week?StartTime=${StartTime}&EndTime=${EndTime}`
+  );
 };
 const getAllTimeWorking = (page) => {
   return axios.get(`/api/get-all-time-working?page=${page}`);
@@ -11,4 +13,4 @@ const getAllWorkingOfStaff = (StaffId, page) => {
     `/api/${StaffId}/get-schedule-working-of-staff?page=${page}`
   );
 };
-export { getAllSchedule, getAllTimeWorking, getAllWorkingOfStaff };
+export { getAllScheduleByWeek, getAllTimeWorking, getAllWorkingOfStaff };
