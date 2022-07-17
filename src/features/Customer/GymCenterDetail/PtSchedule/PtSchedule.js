@@ -4,7 +4,7 @@ import "./ptSchedule.scss";
 import moment from "moment";
 import { LANGUAGES } from "../../../../utils/constant";
 import { useSelector } from "react-redux";
-import { getCusDetail, getTimeWorking } from "./PtScheduleAPI";
+import { getCusDetail, getServiceOfPt, getTimeWorking } from "./PtScheduleAPI";
 import { Form, Input, Select, Button, DatePicker } from "antd";
 import { createBooking } from "./PtScheduleAPI";
 import { loginSchema } from "./validation";
@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getDetailService } from "./PtScheduleAPI";
 import { getDisCount } from "./PtScheduleAPI";
 import { getCenterDetail } from "../centerDetailAPI";
+
 import ButtonSchedule from "./btnSchedule";
 import { isVisible } from "@testing-library/user-event/dist/utils";
 const customStyles = {
@@ -44,7 +45,7 @@ const PTShedule = (props) => {
       draggable: true,
       progress: undefined,
     });
-  const [scheduleId, setScheduleId] = useState(new Date());
+  const [scheduleId, setScheduleId] = useState();
   const cusInfo = useSelector((state) => state.cus.cusInfo);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [secondMonth, SetSecondMonth] = useState("2629743000");
@@ -52,6 +53,9 @@ const PTShedule = (props) => {
   const [nocenterDetail, setNoCenterDetail] = useState(false);
   const [, setCenterDetailLoading] = useState(true);
   const [centerName, setCenterName] = useState();
+  const [serviceOfPt, setServiceOfPt] = useState();
+  const [noServiceOfPt, setNoServiceOfPt] = useState(false);
+  const [, setServiceOfPtLoading] = useState(true);
   function openModal(e) {
     if (!cusInfo) {
       toast.error("Chức năng cần đăng nhập", options);
@@ -88,9 +92,27 @@ const PTShedule = (props) => {
         .finally(() => {
           setCenterDetailLoading(false);
         });
+
+      getServiceOfPt(props.ptId, 1)
+        .then((response) => {
+          if (response.services.rows.length > 0) {
+            setServiceOfPt(response.services.rows);
+
+            setNoServiceOfPt(false);
+          } else {
+            setNoServiceOfPt(true);
+          }
+        })
+        .catch(() => {
+          setNoServiceOfPt(true);
+        })
+        .finally(() => {
+          setServiceOfPtLoading(false);
+        });
     }
 
   }
+
 
   function afterOpenModal() {
     subtitle.style.color = "#000";
@@ -281,30 +303,12 @@ const PTShedule = (props) => {
 
     getTimeWorking(props.ptId, timeStampToday, 1)
       .then((response) => {
-        console.log("PTID", props.ptId)
-        console.log("TimeStamp", timeStampToday)
 
         if (response.ScheduleWorking.rows) {
           setTimeDetail(response.ScheduleWorking.rows);
-          console.log('timedetail today', response)
+          setDayWork(timeStampToday);
           setNoTimeDetail(false);
-          getTimeWorking(props.ptId, timeStampToday, 1)
-            .then((response) => {
-              setDayWork(timeStampToday);
 
-              if (response.ScheduleWorking.rows) {
-                setTimeDetail(response.ScheduleWorking.rows);
-                setNoTimeDetail(false);
-              } else {
-                setNoTimeDetail(true);
-              }
-            })
-            .catch(() => {
-              setTimeDetail(true);
-            })
-            .finally(() => {
-              setTimeDetailLoading(false);
-            });
         } else {
           setNoTimeDetail(true);
         }
@@ -447,6 +451,8 @@ const PTShedule = (props) => {
                         <ButtonSchedule
                           data={item}
                           // onClick={(e) => openModal(e)}
+
+
                           open={openModal}
                           handleShowModalBooking={handleShowModalBooking}
                         />
@@ -475,7 +481,7 @@ const PTShedule = (props) => {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input placeholder={cusInfo["email"]} />
                       </Form.Item>
                       Ngày bắt đầu :{" "}
                       {new Intl.DateTimeFormat("vi-VN", {
@@ -498,7 +504,7 @@ const PTShedule = (props) => {
                           onChange={onHandleServiceId}
                         >
                           {" "}
-                          {allService?.map((item, index) => {
+                          {serviceOfPt?.map((item, index) => {
                             return (
                               <>
                                 <Option value={item.id}>
@@ -530,17 +536,7 @@ const PTShedule = (props) => {
                       </Form.Item>
                       <Form.Item name="discount"></Form.Item>
                       <div>
-                        <ToastContainer
-                          position="top-right"
-                          autoClose={5000}
-                          hideProgressBar={false}
-                          newestOnTop={false}
-                          closeOnClick
-                          rtl={false}
-                          pauseOnFocusLoss
-                          draggable
-                          pauseOnHover
-                        />
+
 
                         <ToastContainer />
                       </div>

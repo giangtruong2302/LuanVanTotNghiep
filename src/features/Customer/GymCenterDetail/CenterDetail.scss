@@ -111,6 +111,11 @@
                     }
                 }
             }
+
+            .contentCenterDetail {
+                display: flex;
+                flex-direction: row;
+            }
         }
     }
 }
@@ -154,6 +159,11 @@
             .contentInfo {
                 box-sizing: border-box;
                 padding-left: 30px;
+
+                .contentCenterDetail {
+                    display: flex;
+                    flex-direction: column;
+                }
 
                 .avatarCenterDetail {
                     background: transparent;

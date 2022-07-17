@@ -1,6 +1,6 @@
 .listStaffBookingContent {
     height: 100vh;
-    overflow: auto;
+    overflow: hidden;
     max-height: auto;
     display: flex;
     margin: 0 10px;
@@ -208,19 +208,24 @@
 }
 
 @media only screen and (max-width: 46.1875em) {
-    .listCenterContent {
+    .listStaffBookingContent {
+        height: 100vh;
         overflow: auto;
         max-height: auto;
         display: flex;
-        margin: 0 auto;
+        margin: 0 10px;
         flex-direction: column;
         // align-items: flex-start;
-        padding: 0 20px;
+        //padding: 0 20px;
+        padding-left: 10px;
+        margin-left: 180px;
+        padding-right: 10px;
+        padding-top: 30px;
         gap: 15px;
         position: relative;
-        width: 100vw;
+        width: 100%;
         // height: calc(100% - 20px);
-
+        background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
         border-radius: 5px;
 
         :global {
@@ -231,13 +236,18 @@
 
         .Center {
             box-sizing: border-box;
-            margin: 0 auto;
-            width: 100%;
+            margin-left: 55px;
+
+            width: 55%;
             height: 119px;
             background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
             /* light blue */
-            border: 1px solid #141415;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            box-shadow: 1px 1px 8px 1px grey;
+
             border-radius: 10px;
+
             /* Inside auto layout */
             flex: none;
             order: 0;
@@ -245,60 +255,46 @@
             display: flex;
 
             flex-direction: column;
-            padding: 42px;
+            // padding: 42px;
+
 
             .centerInfo {
                 display: flex;
                 align-items: center;
-                padding: 0px;
+                //padding: 0px;
                 gap: 10px;
                 justify-content: space-between;
-                width: 260px;
-                height: 30px;
+                width: 300px;
+                height: 10px;
                 padding-top: 20px;
 
+                text-align: start;
+
                 .info {
+
                     display: flex;
-                    align-items: center;
-                    margin-left: -30px;
-                    margin-bottom: 10px;
+
+                    flex-direction: column;
+                    gap: 3px;
+
+                    column-gap: 150px;
+                    width: 100%;
+
+
 
                     .infoCus {
                         min-width: 97px;
-                        max-width: auto;
+                        max-width: 200px;
                         height: 17px;
-                        margin-left: 1px;
+                        margin-left: 10px !important;
                         font-family: "Inter";
                         font-style: normal;
                         font-weight: 600;
-                        font-size: 10px;
+                        font-size: 18px;
                         line-height: 17px;
-                        margin-top: 1px;
-                        flex: none;
-                        order: 1;
-                        flex-grow: 0;
-                        color: #223263;
-                    }
+                        margin-top: 2px;
 
-                }
 
-                .infoService {
-                    display: flex;
-                    align-items: center;
-                    margin-left: -1px;
-                    margin-bottom: 10px;
-
-                    .textNameCenter {
-                        min-width: 97px;
-                        max-width: auto;
-                        height: 17px;
-                        margin-left: 1px;
-                        font-family: "Inter";
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 10px;
-                        line-height: 17px;
-                        margin-top: 1px;
                         /* identical to box height */
 
                         /* Black blue */
@@ -307,9 +303,39 @@
 
                         /* Inside auto layout */
 
-                        flex: none;
-                        order: 1;
-                        flex-grow: 0;
+                        display: flex;
+                        flex-direction: row;
+
+                    }
+
+
+
+                }
+
+                .infoService {
+                    display: none;
+
+                    flex-direction: column;
+                    gap: 3px;
+                    margin-left: 40px;
+                    column-gap: 150px;
+                    width: 900px;
+
+                    .textNameCenter {
+
+                        min-width: 97px;
+                        max-width: auto;
+                        height: 17px;
+                        margin-left: 20px;
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 18px;
+                        line-height: 17px;
+                        margin-top: 2px;
+                        color: #223263;
+                        display: flex;
+                        flex-direction: column;
                     }
                 }
 
@@ -317,11 +343,12 @@
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
-                    gap: 1px;
-                    margin-left: 7px;
+
+                    // gap: 9px;
                     justify-content: flex-end;
                     width: 100%;
-                    height: 100px;
+                    height: 17px;
+                    margin-top: 80px;
 
                     font-family: "Inter";
                     font-style: normal;
@@ -332,7 +359,39 @@
 
                     /* #000000 */
 
-                    color: rgba(0, 0, 0, 0.65);
+                    color: black;
+
+                    .buttonAccept {
+                        background-color: rgb(43, 247, 43);
+                        border-radius: 9px;
+                        width: 100px;
+                        height: 35px;
+                        font-weight: bold;
+                        font-size: 18px;
+                        box-sizing: border-box;
+                        box-shadow: 1px 1px 8px 1px grey;
+                    }
+
+                    .buttonAccept:hover {
+                        background-color: rgb(26, 210, 26);
+                        color: white;
+                    }
+
+                    .buttonDeniend {
+                        background-color: rgb(255, 25, 40);
+                        border-radius: 9px;
+                        width: 100px;
+                        height: 35px;
+                        font-weight: bold;
+                        font-size: 18px;
+                        box-sizing: border-box;
+                        box-shadow: 1px 1px 8px 1px grey;
+                    }
+
+                    .buttonDeniend:hover {
+                        background-color: rgb(155, 11, 16);
+                        color: white;
+                    }
 
                     .lineDetailInfo {
                         width: 1px;
@@ -363,4 +422,5 @@
         // margin-top: -20px;
         margin-left: 20px;
     }
+
 }

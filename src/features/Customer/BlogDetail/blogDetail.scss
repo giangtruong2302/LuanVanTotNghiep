@@ -1,0 +1,94 @@
+.BlogDetailBg {
+    .backToHome {
+        width: 100%;
+        background: #a50000;
+
+        height: 60px;
+
+        .backtoHome {
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            // width: fit-content;
+            .textBackToHome {
+                font-family: "roboto";
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+                color: white;
+            }
+        }
+    }
+
+    .BlogDetailContent {
+        display: flex;
+        gap: 15px;
+        margin: 0 25px;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0.9),
+                rgba(255, 255, 255, 1));
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+
+
+        .breadcumDetail {
+            padding: 10px 20px 20px 0px;
+
+            .blogTitle {
+                font-size: 35px;
+            }
+        }
+
+        .blogDetailAbout {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+
+
+            .blogDetailTitle {
+                color: #000;
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+            .blogDetailDefine {
+                color: #000;
+                font-size: 14px;
+                font-style: italic;
+            }
+
+            .blogImage {
+                margin-left: 250px;
+            }
+
+            .blogDetailDefineSeemore {
+                margin-top: 10px;
+                color: rgb(95, 95, 95);
+                font-size: 17px;
+
+            }
+
+            .linkCollapse {
+                font-style: italic;
+                font-weight: 500;
+                color: rgb(48, 15, 215);
+                cursor: pointer;
+            }
+
+            .linkSeemore {
+                font-weight: 500;
+                font-style: italic;
+                color: rgb(48, 15, 215);
+                cursor: pointer;
+            }
+        }
+
+        .listPTService {
+            margin-top: 20px;
+        }
+    }
+}

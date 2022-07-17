@@ -1,7 +1,8 @@
 .BookProfileBg {
 
-    height: 100vh;
+    min-height: 100vh;
     max-width: 100vw;
+    overflow: auto;
     //background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
 
     // overflow: auto;
@@ -47,6 +48,7 @@
 
         .titlePageBooking {
             padding-right: 150px;
+            margin-bottom: 500px;
 
 
 
@@ -57,7 +59,7 @@
 
                 .listBookingContent {
                     overflow: hidden;
-                    min-height: auto;
+                    height: auto;
                     display: flex;
                     margin: 0 10px;
                     flex-direction: column;
@@ -264,4 +266,275 @@
     }
 
 
+}
+
+@media only screen and (max-width: 46.1875em) {
+    .BookProfileBg {
+
+        height: 100vh;
+        max-width: 100vw;
+        //background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
+
+        // overflow: auto;
+        .backToHome {
+            width: 100%;
+            background: #a50000;
+
+            height: 60px;
+
+            .backtoHome {
+                padding-top: 15px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                // width: fit-content;
+                .textBackToHome {
+                    font-family: "roboto";
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-left: 10px;
+                    color: white;
+                }
+            }
+        }
+
+        .containerListPT {
+            max-width: 100vw;
+            // margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            font-family: "roboto";
+            font-weight: bold;
+            font-size: 50px;
+            min-height: 100vh;
+            overflow: hidden;
+            margin-top: 20px;
+
+
+
+            .titlePageBooking {
+                padding-right: 150px;
+
+
+
+                .PTinfo {
+                    display: flex;
+                    flex-direction: row;
+                    margin-left: 200px;
+
+                    .listBookingContent {
+                        overflow: hidden;
+                        min-height: auto;
+                        display: flex;
+
+                        flex-direction: column;
+                        // align-items: flex-start;
+                        //padding: 0 20px;
+                        //padding-left: 10px;
+                        padding-right: 10px;
+                        margin-right: 60px !important;
+
+                        gap: 15px;
+                        position: relative;
+                        width: 100vw;
+                        // height: calc(100% - 20px);
+
+                        border-radius: 5px;
+
+                        :global {
+                            .infinite-scroll-component__outerdiv {
+                                width: 100%;
+
+                            }
+                        }
+
+                        .Center {
+                            box-sizing: border-box;
+                            //margin: 0 auto;
+                            width: 99%;
+                            height: 119px;
+                            background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
+                            /* light blue */
+                            border: 1px solid transparent;
+                            box-sizing: border-box;
+                            box-shadow: 1px 1px 8px 1px grey;
+
+                            border-radius: 10px;
+
+                            /* Inside auto layout */
+                            flex: none;
+                            order: 0;
+                            flex-grow: 0;
+                            display: flex;
+                            padding: 1px !important;
+                            flex-direction: column;
+                            //padding: 42px;
+                            margin-top: 20px;
+
+                            .centerInfo {
+                                display: flex;
+                                align-items: center;
+                                padding: 0px;
+                                gap: 10px;
+                                justify-content: space-between;
+                                width: 100%;
+                                height: 10px;
+                                padding-top: 60px;
+                                text-align: start;
+
+                                .info {
+                                    display: flex;
+
+                                    flex-direction: column;
+                                    gap: 3px;
+
+                                    column-gap: 150px;
+                                    width: 1000px;
+
+
+                                    .infoCus {
+                                        min-width: 97px;
+                                        max-width: auto;
+                                        height: 17px;
+                                        margin-left: 1px;
+                                        font-family: "Inter";
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        font-size: 14px;
+                                        line-height: 17px;
+                                        margin-top: 2px;
+
+
+                                        /* identical to box height */
+
+                                        /* Black blue */
+
+                                        color: #223263;
+
+                                        /* Inside auto layout */
+
+                                        display: flex;
+                                        flex-direction: row;
+
+                                    }
+
+
+
+                                }
+
+                                .infoService {
+                                    display: flex;
+
+                                    flex-direction: column;
+                                    gap: 3px;
+                                    margin-left: 1px;
+                                    column-gap: 150px;
+                                    width: 900px;
+
+                                    .textNameCenter {
+
+                                        min-width: 97px;
+                                        max-width: auto;
+                                        height: 17px;
+                                        margin-left: 1px;
+                                        font-family: "Inter";
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        font-size: 14px;
+                                        line-height: 17px;
+                                        margin-top: 2px;
+                                        color: #223263;
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                }
+
+                                .detailInfo {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: flex-start;
+                                    margin-bottom: 20px;
+                                    gap: 9px;
+                                    justify-content: flex-end;
+                                    width: 100%;
+                                    height: 17px;
+
+                                    font-family: "Inter";
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    font-size: 14px;
+                                    line-height: 17px;
+                                    /* identical to box height */
+
+                                    /* #000000 */
+
+                                    color: black;
+
+                                    .buttonAccept {
+                                        background-color: rgb(43, 247, 43);
+                                        border-radius: 9px;
+                                        width: 100px;
+                                        height: 35px;
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                        box-sizing: border-box;
+                                        box-shadow: 1px 1px 8px 1px grey;
+                                    }
+
+                                    .buttonAccept:hover {
+                                        background-color: rgb(26, 210, 26);
+                                        color: white;
+                                    }
+
+                                    .buttonDeniend {
+                                        background-color: rgb(255, 25, 40);
+                                        border-radius: 9px;
+                                        width: 100px;
+                                        height: 35px;
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                        box-sizing: border-box;
+                                        box-shadow: 1px 1px 8px 1px grey;
+                                    }
+
+                                    .buttonDeniend:hover {
+                                        background-color: rgb(155, 11, 16);
+                                        color: white;
+                                    }
+
+                                    .lineDetailInfo {
+                                        width: 1px;
+                                        height: 17px;
+                                        font-family: "Inter";
+                                        font-style: normal;
+                                        font-weight: 500;
+                                        font-size: 14px;
+                                        line-height: 17px;
+                                        /* identical to box height */
+
+                                        /* light blue */
+
+                                        color: #ebf0ff;
+
+                                        /* Inside auto layout */
+
+                                        flex: none;
+                                        // order: 1;
+                                        flex-grow: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+    }
 }

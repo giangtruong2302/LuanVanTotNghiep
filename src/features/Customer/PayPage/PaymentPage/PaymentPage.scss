@@ -153,7 +153,9 @@
           flex-direction: row;
           text-align: center;
           gap: 20px;
+
           .momo {
+            margin-top: 20px;
             width: 120px;
             float: left;
             // margin-top: 20px;
@@ -163,19 +165,22 @@
             background-repeat: no-repeat;
             height: 100px;
             cursor: pointer;
+            margin-left: 40px;
           }
 
           .stripe {
+            margin-top: 20px;
             cursor: pointer;
-            width: 150px;
+            width: 170px;
             box-shadow: 3px 3px 3px 5px #cdcccc;
             height: 100px;
-            float: right;
+            padding-right: 10px;
             // margin-top: 20px;
             // margin-right: 90px;
             background: url("../../../../assets/images/logo/stripe.png");
             background-size: cover;
             background-repeat: no-repeat;
+            margin-left: 60px;
           }
         }
       }
@@ -193,6 +198,219 @@
         width: 200px;
         height: 60px;
         border: solid black 1px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .PaymentBg {
+    background-color: #fff;
+    max-height: auto;
+    max-width: 100vw;
+    overflow: hidden;
+
+    .containerPayment {
+      max-width: 100vw;
+      // margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-bottom: 40px;
+
+      .backToHome {
+        width: 100%;
+        background: #a50000;
+        height: 60px;
+        padding-left: 20px;
+
+        .backtoHome {
+          padding-top: 15px;
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          .textBackToHome {
+            font-family: "roboto";
+            font-size: 18px;
+            font-weight: 400;
+            margin-left: 10px;
+            color: white;
+          }
+        }
+      }
+
+      .titlePage {
+        width: 100%;
+
+        margin-top: 40px;
+        justify-content: center;
+
+        .thisIsPayment {
+          font-size: 30px;
+          text-align: center;
+          font-weight: bold;
+        }
+
+        .step {
+          margin-top: 30px;
+          width: 60%;
+          margin-left: 100px;
+        }
+      }
+
+      .pageContent {
+        width: 180%;
+        margin-top: 50px;
+        margin-left: 140px;
+
+        .cusOrder {
+          border-radius: 40px;
+          float: left;
+          width: 50%;
+          border: 1px solid;
+          padding: 10px;
+          box-shadow: 3px 3px 3px 5px #cdcccc;
+          margin-left: 100px;
+          height: 480px;
+
+          .total {
+            float: right;
+            margin-right: 50px;
+            font-size: 25px;
+            margin-top: 10px;
+          }
+
+          .orderTitle {
+            text-align: left;
+            font-size: 25px;
+            border-bottom: solid rgb(207, 203, 203) 1px;
+            margin-left: 30px;
+            padding-bottom: 10px;
+          }
+
+          .content {
+            display: flex;
+            flex-direction: column;
+            width: 200%;
+
+            .leftContent {
+              float: left;
+              width: 50%;
+              padding-bottom: 1px;
+              border: none;
+
+            }
+
+            .rightContent {
+              float: right;
+              width: 50%;
+              padding-bottom: 20px;
+              border: none;
+              border-bottom: solid rgb(207, 203, 203) 1px;
+            }
+          }
+
+          .itemTitle {
+            margin-left: 50px;
+            margin-top: 12px;
+            text-align: left;
+            font-size: 18px;
+          }
+
+          .itemContent {
+            margin-left: 50px;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            text-align: left;
+            font-size: 19px;
+            color: #9f9e9e;
+          }
+        }
+
+        .methodPayment {
+          border-radius: 40px;
+          text-align: left;
+          font-size: 30px;
+          float: right;
+          width: 50%;
+          border: 1px solid;
+          padding: 10px;
+          box-shadow: 3px 3px 3px 5px #cdcccc;
+          margin-right: 240px;
+          margin-top: 20px;
+          height: 280px;
+
+          .methodTiltle {
+            text-align: left;
+            font-size: 25px;
+            border-bottom: solid rgb(207, 203, 203) 1px;
+            margin-left: 30px;
+            padding-bottom: 10px;
+          }
+
+          .methodChoose {
+            margin-left: 30px;
+            margin-top: 12px;
+            text-align: left;
+            font-size: 17px;
+          }
+
+          .imgMethod {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            gap: 5px;
+
+            .momo {
+              margin-top: 20px;
+              width: 120px;
+              float: left;
+              // margin-top: 20px;
+              // margin-left: 100px;
+              background: url("../../../../assets/images/logo/momo.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              height: 100px;
+              cursor: pointer;
+              margin-left: 10px;
+            }
+
+            .stripe {
+              margin-top: 20px;
+              cursor: pointer;
+              width: 155px;
+              box-shadow: 3px 3px 3px 5px #cdcccc;
+              height: 100px;
+              padding-right: 10px;
+              // margin-top: 20px;
+              // margin-right: 90px;
+              background: url("../../../../assets/images/logo/stripe.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              margin-left: 20px;
+            }
+          }
+        }
+
+        .btn-pay {
+          background-color: rgb(60, 218, 42);
+          margin-top: 30px;
+          color: white;
+          margin-left: 180px;
+          border-radius: 25px;
+          border: none;
+          box-shadow: 5px 5px 5px 5px #dddbdb;
+          font-weight: bold;
+          font-size: 30px;
+          width: 200px;
+          height: 60px;
+          border: solid black 1px;
+        }
       }
     }
   }
