@@ -111,7 +111,7 @@ const PaymentPage = () => {
       <div className="containerPayment">
         <div className="backToHome">
           <NavLink to="/" className="backtoHome">
-            <ArrowLeft size={24} color="#292829" weight="duotone" />
+            <ArrowLeft size={24} color="#ffffff" weight="duotone" />
             <div className="textBackToHome">Back to home</div>
           </NavLink>
         </div>
@@ -189,7 +189,7 @@ const PaymentPage = () => {
               </StripeCheckout>
             </div>
           </div>
-          <button className="btn-pay">Thanh toán</button>
+
         </div>
       </div>
       <HomeFooter />

@@ -99,7 +99,7 @@ const PersonalInfoStaff = () => {
 
     const onFinish = (values) => {
 
-        updateStaffDetail(staffInfo["AccountStaff.id"], staffInfo["AccountStaff.ExternalId"], values.fullName, values.email, imageUrl, fileName, values.phoneNumber, values.Gender, values.address, staffInfo["roleId"], values.DayOfBirth, staffInfo["AccountStaff.CenterId"], staffInfo["AccountStaff.SalaryId"]).then((response) => {
+        updateStaffDetail(infoDetail.id, staffInfo["ExternalId"], values.fullName, values.email, imageUrl, fileName, values.phoneNumber, values.Gender, values.address, staffInfo["roleId"], values.DayOfBirth, infoDetail.CenterId, infoDetail.SalaryId).then((response) => {
             if (response.errorCode === 0) {
                 toast.success("Success", options)
                 setStatusPage(Date.now())
@@ -128,7 +128,7 @@ const PersonalInfoStaff = () => {
     let subtitle;
 
     useEffect(() => {
-        getPTDetail(id.id).then((response) => {
+        getPTDetail(staffInfo["ExternalId"]).then((response) => {
             if (response.staffDetail) {
                 setInfoDetail(response.staffDetail);
                 setNoInfoDetail(false);
@@ -171,7 +171,7 @@ const PersonalInfoStaff = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={infoDetail?.StaffImage} className="imgStaff" />
+                                    <img src={infoDetail?.StaffImage ? infoDetail?.StaffImage : ava} className="imgStaff" />
                                 </Col>
                                 <Col span={20} className="infoDetailStaff">
                                     <div className="nameStaffAndPosition">

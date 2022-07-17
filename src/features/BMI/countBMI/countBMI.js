@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./countBMI.scss";
 import Modal from 'react-modal';
+import { Form, Button, Input } from "antd";
 
 const customStyles = {
     content: {
@@ -15,6 +16,7 @@ const customStyles = {
     },
 };
 const CountBMI = () => {
+    const [form] = Form.useForm();
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -43,17 +45,57 @@ const CountBMI = () => {
         console.log("can nang", event.target.value)
     }
     let sum = parseInt(weight) / parseInt(height * 2);
-
+    const onFinish = (values) => {
+        setHeight(values.height)
+        setWeight(values.weight)
+        setIsOpen(true);
+    }
 
     return (
         <div className="bgBmi">
-            <form className="formBMI">
+            <Form ref={form} name="control-hooks" className="formCus" onFinish={onFinish} >
+
+                <div className="titleInput">Nhập chiều cao và cân nặng :</div>
+                <label>Chiều cao (m)</label>
+                <Form.Item
+                    name="height"
+
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <label>Cân nặng (kg)</label>
+                <Form.Item
+                    name="weight"
+
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+
+
+
+                <Button type="primary" htmlType="submit"   >
+                    Tính BMI
+                </Button>
+
+            </Form>
+            {/* <form className="formBMI">
                 <label className="textHeight">Chiều cao (Đơn vị: m)</label>
                 <input className="heightInput" type="text" onChange={(event) => handleHeight(event)}></input>
                 <label className="textWeight">Cân nặng (Đơn vị: kg)</label>
                 <input className="weightInput" type="text" onChange={(event) => handleWeight(event)} ></input>
                 <button className="btnBMI" onClick={openModal} >Tính BMI</button>
-            </form>
+            </form> */}
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

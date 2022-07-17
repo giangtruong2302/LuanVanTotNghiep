@@ -27,6 +27,7 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
     },
+
 };
 
 
@@ -223,6 +224,7 @@ const PerInfo = () => {
             <div className="screenProfile">
                 <div className="modalForm">
                     <Modal
+
 
                         isOpen={modalIsOpen}
                         onAfterOpen={afterOpenModal}

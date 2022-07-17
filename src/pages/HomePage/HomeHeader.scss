@@ -1,3 +1,43 @@
+.CartDrop {
+  border-bottom: solid rgb(190, 185, 185) 1px;
+
+  &:hover {
+    background-color: #b3b3b3;
+  }
+
+  .OptionPay {
+    .textOptionPay {
+      border-width: 50%;
+      border-top: solid rgb(245, 239, 239) 1px;
+      font-weight: bold;
+    }
+
+    .optionBtn {
+
+
+      .btnPay {
+        background-color: rgb(57, 213, 57);
+        border-radius: 20px;
+        margin-right: 20px;
+        padding: 7px;
+        margin-left: 80px;
+        font-weight: bold;
+        border: solid rgb(118, 117, 117) 1px;
+        color: white;
+      }
+
+      .btnCancel {
+        color: white;
+        border: solid rgb(118, 117, 117) 1px;
+        background-color: red;
+        border-radius: 20px;
+        padding: 7px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 .home-header-container {
   height: 70px;
   width: 140%;
@@ -89,7 +129,12 @@
           margin-top: 25px;
         }
 
-        .Notify {}
+        .Notify {
+          .dropdown {
+            height: 40px;
+
+          }
+        }
       }
     }
 

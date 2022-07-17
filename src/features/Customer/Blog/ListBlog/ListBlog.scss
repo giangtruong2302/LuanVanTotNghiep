@@ -1,0 +1,367 @@
+.listBlogContent {
+
+    overflow: hidden;
+    min-height: 308px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    // align-items: flex-start;
+    padding-top: 30px;
+    gap: 15px;
+    position: relative;
+    width: 100vw;
+    // height: calc(100% - 20px);
+    background-color: white;
+    border-radius: 5px;
+    padding-bottom: 30px;
+
+
+    .scrollBlog {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    .Blog {
+
+        box-sizing: border-box;
+        margin: 0 auto;
+        width: 900px;
+        height: 150px;
+
+        /* light blue */
+        border: 1px solid #141415;
+
+        /* Inside auto layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        &:hover {
+            width: 1000px;
+            height: 165px;
+            border: solid red 1px;
+        }
+
+
+        .BlogInfo {
+
+            // align-items: center;
+
+            // padding: 0px;
+            // gap: 10px;
+            // justify-content: space-between;
+            // width: 100%;
+            // height: 30px;
+            // padding-top: 20px;
+            // padding-right: 250px;
+
+            .infoBlog {
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                width: 100%;
+                margin-left: 10px;
+
+                .BlogImg {}
+
+                .blogContent {
+
+                    .textNameBlog {
+                        min-width: 97px;
+                        max-width: auto;
+                        height: 17px;
+
+                        margin-left: 40px;
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 17px;
+                        margin-top: 20px;
+                        /* identical to box height */
+
+                        /* Black blue */
+
+                        color: black;
+                        /* Inside auto layout */
+
+                        flex: none;
+                        order: 1;
+                        flex-grow: 0;
+                    }
+
+                    .content {
+                        width: 600px;
+
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        color: #adadb0;
+                        font-size: 17px;
+                        text-align: justify;
+                        margin-left: 40px;
+                        margin-right: 40px;
+                    }
+
+                    .readmore {
+                        margin-left: 40px;
+                        font-size: 15px;
+
+                        &:hover {
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+            }
+
+            .detailInfoBlog {
+                display: flex;
+
+                align-items: flex-start;
+                padding: 0px;
+                gap: 29px;
+                justify-content: flex-end;
+                width: 100%;
+                height: 17px;
+                color: black;
+
+
+
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 17px;
+                /* identical to box height */
+
+                /* #000000 */
+
+
+
+                .addressCenter {
+                    margin-top: 5px;
+                    margin-left: 200px;
+
+                    width: 600px;
+                }
+
+                .lineDetailInfoCenter {
+                    width: 1px;
+                    height: 17px;
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    /* identical to box height */
+
+                    /* light blue */
+
+                    color: #ebf0ff;
+
+                    /* Inside auto layout */
+
+                    flex: none;
+                    // order: 1;
+                    flex-grow: 0;
+                }
+            }
+        }
+    }
+}
+
+.loading {
+    // margin-top: -20px;
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 46.1875em) {
+    .listBlogContent {
+
+        overflow: hidden;
+        min-height: 308px;
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        // align-items: flex-start;
+        padding-top: 30px;
+        gap: 15px;
+        position: relative;
+        width: 100vw;
+        // height: calc(100% - 20px);
+        background-color: white;
+        border-radius: 5px;
+        padding-bottom: 30px;
+
+
+        .scrollBlog {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+
+        .Blog {
+
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 900px;
+            height: 150px;
+
+            /* light blue */
+            border: 1px solid #141415;
+
+            /* Inside auto layout */
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            &:hover {
+                width: 1000px;
+                height: 165px;
+                border: solid red 1px;
+            }
+
+
+            .BlogInfo {
+
+                // align-items: center;
+
+                // padding: 0px;
+                // gap: 10px;
+                // justify-content: space-between;
+                // width: 100%;
+                // height: 30px;
+                // padding-top: 20px;
+                // padding-right: 250px;
+
+                .infoBlog {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 10px;
+                    width: 100%;
+                    margin-left: 10px;
+
+                    .BlogImg {}
+
+                    .blogContent {
+
+                        .textNameBlog {
+                            min-width: 97px;
+                            max-width: auto;
+                            height: 17px;
+
+                            margin-left: 40px;
+                            font-family: "Inter";
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 24px;
+                            line-height: 17px;
+                            margin-top: 20px;
+                            /* identical to box height */
+
+                            /* Black blue */
+
+                            color: black;
+                            /* Inside auto layout */
+
+                            flex: none;
+                            order: 1;
+                            flex-grow: 0;
+                        }
+
+                        .content {
+                            width: 600px;
+
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            color: #adadb0;
+                            font-size: 17px;
+                            text-align: justify;
+                            margin-left: 40px;
+                            margin-right: 40px;
+                        }
+
+                        .readmore {
+                            margin-left: 40px;
+                            font-size: 15px;
+
+                            &:hover {
+                                font-weight: bold;
+                            }
+                        }
+                    }
+
+                }
+
+                .detailInfoBlog {
+                    display: flex;
+
+                    align-items: flex-start;
+                    padding: 0px;
+                    gap: 29px;
+                    justify-content: flex-end;
+                    width: 100%;
+                    height: 17px;
+                    color: black;
+
+
+
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 17px;
+                    /* identical to box height */
+
+                    /* #000000 */
+
+
+
+                    .addressCenter {
+                        margin-top: 5px;
+                        margin-left: 200px;
+
+                        width: 600px;
+                    }
+
+                    .lineDetailInfoCenter {
+                        width: 1px;
+                        height: 17px;
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 17px;
+                        /* identical to box height */
+
+                        /* light blue */
+
+                        color: #ebf0ff;
+
+                        /* Inside auto layout */
+
+                        flex: none;
+                        // order: 1;
+                        flex-grow: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .loading {
+        // margin-top: -20px;
+        margin-left: 20px;
+    }
+}

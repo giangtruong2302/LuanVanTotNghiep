@@ -69,7 +69,7 @@ const ServiceGymDetail = () => {
                     <Breadcrumb.Item href="">
                       <span>Danh sách các dịch vụ</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Dich vu {servicesDetail?.ServiceName} </Breadcrumb.Item>
+                    <Breadcrumb.Item>Dich vụ {servicesDetail?.ServiceName} </Breadcrumb.Item>
                   </Breadcrumb>
                 </div>
                 <div className="serviceDetailAbout">

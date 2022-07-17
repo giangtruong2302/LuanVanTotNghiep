@@ -34,6 +34,8 @@ import Page404 from "../features/Page404/Page404";
 
 import PaymentPage from "../features/Customer/PayPage/PaymentPage/PaymentPage";
 import RecoveryPass from "../features/Customer/RecoveryPass/RecoveryPass";
+import Blog from "../features/Customer/Blog";
+import BlogDetail from "../features/Customer/BlogDetail";
 
 
 const AppLayout = () => {
@@ -62,6 +64,8 @@ const AppLayout = () => {
         <Route path="/booking-of-cus" element={<BookingOfCus />} />
         <Route path="/404-error-notfound" element={<Page404 />} />
         <Route path="/reset-pass" element={<RecoveryPass />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog-detail/:id" element={<BlogDetail />} />
 
         {/* merchant */}
         <Route path="/merchant/gym-select" element={<GymSelect />} />

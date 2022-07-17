@@ -1,11 +1,11 @@
 import axios from "../../axios";
 
-const getPTDetail = (id) => {
-    return axios.get(`/api/get-detail-pt?id=${id}`);
+const getPTDetail = (ExternalId) => {
+    return axios.get(`/api/get-detail-staff-by-external?ExternalId=${ExternalId}`);
 };
 
-const createSchedule = (DayWork, StaffId, TimeId) => {
-    return axios.post(`/api/create-schedule-working?DayWork`, { DayWork: DayWork, StaffId: StaffId, TimeId: TimeId });
+const createSchedule = (DayWork, StaffId, TimeId, Status) => {
+    return axios.post(`/api/create-schedule-working?DayWork`, { DayWork: DayWork, StaffId: StaffId, TimeId: TimeId, Status: Status });
 };
 const getAllTimeWorking = (page) => {
     return axios.get(`/api/get-all-time-working?page=${page}`);

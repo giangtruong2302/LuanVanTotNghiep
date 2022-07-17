@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import ListPTCenter from "./ListPtOfCenter/listPtOfCenter";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
+import ListReview from "./ListReview/ListReview";
 const GymDetailPage = () => {
     const navigate = useNavigate();
 
@@ -95,7 +96,10 @@ const GymDetailPage = () => {
                             </Col>
                         </Row>
                     </Col>
-                    <ListPTCenter />
+                    <div className="contentCenterDetail">
+                        <ListPTCenter />
+                        <ListReview />
+                    </div>
                 </Row>
             </div>
             <HomeFooter />

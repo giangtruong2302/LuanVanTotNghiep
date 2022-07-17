@@ -6,7 +6,7 @@ import { Form, Select, Button } from "antd"
 import ListBooking from "./ListBooking/listBooking";
 import ava from "../../assets/images/imgStaff/staff.png";
 import Modal from "react-modal";
-import { getPtDetail } from "../Customer/PTDetail/PtDetailAPI";
+import { getPTDetail } from "./staffAPI";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { createSchedule } from "./staffAPI";
@@ -81,6 +81,7 @@ const Staff = () => {
     const [modalTimeWorkIsOpen, setModalTimeWorkIsOpen] = React.useState(false);
     const staffInfo = useSelector((state) => state.staff.staffInfo);
     const dispatch = useDispatch();
+    const [status, setStatus] = useState(1);
     function openModal() {
         setIsOpen(true);
     }
@@ -118,7 +119,7 @@ const Staff = () => {
         setTimeId(value)
     };
     const handleCreateTimeWork = () => {
-        createSchedule(timeStamp, staffInfo["AccountStaff.id"], timeId).then((response) => {
+        createSchedule(timeStamp, staffInfo["AccountStaff.id"], timeId, status).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -169,10 +170,11 @@ const Staff = () => {
     const [allDays, setAllDays] = useState([]);
 
 
+
     useEffect(() => {
-        console.log("ssssss", staffInfo)
+
         if (staffInfo) {
-            getPtDetail(staffInfo["AccountStaff.id"]).then((response) => {
+            getPTDetail(staffInfo.ExternalId).then((response) => {
                 if (response.staffDetail) {
                     setptDetail(response.staffDetail);
                     setNoptDetail(false);
@@ -186,8 +188,10 @@ const Staff = () => {
                 .finally(() => {
                     setptDetailLoading(false);
                 });
+        } else {
+            navigate(`/staff-login`);
         }
-        else { navigate("/staff-login") }
+
 
     }, []);
     return (
@@ -202,16 +206,17 @@ const Staff = () => {
                     </div>
 
                 </div>
-                Page Staff Booking
+                <div className="title">Page Staff Booking</div>
                 <div className="titlePage">
+
                     <div className="PTinfo">
-                        <img src={ava} className="imgPT" />
+                        <img src={ptDetail?.StaffImage ? ptDetail?.StaffImage : ava} className="imgPT" />
                         <div className="PtName">
-                            Welcome, {ptDetail?.StaffName} !
+                            <div className="welcomeCus">Welcome, {ptDetail?.StaffName} !</div>
                             <div className="btnPT">
 
 
-                                {(staffInfo["roleId"] === 4 ?
+                                {(ptDetail?.RoleId === 4 ?
                                     <Link to={`/scanqr`}> <button className="btn-book">Scan QR</button></Link>
                                     :
                                     <Link to={`/pt-booking/`}> <button className="btn-book">Lịch booking</button></Link>
@@ -220,7 +225,7 @@ const Staff = () => {
 
 
                                 <button className="btn-book" onClick={openModal}>Salary</button>
-                                {(staffInfo["roleId"] === 3 ?
+                                {(ptDetail?.RoleId === 3 ?
                                     <button className="btn-book" onClick={openModalTimeWork}>Đăng ký lịch làm</button>
                                     : "")}
                                 <Modal
@@ -266,7 +271,7 @@ const Staff = () => {
                                             >
                                                 {allTime?.map((item, index) => {
                                                     return (
-                                                        <Option value={item.id} >{item.TimeWork}</Option>
+                                                        <Option value={item.id} >{item.StartTime.substring(0, 5)} - {item.EndTime.substring(0, 5)}</Option>
 
 
                                                     )
@@ -283,7 +288,7 @@ const Staff = () => {
                             </div>
                         </div>
                     </div>
-                    {(staffInfo["roleId"] === 3 ?
+                    {(ptDetail?.RoleId === 3 ?
                         <ListBooking /> : "")}
                     <ToastContainer />
                 </div>

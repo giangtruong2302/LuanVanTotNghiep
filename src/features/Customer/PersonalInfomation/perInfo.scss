@@ -198,88 +198,215 @@
 
 @media only screen and (max-width: 46.1875em) {
     .CusDetailBgContainer {
-        .breadcumDetail {
-            padding: 10px 20px 20px 25px;
-        }
-
-        .CusDetailContent {
-            display: flex;
-            gap: 15px;
-            margin: 0 25px;
-
-            .contentInfo {
-                box-sizing: border-box;
-
-                .avatarCusDetail {
-                    background: transparent;
-
-                    .imgCus {
-                        height: 200px;
-                        width: 150px;
-                        border: 1px solid #f1f1f1;
-                        border-radius: 50%;
-                        box-shadow: 1px 1px 8px 1px #888;
-                    }
-                }
-
-                .infoDetailCus {
-                    display: flex;
-                    gap: 5px;
-                    flex-direction: column;
-
-                    .nameCusAndPosition {
-                        padding-left: 110px;
-                        padding-top: 40px;
-                        color: #000;
-                        font-weight: bold;
-                        font-size: 18px;
-                        font-family: "Courier New", Courier, monospace;
-                    }
-
-                    .descriCusionCusDetail {
-                        margin-left: -50px;
-                        margin-top: 55px;
-                        font-style: italic;
-                        min-height: 130px;
-                        font-size: 12px;
-                        text-align: justify;
-                    }
-
-                    .likeAndChat {
+        width: 100%;
+        height: 100vh;
 
 
-                        gap: 15px;
-                        justify-content: center;
-                        padding-right: 80px;
+        .backToHome {
+            width: 100%;
+            background: #a50000;
 
-                        .btnLike {
-                            padding: 5px 15px;
-                            background-color: #1bbada;
-                            color: #fff;
-                            border-radius: 6px;
-                            border: 1px solid #ffff;
-                        }
+            height: 60px;
 
-                        .btnChat {
-                            padding: 5px 15px;
-                            background-color: #1bbada;
-                            color: #fff;
-                            border-radius: 6px;
-                            border: 1px solid #ffff;
-                        }
-                    }
+            .backtoHome {
+                padding-top: 15px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                // width: fit-content;
+                .textBackToHome {
+                    font-family: "roboto";
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-left: 10px;
+                    color: white;
                 }
             }
         }
 
-        .timeInfo {
-            display: flex !important;
-            flex-direction: column !important;
+        .breadcumDetail {
+            padding: 10px 20px 20px 25px;
+        }
+
+        .screenProfile {
+            position: absolute;
+
+
+
+            .modalForm {
+                z-index: 100;
+                position: absolute;
+
+                .Modal {
+                    position: absolute;
+                    top: 40px;
+                    left: 40px;
+                    right: 40px;
+                    bottom: 40px;
+                    background-color: white;
+                }
+
+                .formCus {
+                    z-index: 10;
+                    position: absolute;
+
+                }
+            }
+
+            .imgBg {
+                width: 100vw;
+                z-index: -1;
+                height: 685px;
+                position: absolute;
+
+            }
+
+            .CusDetailContent {
+                position: absolute;
+                gap: 15px;
+                margin-top: 50px;
+                padding-left: 30px;
+                // box-shadow: 3px 3px 3px 7px #cdcccc;
+                width: 340px;
+                margin-left: 20px;
+                background-color: white;
+                border-radius: 30px;
+                height: 450px;
+                z-index: -0;
+
+
+
+
+                .contentInfo {
+                    box-sizing: border-box;
+
+
+                    .avatarCusDetail {
+
+                        background: transparent;
+
+
+                        .imgCus {
+                            margin-left: 70px;
+                            margin-top: 20px;
+                            height: 130px;
+                            width: 120px;
+                            border: 1px solid #f1f1f1;
+                            border-radius: 50%;
+                            box-shadow: 1px 1px 8px 1px #888;
+
+                        }
+                    }
+
+                    .infoDetailCus {
+                        display: flex;
+                        gap: 5px;
+                        flex-direction: column;
+
+                        margin-top: 160px;
+                        padding-left: 10px !important;
+                        position: absolute;
+
+
+
+
+
+
+                        .nameCusAndPosition {
+                            border-bottom: solid rgb(170, 168, 168) 1px;
+                            //margin-left: 150px;
+                            margin-left: 15px !important;
+                            width: 100%;
+                            color: #000;
+                            font-weight: 600;
+                            font-size: 20px;
+                            font-family: 'Times New Roman', Times, serif;
+                        }
+
+                        .descriptionCusDetail {
+
+                            width: 470px;
+                            margin-top: 30px;
+                            margin-left: 20px !important;
+
+                            display: flex;
+                            flex-direction: column;
+                            min-height: 130px;
+                            font-size: 15px;
+                            font-family: 'Times New Roman', Times, serif
+                        }
+
+                        .detailCus {
+                            display: flex;
+                            flex-direction: row;
+
+                            .titleInfo {
+                                font-weight: bold;
+                            }
+                        }
+
+
+                        .likeAndChat {
+
+
+
+                            gap: 20px !important;
+                            border-top: solid rgb(170, 168, 168) 1px;
+                            margin-top: 120px;
+                            width: 270px;
+                            margin-left: 1px !important;
+                            padding-top: 10px;
+
+
+
+
+                            .btn-sua {
+                                padding-bottom: 8px;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                padding-top: 10px;
+                                margin-right: 10px;
+
+                                background: #a50000;
+                                color: #fff;
+                                border-radius: 6px;
+                                border: 1px solid #ffff;
+                                font-weight: bold;
+                                font-size: 15px;
+                                border-radius: 30px;
+
+
+
+
+                            }
+
+                            .btn-check-book {
+
+
+                                padding-bottom: 8px;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                padding-top: 10px;
+                                margin-top: 50px !important;
+
+                                background: #a50000;
+                                color: #fff !important;
+                                border-radius: 6px;
+                                border: 1px solid #ffff;
+                                font-weight: bold;
+                                font-size: 15px;
+                                border-radius: 30px;
+                            }
+
+                        }
+                    }
+
+
+                }
+            }
+
         }
     }
-
-
-
-
 
 }

@@ -10,7 +10,7 @@ function App() {
   gapi.load("client:auth2", () => {
     gapi.client.init({
       clientId:
-        "486606115670-699qfj88ffthucqe7lhpr8q0k65gq7hv.apps.googleusercontent.com",
+        "486606115670-5eot9c17ma4fvhhej4pbevep3cn2b6jg.apps.googleusercontent.com",
       plugin_name: "chat",
     });
   });
