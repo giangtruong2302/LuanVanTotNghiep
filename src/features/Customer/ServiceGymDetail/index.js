@@ -40,9 +40,9 @@ const ServiceGymDetail = () => {
 
     <div className="ServiceGymDetailBg">
       <div className="backToHome">
-        <NavLink to="/" className="backtoHome">
+        <NavLink to="/service-gym" className="backtoHome">
           <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-          <div className="textBackToHome">Back to home</div>
+          <div className="textBackToHome">Back</div>
         </NavLink>
 
       </div>

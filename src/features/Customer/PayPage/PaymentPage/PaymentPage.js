@@ -13,6 +13,7 @@ import { useState } from "react";
 import moment from "moment";
 import NumberFormat from "react-number-format";
 import { useEffect } from "react";
+import icon from "../../../../assets/images/logo/walkIcon.gif"
 import {
   handleGetDetailOrder,
   handlePayWithMomoAPI,
@@ -30,6 +31,7 @@ const PaymentPage = () => {
   const [detailCus, setDetailCus] = useState();
   const [detailOrder, setDetailOrder] = useState();
   const [detailService, setDetailService] = useState();
+  const [step, setStep] = useState(0);
   console.log("check info pay: ", state);
   const [token, setToken] = useState();
   const onToken = (token) => {
@@ -38,6 +40,10 @@ const PaymentPage = () => {
       setToken(token.id);
     }
   };
+  const clickStripe = () => {
+    setStep(1)
+  }
+  console.log("step", step)
   useEffect(() => {
     try {
       handlePayWithStripe(
@@ -93,6 +99,7 @@ const PaymentPage = () => {
     }
   }, [state]);
   const handlePayWithMomo = () => {
+    setStep(1)
     try {
       handlePayWithMomoAPI(detailOrder.id, detailOrder.amount)
         .then((res) => {
@@ -117,8 +124,9 @@ const PaymentPage = () => {
         </div>
         <div className="titlePage">
           <div className="thisIsPayment">Payment Page</div>
+          <img src={icon} className="iconWalk"></img>
           <div className="step">
-            <Steps current={0}>
+            <Steps current={step}>
               <Step title="Bước 1" description="Chọn phương thức" />
               <Step title="Bước 2" description="Quét QR" />
               <Step title="Bước 3" description="Hoàn thành" />
@@ -185,7 +193,7 @@ const PaymentPage = () => {
                 stripeKey={`pk_test_51LJw5FAZSrSS1g1Fw8sCcbkbuIwnq43uVQ6v4yt4oOCz4uViqITYPQAek49w0y5kZX6yE2qjYeF0IQeGmKCRRjD900uiS52NeK`}
                 currency="VND"
               >
-                <div className={"stripe"}></div>
+                <div className={"stripe"} onClick={clickStripe}></div>
               </StripeCheckout>
             </div>
           </div>

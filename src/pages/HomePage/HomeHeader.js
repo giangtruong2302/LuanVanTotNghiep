@@ -1,5 +1,5 @@
 import { Input, Button, Menu, Dropdown, Badge } from "antd";
-import { BellOutlined } from "@ant-design/icons";
+import { BellOutlined, CheckOutlined } from "@ant-design/icons";
 import * as actions from "../../store/actions";
 import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -25,8 +25,10 @@ import { changeLanguageApp } from "../../store/actions";
 import { LANGUAGES } from "../../utils/constant";
 import "./HomeHeader.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { getCusBooking } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
+import { getCusBooking, getOrder } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
 import { handleGetDetailCustomerByExternalId } from "../../features/Customer/PayPage/PaymentPage/paymentAPI";
+
+import OrderChecked from "./orderChecked";
 const { Search } = Input;
 const HomeHeader = (props) => {
   const navigate = useNavigate();
@@ -43,6 +45,7 @@ const HomeHeader = (props) => {
   const [noCusBooking, setNoCusBooking] = useState(false);
   const [, setCusBookingLoading] = useState(true);
   const [detailCustomer, setDetailCustomer] = useState();
+
   useEffect(() => {
     if (cusInfo) {
       try {
@@ -55,6 +58,7 @@ const HomeHeader = (props) => {
                   if (response.bookingOfCus.rows) {
                     setCountBooking(response.bookingOfCus.count);
                     setCusBooking(response.bookingOfCus.rows);
+
                     setNoCusBooking(false);
                   } else {
                     setNoCusBooking(true);
@@ -74,6 +78,7 @@ const HomeHeader = (props) => {
       }
     }
   }, []);
+
   const cartMenu = (
     <Menu>
       {cusBooking?.map((item, index) => {
@@ -81,29 +86,10 @@ const HomeHeader = (props) => {
           <Menu.Item key={index} className="CartDrop">
             Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
             {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
-            <p>Trạng thái : {item.Status}</p>
+            <p>Trạng thái : {item.Status} </p>
             {item.Status === "SCHEDULED" ? (
-              <div className="OptionPay">
-                <p className="textOptionPay">
-                  Your PT has confirm booking. Please pay to continue
-                </p>
-                <div className="optionBtn">
-                  <button
-                    className="btnPay"
-                    // style={{ borderRadius: "6px", backgroundColor: "aqua" }}
-                    onClick={() => handlePay(item)}
-                  // onClick={() => console.log("check id: ", item)}
-                  >
-                    Thanh toán
-                  </button>
-                  <button
-                    className="btnCancel"
-                  // style={{ borderRadius: "6px", backgroundColor: "red" }}
-                  >
-                    Hủy booking
-                  </button>
-                </div>
-              </div>
+              <OrderChecked data={item} />
+
             ) : (
               ""
             )}
@@ -130,10 +116,7 @@ const HomeHeader = (props) => {
   //   ,
   //   [dispatch]
   // );
-  const handlePay = (item) => {
-    console.log("booking id: ", item);
-    navigate("/payment-page", { state: { item } });
-  };
+
   return (
     <>
       <div className="home-header-container">

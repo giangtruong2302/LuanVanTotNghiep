@@ -230,31 +230,28 @@
         }
 
         .screenProfile {
-            // position: absolute;
+            position: absolute;
 
 
 
             .modalForm {
+                z-index: 100;
+                position: absolute;
 
-
-                .ModalFormCus {
-
-                    max-height: 410px;
-
-                    .titleForm {
-                        font-size: 40px;
-                        font-weight: bold;
-                        background-color: red
-                    }
-
-                    .formCus {
-                        z-index: 10;
-                        position: absolute;
-
-                    }
+                .Modal {
+                    position: absolute;
+                    top: 40px;
+                    left: 40px;
+                    right: 40px;
+                    bottom: 40px;
+                    background-color: white;
                 }
 
+                .formCus {
+                    z-index: 10;
+                    position: absolute;
 
+                }
             }
 
             .imgBg {

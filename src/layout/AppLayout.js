@@ -36,6 +36,7 @@ import PaymentPage from "../features/Customer/PayPage/PaymentPage/PaymentPage";
 import RecoveryPass from "../features/Customer/RecoveryPass/RecoveryPass";
 import Blog from "../features/Customer/Blog";
 import BlogDetail from "../features/Customer/BlogDetail";
+import Page500 from "../features/Page500/Page500";
 
 
 const AppLayout = () => {
@@ -63,6 +64,7 @@ const AppLayout = () => {
         <Route path="/staff-info/:id" element={<PersonalInfoStaff />} />
         <Route path="/booking-of-cus" element={<BookingOfCus />} />
         <Route path="/404-error-notfound" element={<Page404 />} />
+        <Route path="/500-error" element={<Page500 />} />
         <Route path="/reset-pass" element={<RecoveryPass />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog-detail/:id" element={<BlogDetail />} />

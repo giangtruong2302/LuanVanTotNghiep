@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./countBMI.scss";
 import Modal from 'react-modal';
 import { Form, Button, Input } from "antd";
-
+import iconGif from "../../../assets/images/logo/bmiIcon.gif"
 const customStyles = {
     content: {
         top: '50%',
@@ -36,18 +36,14 @@ const CountBMI = () => {
     const [height, setHeight] = useState("")
     const [weight, setWeight] = useState("")
 
-    const handleHeight = (event) => {
-        setHeight(event.target.value)
-        console.log("chieu cao", event.target.value)
-    }
-    const handleWeight = (event) => {
-        setWeight(event.target.value)
-        console.log("can nang", event.target.value)
-    }
-    let sum = parseInt(weight) / parseInt(height * 2);
+
+    const [sum, setSum] = useState();
     const onFinish = (values) => {
+        console.log(values)
         setHeight(values.height)
         setWeight(values.weight)
+        setSum((values.weight) / ((values.height) * 2));
+        console.log((values.weight) / ((values.height) * 2))
         setIsOpen(true);
     }
 
@@ -89,14 +85,9 @@ const CountBMI = () => {
                 </Button>
 
             </Form>
-            {/* <form className="formBMI">
-                <label className="textHeight">Chiều cao (Đơn vị: m)</label>
-                <input className="heightInput" type="text" onChange={(event) => handleHeight(event)}></input>
-                <label className="textWeight">Cân nặng (Đơn vị: kg)</label>
-                <input className="weightInput" type="text" onChange={(event) => handleWeight(event)} ></input>
-                <button className="btnBMI" onClick={openModal} >Tính BMI</button>
-            </form> */}
+
             <Modal
+
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
@@ -104,7 +95,8 @@ const CountBMI = () => {
                 contentLabel="Example Modal"
             ><div>Your BMI is :</div>
                 <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{Math.round(sum * 100) / 100} </h2>
-                {(sum < 18.5) ? <h3>Bạn hơi gầy</h3> : (18.5 < sum && sum < 25) ? <h3>Cân nặng bình thường</h3> : (25 < sum && sum < 30) ? <h3>Bạn bị thừa cân</h3> : <h3>Bạn bị béo phì</h3>}
+                <img src={iconGif} style={{ height: "110px", marginLeft: "60px" }} />
+                {(sum < 18.5) ? <h4>Bạn hơi gầy</h4> : (18.5 < sum && sum < 25) ? <h4>Cân nặng bình thường</h4> : (25 < sum && sum < 30) ? <h4>Bạn bị thừa cân</h4> : <h4>Bạn bị béo phì</h4>}
 
 
             </Modal>

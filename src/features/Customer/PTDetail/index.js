@@ -43,9 +43,9 @@ const PTDetail = () => {
   return (
     <div className="PTDetailBgContainer">
       <div className="backToHome">
-        <NavLink to="/" className="backtoHome">
+        <NavLink to="/Personal-Training" className="backtoHome">
           <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-          <div className="textBackToHome">Back to home</div>
+          <div className="textBackToHome">Back</div>
         </NavLink>
 
       </div>
