@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
+import unknow from "../../../../assets/images/userplaceholder.png";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";

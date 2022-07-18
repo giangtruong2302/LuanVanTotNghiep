@@ -13,14 +13,16 @@ import { isVisible } from "@testing-library/user-event/dist/utils";
 // import CreateAccount from "./ModalManager/modalAddManager";
 import CreateAccount from "./ModalAccount/modalAddBlog";
 // import ListStaff from "./ListStaff/listStaff";
-import { PageHeader, Input, Row, Col, message } from "antd";
+import { PageHeader, Input, Row, Col, message, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import handleGetAllBlog from "./BlogAPI";
 import { handleDeleteBlog } from "./ModalAccount/ModalAccountAPI";
 import UpdateBlog from "./ModalAccount/modalUpdateAccount";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 // import ListAccount from "./ListManager/listAccount";
 // import ListManager from "./ListManager/listManager";
 const { Search } = Input;
+const { confirm } = Modal;
 const Blog = () => {
   const navigate = useNavigate();
   const [showModalAdd, setShowModalAdd] = useState(false);
@@ -34,6 +36,32 @@ const Blog = () => {
   const handleShowModalAdd = (isVisible) => {
     setShowModalAdd(isVisible);
   };
+  function confirmDelete(id) {
+    confirm({
+      title: `Do you want to delete ${
+        // props.data.firstName + " " + props.data.lastName
+        ""
+      }`,
+      icon: <ExclamationCircleOutlined />,
+      centered: true,
+      // content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      onOk() {
+        // return console.log("check id: ", id);
+        return handleDeleteBlog(id)
+          .then((res) => {
+            message.success("Success");
+            // props.colDef.action.action1("delete" + Date.now());
+            setStatus("complete" + Date.now());
+          })
+          .catch(() => {
+            message.error("Failure");
+          });
+      },
+      onCancel() {
+        ("");
+      },
+    });
+  }
   const showModalAddAcc = () => {
     setShowModalAdd(true);
     // alert("aa");
@@ -121,7 +149,7 @@ const Blog = () => {
     <div className={classes.BlogProfileBg}>
       <PageHeader
         className="site-page-header"
-        onBack={() => navigate("/admin/manage-center")}
+        onBack={() => navigate("/admin")}
         subTitle="Back to dashboard center"
         style={{
           top: 0,
@@ -150,11 +178,13 @@ const Blog = () => {
               dataBlog.map((item, index) => {
                 return (
                   <Col span={5} className={classes.item} key={index}>
-                    <span
-                      className={classes.xCircle}
-                      onClick={() => deleteBlog(item.id)}
-                    >
-                      <XCircle size={22} weight="fill" color="#fff" />
+                    <span className={classes.xCircle}>
+                      <XCircle
+                        size={22}
+                        weight="fill"
+                        color="#fff"
+                        onClick={() => confirmDelete(item.id)}
+                      />
                     </span>
                     <div className={classes.titleContent}>{item.Title}</div>
                     <div className={classes.imageBlog}>

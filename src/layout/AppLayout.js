@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import AppSuspense from "../component/AppSuspense";
 import CustomerLoginPage from "../features/Customer/login";
 
-
 import { SendEmail } from "../features/sendEmail";
 import Booking from "../features/Staff/Booking/booking";
 import Staff from "../features/Staff/staff";
@@ -25,7 +24,6 @@ import {
 } from "../routes/user";
 import GymDetailPage from "../features/Customer/GymCenterDetail";
 
-
 import PersonalInfoStaff from "../features/Staff/PersonalInfo/PersonalInfo";
 import PerInfo from "../features/Customer/PersonalInfomation/perInfo";
 import BookingOfCus from "../features/Customer/PersonalInfomation/BookingOfCus/cusBooking";
@@ -36,7 +34,7 @@ import PaymentPage from "../features/Customer/PayPage/PaymentPage/PaymentPage";
 import RecoveryPass from "../features/Customer/RecoveryPass/RecoveryPass";
 import Blog from "../features/Customer/Blog";
 import BlogDetail from "../features/Customer/BlogDetail";
-
+import { NoMatch } from "../routes/admin";
 
 const AppLayout = () => {
   return (
@@ -71,6 +69,7 @@ const AppLayout = () => {
         <Route path="/merchant/gym-select" element={<GymSelect />} />
         <Route path="/merchant/dashboard" element={<Dashboard />} />
         <Route path="/merchant/reservation" element={<Reservation />} />
+        {/* <Route path="*" element={<NoMatch />} /> */}
       </Routes>
     </AppSuspense>
   );

@@ -102,16 +102,16 @@ const DashboardBranchCenter = (props) => {
         description: "Swap",
         link: "/admin/merchant/gym-config",
       },
-      {
-        image: (
-          <span className="icon-QuickAcces_6">
-            <Sword size={24} color="#f2f4f1" weight="fill" />
-          </span>
-        ),
-        title: "Work shiff",
-        description: "Swap",
-        link: "/customers",
-      },
+      // {
+      //   image: (
+      //     <span className="icon-QuickAcces_6">
+      //       <Sword size={24} color="#f2f4f1" weight="fill" />
+      //     </span>
+      //   ),
+      //   title: "Work shiff",
+      //   description: "Swap",
+      //   link: "/customers",
+      // },
       {
         image: (
           <span className="icon-QuickAcces_7">
@@ -168,16 +168,16 @@ const DashboardBranchCenter = (props) => {
         description: "Swap",
         link: "/admin/merchant/gym-config",
       },
-      {
-        image: (
-          <span className="icon-QuickAcces_6">
-            <Sword size={24} color="#f2f4f1" weight="fill" />
-          </span>
-        ),
-        title: "Work shiff",
-        description: "Swap",
-        link: "/customers",
-      },
+      // {
+      //   image: (
+      //     <span className="icon-QuickAcces_6">
+      //       <Sword size={24} color="#f2f4f1" weight="fill" />
+      //     </span>
+      //   ),
+      //   title: "Work shiff",
+      //   description: "Swap",
+      //   link: "/customers",
+      // },
       {
         image: (
           <span className="icon-QuickAcces_7">

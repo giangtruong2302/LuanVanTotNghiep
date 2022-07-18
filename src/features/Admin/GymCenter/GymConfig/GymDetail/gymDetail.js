@@ -8,14 +8,26 @@ import NumberFormat from "react-number-format";
 import GoogleMapComponent from "../../../../../component/GoogleMap";
 import { Link } from "react-router-dom";
 import { getDetailCenter } from "../../../AdminAPI";
+import UpdateService from "../../../ManageCenter/ModalService/modalUpdateService";
 
 const GymDetail = () => {
   const [flag, setFlag] = useState(false);
   const CenterId = localStorage.getItem("CenterId");
   const [detailCenter, setDetailCenter] = useState();
+  const [status, setStatus] = useState("");
+  const [showModalEditDetail, setShowModalEditDetail] = useState(false);
+  const handleModalUpdateCenter = (isVisible) => {
+    setShowModalEditDetail(isVisible);
+  };
+  const showModalUpdate = () => {
+    setShowModalEditDetail(true);
+  };
+  const takeStatus = (value) => {
+    setStatus(value);
+  };
   useEffect(() => {
     try {
-      getDetailCenter(CenterId)
+      getDetailCenter(parseInt(CenterId))
         .then((res) => {
           setDetailCenter(res.centerDetail);
         })
@@ -23,7 +35,7 @@ const GymDetail = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [CenterId]);
+  }, [CenterId, status]);
 
   return (
     <>
@@ -124,17 +136,22 @@ const GymDetail = () => {
                 Change Center Image
               </div>
             </div>
-            <Link
-              to={"/salon-config/details/edit"}
-              className={classes.editSalonDetail}
-            >
+            <div onClick={showModalUpdate} className={classes.editSalonDetail}>
               <NotePencil size={32} color="#53d1b6" />
               <div className={classes.editSalonDetailTitle}>
                 Edit Salon Details
               </div>
-            </Link>
+            </div>
           </div>
         </div>
+        {showModalEditDetail && (
+          <UpdateService
+            handleModal={handleModalUpdateCenter}
+            showModal={showModalEditDetail}
+            data={detailCenter}
+            takeStatus={takeStatus}
+          />
+        )}
       </div>
     </>
   );

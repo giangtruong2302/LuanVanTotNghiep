@@ -1,4 +1,4 @@
-import { PictureOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, PictureOutlined } from "@ant-design/icons";
 import {
   Col,
   DatePicker,
@@ -18,7 +18,7 @@ import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
-import { CheckSquareOffset, Plus, XCircle } from "phosphor-react";
+import { CheckSquareOffset, Plus, Wrench, XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
@@ -30,11 +30,16 @@ import { TimePicker } from "antd";
 // import React from 'react';
 import {
   handleCreateNewCenter,
+  handleCreateNewTimeWorking,
+  handleDeleteTimeWorking,
   handleGetAllTimeWorking,
+  handleUpdateTime,
 } from "./ModalServiceAPI";
 import { getAllManager } from "../../ManageManager/accountAPI";
+import { Data } from "@react-google-maps/api";
 const { Option } = Select;
 const format = "HH:mm";
+const { confirm } = Modal;
 
 const CreateTimeWorking = (props) => {
   const [manager, setManager] = useState();
@@ -48,14 +53,85 @@ const CreateTimeWorking = (props) => {
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [crop, setCrop] = useState({ x: 50, y: 50 });
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState();
-  const [zoom, setZoom] = useState(1);
+  const [status, setStatus] = useState("");
+  const [StartTime, setStartTime] = useState();
+  const [tempVarible, setTempVarible] = useState();
+  const [EndTime, setEndTime] = useState();
+  const setVaribleIdTime = (item) => {
+    // console.log("check item temp: ", item);
+    setTempVarible(item);
+  };
   const onChangeStartTime = (value) => {
-    console.log("check start time: ", value._d);
+    // console.log("check start time: ", moment(value._d).format("HH:mm"));
+    let Starttime = moment(value._d).format("HH:mm");
+    setStartTime(Starttime);
   };
   const onChangeEndTime = (value) => {
-    console.log("check end time ", value._d);
+    // console.log("check end time: ", moment(value._d).format("HH:mm"));
+    let Endtime = moment(value._d).format("HH:mm");
+    setEndTime(Endtime);
+  };
+  function confirmDelete(id) {
+    confirm({
+      title: `Do you want to delete ${
+        // props.data.firstName + " " + props.data.lastName
+        ""
+      }`,
+      icon: <ExclamationCircleOutlined />,
+      centered: true,
+      // content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      onOk() {
+        // return console.log("check id: ", id);
+        return handleDeleteTimeWorking(id)
+          .then((res) => {
+            if (res.message.errCode === 0) {
+              message.success("Delete success");
+              // props.colDef.action.action1("delete" + Date.now());
+              setStatus("delete complete" + Date.now());
+            }
+            if (res.message.errCode === 10) {
+              message.warning(res.message.errMessage);
+              // props.colDef.action.action1("delete" + Date.now());
+              setStatus("delete complete" + Date.now());
+            }
+          })
+          .catch(() => {
+            message.error("Failure");
+          });
+      },
+      onCancel() {
+        ("");
+      },
+    });
+  }
+  const handleCreateTimeWorking = () => {
+    try {
+      handleCreateNewTimeWorking(StartTime, EndTime)
+        .then((res) => {
+          message.success(res.message.errMessage);
+          setStatus("create complete" + Date.now());
+        })
+        .catch((error) => {
+          message.error("create fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdateTimeWorking = () => {
+    try {
+      handleUpdateTime(tempVarible?.id, StartTime, EndTime)
+        .then((res) => {
+          message.success(res.message);
+          setStatus("update complete" + Date.now());
+        })
+        .catch((error) => {
+          message.error("update fail");
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const content = (
     <Menu>
@@ -99,6 +175,7 @@ const CreateTimeWorking = (props) => {
                 fontWeight: "600",
                 fontSize: "14px",
               }}
+              onClick={handleCreateTimeWorking}
             >
               Add
             </button>
@@ -107,8 +184,63 @@ const CreateTimeWorking = (props) => {
       </Menu.Item>
     </Menu>
   );
+  const contentupdate = (
+    <Menu>
+      <Menu.Item
+        key="2"
+        onClick={() => {
+          // setShowPopOver(false);
+          // setShowModal(true);
+        }}
+        style={{ height: "100%" }}
+      >
+        <>
+          <div style={{ fontSize: "16px", fontWeight: "700" }}>
+            Update Time Working
+          </div>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            <div style={{ display: "flex", gap: "10px" }}>
+              Start Time
+              <TimePicker
+                defaultValue={moment(tempVarible?.StartTime, format)}
+                format={format}
+                onChange={onChangeStartTime}
+              />
+            </div>
+            <div style={{ display: "flex", gap: "10px" }}>
+              End Time
+              <TimePicker
+                defaultValue={moment(tempVarible?.EndTime, format)}
+                format={format}
+                onChange={onChangeEndTime}
+              />
+            </div>
+            <button
+              style={{
+                border: "1px solid transparent",
+                borderRadius: "6px",
+                background: "#07cd04",
+                color: "#fff",
+                fontWeight: "600",
+                fontSize: "14px",
+              }}
+              onClick={handleUpdateTimeWorking}
+            >
+              Save
+            </button>
+          </div>
+        </>
+      </Menu.Item>
+    </Menu>
+  );
   const handleClickChange = (visible) => {
     setShowPopOver(visible);
+  };
+  const handleClickChangeUpdate = (visible) => {
+    setShowPopOver(visible);
+    // console.log("check item update: ", visible);
   };
   const beforeUpload = (file) => {
     const isJpgOrPng =
@@ -131,10 +263,7 @@ const CreateTimeWorking = (props) => {
     }
     return isJpgOrPng;
   };
-  const onCropComplete = useCallback((_croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-    setLoading(false);
-  }, []);
+
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
   const handleSubmitCreateStaff = useCallback(
@@ -222,7 +351,7 @@ const CreateTimeWorking = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [status]);
   const handleCancel = () => {
     setIsModalVisible(false);
     props.handleModal(false);
@@ -239,7 +368,7 @@ const CreateTimeWorking = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Create New Time Working</span>
+          <span className={classes.nameCreate}>Time Working</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.currentWorkingHour}>
@@ -257,7 +386,24 @@ const CreateTimeWorking = (props) => {
                         color="#cbc8c8"
                         weight="fill"
                         className={classes.deleteIcon}
+                        onClick={() => confirmDelete(item.id)}
                       />
+                      <Popover
+                        content={contentupdate}
+                        trigger={"click"}
+                        showPopOver={showPopOver}
+                        placement="right"
+                        onVisibleChange={handleClickChangeUpdate}
+                      >
+                        <Wrench
+                          size={22}
+                          color="#cbc8c8"
+                          weight="fill"
+                          className={classes.updateIcon}
+                          onClick={() => setVaribleIdTime(item)}
+                        />
+                      </Popover>
+
                       <p className={classes.textHour}>
                         {item.StartTime} - {item.EndTime}
                       </p>

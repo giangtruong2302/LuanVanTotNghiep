@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/gymplaceholder.jpg";
+import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
@@ -18,15 +18,16 @@ import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateServiceSchema } from "./validation";
-import { handleCreateNewService } from "./ModalServiceAPI";
+import { handleCreateNewService, handleUpdateService } from "./ModalServiceAPI";
 const { Option } = Select;
-const CreateService = (props) => {
+const UpdateService = (props) => {
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -62,29 +63,34 @@ const CreateService = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitCreateStaff = useCallback(
+  const handleSubmitUpdateStaff = useCallback(
     (values) => {
       // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewService(
+        handleUpdateService(
+          props.data.id,
           values.ServiceName,
           values.WorkDuration,
           values.Price,
-          imageUrl,
+          imageUrl ? imageUrl : props.data.ServiceImage,
           fileName
         )
           .then((res) => {
-            toast.success("create new service is success");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
-
-            // toast.success("create new staff account is success !");
+            if (res.data.success === true) {
+              message.success("update service is success !");
+            } else {
+              message.error(res.data.data.email[0]);
+            }
           })
-          .catch((error) => {
-            message.error("add service fail");
+          .catch((res) => {
+            setSaving(false);
+            // console.log("check res data email: ", res);
+            message.error(res.data.data.email);
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -112,7 +118,6 @@ const CreateService = (props) => {
       });
     }
   };
-  // console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}
@@ -135,30 +140,34 @@ const CreateService = (props) => {
       <Modal
         centered
         visible={isModalVisible}
-        width="500px"
+        width="477px"
         onCancel={handleCancel}
         closable={true}
         closeIcon={<XCircle size={32} color="#fff" weight="fill" />}
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Create New Service</span>
-          {/* {differentPass ? (
+          <span className={classes.nameCreate}>Update Account</span>
+          {differentPass ? (
             <p style={{ color: "#ff0000" }}>
               password is different current password
             </p>
           ) : (
             ""
-          )} */}
+          )}
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
             <Formik
               validationSchema={CreateServiceSchema}
               initialValues={{
-                ServiceName: "",
-                WorkDuration: "",
-                Price: "",
+                ServiceName: props.data?.ServiceName
+                  ? props.data.ServiceName
+                  : "N/A",
+                WorkDuration: props.data?.WorkDuration
+                  ? props.data.WorkDuration
+                  : "N/A",
+                Price: props.data?.Price ? props.data.Price : "N/A",
                 // // avatar: "",
                 // isActive: true,
                 // userName: "",
@@ -170,7 +179,7 @@ const CreateService = (props) => {
               onSubmit={async (values) => {
                 // console.log("check values:", values);
                 setSaving(true);
-                handleSubmitCreateStaff(values);
+                handleSubmitUpdateStaff(values);
                 // let newValues: CreateStaffAccountType = values
                 // if (imageUrl && croppedAreaPixels) {
                 //   const croppedImage = await getCroppedImg(
@@ -332,11 +341,13 @@ const CreateService = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item> */}
-                    <span className={classes.titleRight}>Service Image</span>
+                    <span className={classes.titleRight}>Avatar</span>
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>
                         <Cropper
-                          image={imageUrl ? imageUrl + " " : unknow}
+                          image={
+                            imageUrl ? imageUrl + " " : props.data.ServiceImage
+                          }
                           crop={crop}
                           zoom={zoom}
                           aspect={2 / 2}
@@ -368,7 +379,7 @@ const CreateService = (props) => {
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        "Create"
+                        "Update"
                       )}
                     </button>
                   </Form>
@@ -381,4 +392,4 @@ const CreateService = (props) => {
     </>
   );
 };
-export default CreateService;
+export default UpdateService;

@@ -41,6 +41,7 @@ import {
   ListNumbers,
   IdentificationBadge,
   AlignCenterHorizontal,
+  Ticket,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -50,7 +51,7 @@ import { LANGUAGES } from "../../utils/constant";
 import { FormattedMessage } from "react-intl";
 import flagVie from "../../assets/images/region/vietnam.png";
 import flagEng from "../../assets/images/region/united-states.png";
-import { getAllCenter } from "./AdminAPI";
+import { getAllCenter, getAllCenterActive } from "./AdminAPI";
 
 const { Header, Sider, Content } = Layout;
 function getItem(label, key, icon, children, type) {
@@ -93,19 +94,7 @@ const AdminPage = () => {
           icon: <User size={20} color="#171717" weight="fill" />,
           label: <NavLink to="/admin/setting-account">Profile</NavLink>,
         },
-        {
-          key: "2",
-          icon: <Repeat size={20} color="#171717" weight="fill" />,
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              Reset Password
-            </a>
-          ),
-        },
+
         {
           key: "3",
           icon: <SignOut size={20} color="#1d1b1b" weight="fill" />,
@@ -170,7 +159,7 @@ const AdminPage = () => {
   };
   useEffect(() => {
     try {
-      getAllCenter(1).then((res) => {
+      getAllCenterActive(1).then((res) => {
         // console.log("check res: ", res.centers);
         if (res && res.centers.rows.length > 0) {
           setCenter(res.centers.rows);
@@ -195,6 +184,9 @@ const AdminPage = () => {
   };
   const handleViewListCenter = () => {
     navigate("/admin/view-list-center");
+  };
+  const handleViewListDiscount = () => {
+    navigate("/admin/view-list-discount");
   };
   const handleViewListSchedule = () => {
     navigate("/admin/view-list-schedule");
@@ -331,6 +323,15 @@ const AdminPage = () => {
             >
               <Menu.Item onClick={handleViewListOrder}>
                 Xem danh sách đơn hàng
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<Ticket size={20} weight="bold" color="#fff" />}
+              title="Quản lý Khuyến mãi"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListDiscount}>
+                Xem danh sách mức khuyến mãi
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
