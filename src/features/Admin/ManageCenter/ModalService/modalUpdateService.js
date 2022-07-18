@@ -26,7 +26,7 @@ import { getAllManager } from "../../ManageManager/accountAPI";
 const { Option } = Select;
 const UpdateService = (props) => {
   const [manager, setManager] = useState();
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -67,7 +67,7 @@ const UpdateService = (props) => {
   const dispatch = useDispatch();
   const handleSubmitUpdateCenter = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -94,7 +94,7 @@ const UpdateService = (props) => {
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -184,7 +184,7 @@ const UpdateService = (props) => {
                   Status: props.data.Status,
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateCenter(values);
                 }}

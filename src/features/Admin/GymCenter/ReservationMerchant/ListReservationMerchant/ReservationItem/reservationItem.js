@@ -51,7 +51,7 @@ const ReservationItemMerchant = (props) => {
         return "color1";
     }
   };
-  console.log("check props: ", props);
+  // console.log("check props: ", props);
   return (
     <NavLink
       to={`/admin/merchant/reservation-detail/${props.data.id}`}

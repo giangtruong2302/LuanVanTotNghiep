@@ -29,7 +29,7 @@ const Manager = () => {
     setStatus(value);
   };
   const onSearchCus = (value) => {
-    console.log("check search value: ", value);
+    // console.log("check search value: ", value);
     setSearchValue(value);
   };
   const onChangeSearchManager = (e) => {
@@ -41,7 +41,7 @@ const Manager = () => {
     <div className="PTProfileBg">
       <PageHeader
         className="site-page-header"
-        onBack={() => navigate("/admin/manage-center")}
+        onBack={() => navigate("/admin")}
         subTitle="Back to dashboard center"
         style={{
           top: 0,

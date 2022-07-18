@@ -16,6 +16,7 @@ LicenseManager.setLicenseKey(
 );
 
 const ListAccount = (props) => {
+  const [status, setStatus] = useState("");
   const [rowData] = useState([
     {
       setting: <Gear size={20} color="#0a0700" weight="light" />,
@@ -96,6 +97,12 @@ const ListAccount = (props) => {
       flex: 0,
       // headerName: "Setting",
       cellRenderer: "settingRenderer",
+      action: {
+        action1: (value) => {
+          // console.log("check value update:", value);
+          setStatus(value);
+        },
+      },
     },
     {
       field: "status",
@@ -130,7 +137,7 @@ const ListAccount = (props) => {
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
-    console.log("check cuurent salon:", CenterId);
+    // console.log("check cuurent salon:", CenterId);
 
     return {
       getRows: function (params) {
@@ -163,7 +170,7 @@ const ListAccount = (props) => {
         } catch (error) {}
       },
     };
-  }, [CenterId, props.status, props.searchValue]);
+  }, [CenterId, props.status, props.searchValue, status]);
   const gridOptions = {
     rowSelection: "single",
     rowModelType: "serverSide",
@@ -178,7 +185,7 @@ const ListAccount = (props) => {
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
-    console.log("check search value list :", props.searchValue);
+    // console.log("check search value list :", props.searchValue);
     if (props.searchValue !== "") {
       setSearchValue(props.searchValue);
     }
@@ -186,7 +193,7 @@ const ListAccount = (props) => {
       const newDataSource = serverSideDatasource();
       gridApiCustomer.setServerSideDatasource(newDataSource);
     }
-  }, [serverSideDatasource, props.status, props.searchValue]);
+  }, [serverSideDatasource, props.status, props.searchValue, status]);
 
   const onGridReady = (params) => {
     params.api.showLoadingOverlay();

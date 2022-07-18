@@ -9,14 +9,14 @@ const StaffRenderer = (props) => {
   const [idPT] = useState("1");
   const [detailStaff, setDetailStaff] = useState();
   useEffect(() => {
-    handleGetDetailStaff(props.data.StaffId)
+    handleGetDetailStaff(props?.data?.StaffId)
       .then((res) => {
         if (res.staffDetail) {
           setDetailStaff(res.staffDetail);
         }
       })
       .catch((error) => console.log(error));
-  }, [props.data.StaffId]);
+  }, [props?.data?.StaffId]);
   return (
     <>
       <Link to={`/pt-detail/${idPT}`} className="staffContainer">
@@ -26,6 +26,8 @@ const StaffRenderer = (props) => {
           />
         </div>
         <div className="staffText">{detailStaff?.StaffName}</div>
+
+        {/* <div className="staffText">{detailStaff?.StaffName}</div> */}
       </Link>
     </>
   );

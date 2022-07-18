@@ -10,7 +10,7 @@ import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
 
 const ChangeAvatar = (props) => {
-  console.log(props);
+  // console.log(props);
   const [isModalVisible, setIsShowModalVisible] = useState(true);
   const [crop, setCrop] = useState({ x: 50, y: 50 });
   const [loading, setLoading] = useState(false);

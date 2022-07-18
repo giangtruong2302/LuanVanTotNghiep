@@ -20,14 +20,18 @@ import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
-import { CreateInfoSchema } from "./validation";
-import { handleCreateNewAcount } from "./ModalAccountAPI";
+import { CreateInfoSchema, UpdateInfoSchema } from "./validation";
+import {
+  handleCreateNewAcount,
+  handleUpdateNewAcount,
+} from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateAccount = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -64,30 +68,30 @@ const UpdateAccount = (props) => {
   const dispatch = useDispatch();
   const handleSubmitUpdateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewAcount(
+        handleUpdateNewAcount(
           values.email,
           values.password,
           values.fullName,
-          values.isActive,
+          imageUrl,
+          fileName,
           values.userName,
-          values.roleId
+          values.roleId,
+          props.data.ExternalId,
+          props.data.id
         )
           .then((res) => {
+            message.success("update account is success !");
+            props.handleModal(false);
             props.takeStatus("complete" + Date.now());
-            if (res.data.success === true) {
-              message.success("create new staff account is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -98,7 +102,7 @@ const UpdateAccount = (props) => {
         setSaving(false);
       }
     },
-    [dispatch]
+    [dispatch, imageUrl, fileName]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -111,6 +115,7 @@ const UpdateAccount = (props) => {
     if (info.file) {
       getBase64(info.file.originFileObj, (imgUrl) => {
         setImageUrl(imgUrl);
+        setFileName(info.file.name);
         setLoading(false);
       });
     }
@@ -158,68 +163,18 @@ const UpdateAccount = (props) => {
             <span className={classes.titleLeft}>Infomation</span>
             <div className={classes.formInfo}>
               <Formik
-                validationSchema={CreateInfoSchema}
+                validationSchema={UpdateInfoSchema}
                 initialValues={{
                   email: props.data.email,
-                  password: "",
                   fullName: props.data.fullName,
-                  // avatar: "",
-                  isActive: true,
+
                   userName: props.data.userName,
                   roleId: props.data.roleId,
-                  // gender: "",
-                  // dob: "",
-                  // address: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateStaff(values);
-                  // let newValues: CreateStaffAccountType = values
-                  // if (imageUrl && croppedAreaPixels) {
-                  //   const croppedImage = await getCroppedImg(
-                  //     imageUrl,
-                  //     croppedAreaPixels,
-                  //   )
-                  //   if (fileSize && croppedImage) {
-                  //     const metadata: ImagePresignedS3Type = {
-                  //       images: [
-                  //         {
-                  //           ext: fileType,
-                  //           size: parseInt(fileSize.toFixed(0)),
-                  //         },
-                  //       ],
-                  //     }
-                  //     doGetPresignedUrlS3(metadata).then((res) => {
-                  //       const { data } = res
-                  //       if (data.data) {
-                  //         doPutPresignedUrl(
-                  //           data.data.urls[0],
-                  //           croppedImage,
-                  //         ).then(() => {
-                  //           newValues = {
-                  //             ...newValues,
-                  //             avatar: data.data.urls[0].split('?')[0],
-                  //           }
-                  //           handleSubmitCreateStaff(newValues)
-                  //           // CreateAccountStaff(7, newValues)
-                  //           //   .then(() => {
-                  //           //     message.success('Success')
-                  //           //   })
-                  //           //   .catch(() => {
-                  //           //     message.error('Failure')
-                  //           //   })
-                  //           //   .finally(() => {
-                  //           //     setSaving(false)
-                  //           //     props.handleModal(false)
-                  //           //   })
-                  //         })
-                  //       }
-                  //     })
-                  //   }
-                  // } else {
-                  //   handleSubmitCreateStaff(values)
-                  // }
                 }}
               >
                 {({ errors, touched, setFieldValue }) => {
@@ -310,96 +265,7 @@ const UpdateAccount = (props) => {
                           <Option value="5">Customer</Option>
                         </Select>
                       </FormAnt.Item>
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.phoneNumber && errors?.phoneNumber)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(
-                            touched?.phoneNumber && errors?.phoneNumber
-                          ) && errors?.phoneNumber
-                        }
-                      >
-                        <Field name="phoneNumber">
-                          {({ field }) => (
-                            <Input
-                              {...field}
-                              className={` ${
-                                touched?.phoneNumber && errors?.phoneNumber
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              initialValueFormat="national"
-                              country="US"
-                              onChange={(value) =>
-                                setFieldValue("phoneNumber", value?.slice(2))
-                              }
-                              value={""}
-                              international={false}
-                              placeholder="Phone number"
-                              name="phoneNumber"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item>
 
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.dob && errors?.dob)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.dob && errors?.dob) && errors?.dob
-                        }
-                      >
-                        <DatePicker
-                          placeholder="Date of Birth"
-                          onChange={(dateString) => {
-                            const startday =
-                              moment(dateString).format("YYYY-MM-DD");
-                            setFieldValue("dob", startday);
-                            console.log(startday);
-                          }}
-                          className={` ${
-                            touched?.dob && errors?.dob
-                              ? classes.inputError
-                              : ""
-                          } ${classes.inputRecovery} ant-picker `}
-                          // defaultValue={moment('2015-01-01', 'YYYY-MM-DD')}
-                        />
-                      </FormAnt.Item>
-                      <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.address && errors?.address)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.address && errors?.address) &&
-                          errors?.address
-                        }
-                      >
-                        <Field name="address">
-                          {({ field }) => (
-                            <Input
-                              {...field}
-                              name="address"
-                              className={` ${
-                                touched?.address && errors?.address
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Address"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
                       <span className={classes.titleLeft}>Login info</span>
                       <FormAnt.Item
                         style={{ marginTop: "20px" }}
@@ -428,71 +294,18 @@ const UpdateAccount = (props) => {
                           )}
                         </Field>
                       </FormAnt.Item>
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password && errors?.password)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password && errors?.password) &&
-                          errors?.password
-                        }
-                      >
-                        <Field name="password">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password"
-                              className={` ${
-                                touched?.password && errors?.password
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
-                      {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password2 && errors?.password2)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password2 && errors?.password2) &&
-                          errors?.password2
-                        }
-                      >
-                        <Field name="password2">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password2"
-                              className={` ${
-                                touched?.password2 && errors?.password2
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Confirm Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
+
                       <button
                         className={classes.btnRecovery}
                         type="submit"
                         style={{ margin: "10px" }}
                       >
                         {saving ? (
-                          <div style={{ marginLeft: "150px" }}>
+                          <div style={{ marginLeft: "99px" }}>
                             <StaggerAnimation></StaggerAnimation>
                           </div>
                         ) : (
-                          "Create"
+                          "Save"
                         )}
                       </button>
                     </Form>
@@ -507,7 +320,7 @@ const UpdateAccount = (props) => {
             <div className={classes.changeThumbnailContainer}>
               <div className={classes.image}>
                 <Cropper
-                  image={imageUrl ? imageUrl + " " : unknow}
+                  image={imageUrl ? imageUrl + " " : props.data.avatar}
                   crop={crop}
                   zoom={zoom}
                   aspect={2 / 2}

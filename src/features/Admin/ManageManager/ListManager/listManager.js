@@ -146,7 +146,7 @@ const ListManager = (props) => {
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
-    console.log("check cuurent salon:", CenterId);
+    // console.log("check cuurent salon:", CenterId);
 
     return {
       getRows: function (params) {
@@ -194,7 +194,7 @@ const ListManager = (props) => {
   const agOverLaytheme =
     '<span class="ag-overlay-loading-center">No rows to show</span>';
   useEffect(() => {
-    console.log("check search value list :", props.searchValue);
+    // console.log("check search value list :", props.searchValue);
     if (props.searchValue !== "") {
       setSearchValue(props.searchValue);
     }

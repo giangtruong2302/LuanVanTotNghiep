@@ -107,7 +107,7 @@ const CreateStaff = (props) => {
   };
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -129,19 +129,15 @@ const CreateStaff = (props) => {
           Math.floor(Math.random() * 2001)
         )
           .then((res) => {
-            if (res.errCode === 0) {
-              props.takeStatus("complete" + Date.now());
+            props.takeStatus("complete" + Date.now());
 
-              toast.success("create new staff account is success !");
-              props.handleModal(false);
-            } else {
-              toast.error("create new staff account is failed !");
-            }
+            toast.success("create new staff account is success !");
+            props.handleModal(false);
           })
           .catch((error) => {
             setSaving(false);
-            console.log("check res data email: ", error);
-            // message.error(res.data.data.email);
+            // console.log("check res data email: ", error);
+            message.error("create staff fail");
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -197,7 +193,7 @@ const CreateStaff = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateStaff(values);
                 }}

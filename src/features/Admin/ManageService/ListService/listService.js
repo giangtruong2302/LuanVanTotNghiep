@@ -102,7 +102,6 @@ const ListService = (props) => {
       cellRenderer: "settingRenderer",
       action: {
         action1: (value) => {
-          // console.log("check value update:", value);
           setStatus(value);
         },
       },
@@ -135,7 +134,7 @@ const ListService = (props) => {
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
-    console.log("check cuurent salon:", CenterId);
+    // console.log("check cuurent salon:", CenterId);
 
     return {
       getRows: function (params) {
@@ -165,7 +164,7 @@ const ListService = (props) => {
             .catch(() => {
               params.api.showLoadingOverlay();
             });
-        } catch (error) { }
+        } catch (error) {}
       },
     };
   }, [CenterId, props.status, props.searchValue, status]);
@@ -223,7 +222,7 @@ const ListService = (props) => {
         overlayLoadingTemplate={agOverLaytheme}
         frameworkComponents={frameworkcomponents}
         onGridReady={onGridReady}
-      // suppressContextMenu={true}
+        // suppressContextMenu={true}
       />
       <ToastContainer
         position="bottom-left"

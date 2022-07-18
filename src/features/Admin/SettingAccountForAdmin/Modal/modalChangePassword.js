@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 // import { Area, Point } from "react-easy-crop/types";
 
 const ChangePassword = (props) => {
-  console.log(props);
+  // console.log(props);
   const [isModalVisible, setIsShowModalVisible] = useState(true);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -100,7 +100,7 @@ const ChangePassword = (props) => {
                 password2: "",
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 handleSubmitChangePassword(values);
               }}
             >

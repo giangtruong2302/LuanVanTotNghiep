@@ -40,7 +40,7 @@ const Account = () => {
     <div className="PTProfileBg">
       <PageHeader
         className="site-page-header"
-        onBack={() => navigate("/admin/manage-center")}
+        onBack={() => navigate("/admin")}
         subTitle="Back to dashboard center"
         style={{
           top: 0,

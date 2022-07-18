@@ -5,4 +5,9 @@ const getAllReservationOfCenter = (CenterId, name, page) => {
     `/api/merchant/${CenterId}/get-all-booking-of-center?page=${page}&name=${name}`
   );
 };
-export { getAllReservationOfCenter };
+const getDetailBookingOfCenter = (CenterId, id) => {
+  return axios.get(
+    `/api/get-booking-detail-center?id=${id}&CenterId=${CenterId}`
+  );
+};
+export { getAllReservationOfCenter, getDetailBookingOfCenter };

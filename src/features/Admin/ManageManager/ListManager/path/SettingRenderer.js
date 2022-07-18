@@ -75,7 +75,7 @@ const SettingRenderer = (props) => {
   const handleClickChange = (visible) => {
     setShowPopOver(visible);
   };
-  console.log("check show popover: ", showPopOver);
+  // console.log("check show popover: ", showPopOver);
   return (
     <>
       <Popover

@@ -24,11 +24,10 @@ const SettingRenderer = (props) => {
       centered: true,
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
-        console.log("check id: ", props.data.id);
+        // console.log("check id: ", props.data.id);
         // return handleDeleteService(parseInt(props.data.id))
         //   .then(() => {
         //     message.success("Success");
-
         //     props.colDef.action.action1("delete" + Date.now());
         //   })
         //   .catch(() => {
@@ -75,7 +74,7 @@ const SettingRenderer = (props) => {
   const handleClickChange = (visible) => {
     setShowPopOver(visible);
   };
-  console.log("check show popover: ", showPopOver);
+  // console.log("check show popover: ", showPopOver);
   return (
     <>
       <Popover

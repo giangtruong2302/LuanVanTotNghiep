@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { getAllCustomerOfCenter } from "../GymCenter/Customers/CusAPI";
 import { message } from "antd";
 import { getAllStaffOfCenter } from "../GymCenter/Staffs/StaffAPI";
+import { handleGet5ReviewNew, handleGetBookingOfCenter } from "./CenterAPI";
 
 const DashboardBranchCenter = (props) => {
   //const salonId = useAppSelector(state => state.currentSalon);
@@ -54,6 +55,8 @@ const DashboardBranchCenter = (props) => {
   console.log("check la in dashboard: ", testLanguage);
   const [customerTotal, setCustomerTotal] = useState();
   const [staffTotal, setStaffTotal] = useState();
+  const [bookingTotal, setBookingTotal] = useState();
+  const [fiveReview, setFiveReview] = useState();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
 
   let arr = useMemo(
@@ -99,16 +102,16 @@ const DashboardBranchCenter = (props) => {
         description: "Swap",
         link: "/admin/merchant/gym-config",
       },
-      {
-        image: (
-          <span className="icon-QuickAcces_6">
-            <Sword size={24} color="#f2f4f1" weight="fill" />
-          </span>
-        ),
-        title: "Work shiff",
-        description: "Swap",
-        link: "/customers",
-      },
+      // {
+      //   image: (
+      //     <span className="icon-QuickAcces_6">
+      //       <Sword size={24} color="#f2f4f1" weight="fill" />
+      //     </span>
+      //   ),
+      //   title: "Work shiff",
+      //   description: "Swap",
+      //   link: "/customers",
+      // },
       {
         image: (
           <span className="icon-QuickAcces_7">
@@ -165,16 +168,16 @@ const DashboardBranchCenter = (props) => {
         description: "Swap",
         link: "/admin/merchant/gym-config",
       },
-      {
-        image: (
-          <span className="icon-QuickAcces_6">
-            <Sword size={24} color="#f2f4f1" weight="fill" />
-          </span>
-        ),
-        title: "Work shiff",
-        description: "Swap",
-        link: "/customers",
-      },
+      // {
+      //   image: (
+      //     <span className="icon-QuickAcces_6">
+      //       <Sword size={24} color="#f2f4f1" weight="fill" />
+      //     </span>
+      //   ),
+      //   title: "Work shiff",
+      //   description: "Swap",
+      //   link: "/customers",
+      // },
       {
         image: (
           <span className="icon-QuickAcces_7">
@@ -224,7 +227,7 @@ const DashboardBranchCenter = (props) => {
     try {
       getAllStaffOfCenter(parseInt(CenterId), "", 1)
         .then((res) => {
-          console.log("check res staff: ", res.staffOfCenter);
+          // console.log("check res staff: ", res.staffOfCenter);
           if (res.staffOfCenter) {
             setSummary({
               staff: res.staffOfCenter.count ? res.staffOfCenter.count : 0,
@@ -243,7 +246,7 @@ const DashboardBranchCenter = (props) => {
     try {
       getAllCustomerOfCenter(parseInt(CenterId), "", 1)
         .then((res) => {
-          console.log("check res: ", res);
+          // console.log("check res: ", res);
           if (res.customerOfCenter) {
             setSummary({
               customer: res.customerOfCenter.count
@@ -256,6 +259,21 @@ const DashboardBranchCenter = (props) => {
         .catch(() => {
           message.error("get customer fail");
         });
+      handleGetBookingOfCenter(CenterId, "", 1)
+        .then((res) => {
+          if (res) {
+            setBookingTotal(res.bookingOfCenter.count);
+          }
+        })
+        .catch((error) => console.log(error));
+      handleGet5ReviewNew(CenterId)
+        .then((res) => {
+          // console.log("check 5 review: ", res);
+          if (res) {
+            setFiveReview(res.fiveReviewOfCenter.rows);
+          }
+        })
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
     }
@@ -293,7 +311,11 @@ const DashboardBranchCenter = (props) => {
                     <Summarize image={logo1} title="Staff" total={staffTotal} />
                   </div>
                   <div className={classes.summarizeItem}>
-                    <Summarize image={logo2} title="Something" total={1.2022} />
+                    <Summarize
+                      image={logo2}
+                      title="Booking"
+                      total={bookingTotal}
+                    />
                   </div>
                 </div>
               </div>
@@ -349,25 +371,28 @@ const DashboardBranchCenter = (props) => {
                   <AreaChart />
                 </div>
               </div>
-              <div
-                className={`${classes.rightItem} ${classes.rightItemNotifications}`}
-              >
+              <div className={` ${classes.rightItemNotifications}`}>
                 <div
                   className={`${classes.title} ${classes.titleNotifications}`}
                 >
                   Notifications
                 </div>
-                <div className={classes.notificationsDashboard}>
-                  {nfs.map(function (item, idx) {
-                    return (
-                      <Notifications
-                        key={idx}
-                        date={item.date}
-                        title={item.title}
-                        text={item.text}
-                      />
-                    );
-                  })}
+                <div
+                  className={classes.notificationsDashboard}
+                  style={{ height: "290px", overflow: "auto" }}
+                >
+                  {fiveReview &&
+                    fiveReview.map(function (item, index) {
+                      return (
+                        <Notifications
+                          key={index}
+                          date={item.createdAt}
+                          title={item.ratingPoint}
+                          text={item.reviewContent}
+                          data={item}
+                        />
+                      );
+                    })}
                 </div>
               </div>
             </div>

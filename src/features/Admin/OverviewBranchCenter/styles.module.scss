@@ -62,14 +62,23 @@
           padding-left: 15px;
           padding-right: 15px;
           width: 33.3334%;
+          .rightItem {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+          }
           .rightItemReservation {
             margin-bottom: 10px;
+            .titleNotifications {
+              margin-bottom: 21px;
+            }
             .reservationDashboard {
               height: 220px;
+              display: flex;
+              flex-direction: column;
+              overflow: auto;
+              gap: 15px;
             }
-          }
-          .titleNotifications {
-            margin-bottom: 21px;
           }
         }
       }

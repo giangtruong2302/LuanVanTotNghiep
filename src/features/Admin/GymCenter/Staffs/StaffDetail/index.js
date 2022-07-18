@@ -55,7 +55,7 @@ const StaffProfile = () => {
     // // UPCOMMING BOOKING API
     handleGetBookingOfStaff(staffId, 1).then((res) => {
       const data = res.bookingOfPT.rows;
-      console.log("check data: ", data);
+      // console.log("check data: ", data);
       if (data && data.length > 0) {
         setUpcommingBooking(res.bookingOfPT.rows);
         if (data.length === 0 || data.length < 10) {

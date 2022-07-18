@@ -93,7 +93,7 @@ const SettingRenderer = (props) => {
     setShowPopOver(visible);
   };
   // console.log("check show popover: ", showPopOver);
-  console.log("check props setting: ", props.data);
+  // console.log("check props setting: ", props.data);
   return (
     <>
       <Popover

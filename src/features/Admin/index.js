@@ -15,6 +15,7 @@ import {
   UserSwitchOutline,
   AppstoreOutlined,
   BankOutlined,
+  SmileOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Dropdown, Layout, Menu } from "antd";
 import {
@@ -40,6 +41,7 @@ import {
   ListNumbers,
   IdentificationBadge,
   AlignCenterHorizontal,
+  Ticket,
 } from "phosphor-react";
 import DashboardAdmin from "./Dashboard";
 import { Link, NavLink, Outlet, Route, Router, Routes } from "react-router-dom";
@@ -49,7 +51,7 @@ import { LANGUAGES } from "../../utils/constant";
 import { FormattedMessage } from "react-intl";
 import flagVie from "../../assets/images/region/vietnam.png";
 import flagEng from "../../assets/images/region/united-states.png";
-import { getAllCenter } from "./AdminAPI";
+import { getAllCenter, getAllCenterActive } from "./AdminAPI";
 
 const { Header, Sider, Content } = Layout;
 function getItem(label, key, icon, children, type) {
@@ -67,7 +69,7 @@ const AdminPage = () => {
 
   const navigate = useNavigate();
   const roleId = useSelector((state) => state.user.userInfo.roleId);
-  console.log("check role: ", roleId);
+  // console.log("check role: ", roleId);
   const [collapsed, setCollapsed] = useState(true);
   const [center, setCenter] = useState([]);
   const dispatch = useDispatch();
@@ -78,7 +80,7 @@ const AdminPage = () => {
   const handleChangeCenter = (CenterId, CenterName) => {
     navigate(`/admin/manage-center`);
     localStorage.setItem("CenterId", CenterId.toString());
-    console.log("check center id after change: ", CenterId);
+    // console.log("check center id after change: ", CenterId);
   };
   const handleLogout = () => {
     dispatch(dispatch(actions.processLogout()));
@@ -92,19 +94,7 @@ const AdminPage = () => {
           icon: <User size={20} color="#171717" weight="fill" />,
           label: <NavLink to="/admin/setting-account">Profile</NavLink>,
         },
-        {
-          key: "2",
-          icon: <Repeat size={20} color="#171717" weight="fill" />,
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              Reset Password
-            </a>
-          ),
-        },
+
         {
           key: "3",
           icon: <SignOut size={20} color="#1d1b1b" weight="fill" />,
@@ -114,13 +104,63 @@ const AdminPage = () => {
       ]}
     />
   );
+  const menuDrop = (
+    <Menu
+      items={[
+        {
+          key: "1",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.antgroup.com"
+            >
+              1st menu item
+            </a>
+          ),
+        },
+        {
+          key: "2",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.aliyun.com"
+            >
+              2nd menu item (disabled)
+            </a>
+          ),
+          icon: <SmileOutlined />,
+          // disabled: true,
+        },
+        {
+          key: "3",
+          label: (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.luohanacademy.com"
+            >
+              3rd menu item (disabled)
+            </a>
+          ),
+          // disabled: true,
+        },
+        {
+          key: "4",
+          danger: true,
+          label: "a danger item",
+        },
+      ]}
+    />
+  );
   const handleSettingAccount = () => {
     navigate("/admin/setting-account");
   };
   useEffect(() => {
     try {
-      getAllCenter(1).then((res) => {
-        console.log("check res: ", res.centers);
+      getAllCenterActive(1).then((res) => {
+        // console.log("check res: ", res.centers);
         if (res && res.centers.rows.length > 0) {
           setCenter(res.centers.rows);
         }
@@ -129,7 +169,7 @@ const AdminPage = () => {
       console.log(error);
     }
   }, []);
-  console.log("check center: ", center);
+  // console.log("check center: ", center);
   const handleViewListAccount = () => {
     navigate("/admin/view-list-account");
   };
@@ -144,6 +184,9 @@ const AdminPage = () => {
   };
   const handleViewListCenter = () => {
     navigate("/admin/view-list-center");
+  };
+  const handleViewListDiscount = () => {
+    navigate("/admin/view-list-discount");
   };
   const handleViewListSchedule = () => {
     navigate("/admin/view-list-schedule");
@@ -283,6 +326,15 @@ const AdminPage = () => {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu
+              icon={<Ticket size={20} weight="bold" color="#fff" />}
+              title="Quản lý Khuyến mãi"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListDiscount}>
+                Xem danh sách mức khuyến mãi
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
               icon={<Book size={20} weight="bold" color="#fff" />}
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
               title="Quản lý Blog"
@@ -391,8 +443,10 @@ const AdminPage = () => {
             )}
           </span>
           <span className="notificationAdmin">
-            <Badge style={{ zIndex: "9999" }} count={2} size="default">
-              <BellRinging size={26} color="#ffea00" weight="fill" />
+            <Badge style={{ zIndex: "9999" }} count={5} size="default">
+              <Dropdown overlay={menuDrop}>
+                <BellRinging size={26} color="#ffea00" weight="fill" />
+              </Dropdown>
             </Badge>
           </span>
           <span className="infoUser">

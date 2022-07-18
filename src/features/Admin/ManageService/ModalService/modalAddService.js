@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
+import unknow from "../../../../assets/images/gymplaceholder.jpg";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
@@ -64,7 +64,7 @@ const CreateService = (props) => {
   const dispatch = useDispatch();
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -77,20 +77,14 @@ const CreateService = (props) => {
           fileName
         )
           .then((res) => {
-            if (res.errCode === 0) {
-              message.success("create new service is success");
-              props.handleModal(false);
-            } else {
-              message.error(res.message);
-            }
+            toast.success("create new service is success");
             props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
 
-            toast.success("create new staff account is success !");
+            // toast.success("create new staff account is success !");
           })
-          .catch((res) => {
-            setSaving(false);
-            console.log("check res data email: ", res);
-            message.error(res.data.data.email);
+          .catch((error) => {
+            message.error("add service fail");
           })
           .finally(() => {
             props.takeStatus("complete");
@@ -118,7 +112,7 @@ const CreateService = (props) => {
       });
     }
   };
-  console.log(imageUrl, fileName);
+  // console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}
@@ -174,7 +168,7 @@ const CreateService = (props) => {
                 // address: "",
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 setSaving(true);
                 handleSubmitCreateStaff(values);
                 // let newValues: CreateStaffAccountType = values
@@ -370,7 +364,7 @@ const CreateService = (props) => {
                       style={{ margin: "10px" }}
                     >
                       {saving ? (
-                        <div style={{ marginLeft: "150px" }}>
+                        <div style={{ marginLeft: "99px" }}>
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (

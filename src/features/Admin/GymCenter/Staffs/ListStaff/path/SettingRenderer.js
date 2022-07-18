@@ -43,8 +43,14 @@ const SettingRenderer = (props) => {
           props.data.RoleId.toString()
         )
           .then((res) => {
-            toast.success(res.errMessage);
-            props.colDef.action.action1("delete" + Date.now());
+            if (res.errCode === 0) {
+              toast.success(res.errMessage);
+              props.colDef.action.action1("delete" + Date.now());
+            }
+            if (res.errCode === 10) {
+              message.warning(res.errMessage);
+              props.colDef.action.action1("delete" + Date.now());
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -93,8 +99,8 @@ const SettingRenderer = (props) => {
   const handleClickChange = (visible) => {
     setShowPopOver(visible);
   };
-  console.log("check show popover: ", showPopOver);
-  console.log("check props setting: ", props.data);
+  // console.log("check show popover: ", showPopOver);
+  // console.log("check props setting: ", props.data);
   return (
     <>
       <Popover

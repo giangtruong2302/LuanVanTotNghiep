@@ -102,7 +102,7 @@ const ListService = (props) => {
   const [gridApiCustomer, setGridApiCustomer] = useState();
   const CenterId = localStorage.getItem("CenterId");
   const serverSideDatasource = useCallback(() => {
-    console.log("check cuurent salon:", CenterId);
+    // console.log("check cuurent salon:", CenterId);
     return {
       getRows: function (params) {
         // loading?.classList.remove("hidden");

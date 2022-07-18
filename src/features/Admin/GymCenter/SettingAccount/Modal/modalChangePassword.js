@@ -72,7 +72,7 @@ const ChangePassword = (props) => {
                 password2: "",
               }}
               onSubmit={async (values) => {
-                console.log("check values:", values);
+                // console.log("check values:", values);
                 // handleSubmitUpdatePersonalDetail(values)
               }}
             >

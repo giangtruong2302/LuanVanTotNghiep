@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
+import unknow from "../../../../assets/images/banner/289048829_1167860817104208_3424094009605653790_n.png";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
@@ -66,7 +66,7 @@ const CreateCenter = (props) => {
   const dispatch = useDispatch();
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -93,7 +93,7 @@ const CreateCenter = (props) => {
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -122,7 +122,7 @@ const CreateCenter = (props) => {
       });
     }
   };
-  console.log(imageUrl, fileName);
+  // console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}
@@ -184,7 +184,7 @@ const CreateCenter = (props) => {
                   Status: 1,
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateStaff(values);
                 }}

@@ -32,7 +32,7 @@ import {
 import NumberFormat from "react-number-format";
 const { Option } = Select;
 const UpdateService = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [detailBooking, setDetailBooking] = useState();
   const [detailOrder, setDetailorder] = useState();
@@ -58,11 +58,11 @@ const UpdateService = (props) => {
       handleGetDetailBookingOfCustomer(props.data.CustomerId)
         .then((res) => {
           if (res.bookingDetail) {
-            console.log("res booking detail: ", res.bookingDetail);
+            // console.log("res booking detail: ", res.bookingDetail);
             setDetailBooking(res.bookingDetail);
             handleGetDetailDiscount(res.bookingDetail.idDiscount)
               .then((res) => {
-                console.log("res.discount: ", res.discount);
+                // console.log("res.discount: ", res.discount);
                 if (res.discount) {
                   setDetailorder(res.discount);
                 }

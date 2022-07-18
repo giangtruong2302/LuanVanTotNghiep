@@ -26,7 +26,7 @@ import { getAllCenter } from "../../AdminAPI";
 import { handleCreateNewBlog, handleUpdateBlog } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateBlog = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -110,7 +110,7 @@ const UpdateBlog = (props) => {
   };
   const handleSubmitUpdateBlog = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -166,7 +166,7 @@ const UpdateBlog = (props) => {
                   centerId: props.data.CenterId,
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateBlog(values);
                 }}

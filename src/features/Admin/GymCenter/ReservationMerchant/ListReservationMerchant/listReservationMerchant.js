@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./listReservationMerchant.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../../component/StaggerAnimation";
@@ -9,13 +9,15 @@ import { useState } from "react";
 
 const ListReservationMerchant = (props) => {
   const [dataRes, setDataRes] = useState();
+  const [page, setPage] = useState(2);
+  const [hasMore, setHasMore] = useState(true);
   const CenterId = localStorage.getItem("CenterId");
-  console.log("check props: ", props.searchValue);
+  // console.log("check props: ", props.searchValue);
   useEffect(() => {
     try {
       getAllReservationOfCenter(CenterId, props.searchValue, 1)
         .then((res) => {
-          console.log("check res reservation: ", res);
+          // console.log("check res reservation: ", res);
           if (
             res &&
             res.bookingOfCenter &&
@@ -29,16 +31,42 @@ const ListReservationMerchant = (props) => {
       console.log(error);
     }
   }, [CenterId, props.searchValue]);
+  const fetchNextPageBooking = useCallback(async () => {
+    getAllReservationOfCenter(CenterId, props.searchValue, page)
+      .then((response) => {
+        const data = response.bookingOfCenter.rows;
+        if (data && data.length > 0) {
+          // console.log(response);
+          setDataRes((prev) => {
+            if (prev !== undefined) return [...prev, ...data];
+          });
+          if (data.length === 0 || data.length < 10) {
+            setHasMore(false);
+          }
+          setPage(page + 1);
+        }
+      })
+      .catch(() => {
+        // setFlag(true);
+        setHasMore(false);
+      })
+      .finally(() => {
+        // setFlag(true);
+        console.log("success");
+        // setHasMore(false)
+      });
+  }, [props.searchValue, CenterId]);
   return (
-    <div className="listItemReservation">
+    <div className="listItemReservation" id="scrollableDiv">
       <InfiniteScroll
         dataLength={8}
-        next={() => console.log("object")}
         loader={
           <div>
             <StaggerAnimation />
           </div>
         }
+        hasMore={hasMore}
+        next={fetchNextPageBooking}
         scrollableTarget="scrollableDiv"
       >
         {dataRes && dataRes.length > 0

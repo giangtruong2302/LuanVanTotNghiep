@@ -25,7 +25,7 @@ import { CreateManagerSchema, UpdateManagerSchema } from "./validation";
 import { handleCreateNewManager, handleUpdateManager } from "./ModalAccountAPI";
 const { Option } = Select;
 const UpdateAccount = (props) => {
-  console.log("check props update: ", props);
+  // console.log("check props update: ", props);
   const [allCenter, setAllCenter] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
@@ -67,7 +67,7 @@ const UpdateAccount = (props) => {
   const dispatch = useDispatch();
   const handleSubmitUpdateManager = useCallback(
     (values) => {
-      console.log("check values: ", values, fileName, imageUrl);
+      // console.log("check values: ", values, fileName, imageUrl);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
@@ -88,17 +88,13 @@ const UpdateAccount = (props) => {
           props.data.ExternalId
         )
           .then((res) => {
+            message.success("update new staff account is success !");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
-            if (res.data.success === true) {
-              message.success("update new staff account is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
           })
           .catch((res) => {
             setSaving(false);
-            console.log("check res data email: ", res);
+            // console.log("check res data email: ", res);
             message.error(res.data.data.email);
           })
           .finally(() => {
@@ -117,7 +113,7 @@ const UpdateAccount = (props) => {
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
-  console.log("check imageUrl: ", imageUrl);
+  // console.log("check imageUrl: ", imageUrl);
 
   const handleChangeImage = async (info) => {
     setLoading(true);
@@ -195,7 +191,7 @@ const UpdateAccount = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitUpdateManager(values);
                   // let newValues: CreateStaffAccountType = values

@@ -25,6 +25,8 @@ import {
   Order,
   Schedule,
   Center,
+  Discount,
+  NoMatch,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
 import RequireAuth from "./RequiredAuth";
@@ -107,6 +109,7 @@ const AppLayoutAdmin = () => {
           <Route path="/admin/view-list-order" element={<Order />} />
           <Route path="/admin/view-list-manager" element={<Manager />} />
           <Route path="/admin/view-list-schedule" element={<Schedule />} />
+          <Route path="/admin/view-list-discount" element={<Discount />} />
         </Route>
       </Routes>
     </AppSuspense>

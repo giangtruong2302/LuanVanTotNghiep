@@ -107,7 +107,7 @@ const CreateCustomer = (props) => {
   };
   const handleSubmitCreateStaff = useCallback(
     (values) => {
-      console.log("check values: ", values);
+      // console.log("check values: ", values);
       try {
         setSaving(true);
         handleCreateNewCustomer(
@@ -123,22 +123,17 @@ const CreateCustomer = (props) => {
           fileName,
           values.centerId,
           values.salaryId,
-          Math.floor(Math.random() * 1001),
-          Math.floor(Math.random() * 2001)
+          Math.floor(Math.random() * 3001)
         )
           .then((res) => {
-            if (res.errCode === 0) {
-              props.takeStatus("complete" + Date.now());
-
-              toast.success("create new staff account is success !");
-              props.handleModal(false);
-            } else {
-              toast.error("create new staff account is failed !");
-            }
+            props.takeStatus("complete" + Date.now());
+            toast.success("create new staff account is success !");
+            props.handleModal(false);
           })
           .catch((error) => {
             setSaving(false);
-            console.log("check res data email: ", error);
+            console.log(error);
+            toast.error("create customer fail");
             // message.error(res.data.data.email);
           })
           .finally(() => {
@@ -177,7 +172,7 @@ const CreateCustomer = (props) => {
                   password: "",
                   phoneNumber: "",
                   gender: false,
-                  roleId: "5",
+                  roleId: 5,
                   dob: "",
                   address: "",
 

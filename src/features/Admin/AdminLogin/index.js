@@ -16,7 +16,7 @@ const AdminLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const handleLogin = async (values) => {
-    console.log("check info ", values);
+    // console.log("check info ", values);
     const email = values ? values.email : "";
     const password = values ? values.password : "";
     try {
@@ -40,13 +40,7 @@ const AdminLoginPage = () => {
         <div className={classes.logoLogin}>GH GYM</div>
         <div className={classes.titlePage}>
           <div className={classes.textLoginPage}></div>
-          {isLogin.isAuthenticated ? (
-            ""
-          ) : (
-            <div className={classes.textRecovery} style={{ color: "red" }}>
-              Invalid username or password
-            </div>
-          )}
+
           <Formik
             validationSchema={loginSchema}
             initialValues={{

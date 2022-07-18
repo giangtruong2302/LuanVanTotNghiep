@@ -40,7 +40,7 @@ const CustomerProfile = () => {
   const location = useLocation();
   // const currentSalon = useSelector((state) => state.currentSalon.salonId);
   const customerId = location.pathname.split("/")[3];
-  console.log("check cus id: ", customerId);
+  // console.log("check cus id: ", customerId);
   useEffect(() => {
     //  CARD CUSTOMER PROFILE API
     handleGetDetailCustomer(customerId)
@@ -54,7 +54,7 @@ const CustomerProfile = () => {
     // // UPCOMMING BOOKING API
     handleGetBookingOfCustomer(customerId, 1).then((res) => {
       const data = res.bookingOfCus.rows;
-      console.log("check data: ", data);
+      // console.log("check data: ", data);
       if (data && data.length > 0) {
         setUpcommingBooking(res.bookingOfCus.rows);
         if (data.length === 0 || data.length < 10) {
