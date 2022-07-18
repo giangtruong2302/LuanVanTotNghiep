@@ -61,7 +61,7 @@
                     display: flex;
                     gap: 5px;
                     flex-direction: column;
-                    padding-left: 50px;
+
                     margin-top: 50px;
                     padding-left: 150px;
 
@@ -181,17 +181,19 @@
                     }
 
                     .infoDetailStaff {
-                        padding-top: 100px;
+                        padding-top: 70px;
                         padding-right: 400px !important;
                         margin-right: 200px !important;
                         position: absolute;
+                        padding-left: 10px !important;
 
 
 
                         .nameStaffAndPosition {
-                            width: 100%;
+                            width: 80%;
                             border-bottom: solid rgb(170, 168, 168) 1px;
-                            padding-right: 300px !important;
+                            // padding-right: 300px !important;
+                            margin-left: 100px !important;
                             position: absolute;
                             color: #000;
                             font-weight: 600;
@@ -212,7 +214,7 @@
 
                         .likeAndChat {
                             gap: 15px;
-                            border-top: solid rgb(170, 168, 168) 1px;
+                            // border-top: solid rgb(170, 168, 168) 1px;
                             margin-top: 230px;
                             width: 530px;
                             margin-left: 80px;

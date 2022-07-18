@@ -98,7 +98,7 @@ const ListService = (props) => {
           />
         </div>
       ) : (
-        <div className={classes.listServiceContent} id="scrollableDiv">
+        <div className={classes.listServiceContent}>
           <InfiniteScroll
             dataLength={allService?.length ? allService.length : 0}
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
@@ -109,7 +109,7 @@ const ListService = (props) => {
             }
             hasMore={hasMore}
             next={fetchNextPageService}
-            scrollableTarget="scrollableDiv"
+
 
           >
             {allService?.map((item, index) => {

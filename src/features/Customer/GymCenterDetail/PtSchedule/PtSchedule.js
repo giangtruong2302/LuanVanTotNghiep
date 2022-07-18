@@ -338,7 +338,7 @@ const PTShedule = (props) => {
   // }, []);
 
   const handleDate = (e) => {
-    // console.log(timestampSeconds);
+    console.log("timestamp", e.target.value);
 
     getTimeWorking(props.ptId, e.target.value, 1)
       .then((response) => {

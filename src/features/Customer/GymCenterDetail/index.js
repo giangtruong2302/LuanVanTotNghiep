@@ -40,9 +40,9 @@ const GymDetailPage = () => {
     return (
         <div className="CenterDetailBgContainer">
             <div className="backToHome">
-                <NavLink to="/" className="backtoHome">
+                <NavLink to="/gym-center" className="backtoHome">
                     <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back to home</div>
+                    <div className="textBackToHome">Back</div>
                 </NavLink>
 
             </div>

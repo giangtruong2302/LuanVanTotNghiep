@@ -41,6 +41,31 @@
       margin-top: 40px;
       justify-content: center;
 
+      .iconWalk {
+        margin-top: 2px;
+        margin-left: 400px;
+        width: 100px;
+        height: 9%;
+        position: absolute;
+        animation-name: example;
+        animation-duration: 10s;
+        animation-delay: 1s;
+        animation-iteration-count: 50;
+      }
+
+      @keyframes example {
+        0% {
+          left: 0px;
+          top: 150px;
+        }
+
+        25% {
+          left: 280px;
+          top: 150px;
+        }
+
+      }
+
       .thisIsPayment {
         font-size: 30px;
         text-align: center;
@@ -48,7 +73,7 @@
       }
 
       .step {
-        margin-top: 30px;
+        margin-top: 50px;
         width: 60%;
         margin-left: 340px;
       }

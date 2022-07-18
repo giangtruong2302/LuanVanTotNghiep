@@ -6,6 +6,7 @@ import { getBookingDetail } from "./bookingAPI";
 import { Empty } from "antd";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import List from "./List";
 import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
 
@@ -66,8 +67,7 @@ const Booking = () => {
                     <ArrowLeft size={24} color="#ffffff" weight="duotone" />
                     <div className="textBackToHome">Back to home</div>
                 </NavLink>
-                <div>
-                </div>
+
 
             </div>
             <div className="containerListPT">
@@ -101,28 +101,7 @@ const Booking = () => {
                                     {bookDetail?.map((item, index) => {
 
                                         return (
-                                            <>
-                                                {(item.Status) === "SCHEDULED"
-                                                    ?
-                                                    <div className="Center">
-                                                        <div className="centerInfo">
-                                                            <div className="info">
-
-                                                                <p className={"infoCus"}>Khách hàng : {item.CustomerName}</p>
-                                                                <p className={"infoCus"}>Ngày bắt đầu : {moment(item.StartTime).format("DD-MM-YYYY")}</p>
-                                                                <p className={"infoCus"}>Ngày kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")}</p>
-
-                                                            </div>
-                                                            <div className="infoService">
-                                                                <p className={"textNameCenter"}>Dịch vụ đăng ký : {item.ServiceId}</p>
-                                                                <p className={"textNameCenter"}>Huấn luyện viên : {item.PTName}</p>
-                                                                <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    : ""}
-                                            </>
+                                            <List data={item} />
                                         )
                                     })}
 
