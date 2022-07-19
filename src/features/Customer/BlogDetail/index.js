@@ -82,7 +82,7 @@ const BlogDetail = () => {
 
                                     </div>
                                     <div className="blogImage">
-                                        <img src={blogDetail?.BlogImage} /></div>
+                                        <img src={blogDetail?.BlogImage} className="imageBlog" /></div>
                                     <div className="blogDetailDefineSeemore">
                                         {blogDetail?.Content}
                                     </div>
