@@ -8,9 +8,10 @@ const ScanQR = () => {
     const [splitData, setSplitData] = useState();
     const dataScan = data.split(",")
     const dataTime = dataScan[dataScan.length - 1]
-    const dataPrice = dataScan[dataScan.length - 2]
-    const dataCusId = dataScan[dataScan.length - 3]
-    const dataId = dataScan[dataScan.length - 4]
+    const dataStatus = dataScan[dataScan.length - 2]
+    const dataPrice = dataScan[dataScan.length - 3]
+    const dataCusId = dataScan[dataScan.length - 4]
+    const dataId = dataScan[dataScan.length - 5]
 
     return (
         <div className='ScanPage'>
@@ -39,10 +40,13 @@ const ScanQR = () => {
                     style={{ width: '100px' }}
                 />
                 <p className='resultScan'>Kết quả : {data}</p>
-                <div className='dataScan'>id : {dataId}</div>
-                <div className='dataScan'>Customer Id : {dataCusId}</div>
-                <div className='dataScan'>Price : {dataPrice}</div>
-                <div className='dataScan'>Time : {dataTime}</div>
+                <div className='dataScan'><a style={{ fontWeight: "450" }}>id : </a>{dataId}</div>
+                <div className='dataScan'><a style={{ fontWeight: "450" }}>Customer Id : </a>{dataCusId}</div>
+                <div className='dataScan'><a style={{ fontWeight: "450" }}>Price :</a> {dataPrice}</div>
+                <div className='dataScan'><a style={{ fontWeight: "450" }}>Status :</a>
+                    <a style={{ color: "green" }}> {dataStatus}</a>
+                </div>
+                <div className='dataScan'><a style={{ fontWeight: "450" }}>Time : </a>{dataTime}</div>
             </div>
         </div>
 

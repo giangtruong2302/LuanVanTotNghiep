@@ -24,7 +24,7 @@ const Google = () => {
         console.log('Login success', res.profileObj);
         checkEmail(res.profileObj.email).then((response) => {
             if (response.errorCode === 1) {
-                createUser(Math.floor(Math.random() * 1000), res.profileObj.email, "", "", res.profileObj.imageUrl, "", active, "", roleId.toString(), Math.floor(Math.random() * 1000), gender, "", "", "", centerId).then((response) => {
+                createUser(Math.floor(Math.random() * 1000), res.profileObj.email, "", res.profileObj.name, res.profileObj.imageUrl, "", active, "", roleId.toString(), Math.floor(Math.random() * 1000), gender, "", "", "", centerId).then((response) => {
                     if (response.errCode === 0) {
                         try {
                             handleLoginUserAPI(res.profileObj.email, "")
@@ -75,7 +75,7 @@ const Google = () => {
         <div>
 
             <GoogleLogin
-                clientId="486606115670-5eot9c17ma4fvhhej4pbevep3cn2b6jg.apps.googleusercontent.com"
+                clientId="486606115670-ad2l3creiud9omp5aklv6b2749gi3hk4.apps.googleusercontent.com"
                 buttonText="Login with Google"
                 onSuccess={onSuccess}
                 onFailure={onFailure}

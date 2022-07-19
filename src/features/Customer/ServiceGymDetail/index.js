@@ -80,11 +80,9 @@ const ServiceGymDetail = () => {
                   </div>
 
                   <div className="serviceDetailDefineSeemore">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dolorem voluptatum hic id sint voluptatibus
-                    sapiente similique dolore veritatis perspiciatis tempora
-                    magni, dignissimos impedit error beatae veniam quaerat
-                    fuga minima quam.
+                    Khách hàng có thể chọn book 1 PT theo một khung giờ nhất định. Sau khi đăng ký thành công khách hàng chờ
+                    PT xác nhận booking. Sau khi được PT xác nhận khách hàng sẽ nhận được thông báo ở trang chủ. Thông báo yêu cầu
+                    khách hàng thanh toán, hoặc khách hàng có thể hủy booking đó.
                   </div>
 
 

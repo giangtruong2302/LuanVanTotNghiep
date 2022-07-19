@@ -53,7 +53,7 @@ const GymCenter = (props) => {
                 >
                   <div
                     className="bgCenter "
-                    style={{ backgroundImage: `url(${img})` }}
+                    style={{ backgroundImage: `url(${item.CenterImage})` }}
                   ></div>
                   <div className="specialty-name">{item.CenterName}</div>
                 </NavLink>

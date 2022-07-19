@@ -29,7 +29,7 @@
     }
 
     .scanContain {
-        padding-top: 5px;
+        padding-top: 1px;
         text-align: center;
         width: 500px;
         height: 100px;
@@ -42,10 +42,17 @@
 
         }
 
+
         .dataScan {
             font-size: 20px;
             font-weight: bold;
+
+            .Status {
+                color: green;
+            }
         }
+
+
 
     }
 }

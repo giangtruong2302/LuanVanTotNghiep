@@ -128,20 +128,24 @@ const PersonalInfoStaff = () => {
     let subtitle;
 
     useEffect(() => {
-        getPTDetail(staffInfo["ExternalId"]).then((response) => {
-            if (response.staffDetail) {
-                setInfoDetail(response.staffDetail);
-                setNoInfoDetail(false);
-            } else {
-                setNoInfoDetail(true);
-            }
-        })
-            .catch(() => {
-                setNoInfoDetail(true);
+        if (staffInfo) {
+            getPTDetail(staffInfo["ExternalId"]).then((response) => {
+                if (response.staffDetail) {
+                    setInfoDetail(response.staffDetail);
+                    setNoInfoDetail(false);
+                } else {
+                    setNoInfoDetail(true);
+                }
             })
-            .finally(() => {
-                setInfoDetailLoading(false);
-            });
+                .catch(() => {
+                    setNoInfoDetail(true);
+                })
+                .finally(() => {
+                    setInfoDetailLoading(false);
+                });
+        } else {
+            navigate(`/staff-login`);
+        }
     }, [statusPage]);
     return (
         <div className="StaffDetailContainer">

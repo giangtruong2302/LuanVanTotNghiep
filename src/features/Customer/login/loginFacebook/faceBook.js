@@ -18,56 +18,59 @@ const Facebook = () => {
     const [gender, setGender] = useState(true)
     const [roleId, setRoleId] = useState(5)
     const [centerId, setCenterId] = useState(1)
-    const [email, setEmail] = useState()
-    const responseFacebook = (response) => {
-        setEmail(response.email)
-        checkEmail(response.email).then((response) => {
+    const [emailRes, setEmail] = useState()
+    const [fullName, setFullName] = useState()
+    const responseFacebook = (res) => {
 
-            if (response.errorCode === 1) {
+        if (res.email) {
+            checkEmail(res.email).then((response) => {
 
-                createUser(Math.floor(Math.random() * 1000), email, "", "", "", "", active, "", roleId.toString(), Math.floor(Math.random() * 1000), gender, "", "", "", centerId).then((response) => {
-                    console.log(email)
-                    if (response.errCode === 0) {
-                        try {
-                            handleLoginUserAPI(email, "")
-                                .then((res) => {
+                if (response.errorCode === 1) {
 
-                                    if (res.errorCode === 0) {
-                                        const dataCus = res.data;
-                                        dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
-                                        navigate(`/`);
-                                    } else {
-                                        message.error("login fail");
-                                    }
+                    createUser(Math.floor(Math.random() * 1000), res.email, "", res.name, "", "", active, "", roleId.toString(), Math.floor(Math.random() * 1000), gender, "", "", "", centerId).then((response) => {
+                        console.log("emailRes: ", res.email)
+                        if (response.errCode === 0) {
+                            try {
+                                handleLoginUserAPI(res.email, "")
+                                    .then((res) => {
 
-                                })
+                                        if (res.errorCode === 0) {
+                                            const dataCus = res.data;
+                                            dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
+                                            navigate(`/`);
+                                        } else {
+                                            message.error("login fail");
+                                        }
 
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    }
-                })
-            }
-            else {
-                try {
-                    handleLoginUserAPI(email, "")
-                        .then((res) => {
+                                    })
 
-                            if (res.errorCode === 0) {
-                                const dataCus = res.data;
-                                dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
-                                navigate(`/`);
-                            } else {
-                                message.error("login fail");
+                            } catch (error) {
+                                console.log(error);
                             }
-
-                        })
-
-                } catch (error) {
-                    console.log(error);
+                        }
+                    })
                 }
-            }
-        })
+                if (response.errorCode === 0) {
+                    try {
+                        handleLoginUserAPI(res.email, "")
+                            .then((res) => {
+
+                                if (res.errorCode === 0) {
+                                    const dataCus = res.data;
+                                    dispatch(dispatch(actions.cusLoginSuccess(dataCus)));
+                                    navigate(`/`);
+                                } else {
+                                    message.error("login fail");
+                                }
+
+                            })
+
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            })
+        }
 
     }
     return (

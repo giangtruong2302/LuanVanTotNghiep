@@ -9,8 +9,9 @@ import { NavLink } from "react-router-dom";
 import List from "./List";
 import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
-
+import { useNavigate } from "react-router-dom";
 const Booking = () => {
+    const navigate = useNavigate()
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(2);
     const [bookDetail, setBookDetail] = useState();
@@ -19,20 +20,24 @@ const Booking = () => {
     const staffInfo = useSelector((state) => state.staff.staffInfo);
 
     useEffect(() => {
-        getBookingDetail(staffInfo["AccountStaff.id"], 1).then((response) => {
-            if (response.bookingOfPT.rows) {
-                setBookDetail(response.bookingOfPT.rows);
-                setNoBookDetail(false);
-            } else {
-                setNoBookDetail(true);
-            }
-        })
-            .catch(() => {
-                setNoBookDetail(true);
+        if (staffInfo) {
+            getBookingDetail(staffInfo["AccountStaff.id"], 1).then((response) => {
+                if (response.bookingOfPT.rows) {
+                    setBookDetail(response.bookingOfPT.rows);
+                    setNoBookDetail(false);
+                } else {
+                    setNoBookDetail(true);
+                }
             })
-            .finally(() => {
-                setBookDetailLoading(false);
-            });
+                .catch(() => {
+                    setNoBookDetail(true);
+                })
+                .finally(() => {
+                    setBookDetailLoading(false);
+                });
+        } else {
+            navigate(`/staff-login`);
+        }
     }, []);
     const fetchNextPageService = async () => {
         getBookingDetail(staffInfo["AccountStaff.id"], page)
