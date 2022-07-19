@@ -60,7 +60,7 @@ const SettingRenderer = (props) => {
         style={{ color: "#53d1b6" }}
       >
         <CheckSquareOffset size={18} color="#53d1b6" weight="fill" />
-        UPDATE DISCOUNT RATE
+        UPDATE SALARY RATE
       </Menu.Item>
       {/* <Menu.Item
         key="3"
@@ -72,7 +72,7 @@ const SettingRenderer = (props) => {
       </Menu.Item> */}
       <Menu.Item key="4" onClick={confirmDelete} style={{ color: "#FD409A" }}>
         <XCircle size={18} color="#FD409A" weight="fill" />
-        DELETE DISCOUNT
+        DELETE SALARY RATE
       </Menu.Item>
     </Menu>
   );

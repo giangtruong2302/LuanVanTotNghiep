@@ -57,6 +57,7 @@ const Blog = React.lazy(() => import("../features/Admin/ManagerBlog"));
 const Center = React.lazy(() => import("../features/Admin/ManageCenter"));
 const Schedule = React.lazy(() => import("../features/Admin/ManageSchedule"));
 const Discount = React.lazy(() => import("../features/Admin/ManageDiscount"));
+const Salary = React.lazy(() => import("../features/Admin/ManageSalary"));
 const NoMatch = React.lazy(() => import("../features/Page404/Page404"));
 // const Reservation=React.lazy(()=>import("../features/Merchant/Reservations"))
 export {
@@ -84,5 +85,6 @@ export {
   Center,
   Blog,
   Discount,
+  Salary,
   NoMatch,
 };

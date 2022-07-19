@@ -20,7 +20,11 @@ import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
-import { CreateSDiscountSchema, CreateServiceSchema } from "./validation";
+import {
+  CreateSalarySchema,
+  CreateSDiscountSchema,
+  CreateServiceSchema,
+} from "./validation";
 import {
   handleCreateNewService,
   handleUpdateDiscount,
@@ -140,19 +144,19 @@ const UpdateService = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Update Discount Rate</span>
+          <span className={classes.nameCreate}>Create New Salary Rate</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
             <Formik
-              validationSchema={CreateSDiscountSchema}
+              validationSchema={CreateSalarySchema}
               initialValues={{
-                DiscountRate: props.data.DiscountRate + " %",
+                Salary: props.data.Salary,
               }}
               onSubmit={async (values) => {
                 console.log("check values:", values);
                 setSaving(true);
-                handleSubmitUpdateDiscount(values);
+                // handleSubmitCreateDiscount(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -161,27 +165,26 @@ const UpdateService = (props) => {
                     <FormAnt.Item
                       style={{ marginTop: "10px" }}
                       validateStatus={
-                        Boolean(touched?.DiscountRate && errors?.DiscountRate)
+                        Boolean(touched?.Salary && errors?.Salary)
                           ? "error"
                           : "success"
                       }
                       help={
-                        Boolean(
-                          touched?.DiscountRate && errors?.DiscountRate
-                        ) && errors?.DiscountRate
+                        Boolean(touched?.Salary && errors?.Salary) &&
+                        errors?.Salary
                       }
                     >
-                      <Field name="DiscountRate">
+                      <Field name="Salary">
                         {({ field }) => (
                           <Input
                             {...field}
-                            name="DiscountRate"
+                            name="Salary"
                             className={` ${
-                              touched?.DiscountRate && errors?.DiscountRate
+                              touched?.Salary && errors?.Salary
                                 ? classes.inputError
                                 : ""
                             } ${classes.inputRecovery} ant-picker `}
-                            placeholder="Discount rate %"
+                            placeholder="Salary rate /month"
                           />
                         )}
                       </Field>
@@ -197,7 +200,7 @@ const UpdateService = (props) => {
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        "Save"
+                        "Create"
                       )}
                     </button>
                   </Form>

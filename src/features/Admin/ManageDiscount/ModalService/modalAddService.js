@@ -21,7 +21,10 @@ import Cropper from "react-easy-crop";
 import { toast, ToastContainer } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateSDiscountSchema, CreateServiceSchema } from "./validation";
-import { handleCreateNewService } from "./ModalServiceAPI";
+import {
+  handleCreateNewDiscount,
+  handleCreateNewService,
+} from "./ModalServiceAPI";
 const { Option } = Select;
 const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -62,39 +65,31 @@ const CreateService = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitCreateStaff = useCallback(
+  const handleSubmitCreateDiscount = useCallback(
     (values) => {
       // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewService(
-          values.ServiceName,
-          values.WorkDuration,
-          values.Price,
-          imageUrl,
-          fileName
-        )
+        handleCreateNewDiscount(parseInt(values.DiscountRate))
           .then((res) => {
-            toast.success("create new service is success");
+            toast.success("create new discount is success");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
-
-            // toast.success("create new staff account is success !");
           })
           .catch((error) => {
-            message.error("add service fail");
+            message.error("add discount fail");
           })
           .finally(() => {
-            props.takeStatus("complete");
+            props.takeStatus("complete" + Date.now());
           });
       } catch (error) {
         console.log(error);
         setSaving(false);
       }
     },
-    [dispatch, imageUrl, fileName]
+    [dispatch]
   );
   const getBase64 = (img, callback) => {
     setLoading(false);
@@ -154,7 +149,7 @@ const CreateService = (props) => {
               onSubmit={async (values) => {
                 console.log("check values:", values);
                 setSaving(true);
-                // handleSubmitCreateStaff(values);
+                handleSubmitCreateDiscount(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {

@@ -182,6 +182,10 @@ const AdminPage = () => {
   const handleViewListOrder = () => {
     navigate("/admin/view-list-order");
   };
+
+  const handleViewListSalary = () => {
+    navigate("/admin/view-list-salary");
+  };
   const handleViewListCenter = () => {
     navigate("/admin/view-list-center");
   };
@@ -323,6 +327,24 @@ const AdminPage = () => {
             >
               <Menu.Item onClick={handleViewListOrder}>
                 Xem danh sách đơn hàng
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<Ticket size={20} weight="bold" color="#fff" />}
+              title="Quản lý Khuyến mãi"
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+            >
+              <Menu.Item onClick={handleViewListDiscount}>
+                Xem danh sách mức khuyến mãi
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu
+              icon={<Coins size={20} weight="bold" color="#fff" />}
+              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title="Quản lý Mức lương"
+            >
+              <Menu.Item onClick={handleViewListSalary}>
+                Xem danh sách mức lương
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu

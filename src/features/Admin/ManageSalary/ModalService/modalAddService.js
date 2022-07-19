@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
-import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
+import unknow from "../../../../assets/images/gymplaceholder.jpg";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
@@ -18,20 +18,22 @@ import { XCircle } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 // import { Area, Point } from "react-easy-crop/types";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import classes from "./styles.module.scss";
-import { CreateSDiscountSchema, CreateServiceSchema } from "./validation";
 import {
-  handleCreateNewService,
-  handleUpdateDiscount,
-  handleUpdateService,
+  CreateSalarySchema,
+  // CreateSDiscountSchema,
+  // CreateServiceSchema,
+} from "./validation";
+import {
+  handleCreateNewDiscount,
+  // handleCreateNewService,
 } from "./ModalServiceAPI";
 const { Option } = Select;
-const UpdateService = (props) => {
-  // console.log("check props update: ", props);
+const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
@@ -67,23 +69,21 @@ const UpdateService = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitUpdateDiscount = useCallback(
+  const handleSubmitCreateDiscount = useCallback(
     (values) => {
       // console.log("check values: ", values);
       //setDifferentPass(false)
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleUpdateDiscount(props.data.id, parseInt(values.DiscountRate))
+        handleCreateNewDiscount(parseInt(values.DiscountRate))
           .then((res) => {
-            message.success("update discount is success !");
+            toast.success("create new discount is success");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
           })
           .catch((error) => {
-            setSaving(false);
-            // console.log("check res data email: ", res);
-            message.error("update discount fail");
+            message.error("add discount fail");
           })
           .finally(() => {
             props.takeStatus("complete" + Date.now());
@@ -111,6 +111,7 @@ const UpdateService = (props) => {
       });
     }
   };
+  // console.log(imageUrl, fileName);
   const uploadButton = (
     <div className={classes.btnUpload}>
       {loading ? <PictureOutlined /> : <PictureOutlined />}
@@ -140,19 +141,19 @@ const UpdateService = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Update Discount Rate</span>
+          <span className={classes.nameCreate}>Create New Salary Rate</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
             <Formik
-              validationSchema={CreateSDiscountSchema}
+              validationSchema={CreateSalarySchema}
               initialValues={{
-                DiscountRate: props.data.DiscountRate + " %",
+                Salary: "",
               }}
               onSubmit={async (values) => {
                 console.log("check values:", values);
                 setSaving(true);
-                handleSubmitUpdateDiscount(values);
+                handleSubmitCreateDiscount(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -161,27 +162,26 @@ const UpdateService = (props) => {
                     <FormAnt.Item
                       style={{ marginTop: "10px" }}
                       validateStatus={
-                        Boolean(touched?.DiscountRate && errors?.DiscountRate)
+                        Boolean(touched?.Salary && errors?.Salary)
                           ? "error"
                           : "success"
                       }
                       help={
-                        Boolean(
-                          touched?.DiscountRate && errors?.DiscountRate
-                        ) && errors?.DiscountRate
+                        Boolean(touched?.Salary && errors?.Salary) &&
+                        errors?.Salary
                       }
                     >
-                      <Field name="DiscountRate">
+                      <Field name="Salary">
                         {({ field }) => (
                           <Input
                             {...field}
-                            name="DiscountRate"
+                            name="Salary"
                             className={` ${
-                              touched?.DiscountRate && errors?.DiscountRate
+                              touched?.Salary && errors?.Salary
                                 ? classes.inputError
                                 : ""
                             } ${classes.inputRecovery} ant-picker `}
-                            placeholder="Discount rate %"
+                            placeholder="Salary rate /month"
                           />
                         )}
                       </Field>
@@ -197,7 +197,7 @@ const UpdateService = (props) => {
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        "Save"
+                        "Create"
                       )}
                     </button>
                   </Form>
@@ -210,4 +210,4 @@ const UpdateService = (props) => {
     </>
   );
 };
-export default UpdateService;
+export default CreateService;

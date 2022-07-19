@@ -26,6 +26,7 @@ import {
   Schedule,
   Center,
   Discount,
+  Salary,
   NoMatch,
 } from "../routes/admin";
 import AdminPage from "../features/Admin";
@@ -110,6 +111,7 @@ const AppLayoutAdmin = () => {
           <Route path="/admin/view-list-manager" element={<Manager />} />
           <Route path="/admin/view-list-schedule" element={<Schedule />} />
           <Route path="/admin/view-list-discount" element={<Discount />} />
+          <Route path="/admin/view-list-salary" element={<Salary />} />
         </Route>
       </Routes>
     </AppSuspense>
