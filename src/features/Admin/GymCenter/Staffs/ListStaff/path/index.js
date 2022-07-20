@@ -4,6 +4,7 @@ import PhoneRenderer from "./PhoneRenderer";
 import EmailRenderer from "./EmailRenderer";
 import AddressRenderer from "./AddressRenderer";
 import StatusRenderer from "./StatusRenderer";
+import SalaryRateRenderer from "./SalaryRateRenderer";
 
 const frameworkcomponents = {
   settingRenderer: SettingRenderer,
@@ -12,5 +13,6 @@ const frameworkcomponents = {
   emailRenderer: EmailRenderer,
   addressRenderer: AddressRenderer,
   statusRenderer: StatusRenderer,
+  salaryRateRenderer: SalaryRateRenderer,
 };
 export default frameworkcomponents;

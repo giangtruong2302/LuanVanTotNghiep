@@ -5,4 +5,7 @@ const getAllStaffOfCenter = (CenterId, StaffName, page) => {
     `/api/merchant/${CenterId}/staff-center?StaffName=${StaffName}&page=${page}`
   );
 };
-export { getAllStaffOfCenter };
+const getDetailSalary = (id) => {
+  return axios.get(`/api/admin/get-detail-salary?id=${id}`);
+};
+export { getAllStaffOfCenter, getDetailSalary };

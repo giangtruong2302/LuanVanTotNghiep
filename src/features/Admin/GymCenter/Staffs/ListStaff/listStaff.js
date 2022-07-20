@@ -123,6 +123,13 @@ const ListStaff = (props) => {
       cellRenderer: "emailRenderer",
     },
     {
+      field: "salaryRate",
+      // width: 215,
+      // headerName: "Email",
+      // type: "rightAligned",
+      cellRenderer: "salaryRateRenderer",
+    },
+    {
       field: "address",
       // width: 215,
       // headerName: "Address",

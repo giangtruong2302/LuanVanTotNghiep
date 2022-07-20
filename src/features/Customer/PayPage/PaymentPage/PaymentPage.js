@@ -13,7 +13,7 @@ import { useState } from "react";
 import moment from "moment";
 import NumberFormat from "react-number-format";
 import { useEffect } from "react";
-import icon from "../../../../assets/images/logo/walkIcon.gif"
+import icon from "../../../../assets/images/logo/walkIcon.gif";
 import {
   handleGetDetailOrder,
   handlePayWithMomoAPI,
@@ -21,6 +21,7 @@ import {
 } from "./paymentAPI";
 import { handleGetDetailCustomer } from "../../../Admin/GymCenter/Customers/CustomerDetail/CusDetailAPI";
 import { handleGetDetailService } from "../../../Admin/ManageOrder/orderAPI";
+import { useCallback } from "react";
 const { Step } = Steps;
 const PaymentPage = () => {
   // const location: Location & {
@@ -32,6 +33,8 @@ const PaymentPage = () => {
   const [detailOrder, setDetailOrder] = useState();
   const [detailService, setDetailService] = useState();
   const [step, setStep] = useState(0);
+  const [url, setUrl] = useState(window.location.href);
+  console.log("check url: ", url);
   console.log("check info pay: ", state);
   const [token, setToken] = useState();
   const onToken = (token) => {
@@ -41,9 +44,9 @@ const PaymentPage = () => {
     }
   };
   const clickStripe = () => {
-    setStep(1)
-  }
-  console.log("step", step)
+    setStep(1);
+  };
+  // console.log("step", step);
   useEffect(() => {
     try {
       handlePayWithStripe(
@@ -57,12 +60,17 @@ const PaymentPage = () => {
         detailCus?.CustomerEmail,
         "BOOKING AT GHGYM",
         "YOUR QR CODE"
-      ).then((res) => {
-        console.log("check paymnent with stripe: ", res);
-        message.success(
-          "thanh toan thanh cong! Chung toi se gui email cho ban"
-        );
-      });
+      )
+        .then((res) => {
+          console.log("check paymnent with stripe: ", res);
+          message.success(
+            "thanh toan thanh cong! Chung toi se gui email cho ban"
+          );
+        })
+        .catch((res) => {
+          console.log("check res stripeErr: ", res.stripeErr);
+          message.error("thanh toán thất bại");
+        });
     } catch (error) {
       console.log(error);
     }
@@ -98,13 +106,14 @@ const PaymentPage = () => {
       console.log(error);
     }
   }, [state]);
-  const handlePayWithMomo = () => {
-    setStep(1)
+  const handlePayWithMomo = useCallback(() => {
+    setStep(1);
     try {
       handlePayWithMomoAPI(detailOrder.id, detailOrder.amount)
         .then((res) => {
           console.log("check res: ", res);
           window.location.href = res.result.payUrl;
+          setUrl(window.location.href);
         })
         .catch((error) => {
           console.log(error);
@@ -112,7 +121,7 @@ const PaymentPage = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
   return (
     <div className="PaymentBg">
       <div className="containerPayment">
@@ -197,7 +206,6 @@ const PaymentPage = () => {
               </StripeCheckout>
             </div>
           </div>
-
         </div>
       </div>
       <HomeFooter />
