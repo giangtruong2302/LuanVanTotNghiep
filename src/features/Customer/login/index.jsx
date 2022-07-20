@@ -14,6 +14,7 @@ import * as actions from "../../../store/actions";
 import bgLogin from "../../../assets/images/banner/bgLogin.jpg"
 const { Password } = Input;
 const CustomerLoginPage = () => {
+
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +43,9 @@ const CustomerLoginPage = () => {
 
 
   return (
+
     <div className="wrapperBg">
+
       <img className="bgLogin" src={bgLogin}></img>
       <div className="loginPage">
         <div className="logoLogin">

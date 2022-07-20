@@ -1,9 +1,8 @@
 .BookProfileBg {
 
-    min-height: 100vh;
-    max-width: 100vw;
+
     overflow: auto;
-    //background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
+    background: linear-gradient(180deg, #ffffff 1.28%, #717c7c 100%);
 
     // overflow: auto;
     .backToHome {
@@ -40,7 +39,7 @@
         font-family: "roboto";
         font-weight: bold;
         font-size: 50px;
-        min-height: 100vh;
+        height: auto;
         overflow: hidden;
         margin-top: 20px;
 
@@ -58,7 +57,7 @@
                 margin-left: 200px;
 
                 .listBookingContent {
-                    overflow: hidden;
+                    overflow: auto;
                     height: auto;
                     display: flex;
                     margin: 0 10px;
@@ -161,9 +160,9 @@
 
                                 flex-direction: column;
                                 gap: 3px;
-                                margin-left: 40px;
+                                margin-left: 1px;
                                 column-gap: 150px;
-                                width: 900px;
+                                width: 1300px;
 
                                 .textNameCenter {
 
@@ -207,12 +206,13 @@
                                 .buttonAccept {
                                     background-color: rgb(43, 247, 43);
                                     border-radius: 9px;
-                                    width: 100px;
-                                    height: 35px;
+                                    width: 110px;
+                                    height: 40px;
                                     font-weight: bold;
                                     font-size: 18px;
                                     box-sizing: border-box;
                                     box-shadow: 1px 1px 8px 1px grey;
+                                    color: white;
                                 }
 
                                 .buttonAccept:hover {
@@ -223,12 +223,13 @@
                                 .buttonDeniend {
                                     background-color: rgb(255, 25, 40);
                                     border-radius: 9px;
-                                    width: 100px;
-                                    height: 35px;
+                                    width: 110px;
+                                    height: 40px;
                                     font-weight: bold;
                                     font-size: 18px;
                                     box-sizing: border-box;
                                     box-shadow: 1px 1px 8px 1px grey;
+                                    color: white;
                                 }
 
                                 .buttonDeniend:hover {

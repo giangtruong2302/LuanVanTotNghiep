@@ -2,6 +2,7 @@ import { Input, Button, Menu, Dropdown, Badge } from "antd";
 import { BellOutlined, CheckOutlined } from "@ant-design/icons";
 import * as actions from "../../store/actions";
 import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import StaggerAnimation from "../../component/StaggerAnimation";
 import moment from "moment";
 import {
   AddressBook,
@@ -27,12 +28,13 @@ import "./HomeHeader.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { getCusBooking, getOrder } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
 import { handleGetDetailCustomerByExternalId } from "../../features/Customer/PayPage/PaymentPage/paymentAPI";
-
+import OrderCheckedPending from "./orderCheckedPending";
+import InfiniteScroll from "react-infinite-scroll-component";
 import OrderChecked from "./orderChecked";
 const { Search } = Input;
 const HomeHeader = (props) => {
   const navigate = useNavigate();
-
+  const [hasMore, setHasMore] = useState(true);
   const cusInfo = useSelector((state) => state.cus.cusInfo);
   console.log("check info ", cusInfo);
   const handleLogout = () => {
@@ -45,7 +47,8 @@ const HomeHeader = (props) => {
   const [noCusBooking, setNoCusBooking] = useState(false);
   const [, setCusBookingLoading] = useState(true);
   const [detailCustomer, setDetailCustomer] = useState();
-
+  const [cusId, setCusId] = useState();
+  const [page, setPage] = useState(2)
   useEffect(() => {
     if (cusInfo) {
       try {
@@ -53,6 +56,7 @@ const HomeHeader = (props) => {
           .then((res) => {
             if (res.cusDetail) {
               setDetailCustomer(res.cusDetail);
+              setCusId(res.cusDetail.id)
               getCusBooking(res.cusDetail.id, 1)
                 .then((response) => {
                   if (response.bookingOfCus.rows) {
@@ -78,24 +82,58 @@ const HomeHeader = (props) => {
       }
     }
   }, []);
+  const fetchNextCusBooking = async () => {
+    getCusBooking(cusId, page)
+      .then((response) => {
+        const data = response.bookingOfCus.rows;
+        if (data && data.length > 0) {
+          setCusBooking((prev) => {
+            if (prev !== undefined) return [...prev, ...data];
+          });
+          if (data.length === 0 || data.length < 10) {
+            setHasMore(false);
+          }
+          setPage(page + 1);
+        }
+      })
+      .catch(() => {
+        // setFlag(true);
+        setHasMore(false);
+      })
+      .finally(() => {
+        // setFlag(true);
+        console.log("success");
+        // setHasMore(false)
+      });
+  };
 
   const cartMenu = (
-    <Menu>
-      {cusBooking?.map((item, index) => {
-        return (
-          <Menu.Item key={index} className="CartDrop">
-            Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
-            {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
-            <p>Trạng thái : {item.Status} </p>
-            {item.Status === "SCHEDULED" ? (
-              <OrderChecked data={item} />
 
-            ) : (
-              ""
-            )}
-          </Menu.Item>
-        );
-      })}
+    <Menu className="menuDrop">
+      <InfiniteScroll
+        dataLength={cusBooking?.length ? cusBooking?.length : 0}
+        hasMore={true}
+        next={fetchNextCusBooking}
+      >
+        {cusBooking?.map((item, index) => {
+          return (
+
+            (item.Status === "CANCELED") ? "" :
+              <Menu.Item key={index} className="CartDrop">
+                Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
+                {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
+                <p>Trạng thái : {item.Status} </p>
+                {item.Status === "SCHEDULED" ? (
+                  <OrderChecked data={item} />
+
+                ) : (
+                  <OrderCheckedPending data={item} />
+                )}
+              </Menu.Item>
+
+          );
+        })}
+      </InfiniteScroll>
     </Menu>
   );
   const userMenu = (
@@ -196,7 +234,7 @@ const HomeHeader = (props) => {
                   </div>
                   <div className="Notify">
                     <Dropdown
-                      // style={{ float: 'right' }}
+
                       className="dropdown"
                       placement="bottomRight"
                       overlay={cartMenu}

@@ -10,12 +10,30 @@ import { getCusBooking } from "./cusBookingAPI";
 import { useSelector } from "react-redux";
 import HomeFooter from "../../../../pages/HomePage/HomeFooter";
 import { handleGetDetailCustomerByExternalId } from "../../PayPage/PaymentPage/paymentAPI";
+import { getCancelBooking } from "../../../Staff/ListBooking/listBookingAPI";
+import { ToastContainer, toast } from 'react-toastify';
+import ListCusBooking from "./ListCusBooking";
 const BookingOfCus = () => {
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [cusBooking, setCusBooking] = useState();
     const [noCusBooking, setNoCusBooking] = useState(false);
     const [, setCusBookingLoading] = useState(true);
     const [detailCustomer, setDetailCustomer] = useState();
+    const [canceled, setCancled] = useState("CANCELED")
+    const [statusPage, setStatusPage] = useState("")
+    const [cusId, setCusId] = useState()
+    const [page, setPage] = useState(2)
+    const [hasMore, setHasMore] = useState(true);
+    const options = {
+
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    };
     useEffect(() => {
         if (cusInfo) {
             try {
@@ -23,6 +41,7 @@ const BookingOfCus = () => {
                     .then((res) => {
                         if (res.cusDetail) {
                             setDetailCustomer(res.cusDetail);
+                            setCusId(res.cusDetail.id)
                             getCusBooking(res.cusDetail.id, 1)
                                 .then((response) => {
                                     if (response.bookingOfCus.rows) {
@@ -46,7 +65,45 @@ const BookingOfCus = () => {
                 console.log(error);
             }
         }
-    }, []);
+    }, [statusPage]);
+    const fetchNextCusBooking = async () => {
+        getCusBooking(cusId, page)
+            .then((response) => {
+                const data = response.bookingOfCus.rows;
+                if (data && data.length > 0) {
+                    setCusBooking((prev) => {
+                        if (prev !== undefined) return [...prev, ...data];
+                    });
+                    if (data.length === 0 || data.length < 10) {
+                        setHasMore(false);
+                    }
+                    setPage(page + 1);
+                }
+            })
+            .catch(() => {
+                // setFlag(true);
+                setHasMore(false);
+            })
+            .finally(() => {
+                // setFlag(true);
+                console.log("success");
+                // setHasMore(false)
+            });
+    };
+    const handleCancelBooking = (id, ScheduleId) => {
+
+        getCancelBooking(canceled, id, ScheduleId).then((response) => {
+
+            if (response.message.errorCode === 0) {
+                toast.success("Success", options)
+                setStatusPage(Date.now())
+            } else {
+                toast.error("Fail", options)
+            }
+
+
+        })
+    }
     return (
 
         <div className="BookProfileBg">
@@ -74,14 +131,15 @@ const BookingOfCus = () => {
                         ) : (
                             <div className="listBookingContent ">
                                 <InfiniteScroll
-                                    dataLength={8}
+                                    dataLength={cusBooking?.length ? cusBooking?.length : 0}
                                     style={{ display: "flex", flexDirection: "column", gap: "10px" }}
                                     loader={
                                         <div className={"loading"}>
                                             <StaggerAnimation />
                                         </div>
                                     }
-                                    hasMore={true}
+                                    hasMore={hasMore}
+                                    next={fetchNextCusBooking}
                                 >
                                     {/* {bookDetail?.map((item, index) => {
 
@@ -89,23 +147,7 @@ const BookingOfCus = () => {
                                     <>
                                         {cusBooking?.map((item, index) => {
                                             return (
-                                                <div className="Center">
-                                                    <div className="centerInfo">
-                                                        <div className="info">
-
-                                                            <p className={"infoCus"}>Khách hàng : {item.CustomerName} </p>
-                                                            <p className={"infoCus"}>Ngày bắt đầu : {moment(item.StartTime).format("DD-MM-YYYY")}    </p>
-                                                            <p className={"infoCus"}>Ngày kết thúc : {moment(item.EndTime).format("DD-MM-YYYY")} </p>
-
-                                                        </div>
-                                                        <div className="infoService">
-                                                            <p className={"textNameCenter"}>Dịch vụ đăng ký : {item.ServiceId} </p>
-                                                            <p className={"textNameCenter"}>Huấn luyện viên : {item.PTName}</p>
-                                                            <p className={"textNameCenter"}>Trạng thái : {item.Status}</p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
+                                                <ListCusBooking data={item} cancel={handleCancelBooking} />
                                             )
                                         })}
 

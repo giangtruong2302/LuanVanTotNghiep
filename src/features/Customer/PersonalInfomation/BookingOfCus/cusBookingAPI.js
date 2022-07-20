@@ -6,5 +6,7 @@ const getCusBooking = (id, page) => {
 const getOrder = (bookingId) => {
     return axios.get(`/api/get-detail-order?bookingId=${bookingId}`);
 };
-
-export { getCusBooking, getOrder };
+const getServiceDetail = (id) => {
+    return axios.get(`/api/get-detail-service?id=${id}`);
+};
+export { getCusBooking, getOrder, getServiceDetail };
