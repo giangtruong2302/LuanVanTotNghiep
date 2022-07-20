@@ -210,7 +210,7 @@
 @media only screen and (max-width: 46.1875em) {
     .listStaffBookingContent {
         height: 100vh;
-        overflow: auto;
+        overflow: hidden;
         max-height: auto;
         display: flex;
         margin: 0 10px;

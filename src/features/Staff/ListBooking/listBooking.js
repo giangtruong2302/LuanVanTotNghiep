@@ -125,7 +125,7 @@ const ListBooking = () => {
                 <div className="listStaffBookingContent ">
                     <InfiniteScroll
                         dataLength={8}
-                        style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                        style={{ display: "flex", flexDirection: "column", gap: "20px", overflow: "hidden" }}
                         loader={
                             <div className={"loading"}>
                                 <StaggerAnimation />
