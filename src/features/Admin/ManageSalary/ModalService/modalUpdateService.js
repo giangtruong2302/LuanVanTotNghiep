@@ -28,6 +28,7 @@ import {
 import {
   handleCreateNewService,
   handleUpdateDiscount,
+  handleUpdateSalary,
   handleUpdateService,
 } from "./ModalServiceAPI";
 const { Option } = Select;
@@ -78,16 +79,16 @@ const UpdateService = (props) => {
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleUpdateDiscount(props.data.id, parseInt(values.DiscountRate))
+        handleUpdateSalary(props.data.id, values.Salary)
           .then((res) => {
-            message.success("update discount is success !");
+            message.success("update salary rate is success !");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
           })
           .catch((error) => {
             setSaving(false);
             // console.log("check res data email: ", res);
-            message.error("update discount fail");
+            message.error("update salary rate is fail");
           })
           .finally(() => {
             props.takeStatus("complete" + Date.now());
@@ -144,7 +145,7 @@ const UpdateService = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Create New Salary Rate</span>
+          <span className={classes.nameCreate}>Update Salary Rate</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
@@ -156,7 +157,7 @@ const UpdateService = (props) => {
               onSubmit={async (values) => {
                 console.log("check values:", values);
                 setSaving(true);
-                // handleSubmitCreateDiscount(values);
+                handleSubmitUpdateDiscount(values);
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -200,7 +201,7 @@ const UpdateService = (props) => {
                           <StaggerAnimation></StaggerAnimation>
                         </div>
                       ) : (
-                        "Create"
+                        "Save"
                       )}
                     </button>
                   </Form>

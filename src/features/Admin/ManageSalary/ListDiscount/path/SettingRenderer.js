@@ -7,6 +7,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import UpdateService from "../../ModalService/modalUpdateService";
 import {
   handleDeleteDiscount,
+  handleDeleteSalary,
   handleDeleteService,
 } from "../../ModalService/ModalServiceAPI";
 import { toast } from "react-toastify";
@@ -29,7 +30,7 @@ const SettingRenderer = (props) => {
       // content: 'When clicked the OK button, this dialog will be closed after 1 second',
       onOk() {
         // console.log("check id: ", props.data.id);
-        return handleDeleteDiscount(parseInt(props.data.id))
+        return handleDeleteSalary(props.data.id)
           .then((res) => {
             if (res.message.errCode === 0) {
               toast.success("Success");

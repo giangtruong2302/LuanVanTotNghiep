@@ -27,6 +27,7 @@ import {
 } from "./validation";
 import {
   handleCreateNewDiscount,
+  handleCreateNewSalary,
   // handleCreateNewService,
 } from "./ModalServiceAPI";
 const { Option } = Select;
@@ -76,14 +77,14 @@ const CreateService = (props) => {
       // const sdt = formatPhoneNumber(values.phoneNumber)
       try {
         setSaving(true);
-        handleCreateNewDiscount(parseInt(values.DiscountRate))
+        handleCreateNewSalary(values.Salary)
           .then((res) => {
-            toast.success("create new discount is success");
+            toast.success("create new salary is success");
             props.takeStatus("complete" + Date.now());
             props.handleModal(false);
           })
           .catch((error) => {
-            message.error("add discount fail");
+            message.error("add salary fail");
           })
           .finally(() => {
             props.takeStatus("complete" + Date.now());

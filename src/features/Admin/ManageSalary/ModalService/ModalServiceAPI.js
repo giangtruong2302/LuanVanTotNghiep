@@ -46,7 +46,20 @@ const handleUpdateDiscount = (id, DiscountRate) => {
 const handleDeleteDiscount = (id) => {
   return axios.delete(`/api/admin-delete-discount`, { data: { id: id } });
 };
+const handleCreateNewSalary = (Salary) => {
+  return axios.post(`/api/admin/create-new-salary`, { Salary });
+};
+const handleUpdateSalary = (id, Salary) => {
+  return axios.put(`/api/admin/update-salary-rate`, { id, Salary });
+};
+const handleDeleteSalary = (id) => {
+  return axios.delete(`/api/admin/delete-salary`, { data: { id: id } });
+};
+
 export {
+  handleCreateNewSalary,
+  handleUpdateSalary,
+  handleDeleteSalary,
   handleCreateNewService,
   handleUpdateService,
   handleDeleteService,
