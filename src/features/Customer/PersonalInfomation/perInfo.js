@@ -47,6 +47,7 @@ const PerInfo = () => {
     const [modalReviewIsOpen, setReviewIsOpen] = React.useState(false);
     const [form] = Form.useForm();
     const [messRes, setMessRes] = useState("");
+    const [statusReivew, setStatusReview] = useState(1);
     const options = {
 
         position: "top-right",
@@ -62,7 +63,7 @@ const PerInfo = () => {
     const onFinishReview = (values) => {
 
         console.log('check', values)
-        createReview(valueRate, values.ReviewContent, cusDetail?.id, values.center).then((response) => {
+        createReview(valueRate, values.ReviewContent, cusDetail?.id, values.center, statusReivew).then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -77,9 +78,7 @@ const PerInfo = () => {
     const [allGymCenter, setAllGymCenter] = useState();
     const [noGymCenter, setNoGymCenter] = useState(false);
     const [, setGymCenterLoading] = useState(true);
-    const handleRate = (valueRate) => {
 
-    }
     useEffect(() => {
 
         getAllGymCenter("1").then((response) => {
@@ -170,9 +169,7 @@ const PerInfo = () => {
     function openModal() {
         setIsOpen(true);
     }
-    function openModalReview() {
-        setReviewIsOpen(true);
-    }
+
 
     function afterOpenModal() {
         subtitle.style.color = '#000';
@@ -181,6 +178,9 @@ const PerInfo = () => {
 
     function closeModal() {
         setIsOpen(false);
+    }
+    function openModalReview() {
+        setReviewIsOpen(true);
     }
     function afterOpenModalReview() {
         subtitle.style.color = '#000';
@@ -464,7 +464,7 @@ const PerInfo = () => {
                                                 </span>
 
                                                 <div className={"btnReView"}>
-                                                    <Button type="primary" htmlType="submit" onClick={() => handleRate(valueRate)}>
+                                                    <Button type="primary" htmlType="submit" >
                                                         Submit
                                                     </Button>
                                                 </div>

@@ -568,7 +568,7 @@ const PTShedule = (props) => {
             )} */}
           </div>
         </div>
-        <ToastContainer />
+
       </div>
     </>
   );

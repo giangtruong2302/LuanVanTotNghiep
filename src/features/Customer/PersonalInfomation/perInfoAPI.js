@@ -8,9 +8,9 @@ const updateCusDetail = (id, ExternalId, fullName, gender, dob, phoneNumber, add
     return axios.put(`/api/admin/update-account`, { id: id, ExternalId: ExternalId, fullName: fullName, gender: gender, dob: dob, phoneNumber: phoneNumber, address: address, roleId: roleId, avatar: avatar, fileName: fileName, email: email, centerId: centerId });
 };
 const getAllGymCenter = (page) => {
-    return axios.get(`/api/get-all-center?page=${page}`);
+    return axios.get(`/api/get-all-center-active?page=${page}`);
 };
-const createReview = (ratingPoint, reviewContent, CustomerId, CenterId) => {
-    return axios.post(`/api/admin/create-new-review`, { ratingPoint: ratingPoint, reviewContent: reviewContent, CustomerId: CustomerId, CenterId: CenterId });
+const createReview = (ratingPoint, reviewContent, CustomerId, CenterId, Status) => {
+    return axios.post(`/api/admin/create-new-review`, { ratingPoint: ratingPoint, reviewContent: reviewContent, CustomerId: CustomerId, CenterId: CenterId, Status: Status });
 };
 export { getCusDetail, updateCusDetail, getAllGymCenter, createReview };

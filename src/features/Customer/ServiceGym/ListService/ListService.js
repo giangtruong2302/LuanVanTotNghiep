@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import classes from "./styles.module.scss";
+import "./ListService.scss";
 import { Empty } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StaggerAnimation from "../../../../component/StaggerAnimation";
@@ -50,14 +50,9 @@ const ListService = (props) => {
         });
     }
   }, [props.searchValue]);
-  console.log("useeffect serach", props.searchValue)
 
-
-
-
-  console.log("search:", props.searchValue)
   const fetchNextPageService = async () => {
-    getAllService(page)
+    getAllService("", page)
       .then((response) => {
         const data = response.services.rows;
         if (data && data.length > 0) {
@@ -81,9 +76,7 @@ const ListService = (props) => {
         // setHasMore(false)
       });
   };
-  const functionSearch = () => {
 
-  }
 
   return (
     <>
@@ -98,35 +91,36 @@ const ListService = (props) => {
           />
         </div>
       ) : (
-        <div className={classes.listServiceContent}>
-          <InfiniteScroll
+
+        <div className="listServiceContent">
+          <InfiniteScroll className="scroll"
             dataLength={allService?.length ? allService.length : 0}
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             loader={
               <div className={"loading"}>
                 <StaggerAnimation />
               </div>
             }
+
             hasMore={hasMore}
+            style={{ display: "flex", flexDirection: "column", gap: "15px" }}
             next={fetchNextPageService}
-
-
           >
+
             {allService?.map((item, index) => {
               return (
                 <Link
                   to={`/service-detail/${item.id}`}
-                  className={classes.service}
+                  className="service"
                 >
 
-                  <div className={classes.lineService}></div>
-                  <div className={classes.serviceInfo}>
-                    <div className={classes.info}>
-                      <p className={classes.textNameService}>
+                  <div className="lineService"></div>
+                  <div className="serviceInfo">
+                    <div className="info">
+                      <p className="textNameService">
                         {item.ServiceName}
                       </p>
                       <img
-                        className={classes.SerImg}
+                        className="classes.SerImg"
                         src={item.ServiceImage}
                         style={{
 
@@ -142,9 +136,9 @@ const ListService = (props) => {
                       />
 
                     </div>
-                    <div className={classes.detailInfo}>
+                    <div className="detailInfo">
                       <p>{item.Price} VND /</p>
-                      <span className={classes.lineDetailInfo}></span>
+                      <span className="lineDetailInfo"></span>
                       <p>{item.WorkDuration} Month</p>
                     </div>
                   </div>
