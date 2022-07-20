@@ -49,6 +49,7 @@ const HomeHeader = (props) => {
   const [detailCustomer, setDetailCustomer] = useState();
   const [cusId, setCusId] = useState();
   const [page, setPage] = useState(2)
+
   useEffect(() => {
     if (cusInfo) {
       try {
@@ -106,7 +107,10 @@ const HomeHeader = (props) => {
         // setHasMore(false)
       });
   };
-
+  const filtered = cusBooking?.filter(Booking => {
+    return Booking.Status === "PENDING" || Booking.Status === "SCHEDULED";
+  });
+  console.log("filter:", filtered)
   const cartMenu = (
 
     <Menu className="menuDrop">
@@ -239,7 +243,7 @@ const HomeHeader = (props) => {
                       placement="bottomRight"
                       overlay={cartMenu}
                     >
-                      <Badge count={countBooking} offset={[0, 0]}>
+                      <Badge count={filtered?.length} offset={[0, 0]}>
                         <BellOutlined
                           size="small"
                           style={{
