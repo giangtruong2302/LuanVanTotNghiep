@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCenterDetail } from "./centerDetailAPI";
-import { Breadcrumb, Col, PageHeader, Row } from "antd";
+import { Breadcrumb, Col, PageHeader, Row, Button, Rate } from "antd";
 import { Question, List, ThumbsUp, Chats } from "phosphor-react";
 import chinhanh from "../../../assets/images/gym-place/chiNhanh1.jpg";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
@@ -12,14 +12,51 @@ import { ArrowLeft } from "phosphor-react";
 import ListPTCenter from "./ListPtOfCenter/listPtOfCenter";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
 import ListReview from "./ListReview/ListReview";
-const GymDetailPage = () => {
-    const navigate = useNavigate();
+import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import { createReview } from "../PersonalInfomation/perInfoAPI";
+import { Form, Input, Select } from "antd";
+import { handleGetDetailCustomerByExternalId } from "../PayPage/PaymentPage/paymentAPI";
+import { useSelector } from "react-redux";
+const customStyles = {
+    content: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        right: '74%',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
 
+};
+const GymDetailPage = () => {
+    const [statusReview, setStatusReview] = useState(1);
+    const [statusPage, setStatusPage] = useState("")
+    const cusInfo = useSelector((state) => state.cus.cusInfo);
+    const { Option } = Select;
+    const navigate = useNavigate();
+    const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
     const [centerDetail, setCenterDetail] = useState();
     const [nocenterDetail, setNoCenterDetail] = useState(false);
     const [, setCenterDetailLoading] = useState(true);
     const id = useParams();
+    const [modalReviewIsOpen, setReviewIsOpen] = React.useState(false);
+    const [form] = Form.useForm();
+    const [valueRate, setValueRate] = useState(3);
+    const [cusDetail, setCusDetail] = useState();
+    const [noCusDetail, setNoCusDetail] = useState(false);
+    const [, setCusDetailLoading] = useState(true);
+    const options = {
 
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    };
     useEffect(() => {
         getCenterDetail(id.id).then((response) => {
             if (response.centerDetail) {
@@ -35,6 +72,56 @@ const GymDetailPage = () => {
             .finally(() => {
                 setCenterDetailLoading(false);
             });
+    }, []);
+    function openModalReview() {
+        setReviewIsOpen(true);
+    }
+    function afterOpenModalReview() {
+        subtitle.style.color = '#000';
+
+    }
+
+    function closeModalReview() {
+        setReviewIsOpen(false);
+    }
+    let subtitle;
+    const onFinishReview = (values) => {
+
+        console.log('check', values)
+        createReview(valueRate, values.ReviewContent, cusDetail?.id, centerDetail?.id, statusReview).then((response) => {
+            if (response.message.errCode === 0) {
+                toast.success("Success", options)
+
+            } else {
+
+                toast.error("Fail", options);
+            }
+        })
+
+    };
+    useEffect(() => {
+        if (cusInfo) {
+            try {
+                handleGetDetailCustomerByExternalId(cusInfo["ExternalId"]).then((response) => {
+                    if (response.cusDetail) {
+                        setCusDetail(response.cusDetail);
+                        setNoCusDetail(false);
+                    } else {
+                        setNoCusDetail(true);
+                    }
+                })
+                    .catch(() => {
+                        setNoCusDetail(true);
+                    })
+                    .finally(() => {
+                        setCusDetailLoading(false);
+                    })
+                    .catch((error) => console.log(error));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
     }, []);
     // console.log('check', getCenterDetail)
     return (
@@ -90,7 +177,7 @@ const GymDetailPage = () => {
                                         <ThumbsUp size={20} color="#fff" weight="fill" /> Like
                                     </span>
                                     <span className="btnChat">
-                                        <Chats size={20} color="#fff" weight="fill" />
+                                        <Chats onClick={openModalReview} size={20} color="#fff" weight="fill" /> Review
                                     </span>
                                 </div>
                             </Col>
@@ -101,6 +188,72 @@ const GymDetailPage = () => {
                         <ListReview />
                     </div>
                 </Row>
+                <Modal
+
+                    isOpen={modalReviewIsOpen}
+                    onAfterOpen={afterOpenModalReview}
+                    onRequestClose={closeModalReview}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                ><h1>Form Review</h1>
+                    <div ref={(_subtitle) => (subtitle = _subtitle)}>
+                        <Form form={form} name="control-hooks" onFinish={onFinishReview}>
+                            <div className="titleInput">Email :</div>
+                            <Form.Item
+                                name="Email"
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <div className="titleInput">Phone number :</div>
+                            <Form.Item
+                                name="PhoneNumber"
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <div className="titleInput">Gym Center :{centerDetail?.CenterName}</div>
+
+
+
+
+                            <div className="titleInput">Review :</div>
+                            <Form.Item
+                                name="ReviewContent"
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <Input className="inputReview" />
+                            </Form.Item>
+                            <div className="titleInput">Rating :</div>
+                            <span>
+                                <Rate tooltips={desc} onChange={setValueRate} value={valueRate} />
+                                {valueRate ? <span className="ant-rate-text">{desc[valueRate - 1]}</span> : ''}
+                            </span>
+
+                            <div className={"btnReView"}>
+                                <Button type="primary" htmlType="submit" >
+                                    Submit
+                                </Button>
+                            </div>
+
+                        </Form>
+                    </div>
+
+
+
+                </Modal>
             </div>
             <HomeFooter />
         </div>

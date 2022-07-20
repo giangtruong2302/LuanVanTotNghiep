@@ -34,7 +34,7 @@ const ListCenter = (props) => {
         });
     }
     else {
-      getAllGymCenter("1").then((response) => {
+      getAllGymCenter(1).then((response) => {
 
         if (response.centers.rows.length > 0) {
           setAllGymCenter(response.centers.rows);
