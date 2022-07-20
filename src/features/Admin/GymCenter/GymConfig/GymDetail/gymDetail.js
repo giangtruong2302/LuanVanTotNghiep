@@ -127,15 +127,6 @@ const GymDetail = () => {
         </div>
         <div className={classes.salonDetailRight}>
           <div className={classes.detailRightContainer}>
-            <div
-              className={classes.changeThumbnail}
-              // onClick={() => setShowChangeImageModal(true)}
-            >
-              <ImageSquare size={32} color="#53d1b6" />
-              <div className={classes.changeThumbnailTitle}>
-                Change Center Image
-              </div>
-            </div>
             <div onClick={showModalUpdate} className={classes.editSalonDetail}>
               <NotePencil size={32} color="#53d1b6" />
               <div className={classes.editSalonDetailTitle}>

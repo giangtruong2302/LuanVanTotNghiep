@@ -62,14 +62,18 @@ const PaymentPage = () => {
         "YOUR QR CODE"
       )
         .then((res) => {
-          console.log("check paymnent with stripe: ", res);
-          message.success(
-            "thanh toan thanh cong! Chung toi se gui email cho ban"
-          );
-        })
-        .catch((res) => {
-          console.log("check res stripeErr: ", res.stripeErr);
+          if (res.stripeRes) {
+            console.log("check paymnent with stripe: ", res);
+            message.success(
+              "thanh toan thanh cong! Chung toi se gui email cho ban"
+            );
+          }
+          console.log("check res stripeErr: ", res.stripeRes);
           message.error("thanh toán thất bại");
+        })
+        .catch((error) => {
+          console.log("check res stripeErr: ", error);
+          // message.error("thanh toán thất bại");
         });
     } catch (error) {
       console.log(error);
@@ -109,15 +113,27 @@ const PaymentPage = () => {
   const handlePayWithMomo = useCallback(() => {
     setStep(1);
     try {
-      handlePayWithMomoAPI(detailOrder.id, detailOrder.amount)
-        .then((res) => {
-          console.log("check res: ", res);
-          window.location.href = res.result.payUrl;
-          setUrl(window.location.href);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (detailOrder && detailCus) {
+        console.log("first");
+        handlePayWithMomoAPI(
+          detailOrder?.id,
+          detailOrder?.amount,
+          detailCus?.CustomerEmail,
+          "QR CODE PAYMENT",
+          ""
+        )
+          .then((res) => {
+            console.log("check res: ", res);
+            if (res.result.payUrl) {
+              window.location.href = res.result.payUrl;
+            }
+            console.log("check momo link", res);
+            message.warning(res.result.message);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     } catch (error) {
       console.log(error);
     }
