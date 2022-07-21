@@ -501,7 +501,7 @@ const PTShedule = (props) => {
                                             <div>
 
 
-                                                <ToastContainer />
+
                                             </div>
                                             <Button type="primary" htmlType="submit">
                                                 Submit
@@ -513,7 +513,7 @@ const PTShedule = (props) => {
                                     </div>
                                 </Modal>
                             )}
-
+                            <ToastContainer />
                             <div className="book-free">
                                 <span>
                                     <FormattedMessage id="patient.detail-doctor.choose" />

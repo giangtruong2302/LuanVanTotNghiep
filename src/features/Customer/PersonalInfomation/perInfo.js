@@ -17,6 +17,7 @@ import Modal from 'react-modal';
 import BgProfile from "../../../assets/images/banner/bgCus.jpg"
 import { getAllGymCenter } from "./perInfoAPI";
 import { createReview } from "./perInfoAPI";
+import NoneAvatar from "../../../assets/images/logo/noneAvatar.jpg"
 const customStyles = {
     content: {
         position: 'absolute',
@@ -350,7 +351,7 @@ const PerInfo = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={(cusDetail?.CustomerImage) ? cusDetail?.CustomerImage : ava} className="imgCus" />
+                                    <img src={(cusDetail?.CustomerImage) ? cusDetail?.CustomerImage : NoneAvatar} className="imgCus" />
                                 </Col>
                                 <Col span={20} className="infoDetailCus">
                                     <div className="nameCusAndPosition">

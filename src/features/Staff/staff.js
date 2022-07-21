@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import * as actions from "../../store/actions";
 import { useDispatch } from "react-redux";
+import NoneAvatar from "../../assets/images/logo/noneAvatar.jpg"
 const customStyles = {
     content: {
         top: "50%",
@@ -210,7 +211,7 @@ const Staff = () => {
                 <div className="titlePage">
 
                     <div className="PTinfo">
-                        <img src={ptDetail?.StaffImage ? ptDetail?.StaffImage : ava} className="imgPT" />
+                        <img src={ptDetail?.StaffImage ? ptDetail?.StaffImage : NoneAvatar} className="imgPT" />
                         <div className="PtName">
                             <div className="welcomeCus">Welcome, {ptDetail?.StaffName} !</div>
                             <div className="btnPT">
@@ -248,10 +249,11 @@ const Staff = () => {
                                     onRequestClose={closeModalTimeWork}
                                     style={customStyles}
                                     contentLabel="Example Modal"
-                                ><h1>Form đăng ký lịch làm </h1>
+                                ><h2>Đăng ký lịch làm </h2>
                                     <div ref={(_subtitle) => (subtitle = _subtitle)}>
                                         <Form form={form} name="control-hooks" className="formCus" onFinish={onFinish}>
-                                            <select onChange={handleDay}  >
+                                            <label>Chọn ngày</label>
+                                            <p> <select onChange={handleDay}  >
                                                 {allDays && allDays.length > 0
                                                     ? allDays.map((item, index) => {
                                                         return (
@@ -261,8 +263,10 @@ const Staff = () => {
                                                         );
                                                     })
                                                     : ""}
-                                            </select>
-                                            <Select
+                                            </select></p>
+
+                                            <label>Chọn giờ</label>
+                                            <p> <Select
                                                 defaultValue="SelecTime"
                                                 style={{
                                                     width: 120,
@@ -278,6 +282,7 @@ const Staff = () => {
                                                 })}
 
                                             </Select>
+                                            </p>
                                             <Button onClick={handleCreateTimeWork}> Tạo lịch</Button>
                                         </Form>
                                     </div>
@@ -288,8 +293,8 @@ const Staff = () => {
                             </div>
                         </div>
                     </div>
-                    {(ptDetail?.RoleId === 3 ?
-                        <ListBooking /> : "")}
+
+                    <ListBooking />
                     <ToastContainer />
                 </div>
             </div>
