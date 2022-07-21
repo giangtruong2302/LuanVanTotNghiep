@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import './PersonalInfo.scss';
 import { PictureOutlined } from "@ant-design/icons";
-
+import NoneAvatar from "../../../assets/images/logo/noneAvatar.jpg"
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 const { Option } = Select;
@@ -175,7 +175,7 @@ const PersonalInfoStaff = () => {
 
                             <Row>
                                 <Col className="avatarCusDetail" span={4}>
-                                    <img src={infoDetail?.StaffImage ? infoDetail?.StaffImage : ava} className="imgStaff" />
+                                    <img src={infoDetail?.StaffImage ? infoDetail?.StaffImage : NoneAvatar} className="imgStaff" />
                                 </Col>
                                 <Col span={20} className="infoDetailStaff">
                                     <div className="nameStaffAndPosition">
@@ -278,24 +278,34 @@ const PersonalInfoStaff = () => {
                                                         },
                                                     ]}
                                                 >
-                                                    <Input />
+                                                    <Input placeholder="DD-MM-YYYY" />
                                                 </Form.Item>
                                                 Avatar:
-                                                <Upload
-                                                    name="avatar"
-                                                    listType="picture-card"
-                                                    className="avatar-uploader"
-                                                    showUploadList={true}
-                                                    beforeUpload={beforeUpload}
-                                                    onChange={handleChangeImage}
+                                                <Form.Item
+                                                    name="image"
+
                                                     rules={[
                                                         {
                                                             required: true,
                                                         },
                                                     ]}
                                                 >
-                                                    {uploadButton}
-                                                </Upload>
+                                                    <Upload
+                                                        name="avatar"
+                                                        listType="picture-card"
+                                                        className="avatar-uploader"
+                                                        showUploadList={true}
+                                                        beforeUpload={beforeUpload}
+                                                        onChange={handleChangeImage}
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {uploadButton}
+                                                    </Upload>
+                                                </Form.Item>
 
                                                 <ToastContainer />
 

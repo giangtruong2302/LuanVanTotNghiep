@@ -173,7 +173,7 @@ const RecoveryPass = () => {
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input type="password" />
                             </Form.Item>
 
 

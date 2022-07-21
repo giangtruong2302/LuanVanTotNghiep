@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import List from "./List";
 import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
+
 import { useNavigate } from "react-router-dom";
 const Booking = () => {
     const navigate = useNavigate()
@@ -35,6 +36,7 @@ const Booking = () => {
                 .finally(() => {
                     setBookDetailLoading(false);
                 });
+
         } else {
             navigate(`/staff-login`);
         }
@@ -92,7 +94,7 @@ const Booking = () => {
                             </div>
                         ) : (
                             <div className="listBookingContent ">
-                                <InfiniteScroll
+                                <InfiniteScroll className="scroll"
                                     dataLength={8}
                                     style={{ display: "flex", flexDirection: "column", gap: "10px" }}
                                     loader={

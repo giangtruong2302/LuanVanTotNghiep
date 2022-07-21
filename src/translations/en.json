@@ -1,11 +1,11 @@
 {
   "homeHeader": {
-    "speciality": "Medical specicalty",
-    "searchDocter": "Find a doctor by specialty",
-    "health-facility": "Health facilities",
-    "select-room": "Choose a clinic",
-    "doctor": "Doctor",
-    "select-doctor": "Choose a good doctor",
+    "speciality": "Services",
+    "searchDocter": "Find a service",
+    "health-facility": "Gym facility",
+    "select-room": "Choose the gym",
+    "doctor": "Personal Training",
+    "select-doctor": "Choose a PT",
     "fee": "Examination package",
     "check-health": "General health check",
     "support": "Support",
@@ -15,12 +15,12 @@
   "banner": {
     "title1": "MEDICAL PLATFORM",
     "title2": "COMPREHENSIVE HEALTH CARE",
-    "child1": "Specialized examination",
+    "child1": "Booking with your PT",
     "child2": "Remote examination",
-    "child3": "General examination",
-    "child4": "Medical test",
-    "child5": "Mental health",
-    "child6": "Dental examination"
+    "child3": "Choose nearlest facility",
+    "child4": "PT profile",
+    "child5": "Free advice",
+    "child6": "Check your BMI"
   },
   "menu": {
     "admin": {
@@ -116,5 +116,9 @@
       "create-blog": "Create Blog",
       "update-blog": "Update Blog"
     }
+  },
+  "user": {
+    "profile": "Profile",
+    "logout": "Logout"
   }
 }

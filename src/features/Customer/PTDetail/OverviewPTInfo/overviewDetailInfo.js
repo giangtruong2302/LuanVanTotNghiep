@@ -1,18 +1,18 @@
 import React from "react";
 import "./overviewDetail.scss";
 
-const OverviewDetail = () => {
+const OverviewDetail = (props) => {
   return (
     <div className="overViewPT">
       <div className="infoDetail">
         <div className="detailPTTitle">
-          <h2>Chuyên viên hướng dẫn xây dựng cơ thể: Dyno Duong</h2>
+          <h2>Chuyên viên hướng dẫn xây dựng cơ thể: {props.data?.StaffName}</h2>
         </div>
         <div className="detailPTContent">
           <ul>
-            <li>Trưởng Khoa Dinh Dưỡng bệnh viện Da Liễu TP. HCM Bác sĩ Hương có hơn
-              20 năm kinh nghiệm trong khám và điều trị bệnh lý da liễu Bác sĩ nhận
-              khám mọi độ tuổi.</li></ul>
+            <li>Huấn luyện viên thể hình phòng tập thuộc hệ thống GH Gym TP. HCM. Huấn luyện viên {props.data?.StaffName} có hơn
+              10 năm kinh nghiệm trong việc huấn luyện thể chất, cải thiện vóc dáng và nâng cao sức khỏe ở
+              mọi độ tuổi.</li></ul>
           <h2> Quá trình công tác</h2>
           <ul>
             <li>Trưởng khoa Dinh Dưỡng, Bệnh viện Da Liễu TP.HCM Nguyên Phó trưởng khoa Lâm sàng 1</li>

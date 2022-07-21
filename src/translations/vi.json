@@ -1,10 +1,10 @@
 {
   "homeHeader": {
-    "speciality": " Dịch vụ",
+    "speciality": "Dịch vụ",
     "searchDocter": "Tìm dịch vụ tại hệ thống",
     "health-facility": "Cơ sở GYM ",
     "select-room": "Chọn cơ sở gym gần bạn nhất",
-    "doctor": "PT",
+    "doctor": "Huấn luyện viên",
     "select-doctor": "Chọn huấn luyện viên cá nhân cho bạn",
     "fee": "Gói dịch vụ",
     "check-health": "Chọn gói dịch vụ theo nhu cầu ",
@@ -116,5 +116,9 @@
       "create-blog": "Tạo Blog",
       "update-blog": "Cập nhật Blog"
     }
+  },
+  "user": {
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
   }
 }

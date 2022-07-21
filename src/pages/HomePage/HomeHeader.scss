@@ -1,53 +1,48 @@
-.menuDrop {
-  overflow-y: scroll;
-  max-height: 150px;
+.CartDrop {
+  border-bottom: solid rgb(190, 185, 185) 1px;
+  max-height: 250px;
+  overflow: auto;
+
+  &:hover {
+    background-color: #b3b3b3;
+
+  }
 
 
 
-  .CartDrop {
-    border-bottom: solid rgb(190, 185, 185) 1px;
-
-
-    &:hover {
-      background-color: #b3b3b3;
-
+  .OptionPay {
+    .textOptionPay {
+      border-width: 50%;
+      border-top: solid rgb(245, 239, 239) 1px;
+      font-weight: bold;
     }
 
+    .optionBtn {
 
 
-    .OptionPay {
-      .textOptionPay {
-        border-width: 50%;
-        border-top: solid rgb(245, 239, 239) 1px;
+      .btnPay {
+        background-color: rgb(57, 213, 57);
+        border-radius: 20px;
+        margin-right: 20px;
+        padding: 7px;
+        margin-left: 80px;
         font-weight: bold;
+        border: solid rgb(118, 117, 117) 1px;
+        color: white;
       }
 
-      .optionBtn {
-
-
-        .btnPay {
-          background-color: rgb(57, 213, 57);
-          border-radius: 20px;
-          margin-right: 20px;
-          padding: 7px;
-          margin-left: 80px;
-          font-weight: bold;
-          border: solid rgb(118, 117, 117) 1px;
-          color: white;
-        }
-
-        .btnCancel {
-          color: white;
-          border: solid rgb(118, 117, 117) 1px;
-          background-color: red;
-          border-radius: 20px;
-          padding: 7px;
-          font-weight: bold;
-        }
+      .btnCancel {
+        color: white;
+        border: solid rgb(118, 117, 117) 1px;
+        background-color: red;
+        border-radius: 20px;
+        padding: 7px;
+        font-weight: bold;
       }
     }
   }
 }
+
 
 
 

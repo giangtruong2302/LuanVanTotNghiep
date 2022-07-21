@@ -1,7 +1,7 @@
-import { Input, Button, Menu, Dropdown, Badge } from "antd";
+import { Input, Button, Menu, Dropdown, Badge, Divider, Skeleton } from "antd";
 import { BellOutlined, CheckOutlined } from "@ant-design/icons";
 import * as actions from "../../store/actions";
-import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import NoneAvatar from "../../assets/images/logo/noneAvatar.jpg"
 import StaggerAnimation from "../../component/StaggerAnimation";
 import moment from "moment";
 import {
@@ -30,7 +30,11 @@ import { getCusBooking, getOrder } from "../../features/Customer/PersonalInfomat
 import { handleGetDetailCustomerByExternalId } from "../../features/Customer/PayPage/PaymentPage/paymentAPI";
 import OrderCheckedPending from "./orderCheckedPending";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getDetailSchedule } from "../../features/Staff/ListBooking/listBookingAPI";
+import { getTimeById } from "../../features/Customer/GymCenterDetail/PtSchedule/PtScheduleAPI";
 import OrderChecked from "./orderChecked";
+import TimeBooking from "./timeBooking";
+import { ToastContainer, toast } from 'react-toastify';
 const { Search } = Input;
 const HomeHeader = (props) => {
   const navigate = useNavigate();
@@ -49,7 +53,16 @@ const HomeHeader = (props) => {
   const [detailCustomer, setDetailCustomer] = useState();
   const [cusId, setCusId] = useState();
   const [page, setPage] = useState(2)
+  const options = {
 
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
   useEffect(() => {
     if (cusInfo) {
       try {
@@ -83,6 +96,7 @@ const HomeHeader = (props) => {
       }
     }
   }, []);
+
   const fetchNextCusBooking = async () => {
     getCusBooking(cusId, page)
       .then((response) => {
@@ -110,42 +124,56 @@ const HomeHeader = (props) => {
   const filtered = cusBooking?.filter(Booking => {
     return Booking.Status === "PENDING" || Booking.Status === "SCHEDULED";
   });
-  console.log("filter:", filtered)
+  console.log("filter", filtered)
   const cartMenu = (
 
     <Menu className="menuDrop">
-      <InfiniteScroll
-        dataLength={cusBooking?.length ? cusBooking?.length : 0}
-        hasMore={true}
-        next={fetchNextCusBooking}
+      <div
+        id="scrollableDiv"
+        style={{
+          height: 200,
+          overflow: 'auto',
+          padding: '0 1px',
+          border: '1px solid rgba(140, 140, 140, 0.35)',
+        }}
       >
-        {cusBooking?.map((item, index) => {
-          return (
+        <InfiniteScroll
+          dataLength={2}
+          hasMore={hasMore}
+          next={fetchNextCusBooking}
+          // loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+          endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+          scrollableTarget="scrollableDiv"
 
-            (item.Status === "CANCELED") ? "" :
-              <Menu.Item key={index} className="CartDrop">
-                Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
-                {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
-                <p>Trạng thái : {item.Status} </p>
-                {item.Status === "SCHEDULED" ? (
-                  <OrderChecked data={item} />
+        >
+          {cusBooking?.map((item, index) => {
+            return (
 
-                ) : (
-                  <OrderCheckedPending data={item} />
-                )}
-              </Menu.Item>
+              (item.Status === "CANCELED") ? "" :
+                <Menu.Item key={index} className="CartDrop">
+                  Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
+                  {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
+                  <TimeBooking data={item} />
+                  Trạng thái : {item.Status}
+                  {item.Status === "SCHEDULED" ? (
+                    <OrderChecked data={item} />
 
-          );
-        })}
-      </InfiniteScroll>
+                  ) : (
+                    <OrderCheckedPending data={item} />
+                  )}
+                </Menu.Item>
+
+            );
+          })}
+        </InfiniteScroll></div>
     </Menu>
   );
   const userMenu = (
     <Menu className="UserDrop">
       <Menu.Item>
-        <NavLink to="/customer-infomation">Profile</NavLink>
+        <NavLink to="/customer-infomation"><FormattedMessage id="user.profile" /></NavLink>
       </Menu.Item>
-      <Menu.Item onClick={handleLogout}> Logout</Menu.Item>
+      <Menu.Item onClick={handleLogout}> <FormattedMessage id="user.logout" /></Menu.Item>
     </Menu>
   );
 
@@ -161,6 +189,7 @@ const HomeHeader = (props) => {
 
   return (
     <>
+
       <div className="home-header-container">
         <div className="home-header-content">
           <div className="left-content">
@@ -217,6 +246,7 @@ const HomeHeader = (props) => {
               <li> <NavLink to={`/service-gym`} className="menu__item" >Dịch vụ</NavLink></li>
               <li><NavLink to={`/gym-center`} className="menu__item" >Cơ sở Gym</NavLink></li>
               <li><NavLink to={`/Personal-Training`} className="menu__item" >PT</NavLink></li>
+              <li><NavLink to={`/Blog`} className="menu__item" >Blog</NavLink></li>
               <li><NavLink to={`/login`} className="menu__item" >Đăng nhập</NavLink></li>
             </ul>
           </div>
@@ -224,7 +254,12 @@ const HomeHeader = (props) => {
             <>
               {cusInfo ? (
                 <div className="cusArea">
-                  <img className="imgCus" src={detailCustomer?.CustomerImage} />
+                  {detailCustomer?.CustomerImage === "" ?
+                    <img className="imgCus" src={NoneAvatar} />
+                    :
+                    <img className="imgCus" src={detailCustomer?.CustomerImage} />
+                  }
+
                   <div className="User">
                     <Dropdown overlay={userMenu}>
                       <Gear

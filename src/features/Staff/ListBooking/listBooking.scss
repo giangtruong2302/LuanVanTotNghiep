@@ -1,6 +1,6 @@
 .listStaffBookingContent {
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow: auto;
     max-height: auto;
     display: flex;
     margin: 0 10px;

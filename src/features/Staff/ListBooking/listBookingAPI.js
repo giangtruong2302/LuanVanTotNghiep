@@ -9,7 +9,10 @@ const getCancelBooking = (Status, bookingId, ScheduleId) => {
     return axios.put(`/api/staff/cancel-booking`, { Status: Status, bookingId: bookingId, ScheduleId: ScheduleId });
 };
 
+const getDetailSchedule = (id) => {
+    return axios.get(`/api/get-schedule-working-by-id?id=${id}`);
+};
 const getServiceDetail = (id) => {
     return axios.get(`/api/get-detail-service?id=${id}`);
 };
-export { getAllBookingOfPT, getAcceptBooking, getCancelBooking, getServiceDetail }
+export { getAllBookingOfPT, getAcceptBooking, getCancelBooking, getServiceDetail, getDetailSchedule }
