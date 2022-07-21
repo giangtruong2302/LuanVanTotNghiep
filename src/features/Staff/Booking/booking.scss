@@ -63,7 +63,7 @@
                 margin-left: 200px;
 
                 .listBookingContent {
-                    overflow: auto;
+                    overflow: hidden;
                     max-height: auto;
                     display: flex;
                     margin: 0 10px;
@@ -79,6 +79,11 @@
                     // height: calc(100% - 20px);
 
                     border-radius: 5px;
+
+                    .scroll {
+                        width: 100%;
+                        overflow: auto;
+                    }
 
                     :global {
                         .infinite-scroll-component__outerdiv {

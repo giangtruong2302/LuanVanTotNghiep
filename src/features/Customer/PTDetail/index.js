@@ -102,13 +102,11 @@ const PTDetail = () => {
               <Col span={12}>
                 <PTShedule ptId={id.id} ptName={ptDetail?.StaffName} centerId={ptDetail?.CenterId} />
               </Col>
-              <Col span={12} >
-                <PTSchedulePayment />
-              </Col>
+
             </Row>
             <Row>
               <Col span={24}>
-                <OverviewDetail />
+                <OverviewDetail data={ptDetail} />
               </Col>
             </Row>
           </Col>

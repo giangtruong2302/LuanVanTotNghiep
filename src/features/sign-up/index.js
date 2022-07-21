@@ -160,7 +160,7 @@ const SignUp = () => {
                   },
                 ]}
               >
-                <Input className="inputField" />
+                <Input type="password" className="inputField" />
               </Form.Item>
             </div>
             <div className="titleInputSignUp"> Full Name :</div>
@@ -216,7 +216,7 @@ const SignUp = () => {
                 },
               ]}
             >
-              <Input className="inputField" />
+              <Input className="inputField" placeholder="DD-MM-YYYY" />
             </Form.Item>
             <div className="titleInputSignUp"> Gender : </div>
             <Form.Item
@@ -258,21 +258,30 @@ const SignUp = () => {
               </Select>
             </Form.Item>
             <div className="titleInputSignUp"> Avatar: </div>
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={true}
-              beforeUpload={beforeUpload}
-              onChange={handleChangeImage}
+            <Form.Item
+              name="image"
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              {uploadButton}
-            </Upload>
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={true}
+                beforeUpload={beforeUpload}
+                onChange={handleChangeImage}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                {uploadButton}
+              </Upload>
+            </Form.Item>
             <div className={"btnContainer"}>
               <button
                 className={"btnLogin"}

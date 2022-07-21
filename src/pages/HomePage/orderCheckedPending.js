@@ -37,7 +37,7 @@ const OrderCheckedPending = (props) => {
 
             if (response.message.errorCode === 0) {
                 toast.success("Success", options)
-                setStatusPage(Date.now())
+
             } else {
                 toast.error("Fail", options)
 

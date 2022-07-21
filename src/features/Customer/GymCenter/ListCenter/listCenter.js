@@ -110,7 +110,7 @@ const ListCenter = (props) => {
                       <div className="infoCen">
                         <img
                           className="centerImg"
-                          src={chinhanh}
+                          src={item.CenterImage}
                           style={{
                             borderRadius: "6px",
                             width: "220px",
