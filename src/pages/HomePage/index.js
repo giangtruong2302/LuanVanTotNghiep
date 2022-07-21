@@ -49,7 +49,9 @@ export default function Home() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-  }
+  };
+  const url = useLocation();
+
   return (
     <>
       <HomeHeader isShowBanner={true} />

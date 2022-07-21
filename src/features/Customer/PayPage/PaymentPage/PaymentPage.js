@@ -110,17 +110,17 @@ const PaymentPage = () => {
       console.log(error);
     }
   }, [state]);
-  const handlePayWithMomo = useCallback(() => {
+  const handlePayWithMomo = () => {
     setStep(1);
     try {
       if (detailOrder && detailCus) {
         console.log("first");
         handlePayWithMomoAPI(
           detailOrder?.id,
-          detailOrder?.amount,
-          detailCus?.CustomerEmail,
-          "QR CODE PAYMENT",
-          ""
+          detailOrder?.amount
+          // detailCus?.CustomerEmail,
+          // "QR CODE PAYMENT",
+          // ""
         )
           .then((res) => {
             console.log("check res: ", res);
@@ -137,7 +137,7 @@ const PaymentPage = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
   return (
     <div className="PaymentBg">
       <div className="containerPayment">
