@@ -120,5 +120,18 @@
   "user": {
     "profile": "Hồ sơ",
     "logout": "Đăng xuất"
+  },
+  "admin": {
+    "manage-center": "Quản lý cơ sở",
+    "manage-account": "Quản lý tài khoản",
+    "manage-manager": "Quản lý Manager",
+    "manage-service": "Quản lý dịch vụ",
+    "manage-schedule": "Quản lý lịch làm",
+    "manage-order": "Quản lý đơn hàng",
+    "manage-discount": "Quản lý khuyến mãi",
+    "manage-salary": "Quản lý lương",
+    "manage-blog": "Quản lý Blog",
+    "account-setting": "Cài đặt tài khoản",
+    "manage-languages": "Chuyển ngôn ngữ"
   }
 }
