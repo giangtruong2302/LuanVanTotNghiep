@@ -120,5 +120,18 @@
   "user": {
     "profile": "Profile",
     "logout": "Logout"
+  },
+  "admin": {
+    "manage-center": "Manage Center",
+    "manage-account": "Manage Account",
+    "manage-manager": "Manage Manager",
+    "manage-service": "Manage Services",
+    "manage-schedule": "Manage Schedule",
+    "manage-order": "Manage Order",
+    "manage-discount": "Manage Discount",
+    "manage-salary": "Manage Salary",
+    "manage-blog": "Manage Blog",
+    "account-setting": "Account Setting",
+    "manage-languages": "Manage Languages"
   }
 }
