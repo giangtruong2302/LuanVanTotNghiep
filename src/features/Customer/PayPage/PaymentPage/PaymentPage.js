@@ -69,7 +69,7 @@ const PaymentPage = () => {
             );
           }
           console.log("check res stripeErr: ", res.stripeRes);
-          message.error("thanh toán thất bại");
+          // message.error("thanh toán thất bại");
         })
         .catch((error) => {
           console.log("check res stripeErr: ", error);

@@ -1,72 +1,72 @@
 .ScanPage {
+  .backToHome {
+    width: 100%;
+    color: white;
+    background: #a50000;
+    height: 65px;
 
-    .backToHome {
-        width: 100%;
+    .titleStaffPage {
+      color: black;
+    }
+
+    .backtoHome {
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      // width: fit-content;
+      .textBackToHome {
+        font-family: "roboto";
+        font-size: 18px;
+        font-weight: 400;
+        margin-left: 10px;
         color: white;
-        background: #a50000;
-        height: 65px;
+      }
+    }
+  }
 
-        .titleStaffPage {
+  .scanContain {
+    padding-top: 1px;
+    text-align: center;
+    width: 500px;
+    height: 100px;
+    margin-left: 500px;
 
-            color: black;
-        }
-
-        .backtoHome {
-            padding-top: 15px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-
-            // width: fit-content;
-            .textBackToHome {
-                font-family: "roboto";
-                font-size: 18px;
-                font-weight: 400;
-                margin-left: 10px;
-                color: white;
-            }
-        }
+    .resultScan {
+      font-size: 18px;
     }
 
-    .scanContain {
-        padding-top: 1px;
-        text-align: center;
-        width: 500px;
-        height: 100px;
-        margin-left: 500px;
+    .dataScan {
+      font-size: 20px;
+      font-weight: bold;
 
-
-
-        .resultScan {
-            font-size: 18px;
-
-        }
-
-
-        .dataScan {
-            font-size: 20px;
-            font-weight: bold;
-
-            .Status {
-                color: green;
-            }
-        }
-
-
-
+      .Status {
+        color: green;
+      }
     }
+    .btn-checkTime {
+      height: 50px;
+      width: fit-content;
+      padding: 7px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+    }
+  }
 }
 
-
 @media only screen and (max-width: 46.1875em) {
-    .ScanPage {
-        .scanContain {
-            padding-top: 50px;
-            text-align: center;
-            width: 350px;
-            height: 100px;
-            margin-left: 7px;
-        }
+  .ScanPage {
+    .scanContain {
+      padding-top: 50px;
+      text-align: center;
+      width: 350px;
+      height: 100px;
+      margin-left: 7px;
     }
-
+  }
 }

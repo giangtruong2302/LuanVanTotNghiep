@@ -4,12 +4,34 @@ import {
   PhoneOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import staff from "../../../../../../assets/images/imgStaff/staff.png";
+import { handleGetDetailCustomer } from "../../../Customers/CustomerDetail/CusDetailAPI";
+import { handleGetDetailStaff } from "../../../Staffs/StaffDetail/StaffDetailAPI";
 import classes from "./styles.module.scss";
 
 const ReservationItemMerchant = (props) => {
+  const [customerDetail, setCustomerDetail] = useState();
+  const [staffDetail, setStaffDetail] = useState();
+  useEffect(() => {
+    if (props.data.CustomerId) {
+      handleGetDetailCustomer(props.data.CustomerId).then((res) => {
+        if (res.cusDetail) {
+          setCustomerDetail(res.cusDetail);
+        }
+      });
+    }
+    if (props.data.StaffId) {
+      handleGetDetailStaff(props.data.StaffId).then((res) => {
+        if (res.staffDetail) {
+          setStaffDetail(res.staffDetail);
+        }
+      });
+    }
+  }, [props]);
+
   const statusCondition = () => {
     switch (props.data.Status) {
       case "PENDING":
@@ -74,7 +96,14 @@ const ReservationItemMerchant = (props) => {
       </div>
       <div className={classes.information}>
         <div className={classes.cusDetail}>
-          <img src={staff} alt="" />
+          <img
+            src={
+              customerDetail?.CustomerImage
+                ? customerDetail?.CustomerImage
+                : staff
+            }
+            alt=""
+          />
           <div className={classes.cusName}>
             {props.data.CustomerName ? props.data.CustomerName : "N/A"}
           </div>
@@ -108,7 +137,11 @@ const ReservationItemMerchant = (props) => {
           <div className={classes.serviceName}>{props.data.ServiceId}</div>
           <div className={classes.staffDetail}>
             Staff :
-            <img src={staff} alt="" style={{ height: "35px", width: "35px" }} />
+            <img
+              src={staffDetail?.StaffImage ? staffDetail?.StaffImage : staff}
+              alt=""
+              style={{ height: "35px", width: "35px" }}
+            />
             {props.data.PTName ? props.data.PTName : "N/A"}
           </div>
         </div>

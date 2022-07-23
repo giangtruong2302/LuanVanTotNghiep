@@ -23,19 +23,6 @@
     "child6": "Đo chỉ số cơ thể"
   },
   "menu": {
-    "admin": {
-      "manage-user": "Người dùng",
-      "manage-doctor": "Quản lý bác sĩ",
-      "manage-admin": "Quản lý admin",
-      "crud": "CRUD user",
-      "crud-redux": "CRUD Redux",
-      "clinic": "Phòng khám",
-      "manage-clinic": "Quản lý phòng khám",
-      "specialty": "Chuyên khoa",
-      "manage-specialty": "Quản lý chuyên khoa",
-      "handbook": "Cẩm nang",
-      "manage-handbook": "Quản lý cẩm nang"
-    },
     "doctor": {
       "manage-schedule": "Quản lý kế hoạch khám bệnh",
       "manage-patient": "Quản lý bệnh nhân khám bệnh"
@@ -98,25 +85,7 @@
       "price": "Giá khám: "
     }
   },
-  "admin": {
-    "manage-gym": {
-      "manage-center": "Quản lý chi nhánh",
-      "manage-account": "Quản lý tài khoản",
-      "setting": "Cài đặt",
-      "languages": "Ngôn ngữ",
-      "staff": "Nhân viên",
-      "customer": "Khách hàng",
-      "revenue": "Doanh thu",
-      "list-of-staff": "Xem danh sách nhân viên",
-      "create-staff": "Thêm nhân viên",
-      "update-staff": "Cập nhật nhân viên",
-      "list-of-cus": "Xem danh sách khách hàng",
-      "list-of-revenue": "Xem doanh thu",
-      "list-of-blog": "Xem danh sách Blog",
-      "create-blog": "Tạo Blog",
-      "update-blog": "Cập nhật Blog"
-    }
-  },
+
   "user": {
     "profile": "Hồ sơ",
     "logout": "Đăng xuất"

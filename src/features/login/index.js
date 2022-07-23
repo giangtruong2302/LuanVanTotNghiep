@@ -1,7 +1,7 @@
 import { Checkbox, Form as FormAnt, Input, message } from "antd";
 import { Field, FieldProps, Form, Formik } from "formik";
 import "./Login.scss";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
@@ -20,23 +20,20 @@ const LoginPage = () => {
     const email = values ? values.email : "";
     const password = values ? values.password : "";
     try {
-      await handleLoginStaffAPI(email, password)
-        .then((res) => {
-          if (res.errorCode === 0) {
-            const dataStaff = res.data;
-            dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
-            navigate("/staff-personal-page");
-          } else {
-            message.error("login fail");
-          }
-
-        })
-
+      await handleLoginStaffAPI(email, password).then((res) => {
+        if (res.errorCode === 0) {
+          const dataStaff = res.data;
+          dispatch(dispatch(actions.staffLoginSuccess(dataStaff)));
+          localStorage.setItem("Staff ExternalId", res.data.ExternalId);
+          navigate("/staff-personal-page");
+        } else {
+          message.error("login fail");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <div className="wrapper">
@@ -108,7 +105,7 @@ const LoginPage = () => {
                   </FormAnt.Item>
                   <FormAnt.Item>
                     <Field>
-                      {({ }) => (
+                      {({}) => (
                         <Checkbox className="checkboxLogin">
                           Remember me
                         </Checkbox>

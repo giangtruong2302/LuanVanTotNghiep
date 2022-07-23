@@ -109,47 +109,28 @@ const AdminPage = () => {
       items={[
         {
           key: "1",
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.antgroup.com"
-            >
-              1st menu item
-            </a>
-          ),
+          label: <p>uuuuuu</p>,
         },
         {
           key: "2",
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              2nd menu item (disabled)
-            </a>
-          ),
-          icon: <SmileOutlined />,
+          label: <p>Xong review</p>,
+          // icon: <SmileOutlined />,
           // disabled: true,
         },
         {
           key: "3",
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.luohanacademy.com"
-            >
-              3rd menu item (disabled)
-            </a>
-          ),
+          label: <p>Nên có nhiều chương trình hơn</p>,
           // disabled: true,
         },
         {
           key: "4",
-          danger: true,
-          label: "a danger item",
+          label: <p>Test thử</p>,
+          // disabled: true,
+        },
+        {
+          key: "5",
+          label: <p>Nên có thêm máy chạy bộ</p>,
+          // disabled: true,
         },
       ]}
     />
@@ -253,7 +234,8 @@ const AdminPage = () => {
           >
             <Menu.SubMenu
               icon={<Buildings size={20} weight="bold" color="#fff" />}
-              title={<FormattedMessage id="admin.manage-gym.manage-center" />}
+              // title={<FormattedMessage id="admin.manage-center" />}
+              title="Centers"
             >
               <Menu.SubMenu title="Center">
                 {center &&
@@ -274,7 +256,7 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<UserCircle size={20} weight="bold" color="#fff" />}
-              title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              title={<FormattedMessage id="admin.manage-account" />}
             >
               <Menu.Item onClick={handleViewListAccount}>
                 Xem danh sách tài khoản
@@ -284,8 +266,8 @@ const AdminPage = () => {
               icon={
                 <IdentificationBadge size={20} weight="bold" color="#fff" />
               }
-              title="Quản lý Manager of Center"
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              // title="Quản lý Manager of Center"
+              title={<FormattedMessage id="admin.manage-manager" />}
             >
               <Menu.Item onClick={handleViewListManager}>
                 Xem danh sách Manager
@@ -293,8 +275,8 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<Planet size={20} weight="bold" color="#fff" />}
-              title="Quản lý Dịch vụ"
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              // title="Quản lý Dịch vụ"
+              title={<FormattedMessage id="admin.manage-service" />}
             >
               <Menu.Item onClick={handleViewListService}>
                 Xem danh sách dịch vụ
@@ -304,8 +286,8 @@ const AdminPage = () => {
               icon={
                 <AlignCenterHorizontal size={20} weight="bold" color="#fff" />
               }
-              title="Quản lý Center"
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              // title="Quản lý Center"
+              title={<FormattedMessage id="admin.manage-center" />}
             >
               <Menu.Item onClick={handleViewListCenter}>
                 Xem danh sách Center
@@ -313,8 +295,8 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<CalendarCheck size={20} weight="bold" color="#fff" />}
-              title="Quản lý Lịch làm việc"
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              // title="Quản lý Lịch làm việc"
+              title={<FormattedMessage id="admin.manage-schedule" />}
             >
               <Menu.Item onClick={handleViewListSchedule}>
                 Xem danh sách Lịch làm việc trong tuần
@@ -322,8 +304,8 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<ListNumbers size={20} weight="bold" color="#fff" />}
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
-              title="Quản lý Đơn hàng"
+              title={<FormattedMessage id="admin.manage-order" />}
+              // title="Quản lý Đơn hàng"
             >
               <Menu.Item onClick={handleViewListOrder}>
                 Xem danh sách đơn hàng
@@ -331,8 +313,8 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<Ticket size={20} weight="bold" color="#fff" />}
-              title="Quản lý Khuyến mãi"
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
+              // title="Quản lý Khuyến mãi"
+              title={<FormattedMessage id="admin.manage-discount" />}
             >
               <Menu.Item onClick={handleViewListDiscount}>
                 Xem danh sách mức khuyến mãi
@@ -340,14 +322,14 @@ const AdminPage = () => {
             </Menu.SubMenu>
             <Menu.SubMenu
               icon={<Coins size={20} weight="bold" color="#fff" />}
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
-              title="Quản lý Mức lương"
+              title={<FormattedMessage id="admin.manage-salary" />}
+              // title="Quản lý Mức lương"
             >
               <Menu.Item onClick={handleViewListSalary}>
                 Xem danh sách mức lương
               </Menu.Item>
             </Menu.SubMenu>
-            <Menu.SubMenu
+            {/* <Menu.SubMenu
               icon={<Ticket size={20} weight="bold" color="#fff" />}
               title="Quản lý Khuyến mãi"
               // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
@@ -355,11 +337,11 @@ const AdminPage = () => {
               <Menu.Item onClick={handleViewListDiscount}>
                 Xem danh sách mức khuyến mãi
               </Menu.Item>
-            </Menu.SubMenu>
+            </Menu.SubMenu> */}
             <Menu.SubMenu
               icon={<Book size={20} weight="bold" color="#fff" />}
-              // title={<FormattedMessage id="admin.manage-gym.manage-account" />}
-              title="Quản lý Blog"
+              title={<FormattedMessage id="admin.manage-blog" />}
+              // title="Quản lý Blog"
             >
               <Menu.Item onClick={handleViewListBlog}>
                 Xem danh sách Blog
@@ -369,11 +351,11 @@ const AdminPage = () => {
               icon={<ClockClockwise size={20} weight="bold" color="#fff" />}
               onClick={handleSettingAccount}
             >
-              Cài đặt tài khoản
+              <FormattedMessage id="admin.account-setting" />
             </Menu.Item>
             <Menu.SubMenu
               icon={<Translate size={20} weight="bold" color="#fff" />}
-              title={<FormattedMessage id="admin.manage-gym.languages" />}
+              title={<FormattedMessage id="admin.manage-languages" />}
             >
               <Menu.Item
                 onClick={() => {
@@ -410,10 +392,10 @@ const AdminPage = () => {
                 key: "12",
                 // icon: <BellRinging size={20} color="#f4f1f1" weight="fill" />,
                 icon: <GearSix size={20} color="#f5f5f5" weight="fill" />,
-                label: <FormattedMessage id="admin.manage-gym.setting" />,
+                label: <FormattedMessage id="admin.account-setting" />,
               },
               getItem(
-                <FormattedMessage id="admin.manage-gym.languages" />,
+                <FormattedMessage id="admin.manage-languages" />,
                 "sub7",
                 <Translate size={20} color="#f4f1f1" weight="fill" />,
                 [
