@@ -183,7 +183,7 @@ const CreateCustomer = (props) => {
                   // userName: "",
                 }}
                 onSubmit={async (values) => {
-                  console.log("check values:", values);
+                  // console.log("check values:", values);
                   setSaving(true);
                   handleSubmitCreateStaff(values);
                 }}

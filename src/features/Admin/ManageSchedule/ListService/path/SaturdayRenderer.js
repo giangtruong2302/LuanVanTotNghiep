@@ -30,7 +30,7 @@ const SaturdayRenderer = (props) => {
     setDateTime(stamp);
     let tempArr = [];
     for (let i = 0; i < props?.data?.Shiff?.length; i++) {
-      console.log("check arr 1: ", props?.data?.Shiff[i]?.DayWork);
+      // console.log("check arr 1: ", props?.data?.Shiff[i]?.DayWork);
 
       if (
         formatDate(props?.data?.Shiff[i]?.DayWork) ===
@@ -47,10 +47,10 @@ const SaturdayRenderer = (props) => {
       // // newStamp.push()
       // setArrTime(newStamp);
     }
-    console.log("temArr: ", tempArr);
+    // console.log("temArr: ", tempArr);
     setArrTime(tempArr);
   }, []);
-  console.log("check arr time: ", arrTime);
+  // console.log("check arr time: ", arrTime);
   // useEffect(() => {
   //   try {
   //     getDetailTime(parseInt(props.data?.TimeId))
