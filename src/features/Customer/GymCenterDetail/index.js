@@ -7,7 +7,7 @@ import chinhanh from "../../../assets/images/gym-place/chiNhanh1.jpg";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import './CenterDetail.scss'
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import ListPTCenter from "./ListPtOfCenter/listPtOfCenter";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
@@ -18,6 +18,7 @@ import { createReview } from "../PersonalInfomation/perInfoAPI";
 import { Form, Input, Select } from "antd";
 import { handleGetDetailCustomerByExternalId } from "../PayPage/PaymentPage/paymentAPI";
 import { useSelector } from "react-redux";
+import { FormattedMessage } from "react-intl";
 const customStyles = {
     content: {
         position: 'absolute',
@@ -74,7 +75,11 @@ const GymDetailPage = () => {
             });
     }, []);
     function openModalReview() {
-        setReviewIsOpen(true);
+        if (!cusInfo) {
+            toast.error("Chức năng cần đăng nhập", options);
+        } else {
+            setReviewIsOpen(true);
+        }
     }
     function afterOpenModalReview() {
         subtitle.style.color = '#000';
@@ -129,7 +134,7 @@ const GymDetailPage = () => {
             <div className="backToHome">
                 <NavLink to="/gym-center" className="backtoHome">
                     <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back</div>
+                    <div className="textBackToHome"><FormattedMessage id="header.back" /></div>
                 </NavLink>
 
             </div>
@@ -139,10 +144,10 @@ const GymDetailPage = () => {
                     <Breadcrumb.Item href="">
                         <HomeOutlined />
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item href="">
-                        <span>Danh sách cơ sở Gym</span>
+                    <Breadcrumb.Item >
+                        <Link to={'/gym-center'}><FormattedMessage id="gymDetail.gym-list" /></Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Cơ sở {centerDetail?.CenterName}</Breadcrumb.Item>
+                    <Breadcrumb.Item><FormattedMessage id="gymDetail.center" /> {centerDetail?.CenterName}</Breadcrumb.Item>
                 </Breadcrumb>
             </div>
 
@@ -164,20 +169,18 @@ const GymDetailPage = () => {
                             </Col>
                             <Col span={20} className="infoDetailCenter">
                                 <div className="nameCenterAndPosition">
-                                    Center Name: {centerDetail?.CenterName}
+                                    <FormattedMessage id="gymDetail.center-name" />: {centerDetail?.CenterName}
                                 </div>
                                 <div className="descriptionCenterDetail">
-                                    <div>Address: {centerDetail?.CenterAddress}  </div>
-                                    <div>Phone Number : {centerDetail?.CenterPhoneNumber} </div>
+                                    <div><FormattedMessage id="gymDetail.address" />: {centerDetail?.CenterAddress}  </div>
+                                    <div><FormattedMessage id="gymDetail.phoneNumber" /> : {centerDetail?.CenterPhoneNumber} </div>
 
 
                                 </div>
                                 <div className="likeAndChat">
-                                    <span className="btnLike">
-                                        <ThumbsUp size={20} color="#fff" weight="fill" /> Like
-                                    </span>
+
                                     <span className="btnChat">
-                                        <Chats onClick={openModalReview} size={20} color="#fff" weight="fill" /> Review
+                                        <Chats onClick={openModalReview} size={20} color="#fff" weight="fill" /> <FormattedMessage id="gymDetail.review" />
                                     </span>
                                 </div>
                             </Col>
@@ -195,10 +198,10 @@ const GymDetailPage = () => {
                     onRequestClose={closeModalReview}
                     style={customStyles}
                     contentLabel="Example Modal"
-                ><h1>Form Review</h1>
+                ><h1><FormattedMessage id="gymDetail.review" /></h1>
                     <div ref={(_subtitle) => (subtitle = _subtitle)}>
                         <Form form={form} name="control-hooks" onFinish={onFinishReview}>
-                            <div className="titleInput">Email :</div>
+                            <div className="titleInput"><FormattedMessage id="form-review.email" /> :</div>
                             <Form.Item
                                 name="Email"
                                 rules={[
@@ -209,7 +212,7 @@ const GymDetailPage = () => {
                             >
                                 <Input />
                             </Form.Item>
-                            <div className="titleInput">Phone number :</div>
+                            <div className="titleInput"><FormattedMessage id="form-review.phoneNumber" /> :</div>
                             <Form.Item
                                 name="PhoneNumber"
                                 rules={[
@@ -220,12 +223,12 @@ const GymDetailPage = () => {
                             >
                                 <Input />
                             </Form.Item>
-                            <div className="titleInput">Gym Center :{centerDetail?.CenterName}</div>
+                            <div className="titleInput"><FormattedMessage id="form-review.center" /> :{centerDetail?.CenterName}</div>
 
 
 
 
-                            <div className="titleInput">Review :</div>
+                            <div className="titleInput"><FormattedMessage id="form-review.review-content" /> :</div>
                             <Form.Item
                                 name="ReviewContent"
                                 rules={[
@@ -236,7 +239,7 @@ const GymDetailPage = () => {
                             >
                                 <Input className="inputReview" />
                             </Form.Item>
-                            <div className="titleInput">Rating :</div>
+                            <div className="titleInput"><FormattedMessage id="form-review.rating" /> :</div>
                             <span>
                                 <Rate tooltips={desc} onChange={setValueRate} value={valueRate} />
                                 {valueRate ? <span className="ant-rate-text">{desc[valueRate - 1]}</span> : ''}
@@ -244,7 +247,7 @@ const GymDetailPage = () => {
 
                             <div className={"btnReView"}>
                                 <Button type="primary" htmlType="submit" >
-                                    Submit
+                                    <FormattedMessage id="form-review.send-review" />
                                 </Button>
                             </div>
 

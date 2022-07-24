@@ -22,6 +22,7 @@ import { PictureOutlined } from "@ant-design/icons";
 import NoneAvatar from "../../../assets/images/logo/noneAvatar.jpg";
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
+import { FormattedMessage } from "react-intl";
 const { Option } = Select;
 const customStyles = {
   content: {
@@ -98,7 +99,7 @@ const PersonalInfoStaff = () => {
   const uploadButton = (
     <div className="btnUpload">
       {loading ? <PictureOutlined /> : <PictureOutlined />}
-      <div className="text">Change Image</div>
+      <div className="text"> <FormattedMessage id="formInfoCus.changeImg" /></div>
     </div>
   );
 
@@ -168,7 +169,7 @@ const PersonalInfoStaff = () => {
       <div className="backToHome">
         <NavLink to="/staff-personal-page" className="backtoHome">
           <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-          <div className="textBackToHome">Back to home</div>
+          <div className="textBackToHome"><FormattedMessage id="header.back-to-home" /></div>
         </NavLink>
         <div></div>
       </div>
@@ -197,21 +198,21 @@ const PersonalInfoStaff = () => {
                 </Col>
                 <Col span={20} className="infoDetailStaff">
                   <div className="nameStaffAndPosition">
-                    Hello, {infoDetail?.StaffName} !
+                    <FormattedMessage id="cusInfo.hello" />, {infoDetail?.StaffName} !
                   </div>
                   <div className="descriptionCusDetail">
-                    <div>Email : {infoDetail?.StaffEmail} </div>
-                    <div>Số điện thoại : {infoDetail?.StaffPhoneNumber} </div>
-                    <div>Ngày sinh : {infoDetail?.DayOfBirth} </div>
+                    <div><FormattedMessage id="cusInfo.email" /> : {infoDetail?.StaffEmail} </div>
+                    <div><FormattedMessage id="cusInfo.phoneNumber" /> : {infoDetail?.StaffPhoneNumber} </div>
+                    <div><FormattedMessage id="cusInfo.dayOfBirth" /> : {infoDetail?.DayOfBirth} </div>
                     <div>
-                      Giới tính : {infoDetail?.Gender === true ? "Nam" : "Nữ"}{" "}
+                      <FormattedMessage id="cusInfo.gender" /> : {infoDetail?.Gender === true ? "Nam" : "Nữ"}{" "}
                     </div>
-                    <div>Địa chỉ : {infoDetail?.Address} </div>
+                    <div><FormattedMessage id="cusInfo.address" /> : {infoDetail?.Address} </div>
                   </div>
                   <div className="likeAndChat">
                     <span>
                       <button className={"btn-sua"} onClick={openModal}>
-                        Sửa thông tin
+                        <FormattedMessage id="cusInfo.change" />
                       </button>
                     </span>
                   </div>
@@ -222,90 +223,62 @@ const PersonalInfoStaff = () => {
                     style={customStyles}
                     contentLabel="Example Modal"
                   >
-                    <h1>Form sửa thông tin</h1>
+                    <h1><FormattedMessage id="formInfoCus.form-title" /></h1>
                     <div ref={(_subtitle) => (subtitle = _subtitle)}>
                       <Form
                         form={form}
                         name="control-hooks"
                         onFinish={onFinish}
                       >
-                        Full Name :
+                        <FormattedMessage id="formInfoCus.fullName" /> :
                         <Form.Item
                           name="fullName"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Input value={infoDetail.fullName} />
+                          <Input defaultValue={infoDetail?.StaffName} />
                         </Form.Item>
-                        Email :
+                        <FormattedMessage id="formInfoCus.email" /> :
                         <Form.Item
                           name="email"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Input />
+                          <Input defaultValue={infoDetail?.StaffEmail} />
                         </Form.Item>
-                        Gender :
+                        <FormattedMessage id="formInfoCus.gender" /> :
                         <Form.Item
                           name="Gender"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Select placeholder="Select your gender">
+                          <Select defaultValue={infoDetail?.Gender}>
                             <Option value={true}>Nam</Option>
                             <Option value={false}>Nữ</Option>
                           </Select>
                         </Form.Item>
-                        SĐT
+                        <FormattedMessage id="formInfoCus.phoneNumber" /> :
                         <Form.Item
                           name="phoneNumber"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Input />
+                          <Input defaultValue={infoDetail?.StaffPhoneNumber} />
                         </Form.Item>
-                        Address
+                        <FormattedMessage id="formInfoCus.address" /> :
                         <Form.Item
                           name="address"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Input />
+                          <Input defaultValue={infoDetail?.Address} />
                         </Form.Item>
-                        Day of Birth :
+                        <FormattedMessage id="formInfoCus.dayOfBirth" /> :
                         <Form.Item
                           name="DayOfBirth"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+
                         >
-                          <Input placeholder="DD-MM-YYYY" />
+                          <Input defaultValue={infoDetail?.DayOfBirth} />
                         </Form.Item>
-                        Avatar:
+                        <FormattedMessage id="formInfoCus.avatar" /> :
                         <Form.Item
                           name="image"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
+                          defaultValue={infoDetail?.StaffImage}
                         >
                           <Upload
                             name="avatar"
@@ -314,22 +287,16 @@ const PersonalInfoStaff = () => {
                             showUploadList={true}
                             beforeUpload={beforeUpload}
                             onChange={handleChangeImage}
-                            rules={[
-                              {
-                                required: true,
-                              },
-                            ]}
+
                           >
                             {uploadButton}
                           </Upload>
                         </Form.Item>
                         <ToastContainer />
                         <Button type="primary" htmlType="submit">
-                          Submit
+                          <FormattedMessage id="formInfoCus.submit" />
                         </Button>
-                        <Button htmlType="button" onClick={onReset}>
-                          Reset
-                        </Button>
+
                       </Form>
                     </div>
                   </Modal>

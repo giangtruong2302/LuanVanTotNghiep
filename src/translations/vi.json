@@ -59,7 +59,7 @@
   "patient": {
     "detail-doctor": {
       "schedule": "Lịch hướng dẫn",
-      "no-schedule": "Bác sĩ không có lịch khám",
+      "no-schedule": "Huấn luyện viên không có lịch làm",
       "choose": "Chọn ",
       "Book-free": " và đặt (miễn phí)"
     },
@@ -85,7 +85,6 @@
       "price": "Giá khám: "
     }
   },
-
   "user": {
     "profile": "Hồ sơ",
     "logout": "Đăng xuất"
@@ -102,5 +101,166 @@
     "manage-blog": "Quản lý Blog",
     "account-setting": "Cài đặt tài khoản",
     "manage-languages": "Chuyển ngôn ngữ"
+  },
+  "header": {
+    "back-to-home": "Quay về trang chủ",
+    "back": "Quay về",
+    "logout": "Đăng xuất"
+  },
+  "title": {
+    "service": "Danh sách dịch vụ GH GYM",
+    "center": "Danh sách cơ sở GH GYM",
+    "pt": "Danh sách huấn luyện viên"
+  },
+  "serviceDetail": {
+    "work-duration": "Lộ trình",
+    "price": "Giá",
+    "service-list": "Danh sách các dịch vụ",
+    "service": "Dịch vụ"
+  },
+  "gymDetail": {
+    "gym-list": "Danh sách các cơ sở",
+    "center": "Cơ sở",
+    "center-name": "Tên cơ sở",
+    "address": "Địa chỉ",
+    "phoneNumber": "Số điện thoại",
+    "review": "Đánh giá",
+    "pt-of-center": "Huấn luyện viên của cơ sở"
+  },
+  "pt": {
+    "list-pt": "Danh sách huấn luyện viên"
+  },
+  "form-booking": {
+    "title-form": "Đăng ký",
+    "email": "Địa chỉ Email",
+    "startTime": "Ngày bắt đầu",
+    "service": "Dịch vụ",
+    "center": "Cơ sở",
+    "pt": "Huấn luyện viên",
+    "endTime": "Ngày kết thúc",
+    "discount": "Khuyến mãi",
+    "price": "Giá",
+    "submit": "Đăng ký"
+  },
+  "form-review": {
+    "title-form": "Đánh giá",
+    "email": "Địa chỉ Email",
+    "phoneNumber": "Số điện thoại",
+    "center": "Cơ sở",
+    "review-content": "Nội dung",
+    "rating": "Chấm điểm",
+    "send-review": "Gửi đánh giá"
+  },
+  "pt-detail": {
+    "pt-list": "Danh sách các huấn luyện viên",
+    "pt": "Huấn luyện viên",
+    "email": "Địa chỉ email",
+    "phoneNumber": "Số điện thoại",
+    "review": "Đánh giá",
+    "introduce": "Giới thiệu"
+  },
+  "cart": {
+    "booked": "Bạn đã đặt lịch với",
+    "in": "vào ngày",
+    "time": "Thời gian",
+    "status": "Trạng thái",
+    "accept": " Huấn luyện viên đã xác nhận, nhấn thanh toán để tiếp tục",
+    "paid": "Đã thanh toán",
+    "pay": "Thanh toán",
+    "cancel": "Hủy lịch đặt "
+  },
+  "cusInfo": {
+    "hello": "Chào",
+    "email": "Địa chỉ Email",
+    "phoneNumber": "Số điện thoại",
+    "dayOfBirth": "Ngày sinh",
+    "gender": "Giới tính",
+    "address": "Địa chỉ",
+    "change": "Đổi thông tin",
+    "booking": "Xem lịch đặt",
+    "review": "Đánh giá"
+  },
+  "formInfoCus": {
+    "form-title": "Sửa thông tin",
+    "fullName": "Tên đầy đủ",
+    "email": "Địa chỉ Email",
+    "gender": "Giới tính",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "dayOfBirth": "Ngày sinh",
+    "avatar": "Hình đại diện",
+    "submit": "Đổi thông tin",
+    "male": "Nam",
+    "female": "Nữ",
+    "changeImg": "Đổi ảnh"
+  },
+  "cus-booking": {
+    "title": "Lịch đã đặt",
+    "time": "Thời gian",
+    "startTime": "Ngày bắt đầu",
+    "endTime": "Ngày kết thúc",
+    "service": "Dịch vụ",
+    "pt": "Huấn luyện viên",
+    "status": "Trạng thái",
+    "pay": "Thanh toán",
+    "cancel": "Từ chối"
+  },
+  "blog": {
+    "title": "Danh sách blog GH Gym",
+    "blogList": "Danh sách Blog ",
+    "createdDay": "Ngày đăng"
+  },
+  "staff-page": {
+    "title": "Trang nhân viên",
+    "welcome": "Chào mừng",
+    "booking": "Lịch của bạn",
+    "info": "Thông tin cá nhân",
+    "salary": "Lương",
+    "register": "Đăng ký giờ làm",
+    "chooseDay": "Chọn ngày",
+    "chooseTime": "Chọn giờ",
+    "submit": "Đăng ký",
+    "scan": "Quét mã QR",
+    "your-salary": "Mức lương của bạn là",
+    "webcam": "Webcam quét mã QR",
+    "result": "Kết quả",
+    "cusId": "Mã khách hàng",
+    "price": "Giá",
+    "status": "Trạng thái",
+    "time": "Thời gian",
+    "attendance": "Điểm danh"
+  },
+  "staff-booking": {
+    "customer": "Khách hàng",
+    "time": "Thời gian",
+    "service": "Dịch vụ",
+    "startTime": "Ngày bắt đầu",
+    "endTime": "Ngày kết thúc",
+    "status": "Trạng thái",
+    "accept": "Xác nhận",
+    "cancel": "Từ chối",
+    "title": "Trang lịch đã đặt"
+  },
+  "bmi-page": {
+    "enter": "Nhập chiều cao và cân nặng",
+    "height": "Chiều cao",
+    "weight": "Cân nặng",
+    "check": "Tính BMI",
+    "yourBmi": "BMI của bạn là",
+    "skin": "Bạn hơi gầy ",
+    "normal": "Cân nặng bình thường",
+    "overWeight": "Bạn bị thừa cân ",
+    "fat": "Bạn bị béo phì"
+  },
+  "footer": {
+    "title": "Hệ thống GH GYM ",
+    "day": "Mỗi ngày",
+    "method": "Phương thức thanh toán",
+    "service": "Dịch vụ",
+    "private": "Chính sách bảo mật",
+    "recruit": "Tuyển dụng",
+    "news": "Tin tức",
+    "contact": "Liên hệ",
+    "social": "Mạng xã hội"
   }
 }

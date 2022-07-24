@@ -13,6 +13,7 @@ import { handleGetDetailCustomerByExternalId } from "../../PayPage/PaymentPage/p
 import { getCancelBooking } from "../../../Staff/ListBooking/listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
 import ListCusBooking from "./ListCusBooking";
+import { FormattedMessage } from "react-intl";
 const BookingOfCus = () => {
     const cusInfo = useSelector((state) => state.cus.cusInfo);
     const [cusBooking, setCusBooking] = useState();
@@ -110,12 +111,12 @@ const BookingOfCus = () => {
             <div className="backToHome">
                 <NavLink to="/customer-infomation" className="backtoHome">
                     <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back</div>
+                    <div className="textBackToHome"><FormattedMessage id="header.back" /></div>
                 </NavLink>
 
             </div>
             <div className="containerListPT">
-                Lịch Booking
+                <FormattedMessage id="cus-booking.title" />
                 <div className="titlePageBooking">
                     <div className="PTinfo">
                         {noCusBooking ? (

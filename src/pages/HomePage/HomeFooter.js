@@ -8,6 +8,7 @@ import {
   MapPinLine,
   CalendarCheck,
 } from "phosphor-react";
+import { FormattedMessage } from "react-intl";
 
 const HomeFooter = () => {
   const lang = useSelector((state) => state.app.language);
@@ -15,7 +16,7 @@ const HomeFooter = () => {
   return (
     <div className="home-footer container-fluid">
       <div className="footerLeft">
-        <p className="title-footer-GHGym">Hệ thống GH GYM</p>
+        <p className="title-footer-GHGym"><FormattedMessage id="footer.title" /></p>
         <p>
           <Phone size={32} color="#ffffff" /> 0337657262
         </p>
@@ -24,24 +25,23 @@ const HomeFooter = () => {
           phường 5 Quận 8
         </p>
         <p>
-          <CalendarCheck size={32} color="#ffffff" /> Thứ Hai -
-          Thứ Bảy 6:00 - 22:00
+          <CalendarCheck size={32} color="#ffffff" /> <FormattedMessage id="footer.day" /> 6:00 - 22:00
         </p>
       </div>
       <div className="footerCenter">
         <div className="left-blog">
-          <p>Phương thức thanh toán</p>
-          <p>Dịch vụ</p>
-          <p>Chính sách bảo mật</p>
+          <p><FormattedMessage id="footer.method" /></p>
+          <p><FormattedMessage id="footer.service" /></p>
+          <p><FormattedMessage id="footer.private" /></p>
         </div>
         <div className="right-blog">
-          <p>Tuyển dụng</p>
-          <p>Tin Tức</p>
-          <p>Liên hệ</p>
+          <p><FormattedMessage id="footer.recruit" /></p>
+          <p><FormattedMessage id="footer.news" /></p>
+          <p><FormattedMessage id="footer.contract" /></p>
         </div>
       </div>
       <div className="footerRight">
-        <p className="textSocialMedia">Mạng xã hội</p>
+        <p className="textSocialMedia"><FormattedMessage id="footer.social" /></p>
         <div className="social-media">
           <FacebookLogo size={32} color="#ffffff" />
           <YoutubeLogo size={32} color="#ffffff" />

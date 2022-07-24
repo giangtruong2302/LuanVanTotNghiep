@@ -3,6 +3,7 @@ import "./Blog.scss";
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
+import { FormattedMessage } from "react-intl";
 import "../../../pages/HomePage/HomePage.scss"
 import SearchCenter from "./SearchBlog/SearchBlog";
 const Blog = () => {
@@ -12,7 +13,7 @@ const Blog = () => {
                 <div className="backToHome">
                     <NavLink to="/" className="backToHomeLink">
                         <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                        <div className="textBackToHome">Back to home</div>
+                        <div className="textBackToHome"> <FormattedMessage id="header.back-to-home" /></div>
                     </NavLink>
                 </div>
                 <div className="listItem">

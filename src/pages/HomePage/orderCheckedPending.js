@@ -5,6 +5,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import { getOrder } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
 import { getCancelBooking } from "../../features/Staff/ListBooking/listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import { FormattedMessage } from "react-intl";
 const OrderCheckedPending = (props) => {
     const [oderDetail, setOrderDetail] = useState()
     const [item, setItem] = useState(props.data)
@@ -56,7 +57,7 @@ const OrderCheckedPending = (props) => {
             {oderDetail === 1 ?
                 <div className="OptionPay">
                     <div className="textOptionPay">
-                        Đã thanh toán <CheckOutlined style={{ fontSize: '17px', color: '#08c' }} />
+                        <FormattedMessage id="cart.paid" /> <CheckOutlined style={{ fontSize: '17px', color: '#08c' }} />
                     </div>
                 </div>
                 :
@@ -69,7 +70,7 @@ const OrderCheckedPending = (props) => {
                                 onClick={() => handleCancel()}
                                 style={{ marginLeft: "130px" }}
                             >
-                                Hủy booking
+                                <FormattedMessage id="cart.cancel" />
                             </button>
                         </div></div>
 

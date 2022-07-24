@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getServiceDetail } from "../ListBooking/listBookingAPI";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 import { getDetailSchedule } from "../ListBooking/listBookingAPI";
 import { getTimeById } from "../../Customer/GymCenterDetail/PtSchedule/PtScheduleAPI";
 const List = (props) => {
@@ -59,15 +60,15 @@ const List = (props) => {
                     <div className="centerInfo">
                         <div className="info">
 
-                            <p className={"infoCus"}>Khách hàng :{props.data.CustomerName}</p>
-                            <p className={"infoCus"}>Thời gian : {timeDetail?.StartTime.substring(0, 5)} - {timeDetail?.EndTime.substring(0, 5)} </p>
-                            <p className={"infoCus"}>Dịch vụ : {serviceDetail?.ServiceName}</p>
+                            <p className={"infoCus"}><FormattedMessage id="staff-booking.customer" /> :{props.data.CustomerName}</p>
+                            <p className={"infoCus"}><FormattedMessage id="staff-booking.time" /> : {timeDetail?.StartTime.substring(0, 5)} - {timeDetail?.EndTime.substring(0, 5)} </p>
+                            <p className={"infoCus"}><FormattedMessage id="staff-booking.service" /> : {serviceDetail?.ServiceName}</p>
 
                         </div>
                         <div className="infoService">
-                            <p className={"textNameCenter"}>Thời gia bắt đầu: {moment(props.data.StartTime).format("DD-MM-YYYY")} </p>
-                            <p className={"textNameCenter"}>Thời gia kết thúc : {moment(props.data.EndTime).format("DD-MM-YYYY")}</p>
-                            <p className={"textNameCenter"}>Trạng thái : {props.data.Status}</p>
+                            <p className={"textNameCenter"}><FormattedMessage id="staff-booking.startTime" />: {moment(props.data.StartTime).format("DD-MM-YYYY")} </p>
+                            <p className={"textNameCenter"}><FormattedMessage id="staff-booking.endTime" /> : {moment(props.data.EndTime).format("DD-MM-YYYY")}</p>
+                            <p className={"textNameCenter"}><FormattedMessage id="staff-booking.status" /> : {props.data.Status}</p>
                         </div>
 
                     </div>
