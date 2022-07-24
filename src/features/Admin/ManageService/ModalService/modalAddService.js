@@ -23,7 +23,10 @@ import Cropper from "react-easy-crop";
 import { toast, ToastContainer } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateServiceSchema } from "./validation";
-import { handleCreateNewService } from "./ModalServiceAPI";
+import {
+  handleCreateNewService,
+  handleGetAllDiscountRate,
+} from "./ModalServiceAPI";
 const { Option } = Select;
 const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,6 +34,7 @@ const CreateService = (props) => {
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [fileName, setFileName] = useState("");
+  const [allDiscountRate, setAllDiscountRate] = useState();
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
   const [loading, setLoading] = useState(false);
@@ -77,7 +81,9 @@ const CreateService = (props) => {
           values.WorkDuration,
           values.Price,
           imageUrl,
-          fileName
+          fileName,
+          dataDescription,
+          values.idDiscount
         )
           .then((res) => {
             toast.success("create new service is success");
@@ -127,6 +133,15 @@ const CreateService = (props) => {
     if (props.showModal) {
       setIsModalVisible(true);
     }
+    handleGetAllDiscountRate(1, "")
+      .then((res) => {
+        if (res.discount) {
+          setAllDiscountRate(res.discount.rows);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [props]);
 
   const handleCancel = () => {
@@ -162,63 +177,12 @@ const CreateService = (props) => {
                 ServiceName: "",
                 WorkDuration: "",
                 Price: "",
-                // // avatar: "",
-                // isActive: true,
-                // userName: "",
-                // roleId: "",
-                // gender: "",
-                // dob: "",
-                // address: "",
+                idDiscount: "",
               }}
               onSubmit={async (values) => {
                 // console.log("check values:", values);
                 setSaving(true);
                 handleSubmitCreateStaff(values);
-                // let newValues: CreateStaffAccountType = values
-                // if (imageUrl && croppedAreaPixels) {
-                //   const croppedImage = await getCroppedImg(
-                //     imageUrl,
-                //     croppedAreaPixels,
-                //   )
-                //   if (fileSize && croppedImage) {
-                //     const metadata: ImagePresignedS3Type = {
-                //       images: [
-                //         {
-                //           ext: fileType,
-                //           size: parseInt(fileSize.toFixed(0)),
-                //         },
-                //       ],
-                //     }
-                //     doGetPresignedUrlS3(metadata).then((res) => {
-                //       const { data } = res
-                //       if (data.data) {
-                //         doPutPresignedUrl(
-                //           data.data.urls[0],
-                //           croppedImage,
-                //         ).then(() => {
-                //           newValues = {
-                //             ...newValues,
-                //             avatar: data.data.urls[0].split('?')[0],
-                //           }
-                //           handleSubmitCreateStaff(newValues)
-                //           // CreateAccountStaff(7, newValues)
-                //           //   .then(() => {
-                //           //     message.success('Success')
-                //           //   })
-                //           //   .catch(() => {
-                //           //     message.error('Failure')
-                //           //   })
-                //           //   .finally(() => {
-                //           //     setSaving(false)
-                //           //     props.handleModal(false)
-                //           //   })
-                //         })
-                //       }
-                //     })
-                //   }
-                // } else {
-                //   handleSubmitCreateStaff(values)
-                // }
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -331,6 +295,40 @@ const CreateService = (props) => {
                         }}
                       />
                     </div>
+                    <FormAnt.Item
+                      //style={{ margin: '5px' }}
+                      validateStatus={
+                        Boolean(touched?.idDiscount && errors?.idDiscount)
+                          ? "error"
+                          : "success"
+                      }
+                      help={
+                        Boolean(touched?.idDiscount && errors?.idDiscount) &&
+                        errors?.idDiscount
+                      }
+                    >
+                      <Select
+                        className={` ${
+                          touched?.idDiscount && errors?.idDiscount
+                            ? classes.inputError
+                            : ""
+                        } ${classes.inputRecovery} ant-picker `}
+                        placeholder="Discount Rate"
+                        onChange={(value) => {
+                          setFieldValue("idDiscount", value);
+                        }}
+                      >
+                        {allDiscountRate && allDiscountRate.length > 0
+                          ? allDiscountRate.map((item, index) => {
+                              return (
+                                <Select.Option value={item.id} key={index}>
+                                  {item.DiscountRate} %
+                                </Select.Option>
+                              );
+                            })
+                          : ""}
+                      </Select>
+                    </FormAnt.Item>
                     <span className={classes.titleRight}>Service Image</span>
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>

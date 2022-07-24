@@ -6,7 +6,9 @@ const handleCreateNewService = (
   WorkDuration,
   Price,
   ServiceImage,
-  fileName
+  fileName,
+  CourseRoute,
+  idDiscount
 ) => {
   // console.log("first", userEmail, userPassword);
   return axios.post(`/api/create-new-service`, {
@@ -15,6 +17,8 @@ const handleCreateNewService = (
     Price,
     ServiceImage,
     fileName,
+    CourseRoute,
+    idDiscount,
   });
 };
 const handleUpdateService = (
@@ -23,7 +27,9 @@ const handleUpdateService = (
   WorkDuration,
   Price,
   ServiceImage,
-  fileName
+  fileName,
+  CourseRoute,
+  idDiscount
 ) => {
   return axios.put(`/api/update-service`, {
     id: id,
@@ -32,9 +38,21 @@ const handleUpdateService = (
     Price: Price,
     ServiceImage: ServiceImage,
     fileName,
+    CourseRoute,
+    idDiscount,
   });
 };
 const handleDeleteService = (id) => {
   return axios.delete(`/api/delete-service`, { data: { id: id } });
 };
-export { handleCreateNewService, handleUpdateService, handleDeleteService };
+const handleGetAllDiscountRate = (page, DiscountRate) => {
+  return axios.get(
+    `/api/admin/get-all-discount?DiscountRate=${DiscountRate}&page=${page}`
+  );
+};
+export {
+  handleCreateNewService,
+  handleUpdateService,
+  handleDeleteService,
+  handleGetAllDiscountRate,
+};

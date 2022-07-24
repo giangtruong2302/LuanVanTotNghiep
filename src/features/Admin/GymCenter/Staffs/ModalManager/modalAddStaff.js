@@ -9,6 +9,8 @@ import {
   Upload,
 } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch, useSelector } from "react-redux";
 import unknow from "../../../../../assets/images/imgStaff/dyno.jpg";
 import StaggerAnimation from "../../../../../component/StaggerAnimation";
@@ -29,6 +31,7 @@ const CreateStaff = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [dataDescription, setDataDescription] = useState();
   const [fileName, setFileName] = useState("");
   const [allCenter, setAllCenter] = useState();
   const [fileType, setFileType] = useState("");
@@ -126,7 +129,8 @@ const CreateStaff = (props) => {
           values.centerId,
           values.salaryId,
           Math.floor(Math.random() * 1001),
-          Math.floor(Math.random() * 2001)
+          Math.floor(Math.random() * 2001),
+          dataDescription
         )
           .then((res) => {
             props.takeStatus("complete" + Date.now());
@@ -426,6 +430,30 @@ const CreateStaff = (props) => {
                           // defaultValue={moment('2015-01-01', 'YYYY-MM-DD')}
                         />
                       </FormAnt.Item>
+                      <div className={classes.descriptionService}>
+                        <p>Description of Staff</p>
+                        <CKEditor
+                          editor={ClassicEditor}
+                          // style={{ height: "250px" }}
+                          // data="<p>Hello from CKEditor 5!</p>"
+                          placeholder="<p>About service</p>"
+                          onReady={(editor) => {
+                            // You can store the "editor" and use when it is needed.
+                            // console.log("Editor is ready to use!", editor);
+                          }}
+                          onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setDataDescription(data);
+                            // console.log({ event, editor, data });
+                          }}
+                          onBlur={(event, editor) => {
+                            // console.log("Blur.", editor);
+                          }}
+                          onFocus={(event, editor) => {
+                            // console.log("Focus.", editor);
+                          }}
+                        />
+                      </div>
                       <span className={classes.titleLeft}>Login info</span>
                       <FormAnt.Item
                         style={{ marginTop: "20px" }}

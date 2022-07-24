@@ -15,7 +15,8 @@ const handleCreateNewStaff = (
   centerId,
   salaryId,
   id,
-  ExternalId
+  ExternalId,
+  Description
 ) => {
   // console.log("first", userEmail, userPassword);
   return axios.post(`/api/create-new-user`, {
@@ -33,6 +34,7 @@ const handleCreateNewStaff = (
     salaryId,
     id,
     ExternalId,
+    Description,
   }); // req.body.email, req.body.password //
 };
 const handleUpdateStaff = (
@@ -48,7 +50,8 @@ const handleUpdateStaff = (
   centerId,
   salaryId,
   id,
-  ExternalId
+  ExternalId,
+  Description
 ) => {
   // console.log("first", userEmail, userPassword);
   return axios.put(`/api/admin/update-account`, {
@@ -65,6 +68,7 @@ const handleUpdateStaff = (
     salaryId,
     id,
     ExternalId,
+    Description,
   }); // req.body.email, req.body.password //
 };
 const handleDeleteStaff = (ExternalId, roleId) => {

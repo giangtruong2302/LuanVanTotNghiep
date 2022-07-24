@@ -8,6 +8,8 @@ import {
   Select,
   Upload,
 } from "antd";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
 import unknow from "../../../../assets/images/imgStaff/dyno.jpg";
@@ -21,16 +23,22 @@ import Cropper from "react-easy-crop";
 import { toast } from "react-toastify";
 import classes from "./styles.module.scss";
 import { CreateServiceSchema } from "./validation";
-import { handleCreateNewService, handleUpdateService } from "./ModalServiceAPI";
+import {
+  handleCreateNewService,
+  handleGetAllDiscountRate,
+  handleUpdateService,
+} from "./ModalServiceAPI";
 const { Option } = Select;
 const UpdateService = (props) => {
   // console.log("check props update: ", props);
+  const [dataDescription, setDataDescription] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [fileSize, setFileSize] = useState();
+  const [allDiscountRate, setAllDiscountRate] = useState();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [crop, setCrop] = useState({ x: 50, y: 50 });
@@ -63,45 +71,7 @@ const UpdateService = (props) => {
   }, []);
   const currentSalon = useSelector((state) => state.currentSalon);
   const dispatch = useDispatch();
-  const handleSubmitUpdateStaff = useCallback(
-    (values) => {
-      // console.log("check values: ", values);
-      //setDifferentPass(false)
-      // const sdt = formatPhoneNumber(values.phoneNumber)
-      try {
-        setSaving(true);
-        handleUpdateService(
-          props.data.id,
-          values.ServiceName,
-          values.WorkDuration,
-          values.Price,
-          imageUrl ? imageUrl : props.data.ServiceImage,
-          fileName
-        )
-          .then((res) => {
-            props.takeStatus("complete" + Date.now());
-            props.handleModal(false);
-            if (res.data.success === true) {
-              message.success("update service is success !");
-            } else {
-              message.error(res.data.data.email[0]);
-            }
-          })
-          .catch((res) => {
-            setSaving(false);
-            // console.log("check res data email: ", res);
-            message.error(res.data.data.email);
-          })
-          .finally(() => {
-            props.takeStatus("complete");
-          });
-      } catch (error) {
-        console.log(error);
-        setSaving(false);
-      }
-    },
-    [dispatch, imageUrl, fileName]
-  );
+
   const getBase64 = (img, callback) => {
     setLoading(false);
     const reader = new FileReader();
@@ -129,8 +99,50 @@ const UpdateService = (props) => {
     if (props.showModal) {
       setIsModalVisible(true);
     }
+    handleGetAllDiscountRate(1, "")
+      .then((res) => {
+        if (res.discount) {
+          setAllDiscountRate(res.discount.rows);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [props]);
-
+  const handleSubmitUpdateStaff = useCallback(
+    (values) => {
+      try {
+        setSaving(true);
+        handleUpdateService(
+          props.data.id,
+          values.ServiceName,
+          values.WorkDuration,
+          values.Price,
+          imageUrl ? imageUrl : props.data.ServiceImage,
+          fileName ? fileName : props.data.public_id_image,
+          dataDescription.toString(),
+          values.idDiscount
+        )
+          .then((res) => {
+            props.takeStatus("complete" + Date.now());
+            props.handleModal(false);
+            message.success("update service is success !");
+          })
+          .catch((res) => {
+            setSaving(false);
+            // console.log("check res data email: ", res);
+            message.error("update service fail");
+          })
+          .finally(() => {
+            props.takeStatus("complete");
+          });
+      } catch (error) {
+        console.log(error);
+        setSaving(false);
+      }
+    },
+    [dispatch, imageUrl, fileName]
+  );
   const handleCancel = () => {
     setIsModalVisible(false);
     props.handleModal(false);
@@ -147,14 +159,7 @@ const UpdateService = (props) => {
         className={classes.createStaff}
       >
         <div className={classes.titleCreateStaff}>
-          <span className={classes.nameCreate}>Update Account</span>
-          {differentPass ? (
-            <p style={{ color: "#ff0000" }}>
-              password is different current password
-            </p>
-          ) : (
-            ""
-          )}
+          <span className={classes.nameCreate}>Update Service</span>
         </div>
         <div className={classes.createStaffContainer}>
           <div className={classes.formInfo}>
@@ -168,63 +173,14 @@ const UpdateService = (props) => {
                   ? props.data.WorkDuration
                   : "N/A",
                 Price: props.data?.Price ? props.data.Price : "N/A",
-                // // avatar: "",
-                // isActive: true,
-                // userName: "",
-                // roleId: "",
-                // gender: "",
-                // dob: "",
-                // address: "",
+                idDiscount: props.data?.idDiscount
+                  ? props.data?.idDiscount
+                  : "N/A",
               }}
               onSubmit={async (values) => {
                 // console.log("check values:", values);
                 setSaving(true);
                 handleSubmitUpdateStaff(values);
-                // let newValues: CreateStaffAccountType = values
-                // if (imageUrl && croppedAreaPixels) {
-                //   const croppedImage = await getCroppedImg(
-                //     imageUrl,
-                //     croppedAreaPixels,
-                //   )
-                //   if (fileSize && croppedImage) {
-                //     const metadata: ImagePresignedS3Type = {
-                //       images: [
-                //         {
-                //           ext: fileType,
-                //           size: parseInt(fileSize.toFixed(0)),
-                //         },
-                //       ],
-                //     }
-                //     doGetPresignedUrlS3(metadata).then((res) => {
-                //       const { data } = res
-                //       if (data.data) {
-                //         doPutPresignedUrl(
-                //           data.data.urls[0],
-                //           croppedImage,
-                //         ).then(() => {
-                //           newValues = {
-                //             ...newValues,
-                //             avatar: data.data.urls[0].split('?')[0],
-                //           }
-                //           handleSubmitCreateStaff(newValues)
-                //           // CreateAccountStaff(7, newValues)
-                //           //   .then(() => {
-                //           //     message.success('Success')
-                //           //   })
-                //           //   .catch(() => {
-                //           //     message.error('Failure')
-                //           //   })
-                //           //   .finally(() => {
-                //           //     setSaving(false)
-                //           //     props.handleModal(false)
-                //           //   })
-                //         })
-                //       }
-                //     })
-                //   }
-                // } else {
-                //   handleSubmitCreateStaff(values)
-                // }
               }}
             >
               {({ errors, touched, setFieldValue }) => {
@@ -313,34 +269,69 @@ const UpdateService = (props) => {
                         )}
                       </Field>
                     </FormAnt.Item>
-
-                    {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password2 && errors?.password2)
-                            ? "error"
-                            : "success"
+                    <div className={classes.descriptionService}>
+                      <p>Course Route of Service</p>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        // style={{ height: "250px" }}
+                        data={
+                          dataDescription
+                            ? dataDescription
+                            : props.data.CourseRoute
                         }
-                        help={
-                          Boolean(touched?.password2 && errors?.password2) &&
-                          errors?.password2
-                        }
+                        placeholder="<p>About service</p>"
+                        onReady={(editor) => {
+                          // You can store the "editor" and use when it is needed.
+                          // console.log("Editor is ready to use!", editor);
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          setDataDescription(data);
+                          // console.log({ event, editor, data });
+                        }}
+                        onBlur={(event, editor) => {
+                          // console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          // console.log("Focus.", editor);
+                        }}
+                      />
+                    </div>
+                    <FormAnt.Item
+                      //style={{ margin: '5px' }}
+                      validateStatus={
+                        Boolean(touched?.idDiscount && errors?.idDiscount)
+                          ? "error"
+                          : "success"
+                      }
+                      help={
+                        Boolean(touched?.idDiscount && errors?.idDiscount) &&
+                        errors?.idDiscount
+                      }
+                    >
+                      <Select
+                        className={` ${
+                          touched?.idDiscount && errors?.idDiscount
+                            ? classes.inputError
+                            : ""
+                        } ${classes.inputRecovery} ant-picker `}
+                        placeholder="Discount Rate"
+                        defaultValue={props.data.idDiscount}
+                        onChange={(value) => {
+                          setFieldValue("idDiscount", value);
+                        }}
                       >
-                        <Field name="password2">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password2"
-                              className={` ${
-                                touched?.password2 && errors?.password2
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Confirm Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
+                        {allDiscountRate && allDiscountRate.length > 0
+                          ? allDiscountRate.map((item, index) => {
+                              return (
+                                <Select.Option value={item.id} key={index}>
+                                  {item.DiscountRate} %
+                                </Select.Option>
+                              );
+                            })
+                          : ""}
+                      </Select>
+                    </FormAnt.Item>
                     <span className={classes.titleRight}>Avatar</span>
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>
