@@ -8,8 +8,10 @@ import ListPTService from "./ListPTService/listPTService";
 import { useParams } from "react-router-dom";
 import { getServiceGymDetail } from "./serviceGymDetailAPI";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
+import { FormattedMessage } from "react-intl";
 
 const ServiceGymDetail = () => {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const ServiceGymDetail = () => {
       <div className="backToHome">
         <NavLink to="/service-gym" className="backtoHome">
           <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-          <div className="textBackToHome">Back</div>
+          <div className="textBackToHome"><FormattedMessage id="header.back" /></div>
         </NavLink>
 
       </div>
@@ -66,17 +68,17 @@ const ServiceGymDetail = () => {
                     <Breadcrumb.Item href="">
                       <HomeOutlined />
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item href="">
-                      <span>Danh sách các dịch vụ</span>
+                    <Breadcrumb.Item >
+                      <Link to={'/service-gym'}><FormattedMessage id="serviceDetail.service-list" /></Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Dich vụ {servicesDetail?.ServiceName} </Breadcrumb.Item>
+                    <Breadcrumb.Item><FormattedMessage id="serviceDetail.service" /> {servicesDetail?.ServiceName} </Breadcrumb.Item>
                   </Breadcrumb>
                 </div>
                 <div className="serviceDetailAbout">
                   <div className="serviceDetailTitle">{servicesDetail?.ServiceName}</div>
                   <div className="serviceDetailDefine">
-                    <p>WorkDuration : {servicesDetail?.WorkDuration} month</p>
-                    <p>Price : {servicesDetail?.Price} VND</p>
+                    <p><FormattedMessage id="serviceDetail.work-duration" /> : {servicesDetail?.WorkDuration} month</p>
+                    <p><FormattedMessage id="serviceDetail.price" /> : {servicesDetail?.Price} VND</p>
                   </div>
 
                   <div className="serviceDetailDefineSeemore">
@@ -85,7 +87,7 @@ const ServiceGymDetail = () => {
                     khách hàng thanh toán, hoặc khách hàng có thể hủy booking đó.
                   </div>
 
-
+                  <div>{servicesDetail?.CourseRoute.replace('-', '\n')} </div>
 
 
                 </div>

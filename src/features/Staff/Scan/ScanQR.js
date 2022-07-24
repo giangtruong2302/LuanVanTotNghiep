@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { ArrowLeft } from "phosphor-react";
 import { NavLink } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import {
   handleCheckTimeOfCustomer,
   handleGetDetailBookingByStaffId,
@@ -61,11 +62,11 @@ const ScanQR = () => {
       <div className="backToHome">
         <NavLink to="/staff-personal-page" className="backtoHome">
           <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-          <div className="textBackToHome">Back to home</div>
+          <div className="textBackToHome"><FormattedMessage id="header.back-to-home" /></div>
         </NavLink>
       </div>
       <div className="scanContain">
-        <h3>WebCam Scan QR Code</h3>
+        <h3><FormattedMessage id="staff-page.webcam" /></h3>
         <QrReader
           onResult={(result, error) => {
             if (!!result) {
@@ -79,29 +80,29 @@ const ScanQR = () => {
           }}
           style={{ width: "100px" }}
         />
-        <p className="resultScan">Kết quả : {data}</p>
+        <p className="resultScan"><FormattedMessage id="staff-page.result" /> : {data}</p>
         <div className="dataScan">
           <a style={{ fontWeight: "450" }}>id : </a>
           {dataId}
         </div>
         <div className="dataScan">
-          <a style={{ fontWeight: "450" }}>Customer Id : </a>
+          <a style={{ fontWeight: "450" }}><FormattedMessage id="staff-page.cusId" /> : </a>
           {dataCusId}
         </div>
         <div className="dataScan">
-          <a style={{ fontWeight: "450" }}>Price :</a> {dataPrice}
+          <a style={{ fontWeight: "450" }}><FormattedMessage id="staff-page.price" /> :</a> {dataPrice}
         </div>
         <div className="dataScan">
-          <a style={{ fontWeight: "450" }}>Status :</a>
+          <a style={{ fontWeight: "450" }}><FormattedMessage id="staff-page.status" /> :</a>
           <a style={{ color: "green" }}> {dataStatus}</a>
         </div>
         <div className="dataScan">
-          <a style={{ fontWeight: "450" }}>Time : </a>
+          <a style={{ fontWeight: "450" }}><FormattedMessage id="staff-page.time" /> : </a>
           {dataTime}
         </div>
         {data && (
           <button className="btn-checkTime" onClick={handleCheckTime}>
-            Điểm danh
+            <FormattedMessage id="staff-page.attendance" />
           </button>
         )}
       </div>

@@ -3,6 +3,8 @@ import "./countBMI.scss";
 import Modal from 'react-modal';
 import { Form, Button, Input } from "antd";
 import iconGif from "../../../assets/images/logo/bmiIcon.gif"
+import { FormattedMessage } from "react-intl";
+
 const customStyles = {
     content: {
         top: '50%',
@@ -51,8 +53,8 @@ const CountBMI = () => {
         <div className="bgBmi">
             <Form ref={form} name="control-hooks" className="formCus" onFinish={onFinish} >
 
-                <div className="titleInput">Nhập chiều cao và cân nặng :</div>
-                <label>Chiều cao (m)</label>
+                <div className="titleInput"><FormattedMessage id="bmi-page.enter" />:</div>
+                <label><FormattedMessage id="bmi-page.height" /> (m)</label>
                 <Form.Item
                     name="height"
 
@@ -64,7 +66,7 @@ const CountBMI = () => {
                 >
                     <Input />
                 </Form.Item>
-                <label>Cân nặng (kg)</label>
+                <label><FormattedMessage id="bmi-page.weight" /> (kg)</label>
                 <Form.Item
                     name="weight"
 
@@ -81,7 +83,7 @@ const CountBMI = () => {
 
 
                 <Button type="primary" htmlType="submit"   >
-                    Tính BMI
+                    <FormattedMessage id="bmi-page.check" />
                 </Button>
 
             </Form>
@@ -93,10 +95,10 @@ const CountBMI = () => {
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
-            ><div>Your BMI is :</div>
+            ><div><FormattedMessage id="bmi-page.yourBmi" />:</div>
                 <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{Math.round(sum * 100) / 100} </h2>
                 <img src={iconGif} style={{ height: "110px", marginLeft: "60px" }} />
-                {(sum < 18.5) ? <h4>Bạn hơi gầy</h4> : (18.5 < sum && sum < 25) ? <h4>Cân nặng bình thường</h4> : (25 < sum && sum < 30) ? <h4>Bạn bị thừa cân</h4> : <h4>Bạn bị béo phì</h4>}
+                {(sum < 18.5) ? <h4><FormattedMessage id="bmi-page.skin" /></h4> : (18.5 < sum && sum < 25) ? <h4><FormattedMessage id="bmi-page.normal" /></h4> : (25 < sum && sum < 30) ? <h4><FormattedMessage id="bmi-page.overWeight" /></h4> : <h4><FormattedMessage id="bmi-page.fat" /></h4>}
 
 
             </Modal>

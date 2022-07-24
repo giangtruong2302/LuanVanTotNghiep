@@ -17,7 +17,8 @@ import Modal from 'react-modal';
 import BgProfile from "../../../assets/images/banner/bgCus.jpg"
 import { getAllGymCenter } from "./perInfoAPI";
 import { createReview } from "./perInfoAPI";
-import NoneAvatar from "../../../assets/images/logo/noneAvatar.jpg"
+import NoneAvatar from "../../../assets/images/logo/noneAvatar.jpg";
+import { FormattedMessage } from "react-intl";
 const customStyles = {
     content: {
         position: 'absolute',
@@ -64,7 +65,7 @@ const PerInfo = () => {
     const onFinishReview = (values) => {
 
         console.log('check', values)
-        createReview(valueRate, values.ReviewContent, cusDetail?.id, values.center, statusReivew).then((response) => {
+        createReview(valueRate, values.ReviewContent, cusDetail?.id, values.center, statusReivew, "").then((response) => {
             if (response.message.errCode === 0) {
                 toast.success("Success", options)
 
@@ -142,7 +143,7 @@ const PerInfo = () => {
     const uploadButton = (
         <div className="btnUpload">
             {loading ? <PictureOutlined /> : <PictureOutlined />}
-            <div className="text">Change Image</div>
+            <div className="text"> <FormattedMessage id="formInfoCus.changeImg" /></div>
         </div>
     );
 
@@ -193,20 +194,27 @@ const PerInfo = () => {
     }
     let subtitle;
     useEffect(() => {
-        getCusDetail(cusInfo["ExternalId"]).then((response) => {
-            if (response.cusDetail) {
-                setCusDetail(response.cusDetail);
-                setNoCusDetail(false);
-            } else {
-                setNoCusDetail(true);
-            }
-        })
-            .catch(() => {
-                setNoCusDetail(true);
+        if (cusInfo) {
+
+
+            getCusDetail(cusInfo["ExternalId"]).then((response) => {
+                if (response.cusDetail) {
+                    setCusDetail(response.cusDetail);
+                    setNoCusDetail(false);
+                } else {
+                    setNoCusDetail(true);
+                }
             })
-            .finally(() => {
-                setCusDetailLoading(false);
-            });
+                .catch(() => {
+                    setNoCusDetail(true);
+                })
+                .finally(() => {
+                    setCusDetailLoading(false);
+                });
+        }
+        else {
+            navigate(`/`);
+        }
     }, [statusPage]);
 
 
@@ -216,7 +224,7 @@ const PerInfo = () => {
             <div className="backToHome">
                 <NavLink to="/" className="backtoHome">
                     <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back to home</div>
+                    <div className="textBackToHome"><FormattedMessage id="header.back-to-home" /></div>
                 </NavLink>
 
             </div>
@@ -232,83 +240,59 @@ const PerInfo = () => {
                         onRequestClose={closeModal}
                         style={customStyles}
                         contentLabel="Example Modal"
-                    ><h1>Form sửa thông tin</h1>
+                    ><h1><FormattedMessage id="formInfoCus.form-title" /></h1>
                         <div ref={(_subtitle) => (subtitle = _subtitle)}>
                             <Form form={form} name="control-hooks" className="formCus" onFinish={onFinish}>
-                                Full Name :
+                                <FormattedMessage id="formInfoCus.fullName" /> :
                                 <Form.Item
                                     name="fullName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
-                                    <Input />
+                                    <Input defaultValue={cusDetail?.CustomerName} />
                                 </Form.Item>
-                                Email :
+                                <FormattedMessage id="formInfoCus.email" /> :
                                 <Form.Item
                                     name="email"
 
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
-                                    <Input />
+                                    <Input defaultValue={cusDetail?.CustomerEmail} />
                                 </Form.Item>
-                                Gender :
+                                <FormattedMessage id="formInfoCus.gender" /> :
                                 <Form.Item
                                     name="Gender"
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
                                     <Select
-                                        placeholder="Select your gender"
+                                        defaultValue={cusDetail?.Gender}
                                     >
-                                        <Option value={true}>Nam</Option>
-                                        <Option value={false}>Nữ</Option>
+                                        <Option value={true} ><FormattedMessage id="formInfoCus.male" /></Option>
+                                        <Option value={false}><FormattedMessage id="formInfoCus.female" /></Option>
                                     </Select>
                                 </Form.Item>
-                                SĐT
+                                <FormattedMessage id="formInfoCus.phoneNumber" /> :
                                 <Form.Item
                                     name="phoneNumber"
 
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
-                                    <Input />
+                                    <Input defaultValue={cusDetail?.PhoneNumber} />
                                 </Form.Item>
-                                Address
+                                <FormattedMessage id="formInfoCus.address" /> :
                                 <Form.Item
                                     name="address"
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
-                                    <Input />
+                                    <Input defaultValue={cusDetail?.Address} />
                                 </Form.Item>
-                                Day of Birth :
+                                <FormattedMessage id="formInfoCus.dayOfBirth" />
                                 <Form.Item
                                     name="dayOfBirth"
-                                    rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
+
                                 >
-                                    <Input />
+                                    <Input defaultValue={cusDetail?.DayOfBirth} />
                                 </Form.Item>
-                                Avatar:
+                                <FormattedMessage id="formInfoCus.avatar" />
                                 <Upload
                                     name="avatar"
                                     listType="picture-card"
@@ -323,11 +307,9 @@ const PerInfo = () => {
                                 <ToastContainer />
 
                                 <Button type="primary" htmlType="submit" >
-                                    Submit
+                                    <FormattedMessage id="formInfoCus.submit" />
                                 </Button>
-                                <Button htmlType="button" onClick={onReset}>
-                                    Reset
-                                </Button>
+
                             </Form>
                         </div>
 
@@ -355,38 +337,38 @@ const PerInfo = () => {
                                 </Col>
                                 <Col span={20} className="infoDetailCus">
                                     <div className="nameCusAndPosition">
-                                        Hello, {cusDetail?.CustomerName} !
+                                        <FormattedMessage id="cusInfo.hello" />, {cusDetail?.CustomerName} !
                                     </div>
                                     <div className="descriptionCusDetail">
                                         <div className="detailCus">
-                                            <div className="titleInfo" >Email : </div><div className="infoCus"> {cusDetail?.CustomerEmail}  </div>
+                                            <div className="titleInfo" ><FormattedMessage id="cusInfo.email" /> : </div><div className="infoCus"> {cusDetail?.CustomerEmail}  </div>
                                         </div>
                                         <div className="detailCus">
-                                            <div className="titleInfo" >Số điện thoại : </div><div className="infoCus"> {cusDetail?.PhoneNumber} </div>
+                                            <div className="titleInfo" ><FormattedMessage id="cusInfo.phoneNumber" /> : </div><div className="infoCus"> {cusDetail?.PhoneNumber} </div>
                                         </div>
                                         <div className="detailCus">
-                                            <div className="titleInfo" >Ngày sinh : </div><div className="infoCus"> {cusDetail?.DayOfBirth} </div>
+                                            <div className="titleInfo" ><FormattedMessage id="cusInfo.dayOfBirth" /> : </div><div className="infoCus"> {cusDetail?.DayOfBirth} </div>
                                         </div>
                                         <div className="detailCus">
-                                            <div className="titleInfo" >Giới tính : </div><div className="infoCus"> {(cusDetail?.Gender === true ? "Nam" : "Nữ")} </div>
+                                            <div className="titleInfo" ><FormattedMessage id="cusInfo.gender" /> : </div><div className="infoCus"> {(cusDetail?.Gender === true ? "Nam" : "Nữ")} </div>
                                         </div>
                                         <div className="detailCus">
-                                            <div className="titleInfo" >Địa chỉ : </div><div className="infoCus"> {cusDetail?.Address} </div>
+                                            <div className="titleInfo" ><FormattedMessage id="cusInfo.address" /> : </div><div className="infoCus"> {cusDetail?.Address} </div>
                                         </div>
 
 
                                     </div>
                                     <div className="likeAndChat">
                                         <span >
-                                            <button className={"btn-sua"} onClick={openModal}>Sửa thông tin</button>
+                                            <button className={"btn-sua"} onClick={openModal}><FormattedMessage id="cusInfo.change" /></button>
 
                                         </span>
 
                                         <span >
-                                            <Link to={"/booking-of-cus"} className={"btn-check-book"}>Xem booking</Link>
+                                            <Link to={"/booking-of-cus"} className={"btn-check-book"}><FormattedMessage id="cusInfo.booking" /></Link>
                                         </span>
                                         <span >
-                                            <button onClick={openModalReview} className={"btn-sua"}>Đánh giá</button>
+                                            <button onClick={openModalReview} className={"btn-sua"}><FormattedMessage id="cusInfo.review" /></button>
                                         </span>
                                     </div>
                                     <Modal
@@ -396,10 +378,10 @@ const PerInfo = () => {
                                         onRequestClose={closeModalReview}
                                         style={customStyles}
                                         contentLabel="Example Modal"
-                                    ><h1>Form Review</h1>
+                                    ><h1><FormattedMessage id="form-review.title-form" /></h1>
                                         <div ref={(_subtitle) => (subtitle = _subtitle)}>
                                             <Form form={form} name="control-hooks" onFinish={onFinishReview}>
-                                                <div className="titleInput">Email :</div>
+                                                <div className="titleInput"><FormattedMessage id="form-review.email" /> :</div>
                                                 <Form.Item
                                                     name="Email"
                                                     rules={[
@@ -410,7 +392,7 @@ const PerInfo = () => {
                                                 >
                                                     <Input />
                                                 </Form.Item>
-                                                <div className="titleInput">Phone number :</div>
+                                                <div className="titleInput"><FormattedMessage id="form-review.phoneNumber" /> :</div>
                                                 <Form.Item
                                                     name="PhoneNumber"
                                                     rules={[
@@ -421,7 +403,7 @@ const PerInfo = () => {
                                                 >
                                                     <Input />
                                                 </Form.Item>
-                                                <div className="titleInput">Gym Center :</div>
+                                                <div className="titleInput"><FormattedMessage id="form-review.center" /> :</div>
 
                                                 <Form.Item
                                                     name="center"
@@ -434,7 +416,7 @@ const PerInfo = () => {
 
                                                 >
                                                     <Select
-                                                        placeholder="Select a center"
+
 
                                                     >
                                                         {allGymCenter?.map((item, index) => {
@@ -447,7 +429,7 @@ const PerInfo = () => {
                                                         })}
                                                     </Select>
                                                 </Form.Item>
-                                                <div className="titleInput">Review :</div>
+                                                <div className="titleInput"><FormattedMessage id="form-review.review-content" /> :</div>
                                                 <Form.Item
                                                     name="ReviewContent"
                                                     rules={[
@@ -458,7 +440,7 @@ const PerInfo = () => {
                                                 >
                                                     <Input className="inputReview" />
                                                 </Form.Item>
-                                                <div className="titleInput">Rating :</div>
+                                                <div className="titleInput"><FormattedMessage id="form-review.rating" /> :</div>
                                                 <span>
                                                     <Rate tooltips={desc} onChange={setValueRate} value={valueRate} />
                                                     {valueRate ? <span className="ant-rate-text">{desc[valueRate - 1]}</span> : ''}
@@ -466,7 +448,7 @@ const PerInfo = () => {
 
                                                 <div className={"btnReView"}>
                                                     <Button type="primary" htmlType="submit" >
-                                                        Submit
+                                                        <FormattedMessage id="form-review.send-review" />
                                                     </Button>
                                                 </div>
 

@@ -17,6 +17,7 @@ import { ArrowLeft } from "phosphor-react";
 import * as actions from "../../store/actions";
 import { useDispatch } from "react-redux";
 import NoneAvatar from "../../assets/images/logo/noneAvatar.jpg";
+import { FormattedMessage } from "react-intl";
 const customStyles = {
   content: {
     top: "50%",

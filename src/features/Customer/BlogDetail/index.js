@@ -10,7 +10,7 @@ import { getBlogDetail } from "./blogDetailAPI";
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
-
+import { FormattedMessage } from "react-intl";
 const BlogDetail = () => {
     const navigate = useNavigate();
     const [isSeeMoreServiceDetail, setIsSeeMoreServiceDetail] = useState(false);
@@ -43,9 +43,9 @@ const BlogDetail = () => {
 
         <div className="BlogDetailBg">
             <div className="backToHome">
-                <NavLink to="/" className="backtoHome">
+                <NavLink to="/blog" className="backtoHome">
                     <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back to home</div>
+                    <div className="textBackToHome"><FormattedMessage id="header.back" /></div>
                 </NavLink>
 
             </div>
@@ -70,15 +70,15 @@ const BlogDetail = () => {
                                             <HomeOutlined />
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href="">
-                                            <span>Danh sách các blog</span>
+                                            <span><FormattedMessage id="blog.blogList" /></span>
                                         </Breadcrumb.Item>
-                                        <Breadcrumb.Item>Dich vụ {blogDetail?.Title} </Breadcrumb.Item>
+                                        <Breadcrumb.Item> {blogDetail?.Title} </Breadcrumb.Item>
                                     </Breadcrumb>
                                 </div>
                                 <div className="blogDetailAbout">
                                     <div className="blogDetailTitle">{blogDetail?.Title}</div>
                                     <div className="blogDetailDefine">
-                                        <p>Ngày đăng : {moment(blogDetail?.createdAt).format('DD-MM-YYYY')} </p>
+                                        <p><FormattedMessage id="blog.createdDay" /> : {moment(blogDetail?.createdAt).format('DD-MM-YYYY')} </p>
 
                                     </div>
                                     <div className="blogImage">

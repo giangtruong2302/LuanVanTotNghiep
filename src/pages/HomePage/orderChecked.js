@@ -5,6 +5,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import { getOrder } from "../../features/Customer/PersonalInfomation/BookingOfCus/cusBookingAPI";
 import { getCancelBooking } from "../../features/Staff/ListBooking/listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import { FormattedMessage } from "react-intl";
 const OrderChecked = (props) => {
     const [oderDetail, setOrderDetail] = useState()
     const [item, setItem] = useState(props.data)
@@ -56,7 +57,7 @@ const OrderChecked = (props) => {
             {oderDetail === 1 ?
                 <div className="OptionPay">
                     <div className="textOptionPay">
-                        Đã thanh toán <CheckOutlined style={{ fontSize: '17px', color: '#08c' }} />
+                        <FormattedMessage id="cart.paid" /> <CheckOutlined style={{ fontSize: '17px', color: '#08c' }} />
                     </div>
                 </div>
                 :
@@ -64,7 +65,7 @@ const OrderChecked = (props) => {
 
                     <div className="OptionPay">
                         <p className="textOptionPay">
-                            Your PT has confirm booking. Please pay to continue
+                            <FormattedMessage id="cart.accept" />
                         </p>
 
                         <div className="optionBtn">
@@ -75,14 +76,14 @@ const OrderChecked = (props) => {
                                 onClick={() => handlePay()}
                             // onClick={() => console.log("check id: ", item)}
                             >
-                                Thanh toán
+                                <FormattedMessage id="cart.pay" />
                             </button>
                             <button
                                 className="btnCancel"
                                 onClick={() => handleCancel()}
                             // style={{ borderRadius: "6px", backgroundColor: "red" }}
                             >
-                                Hủy booking
+                                <FormattedMessage id="cart.cancel" />
                             </button>
                         </div>
                     </div>

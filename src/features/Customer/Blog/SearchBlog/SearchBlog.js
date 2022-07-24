@@ -3,7 +3,7 @@ import { Form as FormAnt, Input, Select } from "antd";
 import "./SearchBlog.scss";
 import { Form, Formik } from "formik";
 import ListBlog from "../ListBlog/ListBlog";
-
+import { FormattedMessage } from "react-intl";
 const { Search } = Input;
 const { Option } = Select;
 const SearchBlog = () => {
@@ -33,7 +33,7 @@ const SearchBlog = () => {
                             <FormAnt.Item>
                                 <Search
                                     className="searchService"
-                                    placeholder="Search center of GH GYM..."
+
                                     allowClear
                                     onChange={onChangeSearchServiceSystem}
                                     onSearch={onSearch}
@@ -44,7 +44,7 @@ const SearchBlog = () => {
                     </Formik>
                 </div>
             </div>
-            <div className="titleService">Blog GH GYM list</div>
+            <div className="titleService"><FormattedMessage id="blog.title" /></div>
             <ListBlog searchValue={searchValue} />
 
         </>

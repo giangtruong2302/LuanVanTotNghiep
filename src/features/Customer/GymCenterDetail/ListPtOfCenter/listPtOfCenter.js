@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import PTShedule from "../PtSchedule/PtSchedule";
 import { getPtOfCenter } from "./listPtOfCenterAPI";
 import { useParams } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const ListPTCenter = () => {
     const data = Array.from({
@@ -55,7 +56,7 @@ const ListPTCenter = () => {
     return (
         <div className="listPTCenterContainer">
             <div className="filterCenter">
-                <h5>PT of Center</h5>
+                <h5><FormattedMessage id="gymDetail.pt-of-center" /></h5>
             </div>
             <List
                 // style={{ display: "flex", flexDirection: "column", gap: "15px" }}

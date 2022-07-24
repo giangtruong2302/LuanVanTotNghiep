@@ -10,7 +10,7 @@ const updateCusDetail = (id, ExternalId, fullName, gender, dob, phoneNumber, add
 const getAllGymCenter = (page) => {
     return axios.get(`/api/get-all-center-active?page=${page}`);
 };
-const createReview = (ratingPoint, reviewContent, CustomerId, CenterId, Status) => {
-    return axios.post(`/api/admin/create-new-review`, { ratingPoint: ratingPoint, reviewContent: reviewContent, CustomerId: CustomerId, CenterId: CenterId, Status: Status });
+const createReview = (ratingPoint, reviewContent, CustomerId, CenterId, Status, StaffId) => {
+    return axios.post(`/api/admin/create-new-review`, { ratingPoint: ratingPoint, reviewContent: reviewContent, CustomerId: CustomerId, CenterId: CenterId, Status: Status, StaffId });
 };
 export { getCusDetail, updateCusDetail, getAllGymCenter, createReview };

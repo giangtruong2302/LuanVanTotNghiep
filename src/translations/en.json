@@ -72,7 +72,7 @@
   "patient": {
     "detail-doctor": {
       "schedule": "Schedule",
-      "no-schedule": "The doctor does not have an appointment during this time",
+      "no-schedule": "The PT does not have an appointment during this time",
       "choose": "Choose ",
       "Book-free": " and book (free)"
     },
@@ -98,7 +98,6 @@
       "price": "Price: "
     }
   },
-
   "user": {
     "profile": "Profile",
     "logout": "Logout"
@@ -115,5 +114,166 @@
     "manage-blog": "Manage Blog",
     "account-setting": "Account Setting",
     "manage-languages": "Manage Languages"
+  },
+  "header": {
+    "back-to-home": "Back to home",
+    "back": "Back",
+    "logout": "Logout"
+  },
+  "title": {
+    "service": "Service GH GYM List",
+    "center": "Center GH GYM List",
+    "pt": "Personal Trainer List"
+  },
+  "serviceDetail": {
+    "work-duration": "Work Duration",
+    "price": "Price",
+    "service-list": "Services List",
+    "service": "Service"
+  },
+  "gymDetail": {
+    "gym-list": "Center List",
+    "center": "Center",
+    "center-name": "Center Name",
+    "address": "Address",
+    "phoneNumber": "Phone Number",
+    "review": "Review",
+    "pt-of-center": "PT of Center"
+  },
+  "pt": {
+    "list-pt": "List PT"
+  },
+  "form-booking": {
+    "title-form": "Register",
+    "email": "Email",
+    "startTime": "Start Time",
+    "service": "Service",
+    "center": "Center",
+    "pt": "PT",
+    "endTime": "End Time",
+    "discount": "Discount",
+    "price": "Price",
+    "submit": "Submit"
+  },
+  "form-review": {
+    "title-form": "Review",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "center": "Center",
+    "review-content": "Review Content",
+    "rating": "Rating",
+    "send-review": "Send Review"
+  },
+  "pt-detail": {
+    "pt-list": "List of PT",
+    "pt": "PT",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "review": "Review",
+    "introduce": "Introduce"
+  },
+  "cart": {
+    "booked": "You have booked with",
+    "in": "in",
+    "time": "Time",
+    "status": "Status",
+    "accept": " Your PT has confirm booking. Please pay to continue",
+    "paid": "Paid",
+    "pay": "Pay",
+    "cancel": "Cancel"
+  },
+  "cusInfo": {
+    "hello": "Hello",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "dayOfBirth": "Day of Birth",
+    "gender": "Gender",
+    "address": "Address",
+    "change": "Information",
+    "booking": "Check booking",
+    "review": "Review"
+  },
+  "formInfoCus": {
+    "form-title": "Chane Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "gender": "Gender",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "dayOfBirth": "Day of Birth",
+    "avatar": "Avatar",
+    "submit": "Change",
+    "male": "Male",
+    "female": "Female",
+    "changeImg": "Change Image"
+  },
+  "cus-booking": {
+    "title": "Your Booking",
+    "time": "Time",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "service": "Service",
+    "pt": "PT",
+    "status": "Status",
+    "pay": "Pay",
+    "cancel": "Cancel"
+  },
+  "blog": {
+    "title": "Blog GH GYM List",
+    "blogList": "Blog List",
+    "createdDay": "Created at"
+  },
+  "staff-page": {
+    "title": "Staff Page",
+    "welcome": "Welcome",
+    "booking": "Your Booking",
+    "info": "Information",
+    "salary": "Salary",
+    "register": "Register working hours",
+    "chooseDay": "Choose Day",
+    "chooseTime": "Choose Time",
+    "submit": "Register",
+    "scan": "Scan QR",
+    "your-salary": "Your salary is",
+    "webcam": "Webcam Scan QR Code",
+    "result": "Result",
+    "cusId": "Customer Id",
+    "price": "Price",
+    "status": "Status",
+    "time": "Time",
+    "attendance": "Attendance"
+  },
+  "staff-booking": {
+    "customer": "Customer",
+    "time": "Time",
+    "service": "Service",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "status": "Status",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "title": "Booking Page"
+  },
+  "bmi-page": {
+    "enter": "Enter your Height and Weight",
+    "height": "Height",
+    "weight": "Weight",
+    "check": "Check BMI",
+    "yourBmi": "Your BMI is",
+    "skin": "You're a bit skinny ",
+    "normal": "Normal weight",
+    "overWeight": "You are overweight ",
+    "fat": "You are fat"
+  },
+  "footer": {
+    "title": "GH GYM System",
+    "day": "Everyday",
+    "method": "Payment methods",
+    "service": "Service",
+    "private": "Privacy Policy",
+    "recruit": "Recruit",
+    "news": "NEWS",
+    "contact": "Contact",
+    "social": "Socail Media"
   }
 }
