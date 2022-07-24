@@ -8,6 +8,7 @@ import PTShedule from "../ScheduleWorking/PtSchedule";
 import { getPtOfService } from "./listPTServiceAPI";
 import { useParams } from "react-router-dom";
 import ListItem from "./ListItem";
+import { FormattedMessage } from "react-intl";
 const { Option } = Select;
 const ListPTService = () => {
   const data = Array.from({
@@ -84,7 +85,7 @@ const ListPTService = () => {
         dataSource={PtOfService}
         footer={
           <div>
-            <b>GH Gym</b> Danh sách PT
+            <b>GH Gym</b>  <FormattedMessage id="pt.list-pt" />
           </div>
         }
         renderItem={(item) => (

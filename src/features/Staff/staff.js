@@ -17,6 +17,7 @@ import { ArrowLeft } from "phosphor-react";
 import * as actions from "../../store/actions";
 import { useDispatch } from "react-redux";
 import NoneAvatar from "../../assets/images/logo/noneAvatar.jpg"
+import { FormattedMessage } from "react-intl";
 const customStyles = {
     content: {
         top: "50%",
@@ -202,32 +203,32 @@ const Staff = () => {
                 <div className="backToHome">
                     <div className="backtoHome" onClick={handleLogout}>
                         <ArrowLeft size={24} color=" #ffffff" weight="duotone" />
-                        <div className="textBackToHome">Logout</div>
+                        <div className="textBackToHome"><FormattedMessage id="header.logout" /></div>
 
                     </div>
 
                 </div>
-                <div className="title">Page Staff Booking</div>
+                <div className="title"><FormattedMessage id="staff-page.title" /></div>
                 <div className="titlePage">
 
                     <div className="PTinfo">
                         <img src={ptDetail?.StaffImage ? ptDetail?.StaffImage : NoneAvatar} className="imgPT" />
                         <div className="PtName">
-                            <div className="welcomeCus">Welcome, {ptDetail?.StaffName} !</div>
+                            <div className="welcomeCus"><FormattedMessage id="staff-page.welcome" />, {ptDetail?.StaffName} !</div>
                             <div className="btnPT">
 
 
                                 {(ptDetail?.RoleId === 4 ?
-                                    <Link to={`/scanqr`}> <button className="btn-book">Scan QR</button></Link>
+                                    <Link to={`/scanqr`}> <button className="btn-book"><FormattedMessage id="staff-page.scan" /></button></Link>
                                     :
-                                    <Link to={`/pt-booking/`}> <button className="btn-book">Lịch booking</button></Link>
+                                    <Link to={`/pt-booking/`}> <button className="btn-book"><FormattedMessage id="staff-page.booking" /></button></Link>
                                 )}
-                                <Link to={`/staff-info/${ptDetail?.id}`}> <button className="btn-book">Thông tin cá nhân</button></Link>
+                                <Link to={`/staff-info/${ptDetail?.id}`}> <button className="btn-book"><FormattedMessage id="staff-page.info" /></button></Link>
 
 
-                                <button className="btn-book" onClick={openModal}>Salary</button>
+                                <button className="btn-book" onClick={openModal}><FormattedMessage id="staff-page.salary" /></button>
                                 {(ptDetail?.RoleId === 3 ?
-                                    <button className="btn-book" onClick={openModalTimeWork}>Đăng ký lịch làm</button>
+                                    <button className="btn-book" onClick={openModalTimeWork}><FormattedMessage id="staff-page.register" /></button>
                                     : "")}
                                 <Modal
                                     isOpen={modalIsOpen}
@@ -235,7 +236,7 @@ const Staff = () => {
                                     onRequestClose={closeModal}
                                     style={customStyles}
                                     contentLabel="Example Modal"
-                                ><div>Your Salary is :</div>
+                                ><div><FormattedMessage id="staff-page.your-salary" /> :</div>
                                     <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{(ptDetail?.SalaryId === 1) ? "5.000.000VNĐ" : "4.000.000VNĐ"} </h2>
 
 
@@ -249,10 +250,10 @@ const Staff = () => {
                                     onRequestClose={closeModalTimeWork}
                                     style={customStyles}
                                     contentLabel="Example Modal"
-                                ><h2>Đăng ký lịch làm </h2>
+                                ><h2><FormattedMessage id="staff-page.register" /></h2>
                                     <div ref={(_subtitle) => (subtitle = _subtitle)}>
                                         <Form form={form} name="control-hooks" className="formCus" onFinish={onFinish}>
-                                            <label>Chọn ngày</label>
+                                            <label><FormattedMessage id="staff-page.chooseDay" /></label>
                                             <p> <select onChange={handleDay}  >
                                                 {allDays && allDays.length > 0
                                                     ? allDays.map((item, index) => {
@@ -265,7 +266,7 @@ const Staff = () => {
                                                     : ""}
                                             </select></p>
 
-                                            <label>Chọn giờ</label>
+                                            <label><FormattedMessage id="staff-page.chooseTime" /></label>
                                             <p> <Select
                                                 defaultValue="SelecTime"
                                                 style={{
@@ -283,7 +284,7 @@ const Staff = () => {
 
                                             </Select>
                                             </p>
-                                            <Button onClick={handleCreateTimeWork}> Tạo lịch</Button>
+                                            <Button onClick={handleCreateTimeWork}> <FormattedMessage id="staff-page.submit" /></Button>
                                         </Form>
                                     </div>
 

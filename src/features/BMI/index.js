@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "phosphor-react";
 import CountBMI from "./countBMI/countBMI";
 import HomeFooter from "../../pages/HomePage/HomeFooter";
-
+import { FormattedMessage } from "react-intl";
 
 
 const BMI = () => {
@@ -15,7 +15,7 @@ const BMI = () => {
                 <div className="backToHome">
                     <NavLink to="/" className="backToHomeLink">
                         <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                        <div className="textBackToHome">Back to home</div>
+                        <div className="textBackToHome"> <FormattedMessage id="header.back-to-home" /></div>
                     </NavLink>
                 </div>
                 <div className="titlePage">

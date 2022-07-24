@@ -151,10 +151,10 @@ const HomeHeader = (props) => {
 
               (item.Status === "CANCELED") ? "" :
                 <Menu.Item key={index} className="CartDrop">
-                  Đã đặt lịch với PT: {item.PTName} vào ngày{" "}
+                  <FormattedMessage id="cart.booked" /> {item.PTName}   <FormattedMessage id="cart.in" /> {" "}
                   {moment(item.StartTime).format("DD/MM/YYYY")}{" "}
                   <TimeBooking data={item} />
-                  Trạng thái : {item.Status}
+                  <FormattedMessage id="cart.status" />  : {item.Status}
                   {item.Status === "SCHEDULED" ? (
                     <OrderChecked data={item} />
 

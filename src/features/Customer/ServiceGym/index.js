@@ -6,7 +6,7 @@ import SearchService from "./SearchService/SearchService";
 import ListService from "./ListService/ListService";
 import HomeFooter from "../../../pages/HomePage/HomeFooter";
 import "../../../pages/HomePage/HomePage.scss"
-
+import { FormattedMessage } from "react-intl";
 const ServiceGym = () => {
   return (
     <>
@@ -15,7 +15,7 @@ const ServiceGym = () => {
         <div className="backToHome">
           <NavLink to="/" className="backToHomeLink">
             <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-            <div className="textBackToHome">Back to home</div>
+            <div className="textBackToHome"><FormattedMessage id="header.back-to-home" /></div>
           </NavLink>
 
         </div>

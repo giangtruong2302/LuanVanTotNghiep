@@ -398,10 +398,7 @@ const PTShedule = (props) => {
         });
     };
 
-    const onReset = () => {
-        form.resetFields();
 
-    };
 
     return (
         <>
@@ -444,7 +441,7 @@ const PTShedule = (props) => {
                                             </div>
                                         );
                                     })
-                                    : "Ngày này, PT chưa đăng lịch nhận booking"}
+                                    : <FormattedMessage id="patient.detail-doctor.no-schedule" />}
                             </div>
                             {modalIsOpen && (
                                 <Modal
@@ -454,10 +451,10 @@ const PTShedule = (props) => {
                                     style={customStyles}
                                     contentLabel="Example Modal"
                                 >
-                                    <h1>Form đăng ký</h1>
+                                    <h1> <FormattedMessage id="form-booking.title-form" /></h1>
                                     <div ref={(_subtitle) => (subtitle = _subtitle)}>
                                         <Form form={form} name="control-hooks" onFinish={onFinish}>
-                                            Email :
+                                            <FormattedMessage id="form-booking.email" /> :
                                             <Form.Item
                                                 name="email"
 
@@ -467,30 +464,32 @@ const PTShedule = (props) => {
                                                     },
                                                 ]}
                                             >
-                                                <Input placeholder={cusInfo["email"]} />
+                                                <Input defaultValue={cusInfo["email"]} />
                                             </Form.Item>
-                                            Ngày bắt đầu :{" "}
+                                            <FormattedMessage id="form-booking.startTime" /> :{" "}
                                             {new Intl.DateTimeFormat("vi-VN", {
                                                 year: "numeric",
                                                 month: "2-digit",
                                                 day: "2-digit",
                                             }).format(dayWork)}
                                             <br></br>
-                                            Service : {serviceOfPt?.ServiceName}
+                                            <FormattedMessage id="form-booking.service" /> : {serviceOfPt?.ServiceName}
 
-                                            <p> Center : {centerName}</p>
-                                            <p>PT : {props.ptName}</p>
+                                            <p> <FormattedMessage id="form-booking.center" /> : {centerName}</p>
+                                            <p><FormattedMessage id="form-booking.pt" /> : {props.ptName}</p>
                                             <p>
                                                 {" "}
-                                                Ngày kết thúc :{" "}
+                                                <FormattedMessage id="form-booking.endTime" />c :{" "}
                                                 {new Intl.DateTimeFormat("vi-VN", {
                                                     year: "numeric",
                                                     month: "2-digit",
                                                     day: "2-digit",
                                                 }).format(endTime)}
                                             </p>
-                                            <p>Khuyến mãi : {discount} %</p>
-                                            <Form.Item name="price" label="Giá">
+                                            <p><FormattedMessage id="form-booking.discount" /> : {discount} %</p>
+
+                                            <Form.Item name="price" >
+                                                <FormattedMessage id="form-booking.price" /> :
                                                 {priceDiscount - (priceDiscount * discount) / 100
                                                     ? priceDiscount -
                                                     (priceDiscount * discount) / 100 +
@@ -504,11 +503,9 @@ const PTShedule = (props) => {
 
                                             </div>
                                             <Button type="primary" htmlType="submit">
-                                                Submit
+                                                <FormattedMessage id="form-booking.submit" />
                                             </Button>
-                                            <Button htmlType="button" onClick={onReset}>
-                                                Reset
-                                            </Button>
+
                                         </Form>
                                     </div>
                                 </Modal>

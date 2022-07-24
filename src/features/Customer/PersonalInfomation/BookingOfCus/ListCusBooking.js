@@ -3,6 +3,7 @@ import { getServiceDetail } from "./cusBookingAPI";
 import { useNavigate } from "react-router-dom";
 import { getDetailSchedule } from "../../../Staff/ListBooking/listBookingAPI";
 import { getTimeById } from "../../GymCenterDetail/PtSchedule/PtScheduleAPI";
+import { FormattedMessage } from "react-intl";
 import moment from "moment";
 const ListCusBooking = (props) => {
   const [serviceDetail, setServiceDetail] = useState();
@@ -66,27 +67,27 @@ const ListCusBooking = (props) => {
           <div className="centerInfo">
             <div className="info">
               <p className={"infoCus"}>
-                Thời gian : {timeDetail?.StartTime.substring(0, 5)} -{" "}
+                <FormattedMessage id="cus-booking.time" /> : {timeDetail?.StartTime.substring(0, 5)} -{" "}
                 {timeDetail?.EndTime.substring(0, 5)}{" "}
               </p>
               <p className={"infoCus"}>
-                Ngày bắt đầu :{" "}
+                <FormattedMessage id="cus-booking.startTime" /> :{" "}
                 {moment(props.data.StartTime).format("DD-MM-YYYY")}{" "}
               </p>
               <p className={"infoCus"}>
-                Ngày kết thúc :{" "}
+                <FormattedMessage id="cus-booking.endTime" /> :{" "}
                 {moment(props.data.EndTime).format("DD-MM-YYYY")}{" "}
               </p>
             </div>
             <div className="infoService">
               <p className={"textNameCenter"}>
-                Dịch vụ đăng ký : {serviceDetail?.ServiceName}{" "}
+                <FormattedMessage id="cus-booking.service" /> : {serviceDetail?.ServiceName}{" "}
               </p>
               <p className={"textNameCenter"}>
-                Huấn luyện viên : {props.data.PTName}
+                <FormattedMessage id="cus-booking.pt" /> : {props.data.PTName}
               </p>
               <p className={"textNameCenter"}>
-                Trạng thái : {props.data.Status}
+                <FormattedMessage id="cus-booking.status" /> : {props.data.Status}
               </p>
             </div>
             <div className="detailInfo">
@@ -97,7 +98,7 @@ const ListCusBooking = (props) => {
                   props.cancel(props.data.id, props.data.ScheduleId)
                 }
               >
-                Từ chối
+                <FormattedMessage id="cus-booking.cancel" />
               </button>
             </div>
           </div>
@@ -107,32 +108,32 @@ const ListCusBooking = (props) => {
           <div className="centerInfo">
             <div className="info">
               <p className={"infoCus"}>
-                Thời gian : {timeDetail?.StartTime.substring(0, 5)} -{" "}
+                <FormattedMessage id="cus-booking.time" /> : {timeDetail?.StartTime.substring(0, 5)} -{" "}
                 {timeDetail?.EndTime.substring(0, 5)}{" "}
               </p>
               <p className={"infoCus"}>
-                Ngày bắt đầu :{" "}
+                <FormattedMessage id="cus-booking.startTime" /> :{" "}
                 {moment(props.data.StartTime).format("DD-MM-YYYY")}{" "}
               </p>
               <p className={"infoCus"}>
-                Ngày kết thúc :{" "}
+                <FormattedMessage id="cus-booking.endTime" /> :{" "}
                 {moment(props.data.EndTime).format("DD-MM-YYYY")}{" "}
               </p>
             </div>
             <div className="infoService">
               <p className={"textNameCenter"}>
-                Dịch vụ đăng ký : {serviceDetail?.ServiceName}{" "}
+                <FormattedMessage id="cus-booking.service" /> : {serviceDetail?.ServiceName}{" "}
               </p>
               <p className={"textNameCenter"}>
-                Huấn luyện viên : {props.data.PTName}
+                <FormattedMessage id="cus-booking.pt" /> : {props.data.PTName}
               </p>
               <p className={"textNameCenter"}>
-                Trạng thái : {props.data.Status}
+                <FormattedMessage id="cus-booking.status" /> : {props.data.Status}
               </p>
             </div>
             <div className="detailInfo">
               <button className="buttonAccept" onClick={() => handlePay()}>
-                Thanh toán
+                <FormattedMessage id="cus-booking.pay" />
               </button>
               <span className="lineDetailInfo"></span>
               <button
@@ -141,7 +142,7 @@ const ListCusBooking = (props) => {
                   props.cancel(props.data.id, props.data.ScheduleId)
                 }
               >
-                Từ chối
+                <FormattedMessage id="cus-booking.cancel" />
               </button>
             </div>
           </div>

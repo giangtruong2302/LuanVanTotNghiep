@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { getAcceptBooking } from "./listBookingAPI";
 import { getCancelBooking } from "./listBookingAPI";
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 import List from "./List";
 import moment from "moment";
 const ListBooking = () => {
@@ -27,6 +28,7 @@ const ListBooking = () => {
     const [statusPage, setStatusPage] = useState("")
     const [page, setPage] = useState(2);
     const [hasMore, setHasMore] = useState(true);
+    const navigate = useNavigate()
     const options = {
 
         position: "top-right",
@@ -38,20 +40,24 @@ const ListBooking = () => {
         progress: undefined,
     };
     useEffect(() => {
-        getAllBookingOfPT(staffInfo["AccountStaff.id"], 1).then((response) => {
-            if (response.bookingOfPT.rows) {
-                setBookingOfPt(response.bookingOfPT.rows);
-                setNoBookingOfPt(false);
-            } else {
-                setNoBookingOfPt(true);
-            }
-        })
-            .catch(() => {
-                setNoBookingOfPt(true);
+        if (staffInfo) {
+            getAllBookingOfPT(staffInfo["AccountStaff.id"], 1).then((response) => {
+                if (response.bookingOfPT.rows) {
+                    setBookingOfPt(response.bookingOfPT.rows);
+                    setNoBookingOfPt(false);
+                } else {
+                    setNoBookingOfPt(true);
+                }
             })
-            .finally(() => {
-                setBookingOfPtLoading(false);
-            });
+                .catch(() => {
+                    setNoBookingOfPt(true);
+                })
+                .finally(() => {
+                    setBookingOfPtLoading(false);
+                });
+        } else {
+            navigate(`/staff-login`);
+        }
     }, [statusPage]);
     const [messRes, setMessRes] = useState()
     const handleIdBooking = (id, ScheduleId, CustomerId, CustomerName, price) => {

@@ -1,0 +1,58 @@
+.ReviewContainer {
+    margin-left: 100px;
+    margin-top: 60px;
+
+    .contentReview {
+        display: flex;
+
+        .CusName {
+            font-weight: bold;
+
+
+            .CusReview {
+                font-weight: 400;
+                margin-left: 50px;
+            }
+
+            .imgCusReview {
+                height: 40px;
+                margin-right: 10px;
+                border-radius: 60%;
+                width: 40px;
+
+            }
+
+
+        }
+
+        .rateReview {
+            float: right;
+        }
+
+    }
+}
+
+@media only screen and (max-width: 46.1875em) {
+    .ReviewContainer {
+        width: 90% !important;
+        margin-left: 1px !important;
+        margin-bottom: 50px;
+
+
+        .contentReview {
+            display: flex;
+            flex-direction: column;
+            float: left;
+
+            max-height: 150px;
+
+            .CusName {
+                .CusReview {}
+            }
+
+            .rateReview {
+                float: left;
+            }
+        }
+    }
+}

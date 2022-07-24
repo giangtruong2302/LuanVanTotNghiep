@@ -10,7 +10,9 @@ import List from "./List";
 import { ArrowLeft } from "phosphor-react";
 import moment from "moment";
 
+
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 const Booking = () => {
     const navigate = useNavigate()
     const [hasMore, setHasMore] = useState(true);
@@ -72,13 +74,13 @@ const Booking = () => {
             <div className="backToHome">
                 <NavLink to="/staff-personal-page" className="backtoHome">
                     <ArrowLeft size={24} color="#ffffff" weight="duotone" />
-                    <div className="textBackToHome">Back to home</div>
+                    <div className="textBackToHome"><FormattedMessage id="header.back-to-home" /></div>
                 </NavLink>
 
 
             </div>
             <div className="containerListPT">
-                Lịch Booking
+                <FormattedMessage id="staff-booking.title" />
                 <div className="titlePageBooking">
 
                     <div className="PTinfo">
