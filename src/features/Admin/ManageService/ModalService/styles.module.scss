@@ -126,6 +126,11 @@
           background: #fcf7fe;
         }
       }
+      .descriptionService {
+        width: 315px;
+        max-height: 200px;
+        overflow: auto;
+      }
       .inputError {
         border-color: #ff7875;
         box-shadow: 0 0 0 2px rgb(255 77 79 / 20%);

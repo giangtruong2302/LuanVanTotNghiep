@@ -8,6 +8,8 @@ import {
   Select,
   Upload,
 } from "antd";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
 import { useDispatch, useSelector } from "react-redux";
 import unknow from "../../../../assets/images/gymplaceholder.jpg";
@@ -25,6 +27,7 @@ import { handleCreateNewService } from "./ModalServiceAPI";
 const { Option } = Select;
 const CreateService = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [dataDescription, setDataDescription] = useState();
   const [differentPass, setDifferentPass] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [fileName, setFileName] = useState("");
@@ -304,34 +307,30 @@ const CreateService = (props) => {
                         )}
                       </Field>
                     </FormAnt.Item>
-
-                    {/* <FormAnt.Item
-                        //style={{ margin: '5px' }}
-                        validateStatus={
-                          Boolean(touched?.password2 && errors?.password2)
-                            ? "error"
-                            : "success"
-                        }
-                        help={
-                          Boolean(touched?.password2 && errors?.password2) &&
-                          errors?.password2
-                        }
-                      >
-                        <Field name="password2">
-                          {({ field }) => (
-                            <Input.Password
-                              {...field}
-                              name="password2"
-                              className={` ${
-                                touched?.password2 && errors?.password2
-                                  ? classes.inputError
-                                  : ""
-                              } ${classes.inputRecovery} ant-picker `}
-                              placeholder="Confirm Password"
-                            />
-                          )}
-                        </Field>
-                      </FormAnt.Item> */}
+                    <div className={classes.descriptionService}>
+                      <p>Course Route of Service</p>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        // style={{ height: "250px" }}
+                        // data="<p>Hello from CKEditor 5!</p>"
+                        placeholder="<p>About service</p>"
+                        onReady={(editor) => {
+                          // You can store the "editor" and use when it is needed.
+                          // console.log("Editor is ready to use!", editor);
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          setDataDescription(data);
+                          // console.log({ event, editor, data });
+                        }}
+                        onBlur={(event, editor) => {
+                          // console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          // console.log("Focus.", editor);
+                        }}
+                      />
+                    </div>
                     <span className={classes.titleRight}>Service Image</span>
                     <div className={classes.changeThumbnailContainer}>
                       <div className={classes.image}>
