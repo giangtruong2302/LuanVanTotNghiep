@@ -20,11 +20,7 @@ const navItem = [
     icon: <ArrowLeft weight="light" />,
     link: "/admin/manage-center",
   },
-  {
-    display: "Service hours",
-    icon: <HourglassSimpleMedium weight="light" />,
-    link: "service-hours",
-  },
+
   {
     display: "Details",
     icon: <Info weight="light" />,
@@ -34,11 +30,6 @@ const navItem = [
     display: "Rating & Reviews",
     icon: <Star weight="light" />,
     link: "/admin/merchant/gym-config/rating-and-review",
-  },
-  {
-    display: "FAQ",
-    icon: <Question weight="light" />,
-    link: "faq",
   },
 ];
 
