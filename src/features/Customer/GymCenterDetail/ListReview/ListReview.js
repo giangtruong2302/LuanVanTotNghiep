@@ -15,7 +15,7 @@ const ListReview = (props) => {
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(2);
     const id = useParams();
-    console.log("center", props.centerId)
+
     useEffect(() => {
         getReview(id.id, 1)
             .then((response) => {
@@ -34,7 +34,7 @@ const ListReview = (props) => {
             .finally(() => {
                 setReviewLoading(false);
             });
-    }, []);
+    }, [props.status]);
     const fetchNextReview = async () => {
         getReview(id.id, page)
             .then((response) => {

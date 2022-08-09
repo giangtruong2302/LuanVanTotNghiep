@@ -48,6 +48,7 @@ const GymDetailPage = () => {
     const [cusDetail, setCusDetail] = useState();
     const [noCusDetail, setNoCusDetail] = useState(false);
     const [, setCusDetailLoading] = useState(true);
+
     const options = {
 
         position: "top-right",
@@ -88,6 +89,7 @@ const GymDetailPage = () => {
 
     function closeModalReview() {
         setReviewIsOpen(false);
+        setStatusPage(Date.now())
     }
     let subtitle;
     const onFinishReview = (values) => {
@@ -188,7 +190,7 @@ const GymDetailPage = () => {
                     </Col>
                     <div className="contentCenterDetail">
                         <ListPTCenter />
-                        <ListReview />
+                        <ListReview status={statusPage} />
                     </div>
                 </Row>
                 <Modal

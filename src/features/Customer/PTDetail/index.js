@@ -51,6 +51,7 @@ const PTDetail = () => {
   const [, setCusDetailLoading] = useState(true);
   const [modalReviewIsOpen, setReviewIsOpen] = React.useState(false);
   const cusInfo = useSelector((state) => state.cus.cusInfo);
+  const [statusPage, setStatusPage] = useState("")
   const options = {
 
     position: "top-right",
@@ -75,6 +76,7 @@ const PTDetail = () => {
 
   function closeModalReview() {
     setReviewIsOpen(false);
+    setStatusPage(Date.now())
   }
   let subtitle;
   const onFinishReview = (values) => {
@@ -217,7 +219,7 @@ const PTDetail = () => {
               <h5><FormattedMessage id="pt-detail.review" /> :</h5>
               <Col span={20}>
 
-                <ListReview data={ptDetail} />
+                <ListReview data={ptDetail} status={statusPage} />
               </Col>
 
             </Row>

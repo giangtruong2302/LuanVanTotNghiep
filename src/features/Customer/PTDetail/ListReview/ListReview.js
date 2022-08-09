@@ -34,7 +34,7 @@ const ListReview = (props) => {
             .finally(() => {
                 setReviewLoading(false);
             });
-    }, []);
+    }, [props.status]);
     const fetchNextReview = async () => {
         getReviewOfPt(id.id, page)
             .then((response) => {
