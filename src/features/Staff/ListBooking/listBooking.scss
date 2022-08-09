@@ -236,9 +236,9 @@
 
         .Center {
             box-sizing: border-box;
-            margin-left: 55px;
+            margin-left: 15px;
 
-            width: 55%;
+            width: 48%;
             height: 119px;
             background: linear-gradient(180deg, #ffffff 60.28%, #a8cece 100%);
             /* light blue */
@@ -286,7 +286,7 @@
                         min-width: 97px;
                         max-width: 200px;
                         height: 17px;
-                        margin-left: 10px !important;
+                        margin-left: -30px !important;
                         font-family: "Inter";
                         font-style: normal;
                         font-weight: 600;
@@ -342,7 +342,7 @@
                 .detailInfo {
                     display: flex;
                     flex-direction: column;
-                    align-items: flex-start;
+                    align-items: flex-end;
 
                     // gap: 9px;
                     justify-content: flex-end;

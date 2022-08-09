@@ -56,6 +56,7 @@ const PTShedule = (props) => {
   const [serviceOfPt, setServiceOfPt] = useState();
   const [noServiceOfPt, setNoServiceOfPt] = useState(false);
   const [, setServiceOfPtLoading] = useState(true);
+  const [statusPage, setStatusPage] = useState("");
   function openModal(e) {
     if (!cusInfo) {
       toast.error("Chức năng cần đăng nhập", options);
@@ -120,6 +121,7 @@ const PTShedule = (props) => {
 
   function closeModal() {
     setIsOpen(false);
+    setStatusPage(Date.now())
   }
   let subtitle;
   const language = useSelector((state) => state.app.language);
@@ -319,7 +321,7 @@ const PTShedule = (props) => {
       .finally(() => {
         setTimeDetailLoading(false);
       });
-  }, []);
+  }, [statusPage]);
   // useEffect(() => {
   //   getCusDetail(cusInfo["ExternalId"]).then((response) => {
   //     if (response.cusDetail) {

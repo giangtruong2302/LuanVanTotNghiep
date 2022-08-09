@@ -124,7 +124,7 @@ const Staff = () => {
       }
       if (response.message.errCode === 12) {
         message.warning(response.message.errMessage);
-      } else {
+      } if (response.message.errCode === 1) {
         toast.error("Fail", options);
       }
     });
@@ -265,12 +265,12 @@ const Staff = () => {
                         <select onChange={handleDay}>
                           {allDays && allDays.length > 0
                             ? allDays.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.value}>
-                                    {item.label}
-                                  </option>
-                                );
-                              })
+                              return (
+                                <option key={index} value={item.value}>
+                                  {item.label}
+                                </option>
+                              );
+                            })
                             : ""}
                         </select>
                       </p>

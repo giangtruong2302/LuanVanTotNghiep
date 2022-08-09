@@ -1,4 +1,4 @@
-import { Avatar, Divider, List, Skeleton, Rate } from 'antd';
+import { Avatar, Divider, List, Skeleton, Rate, Empty } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getReviewOfPt } from './ListReviewAPI';
 import { useParams } from "react-router-dom";
@@ -77,13 +77,12 @@ const ListReview = (props) => {
                         dataLength={allReview?.length ? allReview?.length : 0}
                         next={fetchNextReview}
                         hasMore={hasMore}
-                        loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
-                        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+
                         scrollableTarget="scrollableDiv"
                     >
                         <List
                             dataSource={allReview}
-                            renderItem={item => (
+                            renderItem={allReview ? item => (
                                 ((item.Status) === 1 ?
                                     <List.Item className='contentReview'>
 
@@ -96,7 +95,7 @@ const ListReview = (props) => {
                                     ""
                                 )
 
-                            )}
+                            ) : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
                         />
                     </InfiniteScroll>
                 </div>

@@ -55,6 +55,7 @@ const PTShedule = (props) => {
     const [serviceOfPt, setServiceOfPt] = useState();
     const [noServiceOfPt, setNoServiceOfPt] = useState(false);
     const [, setServiceOfPtLoading] = useState(true);
+    const [statusPage, setStatusPage] = useState("")
     const id = useParams()
     function openModal(e) {
         if (!cusInfo) {
@@ -156,6 +157,7 @@ const PTShedule = (props) => {
 
     function closeModal() {
         setIsOpen(false);
+        setStatusPage(Date.now())
     }
     let subtitle;
     const language = useSelector((state) => state.app.language);
@@ -288,8 +290,7 @@ const PTShedule = (props) => {
 
         getTimeWorking(props.ptId, timeStampToday, 1)
             .then((response) => {
-                console.log("PTID", props.ptId)
-                console.log("TimeStamp", timeStampToday)
+
 
                 if (response.ScheduleWorking.rows) {
                     setTimeDetail(response.ScheduleWorking.rows);
@@ -322,7 +323,7 @@ const PTShedule = (props) => {
             .finally(() => {
                 setTimeDetailLoading(false);
             });
-    }, []);
+    }, [statusPage]);
     // useEffect(() => {
     //   getCusDetail(cusInfo["ExternalId"]).then((response) => {
     //     if (response.cusDetail) {
@@ -458,11 +459,7 @@ const PTShedule = (props) => {
                                             <Form.Item
                                                 name="email"
 
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
+
                                             >
                                                 <Input defaultValue={cusInfo["email"]} />
                                             </Form.Item>

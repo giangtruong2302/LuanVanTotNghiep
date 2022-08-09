@@ -131,7 +131,7 @@ const HomeHeader = (props) => {
       <div
         id="scrollableDiv"
         style={{
-          height: 200,
+          height: 150,
           overflow: 'auto',
           padding: '0 1px',
           border: '1px solid rgba(140, 140, 140, 0.35)',
